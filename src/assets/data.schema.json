@@ -1,0 +1,70 @@
+{
+  "$ref": "#/definitions/data",
+  "definitions": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "projects": {
+          "type": "object",
+          "patternProperties": {
+            "^(.+)$": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "link": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "repoLink": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "tech": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "html5",
+                      "css3",
+                      "javascript",
+                      "typescript",
+                      "python",
+                      "react",
+                      "next",
+                      "vue",
+                      "astro",
+                      "sass",
+                      "tailwindcss",
+                      "styledcomponents",
+                      "node",
+                      "docker",
+                      "postgresql",
+                      "mongodb",
+                      "jest",
+                      "vitest",
+                      "testinglibrary",
+                      "cypress"
+                    ]
+                  }
+                }
+              },
+              "required": ["title", "description", "link", "repoLink", "tech"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": ["projects"],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

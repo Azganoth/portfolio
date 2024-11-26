@@ -1,0 +1,19 @@
+---
+import { simpleCX } from "../utils/cx";
+
+interface Props {
+  id: string;
+  class?: string;
+  title: string;
+}
+
+const { id, class: className, title } = Astro.props;
+---
+
+<section
+  id={id}
+  class={simpleCX("px-6 pt-28 md:px-12 md:pt-32 lg:px-16 lg:pt-32", className)}
+>
+  <h2 class="display mb-8 text-center md:text-left">{title}</h2>
+  <slot />
+</section>

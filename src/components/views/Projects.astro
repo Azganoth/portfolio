@@ -1,0 +1,20 @@
+---
+import Content from "../../layouts/Content.astro";
+import { getAllProjects, getProjectSlides } from "../../utils/projects";
+import ProjectThumb from "../ProjectThumb.astro";
+---
+
+<Content id="projects" title="Projetos">
+  <div class="flex flex-wrap justify-center gap-8">
+    {
+      getAllProjects().map(({ id, title, tech }) => (
+        <ProjectThumb
+          id={id}
+          title={title}
+          tech={tech}
+          preview={getProjectSlides(id)[0]}
+        />
+      ))
+    }
+  </div>
+</Content>

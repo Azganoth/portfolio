@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import profileImage from "../../assets/images/profile.webp";
+import Content from "../../layouts/Content.astro";
+import Link from "../shared/Link";
+---
+
+<Content
+  id="bio"
+  class="relative before:absolute before:inset-x-0 before:-bottom-8 before:top-20 before:-z-10 before:-skew-y-6 before:bg-charcoal before:shadow-elevation before:content-[''] md:before:-skew-y-3 lg:before:-bottom-12 lg:before:-skew-y-2"
+  title="Sobre mim"
+>
+  <div class="lg:grid lg:grid-cols-2 lg:gap-16">
+    <div>
+      <p>
+        Me chamo Ademir José Ferreira Júnior, tenho 25 anos e moro em Laguna-SC.
+        Formado em Ciência da Computação pela UNISUL de Tubarão, me especializei
+        em desenvolvimento web full-stack. Acredito que a evolução deve ser
+        constante e me desafio a entregar projetos cada vez melhores.
+      </p>
+      <p class="mt-4">
+        Minha jornada nessa área começou durante a graduação, quando desenvolvi
+        um app full-stack em equipe utilizando Angular e Spring Boot para a
+        matéria de programação web. Desde então aprofundei meus conhecimentos em
+        desenvolvimento web, desenvolvi mais projetos explorando diversas outras
+        tecnologias como JavaScript, React, Vue e Node.
+      </p>
+      <div class="mt-4 text-center">
+        <Link type="prime" href="/curriculo.pdf" newTab>Currículo</Link>
+      </div>
+    </div>
+    <div class="max-lg:mt-12 max-md:hidden">
+      <Image class="mx-auto rounded-2xl" src={profileImage} alt="Profile" />
+    </div>
+  </div>
+</Content>

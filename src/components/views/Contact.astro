@@ -1,0 +1,28 @@
+---
+import Content from "../../layouts/Content.astro";
+import Link from "../shared/Link";
+---
+
+<Content
+  id="contact"
+  class="bg-charcoal pb-44 shadow-elevation"
+  title="Contato"
+>
+  <div>
+    <h3 class="display-s max-w-xs max-lg:mx-auto max-lg:text-center">
+      Tem interesse? Manda uma mensagem!
+    </h3>
+    <div class="mt-24 max-lg:text-center">
+      <Link type="prime" href="mailto:ademirj.ferreirajunior@gmail.com">
+        ademirj.ferreirajunior@gmail.com
+      </Link>
+      <div class="mt-8 flex flex-col gap-2 max-lg:items-center">
+        <Link href="https://wa.me/48991984443">Whatsapp</Link>
+        <Link href="https://github.com/Azganoth">GitHub</Link>
+        <Link href="https://www.linkedin.com/in/ademirjferreirajunior/">
+          LinkedIn
+        </Link>
+      </div>
+    </div>
+  </div>
+</Content>

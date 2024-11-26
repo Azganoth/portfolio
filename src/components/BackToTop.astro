@@ -1,0 +1,32 @@
+---
+import Icon from "./shared/Icon";
+---
+
+<a
+  id="back-to-top-shortcut"
+  class="push-down fixed bottom-8 right-6 rounded-lg bg-charcoal p-2 text-2xl text-white shadow-elevation-small transition-visibility-transform duration-300 ease-out hover:text-orchid aria-hidden:invisible aria-hidden:translate-y-full aria-hidden:opacity-0 md:right-12"
+  href="#start"
+  aria-label="Voltar ao início"
+>
+  <Icon name="back-to-top" />
+</a>
+
+<script>
+  const backToTopShortcut = document.querySelector("#back-to-top-shortcut")!;
+  const startSection = document.querySelector("#start")!;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          backToTopShortcut.setAttribute("aria-hidden", "true");
+        } else {
+          backToTopShortcut.setAttribute("aria-hidden", "false");
+        }
+      });
+    },
+    { threshold: 0.99 },
+  );
+
+  observer.observe(startSection);
+</script>

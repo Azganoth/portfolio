@@ -1,0 +1,35 @@
+---
+import type { Tech } from "../types";
+import { simpleCX } from "../utils/cx";
+import Icon from "./shared/Icon";
+import { TECH_LABELS } from "./shared/TechShowcase";
+import SkillWrap from "./SkillWrap.astro";
+
+interface Props {
+  class?: string;
+  title: string;
+  tech: Tech[];
+}
+
+const { class: className, title, tech } = Astro.props;
+---
+
+<article class={simpleCX("flex flex-col font-code", className)}>
+  <SkillWrap tag="h3">
+    <h3 class="code-indent">{title}</h3>
+  </SkillWrap>
+  <SkillWrap tag="ul">
+    <ul>
+      {
+        tech.map((tec) => (
+          <li class="code-indent flex items-center">
+            <SkillWrap tag="li">
+              <span>{TECH_LABELS[tec]}</span>
+              <Icon class="ml-1.5 mr-0.5 text-l" name={tec} />
+            </SkillWrap>
+          </li>
+        ))
+      }
+    </ul>
+  </SkillWrap>
+</article>

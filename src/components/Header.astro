@@ -1,0 +1,149 @@
+---
+import Icon from "./shared/Icon";
+import Link from "./shared/Link";
+
+const links: { label: string; link: string; description: string }[] = [
+  {
+    label: "Início",
+    link: "#start",
+    description: "Ir para o início da página",
+  },
+  {
+    label: "Sobre mim",
+    link: "#bio",
+    description: "Ir para a seção de biografia",
+  },
+  {
+    label: "Habilidades",
+    link: "#skills",
+    description: "Ir a seção de habilidades",
+  },
+  {
+    label: "Projetos",
+    link: "#projects",
+    description: "Ir para a seção de projetos",
+  },
+  {
+    label: "Contato",
+    link: "#contact",
+    description: "Ir para a seção de contato",
+  },
+];
+---
+
+<header
+  class="fixed inset-x-4 top-4 z-10 flex min-h-16 items-center justify-between rounded-2xl bg-charcoal p-4 shadow-elevation"
+>
+  <h1 class="cursor-default font-decorative text-xl tracking-wider text-white">
+    <span
+      class="before:mr-0.5 before:text-gray before:content-['<'] after:ml-0.5 after:text-gray after:content-['/>']"
+      >Azganoth</span
+    ><span class="text-orchid motion-safe:animate-blink" aria-hidden="true"
+      >_</span
+    >
+  </h1>
+  <nav id="site-nav">
+    <div id="mobile-nav" class="inert:hidden">
+      <button
+        class="push-down block select-none text-2xl hover:text-orchid"
+        type="button"
+        aria-label="Abrir menu de navegação"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <Icon name="menu" />
+      </button>
+      <ul
+        class="fixed inset-x-4 top-24 origin-top rounded-2xl bg-charcoal px-8 py-4 shadow-elevation transition-visibility-transform duration-300 ease-out inert:invisible inert:-translate-y-2 inert:opacity-0 motion-reduce:transition-none"
+        inert
+      >
+        {
+          links.map(({ label, link, description }) => (
+            <li class="mt-2 text-center first:mt-0">
+              <Link type="nav" href={link} description={description}>
+                {label}
+              </Link>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div id="tablet-desktop-nav" class="inert:hidden" inert>
+      <ul class="flex">
+        {
+          links.map(({ label, link, description }) => (
+            <li>
+              <Link type="nav" href={link} description={description}>
+                {label}
+              </Link>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const mobile = {
+    nav: document.querySelector<HTMLElement>("#mobile-nav")!,
+    menu: document.querySelector<HTMLButtonElement>("#mobile-nav > button")!,
+    dropdown: document.querySelector<HTMLUListElement>("#mobile-nav > ul")!,
+    links: document.querySelectorAll<HTMLAnchorElement>("#mobile-nav > ul a"),
+  };
+
+  const tabletDesktop = {
+    nav: document.querySelector<HTMLElement>("#tablet-desktop-nav")!,
+    links: document.querySelectorAll<HTMLAnchorElement>(
+      "#tablet-desktop-nav > ul a",
+    ),
+  };
+
+  // mobile menu visibility
+  function setIsDropdownHidden(isHidden: boolean): void {
+    mobile.menu.setAttribute("aria-expanded", String(!isHidden));
+    if (isHidden) {
+      mobile.dropdown.setAttribute("inert", "");
+    } else {
+      mobile.dropdown.removeAttribute("inert");
+    }
+  }
+
+  setIsDropdownHidden(true);
+  mobile.menu.addEventListener("click", () => {
+    setIsDropdownHidden(mobile.menu.getAttribute("aria-expanded") === "true");
+  });
+
+  // hide menu on outside click
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Node && mobile.nav.contains(event.target))) {
+      setIsDropdownHidden(true);
+    }
+  });
+
+  // hide menu on link follow
+  mobile.links.forEach((link) => {
+    link.addEventListener("click", () => {
+      setIsDropdownHidden(true);
+    });
+  });
+
+  // handle screen size change
+  function handleScreenSwitch(isTabletOrUp: boolean): void {
+    setIsDropdownHidden(true);
+
+    if (isTabletOrUp) {
+      mobile.nav.setAttribute("inert", "");
+      tabletDesktop.nav.removeAttribute("inert");
+    } else {
+      tabletDesktop.nav.setAttribute("inert", "");
+      mobile.nav.removeAttribute("inert");
+    }
+  }
+
+  const mediaQuery = window.matchMedia("(min-width: 768px)");
+  mediaQuery.addEventListener("change", (event) => {
+    handleScreenSwitch(event.matches);
+  });
+  handleScreenSwitch(mediaQuery.matches);
+</script>

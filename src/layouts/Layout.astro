@@ -1,4 +1,12 @@
 ---
+import "@fontsource/inter";
+import "@fontsource/inter/700.css";
+import interWoff2 from "@fontsource/inter/files/inter-greek-400-normal.woff2?url";
+import "@fontsource/patua-one";
+import "@fontsource/paytone-one";
+import Icons from "../components/Icons.astro";
+import ProjectDetails from "../components/interactive/ProjectDetails";
+
 interface Props {
   title: string;
 }
@@ -7,44 +15,68 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="motion-safe:scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta
+      name="description"
+      content="Portfólio responsivo e acessível, feito para apresentar as minhas habilidades e projetos."
+    />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={interWoff2}
+      crossorigin="anonymous"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="body bg-slate leading-normal text-white">
     <slot />
+    <ProjectDetails client:idle />
+    <Icons />
   </body>
 </html>
+
 <style is:global>
+  @font-face {
+    font-family: "Cascadia Code";
+    src: url("/fonts/CascadiaCode.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  @layer components {
+    .display {
+      @apply font-display text-2xl font-normal tracking-wide;
+    }
+
+    .display-s {
+      @apply font-display text-xl font-normal tracking-wide;
+    }
+
+    .body {
+      @apply font-regular text-m font-medium;
+    }
+
+    .code-indent {
+      @apply relative pl-8 before:absolute before:inset-y-0 before:left-[calc(1rem-1px)] before:w-0.5 before:bg-gray before:opacity-25 before:content-[''];
+    }
+
+    .push-down {
+      @apply transition-transform duration-300 ease-out motion-safe:active:scale-90;
+    }
+  }
+
   :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-  }
-  html {
-    font-family: system-ui, sans-serif;
-    background: #13151a;
-  }
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
+    --underscore: "_";
   }
 </style>

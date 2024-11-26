@@ -1,0 +1,44 @@
+---
+import Content from "../../layouts/Content.astro";
+import Skill from "../Skill.astro";
+---
+
+<Content id="skills" title="Habilidades">
+  <div
+    class="grid gap-8 md:grid-cols-2 md:grid-rows-[repeat(9,80px)] md:gap-4 lg:grid-cols-3 lg:grid-rows-[repeat(10,48px)]"
+  >
+    <Skill
+      class="md:col-start-1 md:row-start-1"
+      title="Linguagens"
+      tech={["html5", "css3", "javascript", "typescript", "python"]}
+    />
+    <Skill
+      class="md:col-start-2 md:row-start-2 lg:row-start-3"
+      title="Front-end"
+      tech={[
+        "react",
+        "vue",
+        "next",
+        "astro",
+        "sass",
+        "tailwindcss",
+        "styledcomponents",
+      ]}
+    />
+    <Skill
+      class="md:col-start-2 md:row-start-6 lg:col-start-3 lg:row-start-2"
+      title="Back-end"
+      tech={["node", "docker", "postgresql", "mongodb"]}
+    />
+    <Skill
+      class="md:col-start-1 md:row-start-4 lg:row-start-6"
+      title="Testes"
+      tech={["jest", "vitest", "testinglibrary", "cypress"]}
+    />
+    <Skill
+      class="md:col-start-1 md:row-start-7 lg:col-start-3 lg:row-start-7"
+      title="Ferramentas"
+      tech={["git", "github", "githubactions", "figma"]}
+    />
+  </div>
+</Content>
