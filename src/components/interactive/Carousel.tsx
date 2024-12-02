@@ -23,7 +23,7 @@ function Carousel({ slides }: CarouselProps) {
 
   return (
     <section
-      class="group/carousel relative min-h-8 overflow-hidden text-white"
+      class="group/carousel relative min-h-[240px] overflow-hidden text-white md:min-h-[414px] lg:min-h-[488px]"
       aria-label="Carousel"
     >
       <div
