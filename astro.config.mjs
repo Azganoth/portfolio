@@ -2,6 +2,7 @@
 import preact from "@astrojs/preact";
 import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,4 +12,12 @@ export default defineConfig({
     preact({ devtools: true }),
     tailwind({ applyBaseStyles: false }),
   ],
+  vite: {
+    plugins: [
+      visualizer({
+        emitFile: true,
+        filename: "stats.html",
+      }),
+    ],
+  },
 });
