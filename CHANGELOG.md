@@ -1,3 +1,14 @@
+# 7/12/2024
+
+## Carousel
+
+- Improve Carousel performance
+- Add swipe gesture functionality to Carousel
+
+## Project Details
+
+- Lighten Tech badges background for desktop screens
+
 # 6/12/2024
 
 ## General

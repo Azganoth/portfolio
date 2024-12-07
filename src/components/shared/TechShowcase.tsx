@@ -51,7 +51,7 @@ function TechShowcase({
           class={simpleCX(
             "opacity-50 transition-opacity duration-300 ease-out hover:opacity-100",
             isResponsive &&
-              "lg:flex lg:items-center lg:gap-2 lg:rounded-2xl lg:bg-charcoal lg:px-3 lg:py-2 lg:opacity-100",
+              "lg:flex lg:items-center lg:gap-2 lg:rounded-2xl lg:bg-slate lg:px-3 lg:py-2 lg:opacity-100",
           )}
           title={TECH_LABELS[tec]}
         >
