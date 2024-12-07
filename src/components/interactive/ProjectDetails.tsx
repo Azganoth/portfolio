@@ -56,13 +56,13 @@ function ProjectDetails() {
   return (
     <dialog
       ref={dialogRef}
-      class="z-20 max-w-[320px] overflow-hidden rounded-2xl bg-slate text-white backdrop:bg-[rgba(0,0,0,0.9)] md:max-w-[552px] lg:grid lg:max-w-[1300px]"
+      class="z-20 max-w-[320px] overflow-hidden rounded-2xl bg-charcoal text-white backdrop:bg-[rgba(0,0,0,0.9)] md:max-w-[552px] lg:grid lg:max-w-[1300px]"
       onClick={handleOutsideClick}
     >
       {proj && (
         <>
           <button
-            class="push-down absolute right-2 top-2 z-10 select-none text-2xl hover:text-orchid md:text-3xl"
+            class="push-down absolute right-4 top-4 z-10 select-none text-2xl hover:text-orchid"
             type="button"
             onClick={close}
             aria-label="Fechar detalhes do projeto"
@@ -71,7 +71,7 @@ function ProjectDetails() {
           </button>
           <div class="grid lg:grid-cols-2">
             <Carousel slides={slides} />
-            <article class="flex flex-col gap-4 overflow-hidden px-6 pb-6 pt-4 lg:col-start-1 lg:row-start-1 lg:gap-8 lg:p-8">
+            <article class="flex flex-col gap-4 overflow-hidden px-6 pb-6 pt-4 lg:col-start-1 lg:row-start-1 lg:gap-8 lg:px-8 lg:pb-8 lg:pt-6">
               <h3 class="display-s">{proj.title}</h3>
               <p class="mb-auto">{proj.description}</p>
               <TechShowcase

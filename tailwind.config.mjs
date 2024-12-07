@@ -51,7 +51,7 @@ export default {
         "elevation-small": "0 0 0.25rem 0 rgba(0 0 0 / 0.25)",
       },
       dropShadow: {
-        "stand-out": "0 0 0.5rem rgba(0 0 0 / 0.5)",
+        "stand-out": "0 0 0.25rem rgba(0 0 0 / 0.75)",
       },
       transitionProperty: {
         visibility: "opacity, visibility",

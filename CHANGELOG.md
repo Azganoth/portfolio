@@ -1,3 +1,30 @@
+# 6/12/2024
+
+## General
+
+- Add responsive height adjustments for mobile screens
+
+## Carousel
+
+- Adjust Carousel button placement
+- Enlarge Carousel navigation dots on tablet and desktop screens
+- Enhance contrast for Carousel buttons
+
+## Project Details
+
+- Switch to standard-sized close button
+- Lighten Project Details background to improve contrast
+- Enhance contrast for Project Details buttons
+
+## Navigation
+
+- Enlarge mobile navigation links
+- Apply decorative font to caret symbol
+- Match decorative HTML tag width to caret width
+- Increase spacing between mobile navigation links
+- Center and constrain navigation bar width
+- Replace Back to Top button icon
+
 # 5/12/2024
 
 ## Performance

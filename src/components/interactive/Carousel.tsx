@@ -57,13 +57,13 @@ function Carousel({ slides }: CarouselProps) {
       >
         <Icon class="drop-shadow-stand-out" name="chevron-right" />
       </button>
-      <ul class="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-2">
+      <ul class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
         {slides.map((_, i) => (
-          <li key={i}>
+          <li key={i} class="md:text-l">
             <button
               class={simpleCX(
                 "push-down block select-none hover:text-orchid",
-                i === currentSlide && "text-pink",
+                i === currentSlide && "text-pink hover:text-pink",
               )}
               type="button"
               onClick={() => {
