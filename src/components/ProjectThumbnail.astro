@@ -1,22 +1,24 @@
 ---
 import { Image } from "astro:assets";
-import TechShowcase from "./shared/TechShowcase";
 import type { Tech } from "../types";
 import type { ImageMetadata } from "astro";
+import TechBadge from "./TechBadge.astro";
 
 interface Props {
   id: string;
   title: string;
+  description: string;
   tech: Tech[];
   preview: ImageMetadata;
 }
 
-const { id, title, tech, preview } = Astro.props;
+const { id, title, description, tech, preview } = Astro.props;
 ---
 
 <button
   type="button"
-  class="project-preview group/project-preview flex w-min cursor-pointer flex-col items-center pb-4 focus:outline-none"
+  class="group/project-preview grid cursor-pointer items-center gap-2 focus:outline-none md:max-w-[640px] md:grid-cols-[320px_1fr] md:grid-rows-[240px] md:gap-4"
+  data-project-thumbnail
   data-id={id}
   aria-label="Mostrar detalhes do projeto"
 >
@@ -24,24 +26,33 @@ const { id, title, tech, preview } = Astro.props;
     class="overflow-hidden rounded-2xl bg-charcoal outline outline-4 outline-transparent group-focus/project-preview:outline-orchid group-active/project-preview:outline-orchid"
   >
     <Image
-      class="h-auto min-w-[320px] transition-transform duration-300 ease-out group-hover/project-preview:scale-110 md:min-w-[380px]"
+      class="transition-transform duration-300 ease-out group-hover/project-preview:scale-110"
       src={preview}
       alt={`${title} preview.`}
     />
   </div>
-  <h3
-    class="display-s mx-4 mt-2 text-center group-hover/project-preview:text-green group-focus/project-preview:text-orchid group-active/project-preview:text-orchid"
-  >
-    {title}
-  </h3>
-  <TechShowcase class="mx-4 mt-4 saturate-0" tech={tech} />
+  <div class="flex h-full flex-col gap-4 max-md:px-4 md:pb-4">
+    <h3
+      class="display-s text-center group-hover/project-preview:text-green group-focus/project-preview:text-orchid group-active/project-preview:text-orchid"
+    >
+      {title}
+    </h3>
+    <p class="line-clamp-3 max-h-[4.5rem] text-gray max-md:hidden">
+      {description.substring(0, description.indexOf(".") + 1)}
+    </p>
+    <div class="mt-auto flex flex-wrap justify-center gap-2">
+      {tech.map((tec) => <TechBadge tech={tec} />)}
+    </div>
+  </div>
 </button>
 
 <script>
   import { $currentProject } from "../store";
   import { getProject } from "../utils/projects";
 
-  const projects = document.querySelectorAll<HTMLElement>(".project-preview")!;
+  const projects = document.querySelectorAll<HTMLElement>(
+    "[data-project-thumbnail]",
+  )!;
   projects.forEach((project) => {
     project.addEventListener("keydown", (e) => {
       switch (e.key) {

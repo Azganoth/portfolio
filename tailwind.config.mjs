@@ -10,7 +10,7 @@ export default {
       slate: "#0b0b0f", // background 1
       charcoal: "#16161d", // background 2
       white: "#f8f8f8", // text 1
-      gray: "#5e5e6a", // text 2
+      gray: "#626a75", // text 2
       orchid: "#8a49ff", // accent 1
       green: "#06d79c", // accent 2
       pink: "#fb839e", // accent 3
@@ -47,8 +47,9 @@ export default {
         25: "0.25",
       },
       boxShadow: {
-        elevation: "0 0.25rem 0.5rem 0 rgba(0 0 0 / 0.25)",
-        "elevation-small": "0 0 0.25rem 0 rgba(0 0 0 / 0.25)",
+        "elevation-high": "0 0 0.75rem 0 rgba(0 0 0 / 0.5)",
+        "elevation-medium": "0 0 0.5rem 0 rgba(0 0 0 / 0.5)",
+        "elevation-low": "0 0 0.25rem 0 rgba(0 0 0 / 0.25)",
       },
       dropShadow: {
         "stand-out": "0 0 0.25rem rgba(0 0 0 / 0.75)",

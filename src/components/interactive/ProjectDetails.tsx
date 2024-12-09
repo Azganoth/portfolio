@@ -1,10 +1,10 @@
 import { useStore } from "@nanostores/preact";
 import { useEffect, useRef, useState } from "preact/hooks";
+import { TECH_LABELS } from "../../constants";
 import { $currentProject } from "../../store";
 import { getProjectSlides, type ProjectImage } from "../../utils/projects";
 import Icon from "../shared/Icon";
 import Link from "../shared/Link";
-import TechShowcase from "../shared/TechShowcase";
 import Carousel from "./Carousel";
 
 function ProjectDetails() {
@@ -56,7 +56,7 @@ function ProjectDetails() {
   return (
     <dialog
       ref={dialogRef}
-      class="z-20 max-w-[320px] overflow-hidden rounded-2xl bg-charcoal text-white backdrop:bg-[rgba(0,0,0,0.9)] md:max-w-[552px] lg:grid lg:max-w-[1300px]"
+      class="z-20 max-h-[612px] max-w-[320px] overflow-hidden rounded-2xl bg-charcoal text-white shadow-elevation-high backdrop:bg-[rgba(0,0,0,0.9)] md:max-h-[896px] md:max-w-[640px] lg:grid lg:max-h-[540px] lg:max-w-[1300px]"
       onClick={handleOutsideClick}
     >
       {proj && (
@@ -69,16 +69,28 @@ function ProjectDetails() {
           >
             <Icon class="drop-shadow-stand-out" name="close" />
           </button>
-          <div class="grid lg:grid-cols-2">
+          <div class="grid lg:grid-cols-[auto_1fr]">
             <Carousel slides={slides} />
-            <article class="flex flex-col gap-4 overflow-hidden px-6 pb-6 pt-4 lg:col-start-1 lg:row-start-1 lg:gap-8 lg:px-8 lg:pb-8 lg:pt-6">
-              <h3 class="display-s">{proj.title}</h3>
+            <article class="flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4 lg:px-8 lg:pb-8">
+              <h3 class="display-s max-lg:text-center">{proj.title}</h3>
               <p class="mb-auto">{proj.description}</p>
-              <TechShowcase
-                class="my-2 self-center"
-                tech={proj.tech}
-                isResponsive
-              />
+              <ul
+                class="flex flex-wrap justify-center gap-2"
+                aria-label="Tecnologias usadas"
+              >
+                {proj.tech.map((tec) => (
+                  <li
+                    key={tec}
+                    class="lg:flex lg:items-center lg:gap-2 lg:rounded-2xl lg:bg-slate lg:px-3 lg:py-2"
+                    title={TECH_LABELS[tec]}
+                  >
+                    <Icon class="text-xl lg:text-l" name={tec} />
+                    <span class="cursor-default font-code font-bold text-gray max-lg:sr-only">
+                      {TECH_LABELS[tec]}
+                    </span>
+                  </li>
+                ))}
+              </ul>
               <div class="flex items-center justify-between">
                 <Link
                   class="text-2xl"

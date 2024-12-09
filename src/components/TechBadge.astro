@@ -1,0 +1,14 @@
+---
+import { TECH_LABELS } from "../constants";
+import type { Tech } from "../types";
+
+interface Props {
+  tech: Tech;
+}
+
+const { tech } = Astro.props;
+---
+
+<span class="rounded-2xl bg-charcoal px-2 font-code font-bold text-gray">
+  {TECH_LABELS[tech]}
+</span>

@@ -143,7 +143,7 @@ function Carousel({ slides }: CarouselProps) {
 
   return (
     <section
-      class="group/carousel relative min-h-[240px] overflow-hidden text-white md:min-h-[414px] lg:min-h-[488px]"
+      class="group/carousel relative aspect-[4/3] max-h-[540px] overflow-hidden text-white"
       aria-label="Carousel"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}

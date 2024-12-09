@@ -1,3 +1,30 @@
+# 8/12/2024
+
+## General
+
+- Update muted text color
+- Fix gradient colors for welcome message
+
+## Project Thumbnail
+
+- Use text badges to display technology stack
+- Optimize layout for tablet and desktop screens
+- Add project description for tablet and desktop screens
+
+## Carousel
+
+- Fix sizing
+
+## Project Details
+
+- Center title for mobile and tablet screens
+- Set maximum width and height constraints
+- Apply monospace font to technology badges
+- Reduce icon size for desktop tech badges
+- Update spacing between layout elements
+- Add drop shadow to dialog box
+- Position carousel on left side with text content on right
+
 # 7/12/2024
 
 ## Carousel
