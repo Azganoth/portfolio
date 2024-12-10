@@ -1,3 +1,13 @@
+# 10/12/2024
+
+## General
+
+- Expanded the "Contact" view to occupy all available screen height.
+
+## Links
+
+- Enhanced the visibility of decorations on the "prime" variation of links.
+
 # 9/12/2024
 
 ## General

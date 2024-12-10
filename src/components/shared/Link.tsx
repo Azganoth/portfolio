@@ -22,7 +22,7 @@ function Link({
       class={simpleCX(
         "font-body font-bold text-white hover:text-green",
         type === "prime" &&
-          "relative z-0 after:absolute after:-inset-x-[1%] after:bottom-[13.5%] after:-z-1 after:h-4 after:origin-bottom after:scale-y-25 after:bg-orchid after:transition-transform after:duration-300 after:ease-out after:content-[''] hover:text-white hover:after:scale-100 motion-reduce:transition-none",
+          "relative z-0 after:absolute after:-inset-x-0.5 after:bottom-px after:-z-1 after:h-[1.125rem] after:origin-bottom after:scale-y-[33.33%] after:bg-orchid after:duration-300 after:ease-out after:content-[''] hover:text-white hover:after:scale-100 motion-safe:after:transition-transform",
         type === "nav" &&
           "max-md:text-lg font-display before:px-0.5 before:font-decorative before:text-gray before:opacity-0 before:content-['<'] after:font-decorative after:opacity-0 after:content-[--underscore] hover:text-orchid hover:before:opacity-100 hover:after:animate-blink hover:after:opacity-100",
         className,
