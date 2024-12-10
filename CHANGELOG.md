@@ -2,89 +2,89 @@
 
 ## General
 
-- Update fonts across the project
-- Import only used fonts
-- Enable variable fonts where available
+- Updated fonts across the project
+- Imported only used fonts
+- Enabled variable fonts where available
 
 # 8/12/2024
 
 ## General
 
-- Update muted text color
-- Fix gradient colors for welcome message
+- Adjusted muted text color
+- Fixed gradient colors in the welcome message
 
 ## Project Thumbnail
 
-- Use text badges to display technology stack
-- Optimize layout for tablet and desktop screens
-- Add project description for tablet and desktop screens
+- Introduced text badges to display the technology stack
+- Optimized layout for tablet and desktop screens
+- Added project description for tablet and desktop screens
 
 ## Carousel
 
-- Fix sizing
+- Resolved sizing issues
 
 ## Project Details
 
-- Center title for mobile and tablet screens
+- Centered title on mobile and tablet screens
 - Set maximum width and height constraints
-- Apply monospace font to technology badges
-- Reduce icon size for desktop tech badges
-- Update spacing between layout elements
-- Add drop shadow to dialog box
-- Position carousel on left side with text content on right
+- Applied monospace font to technology badges
+- Reduced icon size for desktop tech badges
+- Updated spacing between layout elements
+- Added drop shadow to the dialog box
+- Positioned the carousel on left side with text content on right
 
 # 7/12/2024
 
 ## Carousel
 
-- Improve Carousel performance
-- Add swipe gesture functionality to Carousel
+- Enhanced performance
+- Added swipe gesture functionality
 
 ## Project Details
 
-- Lighten Tech badges background for desktop screens
+- Lightened the background of tech badges for desktop screens
 
 # 6/12/2024
 
 ## General
 
-- Add responsive height adjustments for mobile screens
+- Implemented responsive height adjustments to improve mobile screens experience
 
 ## Carousel
 
-- Adjust Carousel button placement
-- Enlarge Carousel navigation dots on tablet and desktop screens
-- Enhance contrast for Carousel buttons
+- Adjusted button placement
+- Enlarged navigation dots on tablet and desktop screens
+- Enhanced contrast for buttons
 
 ## Project Details
 
-- Switch to standard-sized close button
-- Lighten Project Details background to improve contrast
-- Enhance contrast for Project Details buttons
+- Replaced close button with a standard-sized version
+- Lightened background to improve contrast
+- Enhanced contrast for buttons
 
 ## Navigation
 
-- Enlarge mobile navigation links
-- Apply decorative font to caret symbol
-- Match decorative HTML tag width to caret width
-- Increase spacing between mobile navigation links
-- Center and constrain navigation bar width
-- Replace Back to Top button icon
+- Enlarged mobile navigation links
+- Applied decorative font to caret symbol
+- Matched the decorative HTML tag width to caret width
+- Increased spacing between mobile navigation links
+- Centered and constrained the navigation bar width
+- Replaced the "Back to Top" button icon
 
 # 5/12/2024
 
 ## Performance
 
-- Add bundle size analyzer
+- Added a bundle size analyzer
 
 # 2/12/2024
 
-- Implement portfolio
-- Update favicon
-- Add social media meta tags and image
-- Make outsite links open a new tab
-- Prevent carousel flicker while loading images
+- Implemented the portfolio
+- Updated the favicon
+- Added social media meta tags and meta image
+- Configured external links to open in a new tab
+- Prevented carousel flicker during image loading
 
 # 25/11/2024
 
-- Initial setup
+- Completed initial setup
