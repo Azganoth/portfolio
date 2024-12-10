@@ -1,9 +1,5 @@
 ---
-import "@fontsource/inter";
-import "@fontsource/inter/700.css";
-import interWoff2 from "@fontsource/inter/files/inter-greek-400-normal.woff2?url";
-import "@fontsource/patua-one";
-import "@fontsource/paytone-one";
+import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import Icons from "../components/Icons.astro";
 import ProjectDetails from "../components/interactive/ProjectDetails";
 
@@ -11,6 +7,7 @@ const title = "Azganoth - Desenvolvedor Web FullStack";
 const description =
   "Portfólio para apresentar as minhas habilidades e projetos.";
 const url = "https://azganoth.github.io/";
+const metaImage = "/meta_image.png";
 ---
 
 <!doctype html>
@@ -23,7 +20,7 @@ const url = "https://azganoth.github.io/";
       rel="preload"
       as="font"
       type="font/woff2"
-      href={interWoff2}
+      href={interVarWoff2}
       crossorigin="anonymous"
     />
     <meta name="generator" content={Astro.generator} />
@@ -36,14 +33,14 @@ const url = "https://azganoth.github.io/";
     <meta property="og:url" content={url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/meta_image.png" />
+    <meta property="og:image" content={metaImage} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={url} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content="/meta_image.png" />
+    <meta property="twitter:image" content={metaImage} />
   </head>
   <body class="body bg-slate leading-normal text-white">
     <slot />
@@ -54,10 +51,50 @@ const url = "https://azganoth.github.io/";
 
 <style is:global>
   @font-face {
-    font-family: "Cascadia Code";
-    src: url("/fonts/CascadiaCode.woff2") format("woff2");
-    font-weight: 400 700;
+    font-family: "Patua One";
+    font-style: normal;
     font-display: swap;
+    font-weight: 400;
+    src: url(@fontsource/patua-one/files/patua-one-latin-400-normal.woff2)
+      format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
+      U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  @font-face {
+    font-family: "Montserrat Alternates";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 700;
+    src: url(@fontsource/montserrat-alternates/files/montserrat-alternates-latin-700-normal.woff2)
+      format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
+      U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  @font-face {
+    font-family: "Inter Variable";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400 700;
+    src: url(@fontsource-variable/inter/files/inter-latin-wght-normal.woff2)
+      format("woff2-variations");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
+      U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  @font-face {
+    font-family: "Cascadia Code";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 500 600;
+    src: url(/fonts/CascadiaCode.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
+      U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
 
   @tailwind base;
@@ -65,16 +102,32 @@ const url = "https://azganoth.github.io/";
   @tailwind utilities;
 
   @layer components {
-    .display {
-      @apply font-display text-2xl font-normal tracking-wide;
+    .title {
+      @apply font-display text-2xl font-bold max-md:-tracking-wider;
     }
 
-    .display-s {
-      @apply font-display text-xl font-normal tracking-wide;
+    .heading-lg {
+      @apply font-display text-2xl font-bold;
+    }
+
+    .heading-md {
+      @apply font-display text-xl font-bold;
+    }
+
+    .sub-heading-lg {
+      @apply text-lg font-body font-medium;
+    }
+
+    .sub-heading-md {
+      @apply text-md font-body font-medium;
     }
 
     .body {
-      @apply font-regular text-m font-medium;
+      @apply text-md font-body font-normal;
+    }
+
+    .code {
+      @apply text-md font-code font-semibold;
     }
 
     .code-indent {

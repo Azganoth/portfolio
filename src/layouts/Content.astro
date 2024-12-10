@@ -14,6 +14,6 @@ const { id, class: className, title } = Astro.props;
   id={id}
   class={simpleCX("px-6 pt-28 md:px-12 md:pt-32 lg:px-16 lg:pt-32", className)}
 >
-  <h2 class="display mb-8 text-center md:text-left">{title}</h2>
+  <h2 class="heading-lg mb-8 text-center md:text-left">{title}</h2>
   <slot />
 </section>

@@ -96,7 +96,7 @@ function Carousel({ slides }: CarouselProps) {
     () => (
       <ul class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
         {slides.map((_, i) => (
-          <li key={i} class="md:text-l">
+          <li key={i} class="md:text-lg">
             <button
               class={simpleCX(
                 "push-down block select-none hover:text-orchid",

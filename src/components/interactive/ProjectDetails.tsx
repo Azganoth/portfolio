@@ -72,7 +72,7 @@ function ProjectDetails() {
           <div class="grid lg:grid-cols-[auto_1fr]">
             <Carousel slides={slides} />
             <article class="flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4 lg:px-8 lg:pb-8">
-              <h3 class="display-s max-lg:text-center">{proj.title}</h3>
+              <h3 class="heading-md max-lg:text-center">{proj.title}</h3>
               <p class="mb-auto">{proj.description}</p>
               <ul
                 class="flex flex-wrap justify-center gap-2"
@@ -84,7 +84,7 @@ function ProjectDetails() {
                     class="lg:flex lg:items-center lg:gap-2 lg:rounded-2xl lg:bg-slate lg:px-3 lg:py-2"
                     title={TECH_LABELS[tec]}
                   >
-                    <Icon class="text-xl lg:text-l" name={tec} />
+                    <Icon class="lg:text-lg text-xl" name={tec} />
                     <span class="cursor-default font-code font-bold text-gray max-lg:sr-only">
                       {TECH_LABELS[tec]}
                     </span>

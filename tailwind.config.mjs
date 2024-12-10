@@ -19,21 +19,15 @@ export default {
       "3xl": "3rem",
       "2xl": "2rem",
       xl: "1.5rem",
-      l: "1.25rem",
-      m: "1rem",
-      s: "0.875rem",
+      lg: "1.25rem",
+      md: "1rem",
+      sm: "0.875rem",
     },
     fontFamily: {
-      display: ["Paytone One", "sans-serif"],
-      regular: ["Inter", "sans-serif"],
+      decorative: ["Patua One", "system-ui"],
+      display: ["Montserrat Alternates", "sans-serif"],
+      body: ["Inter Variable", "sans-serif"],
       code: ["Cascadia Code", "monospace"],
-      decorative: ["Patua One", "sans-serif"],
-    },
-    letterSpacing: {
-      wider: "1px",
-      wide: "0.5px",
-      normal: "0",
-      tight: "-0.25px",
     },
     screens: {
       md: "768px", // tablet

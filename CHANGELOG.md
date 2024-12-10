@@ -1,3 +1,11 @@
+# 9/12/2024
+
+## General
+
+- Update fonts across the project
+- Import only used fonts
+- Enable variable fonts where available
+
 # 8/12/2024
 
 ## General

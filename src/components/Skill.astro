@@ -14,7 +14,7 @@ interface Props {
 const { class: className, title, tech } = Astro.props;
 ---
 
-<article class={simpleCX("flex flex-col font-code", className)}>
+<article class={simpleCX("flex flex-col code", className)}>
   <SkillWrap tag="h3">
     <h3 class="code-indent">{title}</h3>
   </SkillWrap>
@@ -25,7 +25,7 @@ const { class: className, title, tech } = Astro.props;
           <li class="code-indent flex items-center">
             <SkillWrap tag="li">
               <span>{TECH_LABELS[tec]}</span>
-              <Icon class="ml-1.5 mr-0.5 text-l" name={tec} />
+              <Icon class="text-lg ml-1.5 mr-0.5" name={tec} />
             </SkillWrap>
           </li>
         ))
