@@ -84,7 +84,7 @@ function ProjectDetails() {
                     class="lg:flex lg:items-center lg:gap-2 lg:rounded-2xl lg:bg-slate lg:px-3 lg:py-2"
                     title={TECH_LABELS[tec]}
                   >
-                    <Icon class="lg:text-lg text-xl" name={tec} />
+                    <Icon class="text-xl lg:text-lg" name={tec} />
                     <span class="cursor-default font-code font-bold text-gray max-lg:sr-only">
                       {TECH_LABELS[tec]}
                     </span>
