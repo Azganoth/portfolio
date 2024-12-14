@@ -101,7 +101,7 @@ function ProjectDetails() {
                   <Icon name="github2" />
                 </Link>
                 <Link
-                  class="flex items-center gap-1"
+                  class="flex items-center"
                   href={proj.link}
                   description="Abrir o site em uma nova aba"
                   newTab

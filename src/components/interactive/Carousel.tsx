@@ -6,7 +6,6 @@ import {
   useRef,
   useState,
 } from "preact/hooks";
-import { simpleCX } from "../../utils/cx";
 import Icon from "../shared/Icon";
 
 const SWIPE_THRESHOLD = 80;
@@ -98,10 +97,7 @@ function Carousel({ slides }: CarouselProps) {
         {slides.map((_, i) => (
           <li key={i} class="md:text-lg">
             <button
-              class={simpleCX(
-                "push-down block select-none hover:text-orchid",
-                i === currentSlide && "text-pink hover:text-pink",
-              )}
+              class="push-down block select-none hover:text-orchid"
               type="button"
               onClick={() => {
                 goToSlide(i);
@@ -109,7 +105,10 @@ function Carousel({ slides }: CarouselProps) {
               aria-label={`Go to slide ${i + 1}`}
               aria-current={i === currentSlide}
             >
-              <Icon class="drop-shadow-stand-out" name="circle" />
+              <Icon
+                class="drop-shadow-stand-out"
+                name={i === currentSlide ? "slide-dot-selected" : "slide-dot"}
+              />
             </button>
           </li>
         ))}
@@ -151,20 +150,20 @@ function Carousel({ slides }: CarouselProps) {
     >
       {slideContent}
       <button
-        class="push-down absolute left-2 top-1/2 -translate-y-1/2 select-none text-3xl hover:text-orchid"
+        class="push-down absolute left-0 top-1/2 -translate-y-1/2 select-none text-3xl hover:text-orchid"
         type="button"
         onClick={previousSlide}
         aria-label="Previous slide"
       >
-        <Icon class="drop-shadow-stand-out" name="chevron-left" />
+        <Icon class="drop-shadow-stand-out" name="slide-left" />
       </button>
       <button
-        class="push-down absolute right-2 top-1/2 -translate-y-1/2 select-none text-3xl hover:text-orchid"
+        class="push-down absolute right-0 top-1/2 -translate-y-1/2 select-none text-3xl hover:text-orchid"
         type="button"
         onClick={nextSlide}
         aria-label="Next slide"
       >
-        <Icon class="drop-shadow-stand-out" name="chevron-right" />
+        <Icon class="drop-shadow-stand-out" name="slide-right" />
       </button>
       {slideIndicators}
     </section>

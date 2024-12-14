@@ -1,3 +1,19 @@
+# 13/12/2024
+
+## General
+
+- Improved start screen visuals
+- Replaced Font Awesome icons with newly created custom icons
+
+## Carousel
+
+- Updated carousel controls
+- Remade slide selection indicator with a custom design
+
+## Navigation
+
+- Removed background from the "Back to Top" button
+
 # 10/12/2024
 
 ## General
