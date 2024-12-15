@@ -3,8 +3,10 @@ import { Image } from "astro:assets";
 import type { Tech } from "../types";
 import type { ImageMetadata } from "astro";
 import TechBadge from "./TechBadge.astro";
+import { simpleCX } from "../utils/cx";
 
 interface Props {
+  class?: string;
   id: string;
   title: string;
   description: string;
@@ -12,12 +14,15 @@ interface Props {
   preview: ImageMetadata;
 }
 
-const { id, title, description, tech, preview } = Astro.props;
+const { class: className, id, title, description, tech, preview } = Astro.props;
 ---
 
 <button
   type="button"
-  class="group/project-preview grid cursor-pointer items-center gap-2 focus:outline-none md:max-w-[640px] md:grid-cols-[320px_1fr] md:grid-rows-[240px] md:gap-4"
+  class={simpleCX(
+    "group/project-preview grid cursor-pointer items-center gap-2 focus:outline-none md:max-w-[640px] md:grid-cols-[320px_1fr] md:grid-rows-[240px] md:gap-4",
+    className,
+  )}
   data-project-thumbnail
   data-id={id}
   aria-label="Mostrar detalhes do projeto"

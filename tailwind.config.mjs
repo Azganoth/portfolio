@@ -51,6 +51,7 @@ export default {
       transitionProperty: {
         visibility: "opacity, visibility",
         "visibility-transform": "opacity, visibility, transform",
+        "opacity-transform": "opacity, transform",
       },
       animation: {
         blink: "blink 2s ease-in-out infinite",
@@ -66,6 +67,7 @@ export default {
   plugins: [
     plugin(({ addVariant }) => {
       addVariant("inert", "&[inert]");
+      addVariant("reveal", "&.reveal:not(.is-revealed)");
     }),
   ],
 };

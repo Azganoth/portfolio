@@ -139,6 +139,28 @@ const metaImage = "/meta_image.png";
     }
   }
 
+  @layer utilities {
+    .reveal {
+      @apply transition-opacity-transform duration-300 ease-in motion-safe:will-change-[opacity,transform];
+    }
+
+    .reveal-slide-top {
+      @apply reveal:-translate-y-2 reveal:opacity-0;
+    }
+
+    .reveal-slide-left {
+      @apply reveal:-translate-x-2 reveal:opacity-0;
+    }
+
+    .reveal-slide-bottom {
+      @apply reveal:translate-y-2 reveal:opacity-0;
+    }
+
+    .reveal-pop {
+      @apply reveal:scale-95 reveal:opacity-0;
+    }
+  }
+
   :root {
     --underscore: "_";
   }

@@ -9,6 +9,7 @@ import ProjectThumbnail from "../ProjectThumbnail.astro";
     {
       getAllProjects().map(({ id, title, description, tech }) => (
         <ProjectThumbnail
+          class="reveal motion-safe:reveal-pop delay-75"
           id={id}
           title={title}
           description={description}

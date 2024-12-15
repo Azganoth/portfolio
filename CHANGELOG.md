@@ -1,3 +1,9 @@
+# 15/12/2024
+
+## General
+
+- Added various reveal animations
+
 # 13/12/2024
 
 ## General

@@ -26,11 +26,20 @@ import Link from "../shared/Link";
         tecnologias como JavaScript, React, Vue e Node.
       </p>
       <div class="mt-4 text-center">
-        <Link type="prime" href="/curriculo.pdf" newTab>Currículo</Link>
+        <Link
+          class="reveal motion-safe:reveal-slide-bottom delay-75"
+          type="prime"
+          href="/curriculo.pdf"
+          newTab>Currículo</Link
+        >
       </div>
     </div>
     <div class="max-lg:mt-12 max-md:hidden">
-      <Image class="mx-auto rounded-2xl" src={profileImage} alt="Profile" />
+      <Image
+        class="reveal motion-safe:reveal-pop mx-auto rounded-2xl delay-150"
+        src={profileImage}
+        alt="Profile"
+      />
     </div>
   </div>
 </Content>
