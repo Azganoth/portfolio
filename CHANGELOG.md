@@ -3,6 +3,7 @@
 ## General
 
 - Added various reveal animations
+- Ensured that "Back to Top" button is initially hidden
 
 # 13/12/2024
 
