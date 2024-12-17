@@ -70,4 +70,7 @@ export default {
       addVariant("reveal", "&.reveal:not(.is-revealed)");
     }),
   ],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 };

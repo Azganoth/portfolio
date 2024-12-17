@@ -1,3 +1,9 @@
+# 16/12/2024
+
+## General
+
+- Disabled hover effects on devices without hover support
+
 # 15/12/2024
 
 ## General
