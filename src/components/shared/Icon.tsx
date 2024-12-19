@@ -1,4 +1,4 @@
-import { simpleCX } from "../../utils/cx";
+import { simpleCX } from "@utils/cx";
 
 export type IconProps = {
   class?: string;

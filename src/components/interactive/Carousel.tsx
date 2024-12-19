@@ -1,3 +1,4 @@
+import Icon from "@components/shared/Icon";
 import type { ImageMetadata } from "astro";
 import {
   useCallback,
@@ -6,7 +7,6 @@ import {
   useRef,
   useState,
 } from "preact/hooks";
-import Icon from "../shared/Icon";
 
 const SWIPE_THRESHOLD = 80;
 

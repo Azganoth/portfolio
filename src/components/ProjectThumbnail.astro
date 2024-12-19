@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import type { Tech } from "../types";
+import type { Tech } from "@app/types";
 import type { ImageMetadata } from "astro";
-import TechBadge from "./TechBadge.astro";
-import { simpleCX } from "../utils/cx";
+import TechBadge from "@components/TechBadge.astro";
+import { simpleCX } from "@utils/cx";
 
 interface Props {
   class?: string;
@@ -52,8 +52,8 @@ const { class: className, id, title, description, tech, preview } = Astro.props;
 </button>
 
 <script>
-  import { $currentProject } from "../store";
-  import { getProject } from "../utils/projects";
+  import { $currentProject } from "@app/store";
+  import { getProject } from "@utils/projects";
 
   const projects = document.querySelectorAll<HTMLElement>(
     "[data-project-thumbnail]",

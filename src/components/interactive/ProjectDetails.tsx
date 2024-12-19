@@ -1,11 +1,11 @@
+import { TECH_LABELS } from "@app/constants";
+import { $currentProject } from "@app/store";
+import Carousel from "@components/interactive/Carousel";
+import Icon from "@components/shared/Icon";
+import Link from "@components/shared/Link";
 import { useStore } from "@nanostores/preact";
+import { getProjectSlides, type ProjectImage } from "@utils/projects";
 import { useEffect, useRef, useState } from "preact/hooks";
-import { TECH_LABELS } from "../../constants";
-import { $currentProject } from "../../store";
-import { getProjectSlides, type ProjectImage } from "../../utils/projects";
-import Icon from "../shared/Icon";
-import Link from "../shared/Link";
-import Carousel from "./Carousel";
 
 function ProjectDetails() {
   const dialogRef = useRef<HTMLDialogElement>(null);
