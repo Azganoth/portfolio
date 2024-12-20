@@ -1,6 +1,6 @@
 ---
-import BackToTop from "@components/BackToTop.astro";
-import Header from "@components/Header.astro";
+import BackToTop from "@components/interactive/BackToTop.tsx";
+import Header from "@components/interactive/Header.tsx";
 import Bio from "@components/views/Bio.astro";
 import Contact from "@components/views/Contact.astro";
 import Projects from "@components/views/Projects.astro";
@@ -10,7 +10,7 @@ import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout>
-  <Header />
+  <Header client:load />
   <main>
     <Start />
     <Bio />
@@ -18,7 +18,7 @@ import Layout from "@layouts/Layout.astro";
     <Projects />
     <Contact />
   </main>
-  <BackToTop />
+  <BackToTop client:load />
 </Layout>
 
 <script>

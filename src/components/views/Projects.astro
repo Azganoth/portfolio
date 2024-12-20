@@ -1,5 +1,5 @@
 ---
-import ProjectThumbnail from "@components/ProjectThumbnail.astro";
+import ProjectThumbnail from "@components/interactive/ProjectThumbnail";
 import Content from "@layouts/Content.astro";
 import { getAllProjects, getProjectSlides } from "@utils/projects";
 ---
@@ -15,6 +15,7 @@ import { getAllProjects, getProjectSlides } from "@utils/projects";
           description={description}
           tech={tech}
           preview={getProjectSlides(id)[0]}
+          client:load
         />
       ))
     }
