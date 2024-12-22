@@ -1,3 +1,10 @@
+# 22/12/2024
+
+## General
+
+- Restored header mobile menu
+- Refactored outside click functionality into a hook
+
 # 16/12/2024
 
 ## General

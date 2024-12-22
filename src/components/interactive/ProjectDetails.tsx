@@ -3,6 +3,7 @@ import { $currentProject } from "@app/store";
 import Carousel from "@components/interactive/Carousel";
 import Icon from "@components/shared/Icon";
 import Link from "@components/shared/Link";
+import useClickAway from "@hooks/useClickAway";
 import { useStore } from "@nanostores/preact";
 import { getProjectSlides, type ProjectImage } from "@utils/projects";
 import { useEffect, useRef, useState } from "preact/hooks";
@@ -47,17 +48,16 @@ function ProjectDetails() {
     }
   }, [proj]);
 
-  const handleOutsideClick = (event: MouseEvent) => {
-    if (event.target === dialogRef.current) {
-      close();
-    }
-  };
+  // Close on outside click
+  useClickAway(dialogRef, () => close(), {
+    disabled: !proj,
+    ignoreSelf: true,
+  });
 
   return (
     <dialog
       ref={dialogRef}
       class="z-20 max-h-[612px] max-w-[320px] overflow-hidden rounded-2xl bg-charcoal text-white shadow-elevation-high backdrop:bg-[rgba(0,0,0,0.9)] md:max-h-[896px] md:max-w-[640px] lg:grid lg:max-h-[540px] lg:max-w-[1300px]"
-      onClick={handleOutsideClick}
     >
       {proj && (
         <>

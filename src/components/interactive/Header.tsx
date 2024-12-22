@@ -1,5 +1,6 @@
 import Icon from "@components/shared/Icon";
 import Link from "@components/shared/Link";
+import useClickAway from "@hooks/useClickAway";
 import useMediaQuery from "@hooks/useMediaQuery";
 import useMounted from "@hooks/useMounted";
 import { simpleCX } from "@utils/cx";
@@ -45,23 +46,17 @@ function Header() {
     setIsOpened((p) => !p);
   }, []);
 
-  // hide menu on outside click
+  // Hide menu on outside click
   const menuRef = useRef<HTMLUListElement>(null);
-  useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
-      if (
-        !menuRef.current ||
-        !(event.target instanceof Node) ||
-        (event.target !== menuRef.current &&
-          !menuRef.current.contains(event.target))
-      ) {
-        setIsOpened(false);
-      }
-    };
-
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, []);
+  useClickAway(
+    menuRef,
+    () => {
+      setIsOpened(false);
+    },
+    {
+      disabled: !isOpened,
+    },
+  );
 
   const isMounted = useMounted();
 
