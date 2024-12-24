@@ -1,3 +1,9 @@
+# 23/12/2024
+
+## Header
+
+- Implemented auto-close mobile menu after navigation
+
 # 22/12/2024
 
 ## General

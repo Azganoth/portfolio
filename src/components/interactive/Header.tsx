@@ -77,7 +77,7 @@ function Header() {
         )}
       >
         {!isTabletUp && (
-          <div>
+          <>
             <button
               class="push-down block select-none text-2xl hover:text-orchid"
               type="button"
@@ -95,26 +95,29 @@ function Header() {
             >
               {links.map(({ label, link, description }) => (
                 <li class="mt-4 text-center first:mt-0">
-                  <Link type="nav" href={link} description={description}>
+                  <Link
+                    variant="nav"
+                    href={link}
+                    onClick={() => setIsOpened(false)}
+                    aria-label={description}
+                  >
                     {label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </>
         )}
         {isTabletUp && (
-          <div>
-            <ul class="flex">
-              {links.map(({ label, link, description }) => (
-                <li>
-                  <Link type="nav" href={link} description={description}>
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul class="flex">
+            {links.map(({ label, link, description }) => (
+              <li>
+                <Link variant="nav" href={link} aria-label={description}>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         )}
       </nav>
     </header>

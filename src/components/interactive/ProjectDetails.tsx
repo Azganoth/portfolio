@@ -95,7 +95,7 @@ function ProjectDetails() {
                 <Link
                   class="text-2xl"
                   href={proj.repoLink}
-                  description="Abrir repositório do projeto"
+                  aria-label="Abrir repositório do projeto"
                   newTab
                 >
                   <Icon name="github2" />
@@ -103,7 +103,7 @@ function ProjectDetails() {
                 <Link
                   class="flex items-center"
                   href={proj.link}
-                  description="Abrir o site em uma nova aba"
+                  aria-label="Abrir o site em uma nova aba"
                   newTab
                 >
                   Visitar
