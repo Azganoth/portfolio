@@ -7,33 +7,36 @@ function useClickAway<T extends HTMLElement>(
   options: { disabled?: boolean; ignoreSelf?: boolean } = {},
 ) {
   const callbackRef = useRef(callback);
-  const { disabled = false, ignoreSelf = false } = options;
-
   useLayoutEffect(() => {
     callbackRef.current = callback;
-  });
+  }, [callback]);
+
+  const optionsRef = useRef(options);
+  useLayoutEffect(() => {
+    optionsRef.current = options;
+  }, [options]);
 
   useEffect(() => {
-    if (disabled) return;
+    if (optionsRef.current.disabled) return;
 
-    const handleClick = (event: MouseEvent | TouchEvent) => {
-      const element = ref.current;
+    const listener = (event: MouseEvent | TouchEvent) => {
       if (
-        element &&
-        ((ignoreSelf && event.target === element) ||
-          !event.composedPath().includes(element))
+        ref.current &&
+        event.target instanceof Node &&
+        ((optionsRef.current.ignoreSelf && event.target === ref.current) ||
+          !ref.current.contains(event.target))
       ) {
         callbackRef.current(event);
       }
     };
 
-    document.addEventListener("click", handleClick);
-    document.addEventListener("touchstart", handleClick);
+    document.addEventListener("click", listener);
+    document.addEventListener("touchstart", listener);
     return () => {
-      document.removeEventListener("click", handleClick);
-      document.removeEventListener("touchstart", handleClick);
+      document.removeEventListener("click", listener);
+      document.removeEventListener("touchstart", listener);
     };
-  }, [ref, disabled, ignoreSelf]);
+  }, [ref, optionsRef.current.disabled]);
 }
 
 export default useClickAway;
