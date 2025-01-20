@@ -1,3 +1,4 @@
+// @ts-check
 import plugin from "tailwindcss/plugin";
 
 /** @type {import('tailwindcss').Config} */
@@ -58,8 +59,8 @@ export default {
       },
       keyframes: {
         blink: {
-          "40%": { opacity: 0 },
-          "30%, 50%": { opacity: 1 },
+          "40%": { opacity: "0" },
+          "30%, 50%": { opacity: "1" },
         },
       },
     },
