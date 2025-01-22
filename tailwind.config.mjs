@@ -3,7 +3,7 @@ import plugin from "tailwindcss/plugin";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{astro,ts,tsx}"],
+  content: ["./src/**/*.{astro,svelte,ts}"],
   theme: {
     colors: {
       current: "currentColor",

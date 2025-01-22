@@ -1,9 +1,8 @@
 ---
 import { TECH_LABELS } from "@app/constants";
 import type { Tech } from "@app/types";
-import Icon from "@components/shared/Icon";
+import Icon from "@components/Icon.svelte";
 import SkillWrap from "@components/SkillWrap.astro";
-import { simpleCX } from "@utils/cx";
 
 interface Props {
   class?: string;
@@ -15,10 +14,10 @@ const { class: className, title, tech } = Astro.props;
 ---
 
 <article
-  class={simpleCX(
-    "flex flex-col code reveal motion-safe:reveal-slide-bottom md:motion-safe:reveal-slide-left",
+  class:list={[
+    "code reveal motion-safe:reveal-slide-bottom md:motion-safe:reveal-slide-left flex flex-col",
     className,
-  )}
+  ]}
 >
   <SkillWrap tag="h3">
     <h3 class="code-indent">{title}</h3>

@@ -1,6 +1,6 @@
 ---
-import BackToTop from "@components/interactive/BackToTop.tsx";
-import Header from "@components/interactive/Header.tsx";
+import BackToTop from "@components/interactive/BackToTop.svelte";
+import Header from "@components/interactive/Header.svelte";
 import Bio from "@components/views/Bio.astro";
 import Contact from "@components/views/Contact.astro";
 import Projects from "@components/views/Projects.astro";
@@ -18,7 +18,7 @@ import Layout from "@layouts/Layout.astro";
     <Projects />
     <Contact />
   </main>
-  <BackToTop client:load />
+  <BackToTop client:idle />
 </Layout>
 
 <script>
@@ -38,6 +38,8 @@ import Layout from "@layouts/Layout.astro";
       },
     );
 
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    document.querySelectorAll(".reveal").forEach((el) => {
+      observer.observe(el);
+    });
   });
 </script>
