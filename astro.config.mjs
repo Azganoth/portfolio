@@ -12,8 +12,12 @@ export default defineConfig({
   vite: {
     plugins: [
       visualizer({
+        title: "Azganoth.io Bundle Size Report",
+        filename: "bundle-size-report.html",
+        template: "flamegraph",
         emitFile: true,
-        filename: "stats.html",
+        gzipSize: true,
+        brotliSize: true,
       }),
     ],
   },
