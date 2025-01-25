@@ -1,22 +1,18 @@
 <script lang="ts">
-  import { TECH_LABELS } from "@app/constants";
+  import { TECH_STACK_LABELS } from "@app/constants";
   import { activeProject } from "@app/store";
-  import { getProject, type ProjectWithId } from "@utils/projects";
+  import type { Project } from "@utils/projects";
   import type { ClassValue } from "svelte/elements";
 
   interface Props {
     class?: ClassValue;
-    id: ProjectWithId["id"];
-    title: ProjectWithId["title"];
-    description: ProjectWithId["description"];
-    tech: ProjectWithId["tech"];
-    preview: ImageMetadata;
+    project: Project;
   }
 
-  let { class: className, preview, ...project }: Props = $props();
+  let { class: className, project }: Props = $props();
 
   function openProject() {
-    activeProject.set(getProject(project.id));
+    activeProject.set(project);
   }
 
   function handleclick(event: MouseEvent) {
@@ -37,7 +33,7 @@
     "group/project-preview grid cursor-pointer items-center gap-2 focus:outline-none md:max-w-[640px] md:grid-cols-[320px_1fr] md:grid-rows-[240px] md:gap-4",
     className,
   ]}
-  data-id={project.id}
+  data-id={project.name}
   aria-label="Show project details"
   onclick={handleclick}
   onkeydown={handlekeydown}
@@ -47,9 +43,9 @@
   >
     <img
       class="transition-transform duration-300 ease-out group-hover/project-preview:scale-110"
-      src={preview.src}
-      width={preview.width}
-      height={preview.height}
+      src={project.previews[0].src}
+      width={project.previews[0].width}
+      height={project.previews[0].height}
       loading="lazy"
       alt={`${project.title} preview.`}
     />
@@ -64,11 +60,11 @@
       {project.description.substring(0, project.description.indexOf(".") + 1)}
     </p>
     <div class="mt-auto flex flex-wrap justify-center gap-2">
-      {#each project.tech as tech (tech)}
+      {#each project.technologies as tech (tech)}
         <span
           class="rounded-2xl bg-charcoal px-2 font-code font-bold text-gray"
         >
-          {TECH_LABELS[tech]}
+          {TECH_STACK_LABELS[tech]}
         </span>
       {/each}
     </div>

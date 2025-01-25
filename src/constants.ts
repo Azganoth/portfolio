@@ -1,11 +1,15 @@
-export const TECH_LABELS = {
+import type { TechStack } from "./types";
+
+export const TECH_STACK_LABELS: Record<TechStack, string> = {
   html5: "HTML",
   css3: "CSS",
   javascript: "Javascript",
   typescript: "Typescript",
   python: "Python",
   react: "React",
+  preact: "Preact",
   vue: "Vue",
+  svelte: "Svelte",
   next: "Next",
   astro: "Astro",
   sass: "SASS",
@@ -24,3 +28,15 @@ export const TECH_LABELS = {
   githubactions: "GitHub Actions",
   figma: "Figma",
 };
+
+export const PROJECTS_ORDER = [
+  "azganoth",
+  "galleria",
+  "github-user-search",
+  "tic-tac-toe",
+  "body-mass-index-calculator",
+  "skilled-e-learning",
+  "equalizer",
+  "workit",
+  "suite",
+];

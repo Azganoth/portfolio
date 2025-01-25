@@ -1,12 +1,14 @@
-export type Tech =
+export type TechStack =
   | "html5"
   | "css3"
   | "javascript"
   | "typescript"
   | "python"
   | "react"
-  | "next"
+  | "preact"
   | "vue"
+  | "svelte"
+  | "next"
   | "astro"
   | "sass"
   | "tailwindcss"
@@ -23,11 +25,3 @@ export type Tech =
   | "github"
   | "githubactions"
   | "figma";
-
-export type Project = {
-  title: string;
-  description: string;
-  link: string;
-  repoLink: string;
-  tech: Tech[];
-};

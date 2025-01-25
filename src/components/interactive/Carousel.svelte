@@ -1,10 +1,9 @@
 <script lang="ts">
   import Icon from "@components/Icon.svelte";
   import swipe from "@utils/actions/swipe.svelte";
-  import type { ImageMetadata } from "astro";
 
   interface Props {
-    slides: ImageMetadata[];
+    slides: { src: string; width: number; height: number }[];
   }
 
   let { slides }: Props = $props();

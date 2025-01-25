@@ -1,13 +1,13 @@
 ---
-import { TECH_LABELS } from "@app/constants";
-import type { Tech } from "@app/types";
+import { TECH_STACK_LABELS } from "@app/constants";
+import type { TechStack } from "@app/types";
 import Icon from "@components/Icon.svelte";
 import SkillWrap from "@components/SkillWrap.astro";
 
 interface Props {
   class?: string;
   title: string;
-  tech: Tech[];
+  tech: TechStack[];
 }
 
 const { class: className, title, tech } = Astro.props;
@@ -28,7 +28,7 @@ const { class: className, title, tech } = Astro.props;
         tech.map((tec) => (
           <li class="code-indent flex items-center">
             <SkillWrap tag="li">
-              <span>{TECH_LABELS[tec]}</span>
+              <span>{TECH_STACK_LABELS[tec]}</span>
               <Icon class="ml-1.5 mr-0.5 text-lg" name={tec} />
             </SkillWrap>
           </li>

@@ -1,17 +1,18 @@
 ---
 import ProjectThumb from "@components/interactive/ProjectThumb.svelte";
 import Content from "@layouts/Content.astro";
-import { getAllProjects, getProjectSlides } from "@utils/projects";
+import { getAllProjects } from "@utils/projects";
+
+const projects = await getAllProjects();
 ---
 
 <Content id="projects" title="Projetos">
   <div class="flex flex-wrap justify-center gap-x-4 gap-y-16 pb-32">
     {
-      getAllProjects().map((project) => (
+      projects.map((project) => (
         <ProjectThumb
           class="reveal motion-safe:reveal-pop delay-75"
-          {...project}
-          preview={getProjectSlides(project.id)[0]}
+          project={project}
           client:load
         />
       ))

@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { TECH_LABELS } from "@app/constants";
+  import { TECH_STACK_LABELS } from "@app/constants";
   import { activeProject } from "@app/store";
   import Icon from "@components/Icon.svelte";
   import Link from "@components/Link.svelte";
   import clickaway from "@utils/actions/clickaway.svelte";
-  import { getProjectSlides } from "@utils/projects";
   import Carousel from "./Carousel.svelte";
 
   let open = $state(false);
@@ -22,10 +21,6 @@
       activeProject.set(undefined);
     }
   });
-
-  let slides = $derived(
-    $activeProject ? getProjectSlides($activeProject.id) : [],
-  );
 </script>
 
 <dialog
@@ -48,7 +43,7 @@
       <Icon class="drop-shadow-stand-out" name="close" />
     </button>
     <div class="grid lg:grid-cols-[auto_1fr]">
-      <Carousel {slides} />
+      <Carousel slides={$activeProject.previews} />
       <article
         class="flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4 lg:px-8 lg:pb-8"
       >
@@ -58,16 +53,16 @@
           class="flex flex-wrap justify-center gap-2"
           aria-label="Tecnologias usadas"
         >
-          {#each $activeProject.tech as tech (tech)}
+          {#each $activeProject.technologies as tech (tech)}
             <li
               class="lg:flex lg:items-center lg:gap-2 lg:rounded-2xl lg:bg-slate lg:px-3 lg:py-2"
-              title={TECH_LABELS[tech]}
+              title={TECH_STACK_LABELS[tech]}
             >
               <Icon class="text-xl lg:text-lg" name={tech} />
               <span
                 class="cursor-default font-code font-bold text-gray max-lg:sr-only"
               >
-                {TECH_LABELS[tech]}
+                {TECH_STACK_LABELS[tech]}
               </span>
             </li>
           {/each}
@@ -75,7 +70,7 @@
         <div class="flex items-center justify-between">
           <Link
             class="text-2xl"
-            href={$activeProject.repoLink}
+            href={$activeProject.repository}
             aria-label="Abrir repositório do projeto"
             newTab
           >
@@ -83,7 +78,7 @@
           </Link>
           <Link
             class="flex items-center"
-            href={$activeProject.link}
+            href={$activeProject.website}
             aria-label="Abrir o site em uma nova aba"
             newTab
           >
