@@ -1,7 +1,8 @@
-import { PROJECTS_ORDER } from "@app/constants";
+import { PROJECTS_ORDER, TECH_STACK_ORDER } from "@app/constants";
 import type { TechStack } from "@app/types";
 import type { ProjectEntry } from "@lib/contentful";
 import { contentfulClient } from "@lib/contentful";
+import { compareOrderBy } from "@utils/sort";
 import { inferRemoteSize } from "astro:assets";
 
 export interface Project {
@@ -54,17 +55,12 @@ export const getAllProjects = async (): Promise<Project[]> => {
           description: entry.fields.description,
           website: entry.fields.website,
           repository: entry.fields.repository,
-          technologies: entry.fields.technologies ?? [],
+          technologies: (entry.fields.technologies ?? []).sort(
+            compareOrderBy(TECH_STACK_ORDER, (item) => item),
+          ),
           previews: previewImages,
         };
       }),
     )
-  ).sort((a, b) => {
-    const indexA = PROJECTS_ORDER.indexOf(a.name);
-    const indexB = PROJECTS_ORDER.indexOf(b.name);
-
-    if (indexA === -1) return 1;
-    if (indexB === -1) return -1;
-    return indexA - indexB;
-  });
+  ).sort(compareOrderBy(PROJECTS_ORDER, (item) => item.name));
 };

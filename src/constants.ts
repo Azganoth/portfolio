@@ -29,6 +29,8 @@ export const TECH_STACK_LABELS: Record<TechStack, string> = {
   figma: "Figma",
 };
 
+export const TECH_STACK_ORDER = Object.keys(TECH_STACK_LABELS);
+
 export const PROJECTS_ORDER = [
   "azganoth",
   "galleria",
