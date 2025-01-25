@@ -1,5 +1,4 @@
-import { PROJECTS_ORDER, TECH_STACK_ORDER } from "@app/constants";
-import type { TechStack } from "@app/types";
+import { PROJECTS_ORDER, TECH_ORDER, type Tech } from "@app/constants";
 import type { ProjectEntry } from "@lib/contentful";
 import { contentfulClient } from "@lib/contentful";
 import { compareOrderBy } from "@utils/sort";
@@ -11,7 +10,7 @@ export interface Project {
   description: string;
   website: string;
   repository: string;
-  technologies: TechStack[];
+  technologies: Tech[];
   previews: { src: string; width: number; height: number }[];
 }
 
@@ -56,7 +55,7 @@ export const getAllProjects = async (): Promise<Project[]> => {
           website: entry.fields.website,
           repository: entry.fields.repository,
           technologies: (entry.fields.technologies ?? []).sort(
-            compareOrderBy(TECH_STACK_ORDER, (item) => item),
+            compareOrderBy(TECH_ORDER, (item) => item),
           ),
           previews: previewImages,
         };

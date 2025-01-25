@@ -1,4 +1,4 @@
-import type { TechStack } from "@app/types";
+import type { Tech } from "@app/constants";
 import {
   createClient,
   type EntryFieldTypes,
@@ -11,7 +11,7 @@ interface ProjectEntryFields {
   description: EntryFieldTypes.Text;
   website: EntryFieldTypes.Symbol;
   repository: EntryFieldTypes.Symbol;
-  technologies?: EntryFieldTypes.Array<EntryFieldTypes.Symbol<TechStack>>;
+  technologies?: EntryFieldTypes.Array<EntryFieldTypes.Symbol<Tech>>;
   previews: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
 }
 

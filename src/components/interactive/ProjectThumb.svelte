@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TECH_STACK_LABELS } from "@app/constants";
+  import { TECH_META } from "@app/constants";
   import { activeProject } from "@app/store";
   import type { Project } from "@utils/projects";
   import type { ClassValue } from "svelte/elements";
@@ -64,7 +64,7 @@
         <span
           class="rounded-2xl bg-charcoal px-2 font-code font-bold text-gray"
         >
-          {TECH_STACK_LABELS[tech]}
+          {TECH_META[tech].label}
         </span>
       {/each}
     </div>

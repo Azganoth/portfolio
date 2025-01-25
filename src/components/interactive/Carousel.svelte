@@ -79,7 +79,7 @@
     }}
     aria-label="Previous slide"
   >
-    <Icon class="drop-shadow-stand-out" name="slide-left" />
+    <Icon name="slide-left" class="drop-shadow-stand-out" />
   </button>
   <button
     class="push-down absolute right-0 top-1/2 z-10 -translate-y-1/2 select-none text-3xl hover:text-orchid"
@@ -89,7 +89,7 @@
     }}
     aria-label="Next slide"
   >
-    <Icon class="drop-shadow-stand-out" name="slide-right" />
+    <Icon name="slide-right" class="drop-shadow-stand-out" />
   </button>
   <ul class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
     {#each { length: slides.length }, i}
@@ -104,8 +104,8 @@
           aria-current={i === activeSlide}
         >
           <Icon
-            class="drop-shadow-stand-out"
             name={i === activeSlide ? "slide-dot-selected" : "slide-dot"}
+            class="drop-shadow-stand-out"
           />
         </button>
       </li>

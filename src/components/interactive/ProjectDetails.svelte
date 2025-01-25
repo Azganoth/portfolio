@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TECH_STACK_LABELS } from "@app/constants";
+  import { TECH_META } from "@app/constants";
   import { activeProject } from "@app/store";
   import Icon from "@components/Icon.svelte";
   import Link from "@components/Link.svelte";
@@ -40,7 +40,7 @@
       }}
       aria-label="Fechar detalhes do projeto"
     >
-      <Icon class="drop-shadow-stand-out" name="close" />
+      <Icon name="close" class="drop-shadow-stand-out" />
     </button>
     <div class="grid lg:grid-cols-[auto_1fr]">
       <Carousel slides={$activeProject.previews} />
@@ -54,15 +54,20 @@
           aria-label="Tecnologias usadas"
         >
           {#each $activeProject.technologies as tech (tech)}
+            {@const { label, color } = TECH_META[tech]}
             <li
               class="lg:flex lg:items-center lg:gap-2 lg:rounded-2xl lg:bg-slate lg:px-3 lg:py-2"
-              title={TECH_STACK_LABELS[tech]}
+              title={label}
             >
-              <Icon class="text-xl lg:text-lg" name={tech} />
+              <Icon
+                name={tech}
+                class="text-xl text-[var(--icon-color)] lg:text-lg"
+                style="--icon-color: {color};"
+              />
               <span
                 class="cursor-default font-code font-bold text-gray max-lg:sr-only"
               >
-                {TECH_STACK_LABELS[tech]}
+                {label}
               </span>
             </li>
           {/each}
@@ -74,7 +79,7 @@
             aria-label="Abrir repositório do projeto"
             newTab
           >
-            <Icon name="github2" />
+            <Icon name="github" />
           </Link>
           <Link
             class="flex items-center"
@@ -83,7 +88,7 @@
             newTab
           >
             Visitar
-            <Icon class="text-xl" name="redirect" />
+            <Icon name="redirect" class="text-xl" />
           </Link>
         </div>
       </article>
