@@ -1,0 +1,12 @@
+@utility width-em {
+  width: 1em;
+}
+
+@utility height-em {
+  height: 1em;
+}
+
+@utility size-em {
+  width: 1em;
+  height: 1em;
+}

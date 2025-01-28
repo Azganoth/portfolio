@@ -60,7 +60,7 @@
       <div>
         <button
           bind:this={menuToggler}
-          class="push-on-active hover:text-orchid block select-none text-2xl"
+          class="push-on-active hover:text-orchid block select-none"
           type="button"
           onclick={() => {
             open = !open;
@@ -69,7 +69,7 @@
           aria-haspopup="true"
           aria-expanded={open}
         >
-          <Icon name="menu" />
+          <Icon class="size-8" name="menu" />
         </button>
         <ul
           class="bg-charcoal inert:invisible inert:-translate-y-2 inert:opacity-0 shadow-elevation fixed inset-x-0 top-24 origin-top rounded-2xl px-4 py-8 duration-300 ease-out motion-safe:transition-[visibility,opacity,translate]"

@@ -24,7 +24,7 @@
         <li class="code-indent flex items-center">
           <Tag name="li">
             <span>{label}</span>
-            <Icon class="ml-1.5 mr-0.5 text-lg" name={tech} {color} />
+            <Icon class="ml-1.5 mr-0.5 size-5" name={tech} {color} />
           </Tag>
         </li>
       {/each}

@@ -11,7 +11,7 @@
 </script>
 
 <svg
-  class={["block size-[1em] text-[var(--icon-color,currentColor)]", className]}
+  class={["block text-[var(--icon-color,currentColor)]", className]}
   {...color && { style: `--icon-color: ${color};` }}
   aria-hidden="true"
 >

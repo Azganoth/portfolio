@@ -72,28 +72,28 @@
     {/each}
   </div>
   <button
-    class="push-on-active hover:text-orchid absolute left-0 top-1/2 -translate-y-1/2 select-none text-3xl"
+    class="push-on-active hover:text-orchid absolute left-0 top-1/2 -translate-y-1/2 select-none"
     type="button"
     onclick={() => {
       previousSlide();
     }}
     aria-label="Previous slide"
   >
-    <Icon class="drop-shadow-contrast" name="slide-left" />
+    <Icon class="drop-shadow-contrast size-12" name="slide-left" />
   </button>
   <button
-    class="push-on-active hover:text-orchid absolute right-0 top-1/2 z-10 -translate-y-1/2 select-none text-3xl"
+    class="push-on-active hover:text-orchid absolute right-0 top-1/2 z-10 -translate-y-1/2 select-none"
     type="button"
     onclick={() => {
       nextSlide();
     }}
     aria-label="Next slide"
   >
-    <Icon class="drop-shadow-contrast" name="slide-right" />
+    <Icon class="drop-shadow-contrast size-12" name="slide-right" />
   </button>
   <ul class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
     {#each { length: slides.length }, i}
-      <li class="tablet:text-lg">
+      <li>
         <button
           class="push-on-active hover:text-orchid block select-none"
           type="button"
@@ -104,7 +104,7 @@
           aria-current={i === activeSlide}
         >
           <Icon
-            class="drop-shadow-contrast"
+            class="drop-shadow-contrast tablet:size-5 size-4"
             name={i === activeSlide ? "slide-dot-selected" : "slide-dot"}
           />
         </button>
