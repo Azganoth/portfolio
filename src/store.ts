@@ -1,4 +1,4 @@
 import type { Project } from "@utils/projects";
-import { atom } from "nanostores";
+import { writable } from "svelte/store";
 
-export const activeProject = atom<Project | undefined>();
+export const activeProject = writable<Project | undefined>();

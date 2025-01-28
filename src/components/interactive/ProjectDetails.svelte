@@ -7,8 +7,8 @@
   import Carousel from "./Carousel.svelte";
 
   let open = $state(false);
-  activeProject.subscribe((value) => {
-    open = !!value;
+  $effect(() => {
+    open = !!$activeProject;
   });
 
   let dialog = $state<HTMLDialogElement>();
@@ -18,7 +18,7 @@
     } else {
       dialog?.close();
       // Reset the global store when the dialog is closed
-      activeProject.set(undefined);
+      $activeProject = undefined;
     }
   });
 </script>

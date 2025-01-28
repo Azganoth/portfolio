@@ -12,7 +12,7 @@
   let { class: className, project }: Props = $props();
 
   function openProject() {
-    activeProject.set(project);
+    $activeProject = project;
   }
 
   function handleclick(event: MouseEvent) {
