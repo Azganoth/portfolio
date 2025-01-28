@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "@assets/css/theme.css";
+@import "@assets/css/components.css";
+@import "@assets/css/utilities.css";
+
+@layer base {
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+:root {
+  --underscore: "_";
+}

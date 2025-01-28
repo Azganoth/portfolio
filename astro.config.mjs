@@ -1,6 +1,6 @@
 // @ts-check
 import svelte from "@astrojs/svelte";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import { visualizer } from "rollup-plugin-visualizer";
 
@@ -8,9 +8,10 @@ import { visualizer } from "rollup-plugin-visualizer";
 export default defineConfig({
   site: "https://azganoth.github.io/",
   output: "static",
-  integrations: [svelte(), tailwind({ applyBaseStyles: false })],
+  integrations: [svelte()],
   vite: {
     plugins: [
+      tailwindcss(),
       visualizer({
         title: "Azganoth.io Bundle Size Report",
         filename: "bundle-size-report.html",

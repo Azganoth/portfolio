@@ -5,22 +5,20 @@ import Content from "@layouts/Content.astro";
 
 <Content
   id="contact"
-  class="min-h-[100dvh] bg-charcoal pb-44 shadow-elevation-medium"
+  class="bg-charcoal shadow-elevation min-h-dvh pb-44"
   title="Contato"
 >
   <div>
-    <h3 class="sub-heading-lg max-w-xs max-lg:mx-auto max-lg:text-center">
+    <h3
+      class="typo-subheading-lg max-desktop:mx-auto max-desktop:text-center max-w-xs"
+    >
       Tem interesse? Manda uma mensagem!
     </h3>
-    <div class="mt-24 max-lg:text-center">
-      <Link
-        class="reveal motion-safe:reveal-slide-top delay-75"
-        variant="prime"
-        href="mailto:ademirj.ferreirajunior@gmail.com"
-      >
+    <div class="max-desktop:text-center mt-24">
+      <Link variant="prime" href="mailto:ademirj.ferreirajunior@gmail.com">
         ademirj.ferreirajunior@gmail.com
       </Link>
-      <div class="mt-8 flex flex-col items-center gap-2 lg:items-start">
+      <div class="desktop:items-start mt-8 flex flex-col items-center gap-2">
         <Link href="https://wa.me/48991984443" newTab>Whatsapp</Link>
         <Link href="https://github.com/Azganoth" newTab>GitHub</Link>
         <Link href="https://www.linkedin.com/in/ademirjferreirajunior/" newTab>

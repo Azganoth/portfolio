@@ -41,11 +41,13 @@
 </script>
 
 <header
-  class="fixed left-1/2 top-4 z-10 flex max-h-16 min-h-16 w-full max-w-[311px] -translate-x-1/2 items-center justify-between rounded-2xl bg-charcoal p-4 shadow-elevation-medium motion-safe:transition-[max-width] md:max-w-[704px] lg:max-w-[880px]"
+  class="tablet:max-w-[704px] desktop:max-w-[880px] bg-charcoal shadow-elevation fixed left-1/2 top-4 z-10 flex max-h-16 min-h-16 w-full max-w-[311px] -translate-x-1/2 items-center justify-between rounded-2xl p-4 motion-safe:transition-[max-width]"
 >
-  <h1 class="cursor-default font-decorative text-xl tracking-wider text-white">
+  <h1
+    class="font-patua-one text-offwhite cursor-default text-xl tracking-wider"
+  >
     <span
-      class="before:mr-0.5 before:text-gray before:content-['<'] after:ml-0.5 after:text-gray after:content-['/>']"
+      class="before:text-silver after:text-silver before:mr-0.5 before:content-['<'] after:ml-0.5 after:content-['/>']"
     >
       Azganoth
     </span>
@@ -58,7 +60,7 @@
       <div>
         <button
           bind:this={menuToggler}
-          class="push-down block select-none text-2xl hover:text-orchid"
+          class="push-on-active hover:text-orchid block select-none text-2xl"
           type="button"
           onclick={() => {
             open = !open;
@@ -70,7 +72,7 @@
           <Icon name="menu" />
         </button>
         <ul
-          class="fixed inset-x-0 top-24 origin-top rounded-2xl bg-charcoal px-4 py-8 shadow-elevation-medium duration-300 ease-out inert:invisible inert:-translate-y-2 inert:opacity-0 motion-safe:transition-visibility-transform"
+          class="bg-charcoal inert:invisible inert:-translate-y-2 inert:opacity-0 shadow-elevation fixed inset-x-0 top-24 origin-top rounded-2xl px-4 py-8 duration-300 ease-out motion-safe:transition-[visibility,opacity,translate]"
           inert={!open}
           use:clickaway={{ ignoreNodes: [menuToggler] }}
           onclickaway={() => {

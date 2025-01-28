@@ -1,0 +1,40 @@
+@layer components {
+  /* Typography */
+  .typo-title {
+    @apply font-montserrat-alternates max-tablet:-tracking-wider text-2xl font-bold;
+  }
+
+  .typo-heading-lg {
+    @apply font-montserrat-alternates text-2xl font-bold;
+  }
+
+  .typo-heading-md {
+    @apply font-montserrat-alternates text-xl font-bold;
+  }
+
+  .typo-subheading-lg {
+    @apply font-inter text-lg font-medium;
+  }
+
+  .typo-subheading-md {
+    @apply font-inter text-md font-medium;
+  }
+
+  .typo-body {
+    @apply font-inter text-md font-normal;
+  }
+
+  .typo-code {
+    @apply font-cascadia-code text-md font-semibold;
+  }
+
+  /* Decorations */
+  .code-indent {
+    @apply before:bg-silver/40 relative pl-8 before:absolute before:inset-y-0 before:left-[calc(1rem-1px)] before:w-0.5 before:content-[''];
+  }
+
+  /* Effects */
+  .push-on-active {
+    @apply transition-[scale] duration-300 ease-out motion-safe:active:scale-90;
+  }
+}

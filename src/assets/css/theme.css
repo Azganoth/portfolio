@@ -1,0 +1,51 @@
+/* https://tailwindcss.com/docs/theme#default-theme-variable-reference */
+@theme {
+  --font-*: initial;
+  --font-patua-one: "Patua One", sans-serif;
+  --font-montserrat-alternates: "Montserrat Alternates", sans-serif;
+  --font-inter: Inter, sans-serif;
+  --font-cascadia-code: "Cascadia Code", monospace;
+
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1440px;
+
+  --color-*: initial;
+  --color-black: #000;
+  --color-white: #fff;
+  --color-slate: #0b0b0f;
+  --color-charcoal: #16161d;
+  --color-offwhite: #f8f8f8;
+  --color-silver: #626a75;
+  --color-orchid: #8a49ff;
+  --color-green: #06d79c;
+  --color-pink: #fb839e;
+
+  --text-*: initial;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 3rem;
+
+  --shadow-*: initial;
+  --shadow-elevation: 0 10px 15px -3px rgb(0 0 0 / 0.25),
+    0 4px 6px -4px rgb(0 0 0 / 0.25);
+
+  --drop-shadow-*: initial;
+  --drop-shadow-contrast: 0 1px 2px rgb(0 0 0 / 0.5);
+
+  --animate-blink: blink 2s ease-in-out infinite;
+
+  @keyframes blink {
+    40% {
+      opacity: 0;
+    }
+    30%,
+    50% {
+      opacity: 1;
+    }
+  }
+}

@@ -30,7 +30,7 @@
 <button
   type="button"
   class={[
-    "group/project-preview grid cursor-pointer items-center gap-2 focus:outline-none md:max-w-[640px] md:grid-cols-[320px_1fr] md:grid-rows-[240px] md:gap-4",
+    "group/project-preview focus:outline-hidden tablet:max-w-[640px] tablet:grid-cols-[320px_1fr] tablet:grid-rows-[240px] tablet:gap-4 grid items-center gap-2",
     className,
   ]}
   data-id={project.name}
@@ -39,10 +39,10 @@
   onkeydown={handlekeydown}
 >
   <div
-    class="overflow-hidden rounded-2xl bg-charcoal outline outline-4 outline-transparent group-focus/project-preview:outline-orchid group-active/project-preview:outline-orchid"
+    class="bg-charcoal group-focus/project-preview:outline-orchid group-active/project-preview:outline-orchid overflow-hidden rounded-2xl outline-4 outline-transparent"
   >
     <img
-      class="transition-transform duration-300 ease-out group-hover/project-preview:scale-110"
+      class="transition-[scale] duration-300 ease-out group-hover/project-preview:scale-110"
       src={project.previews[0].src}
       width={project.previews[0].width}
       height={project.previews[0].height}
@@ -50,19 +50,19 @@
       alt={`${project.title} preview.`}
     />
   </div>
-  <div class="flex h-full flex-col gap-4 max-md:px-4 md:pb-4">
+  <div class="max-tablet:px-4 tablet:pb-4 flex h-full flex-col gap-4">
     <h3
-      class="heading-md text-center group-hover/project-preview:text-green group-focus/project-preview:text-orchid group-active/project-preview:text-orchid"
+      class="typo-heading-md group-hover/project-preview:text-green group-focus/project-preview:text-orchid group-active/project-preview:text-orchid text-center"
     >
       {project.title}
     </h3>
-    <p class="line-clamp-3 max-h-[4.5rem] text-gray max-md:hidden">
+    <p class="max-tablet:hidden text-silver line-clamp-3 max-h-[4.5rem]">
       {project.description.substring(0, project.description.indexOf(".") + 1)}
     </p>
     <div class="mt-auto flex flex-wrap justify-center gap-2">
       {#each project.technologies as tech (tech)}
         <span
-          class="rounded-2xl bg-charcoal px-2 font-code font-bold text-gray"
+          class="bg-charcoal font-cascadia-code text-silver rounded-2xl px-2 font-bold"
         >
           {TECH_META[tech].label}
         </span>

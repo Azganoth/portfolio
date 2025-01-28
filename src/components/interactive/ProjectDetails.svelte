@@ -25,7 +25,7 @@
 
 <dialog
   bind:this={dialog}
-  class="z-20 max-h-[612px] max-w-[320px] overflow-hidden rounded-2xl bg-charcoal text-white shadow-elevation-high backdrop:bg-[rgba(0,0,0,0.9)] md:max-h-[896px] md:max-w-[640px] lg:grid lg:max-h-[540px] lg:max-w-[1300px]"
+  class="tablet:max-h-[896px] tablet:max-w-[640px] desktop:max-h-[540px] desktop:max-w-[1300px] bg-charcoal text-offwhite shadow-elevation z-20 m-auto max-h-[612px] max-w-[320px] overflow-hidden rounded-2xl backdrop:bg-black/90"
   use:clickaway={{ ignoreSelf: true }}
   onclickaway={() => {
     open = false;
@@ -33,21 +33,23 @@
 >
   {#if $activeProject}
     <button
-      class="push-down absolute right-4 top-4 z-10 select-none text-2xl hover:text-orchid"
+      class="push-on-active hover:text-orchid absolute right-4 top-4 z-10 select-none text-2xl"
       type="button"
       onclick={() => {
         open = false;
       }}
       aria-label="Fechar detalhes do projeto"
     >
-      <Icon name="close" class="drop-shadow-stand-out" />
+      <Icon class="drop-shadow-contrast" name="close" />
     </button>
-    <div class="grid lg:grid-cols-[auto_1fr]">
+    <div class="desktop:grid-cols-[auto_1fr] grid">
       <Carousel slides={$activeProject.previews} />
       <article
-        class="flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4 lg:px-8 lg:pb-8"
+        class="desktop:px-8 desktop:pb-8 flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4"
       >
-        <h3 class="heading-md max-lg:text-center">{$activeProject.title}</h3>
+        <h3 class="typo-heading-md max-desktop:text-center">
+          {$activeProject.title}
+        </h3>
         <p class="mb-auto">{$activeProject.description}</p>
         <ul
           class="flex flex-wrap justify-center gap-2"
@@ -56,16 +58,12 @@
           {#each $activeProject.technologies as tech (tech)}
             {@const { label, color } = TECH_META[tech]}
             <li
-              class="lg:flex lg:items-center lg:gap-2 lg:rounded-2xl lg:bg-slate lg:px-3 lg:py-2"
+              class="desktop:flex desktop:items-center desktop:gap-2 desktop:rounded-2xl desktop:bg-slate desktop:px-3 desktop:py-2"
               title={label}
             >
-              <Icon
-                name={tech}
-                class="text-xl text-[var(--icon-color)] lg:text-lg"
-                style="--icon-color: {color};"
-              />
+              <Icon class="desktop:text-lg text-xl" name={tech} {color} />
               <span
-                class="cursor-default font-code font-bold text-gray max-lg:sr-only"
+                class="max-desktop:sr-only font-cascadia-code text-silver cursor-default font-bold"
               >
                 {label}
               </span>
@@ -88,7 +86,7 @@
             newTab
           >
             Visitar
-            <Icon name="redirect" class="text-xl" />
+            <Icon class="text-xl" name="redirect" />
           </Link>
         </div>
       </article>

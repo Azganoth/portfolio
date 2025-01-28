@@ -40,7 +40,7 @@
 </script>
 
 <section
-  class="group/carousel relative aspect-[4/3] max-h-[540px] overflow-hidden text-white"
+  class="group/carousel aspect-4/3 text-offwhite relative max-h-[540px] overflow-hidden"
   aria-label="Carousel"
   use:swipe={{ threshold: 0 }}
   onswipemove={(event) => {
@@ -58,7 +58,7 @@
   }}
 >
   <div
-    class="flex translate-x-[--slide-offset] transition-transform duration-300 ease-out"
+    class="translate-x-(--slide-offset) flex duration-300 ease-out motion-safe:transition-[translate]"
     style="--slide-offset: {slideOffset}"
   >
     {#each slides as slide, i (slide.src)}
@@ -72,30 +72,30 @@
     {/each}
   </div>
   <button
-    class="push-down absolute left-0 top-1/2 -translate-y-1/2 select-none text-3xl hover:text-orchid"
+    class="push-on-active hover:text-orchid absolute left-0 top-1/2 -translate-y-1/2 select-none text-3xl"
     type="button"
     onclick={() => {
       previousSlide();
     }}
     aria-label="Previous slide"
   >
-    <Icon name="slide-left" class="drop-shadow-stand-out" />
+    <Icon class="drop-shadow-contrast" name="slide-left" />
   </button>
   <button
-    class="push-down absolute right-0 top-1/2 z-10 -translate-y-1/2 select-none text-3xl hover:text-orchid"
+    class="push-on-active hover:text-orchid absolute right-0 top-1/2 z-10 -translate-y-1/2 select-none text-3xl"
     type="button"
     onclick={() => {
       nextSlide();
     }}
     aria-label="Next slide"
   >
-    <Icon name="slide-right" class="drop-shadow-stand-out" />
+    <Icon class="drop-shadow-contrast" name="slide-right" />
   </button>
   <ul class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
     {#each { length: slides.length }, i}
-      <li class="md:text-lg">
+      <li class="tablet:text-lg">
         <button
-          class="push-down block select-none hover:text-orchid"
+          class="push-on-active hover:text-orchid block select-none"
           type="button"
           onclick={() => {
             activeSlide = i;
@@ -104,8 +104,8 @@
           aria-current={i === activeSlide}
         >
           <Icon
+            class="drop-shadow-contrast"
             name={i === activeSlide ? "slide-dot-selected" : "slide-dot"}
-            class="drop-shadow-stand-out"
           />
         </button>
       </li>

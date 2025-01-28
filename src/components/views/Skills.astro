@@ -1,21 +1,21 @@
 ---
-import Skill from "@components/Skill.astro";
+import SkillSet from "@components/SkillSet.svelte";
 import Content from "@layouts/Content.astro";
 ---
 
 <Content id="skills" title="Habilidades">
   <div
-    class="grid gap-8 md:grid-cols-2 md:grid-rows-[repeat(9,80px)] md:gap-4 lg:grid-cols-3 lg:grid-rows-[repeat(10,48px)]"
+    class="tablet:grid-cols-2 tablet:grid-rows-[repeat(9,80px)] tablet:gap-4 desktop:grid-cols-3 desktop:grid-rows-[repeat(10,48px)] grid gap-8"
   >
-    <Skill
-      class="md:col-start-1 md:row-start-1"
-      title="Linguagens"
-      tech={["html5", "css3", "javascript", "typescript", "python"]}
+    <SkillSet
+      class="tablet:col-start-1 tablet:row-start-1"
+      name="Linguagens"
+      set={["html5", "css3", "javascript", "typescript", "python"]}
     />
-    <Skill
-      class="md:col-start-2 md:row-start-2 lg:row-start-3"
-      title="Front-end"
-      tech={[
+    <SkillSet
+      class="tablet:col-start-2 tablet:row-start-2 desktop:row-start-3"
+      name="Front-end"
+      set={[
         "react",
         "vue",
         "svelte",
@@ -26,20 +26,20 @@ import Content from "@layouts/Content.astro";
         "styledcomponents",
       ]}
     />
-    <Skill
-      class="md:col-start-2 md:row-start-6 lg:col-start-3 lg:row-start-2"
-      title="Back-end"
-      tech={["node", "docker", "postgresql", "mongodb", "contentful"]}
+    <SkillSet
+      class="tablet:col-start-2 tablet:row-start-6 desktop:col-start-3 desktop:row-start-2"
+      name="Back-end"
+      set={["node", "docker", "postgresql", "mongodb", "contentful"]}
     />
-    <Skill
-      class="md:col-start-1 md:row-start-4 lg:row-start-6"
-      title="Testes"
-      tech={["jest", "vitest", "testinglibrary", "cypress", "storybook"]}
+    <SkillSet
+      class="tablet:col-start-1 tablet:row-start-4 desktop:row-start-6"
+      name="Testes"
+      set={["jest", "vitest", "testinglibrary", "cypress", "storybook"]}
     />
-    <Skill
-      class="md:col-start-1 md:row-start-7 lg:col-start-3 lg:row-start-7"
-      title="Ferramentas"
-      tech={["git", "github", "githubactions", "figma"]}
+    <SkillSet
+      class="tablet:col-start-1 tablet:row-start-7 desktop:col-start-3 desktop:row-start-7"
+      name="Ferramentas"
+      set={["git", "github", "githubactions", "figma"]}
     />
   </div>
 </Content>

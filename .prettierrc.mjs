@@ -20,4 +20,5 @@ export default {
       },
     },
   ],
+  tailwindStylesheet: "./src/assets/css/app.css",
 };

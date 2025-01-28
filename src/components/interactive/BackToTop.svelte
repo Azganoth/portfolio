@@ -2,7 +2,7 @@
   import Icon from "@components/Icon.svelte";
   import { onMount } from "svelte";
 
-  let hidden = $state(false);
+  let hidden = $state(true);
 
   onMount(() => {
     const startSection = document.querySelector("#start");
@@ -26,7 +26,7 @@
 
 <a
   id="back-to-top-shortcut"
-  class="push-down fixed bottom-8 right-6 p-2 text-2xl text-white transition-visibility-transform duration-300 ease-out hover:text-orchid aria-hidden:invisible aria-hidden:translate-y-full aria-hidden:opacity-0 md:right-12"
+  class="push-on-active tablet:right-12 hover:text-orchid text-offwhite fixed bottom-8 right-6 p-2 text-2xl duration-300 ease-out aria-hidden:invisible aria-hidden:translate-y-full aria-hidden:opacity-0 motion-safe:transition-[visibility,opacity,translate,scale]"
   href="#start"
   aria-label="Voltar ao início"
   aria-hidden={hidden}

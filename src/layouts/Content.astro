@@ -10,8 +10,11 @@ const { id, class: className, title } = Astro.props;
 
 <section
   id={id}
-  class:list={["px-6 pt-28 md:px-12 md:pt-32 lg:px-16 lg:pt-32", className]}
+  class:list={[
+    "tablet:px-12 tablet:pt-32 desktop:px-16 desktop:pt-32 px-6 pt-28",
+    className,
+  ]}
 >
-  <h2 class="heading-lg mb-8 text-center md:text-left">{title}</h2>
+  <h2 class="typo-heading-lg max-tablet:text-center mb-8">{title}</h2>
   <slot />
 </section>
