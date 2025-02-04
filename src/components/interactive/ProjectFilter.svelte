@@ -24,9 +24,7 @@
     <input
       class={[
         "bg-charcoal font-montserrat-alternates size-10 cursor-pointer rounded-lg p-2",
-        selected.length === 0
-          ? "text-offwhite"
-          : "text-silver  hover:text-green",
+        selected.length === 0 ? "text-offwhite" : "text-silver hover:text-teal",
       ]}
       type="reset"
       value="All"
@@ -37,7 +35,7 @@
       {@const label = `${TECH_META[tech].label} filter`}
       {@const labelId = `filter-${tech}-label`}
       <label
-        class="bg-charcoal has-focus-visible:outline-2 text-silver has-checked:text-offwhite hover:text-green has-focus-visible:outline-offwhite cursor-pointer rounded-lg p-2"
+        class="bg-charcoal has-focus-visible:outline-2 text-silver/50 has-checked:text-offwhite hover:text-teal has-focus-visible:outline-offwhite cursor-pointer rounded-lg p-2"
         title={label}
       >
         <input

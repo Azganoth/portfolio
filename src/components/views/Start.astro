@@ -1,28 +1,54 @@
 ---
 import Icon from "@components/Icon.svelte";
+import Link from "@components/Link.svelte";
+import Content from "@layouts/Content.astro";
+import { CONTACT_INFO } from "./Contact.astro";
 ---
 
-<section
-  id="start"
-  class="relative flex min-h-dvh flex-col justify-center gap-8 px-6 py-8 text-center"
->
+<Content id="start" class="relative flex min-h-dvh items-center">
+  <div class="relative w-full">
+    <h2
+      class="max-tablet:text-center font-montserrat-alternates desktop:text-4xl text-3xl font-bold"
+    >
+      Oi, eu sou o <br /><span class="text-orchid">Ademir</span>
+    </h2>
+    <h3
+      class="text-silver max-tablet:text-center desktop:text-[2.25rem] text-xl font-medium"
+    >
+      Desenvolvedor FullStack
+    </h3>
+    <ul
+      class="max-tablet:top-[calc(100%+2rem)] max-tablet:center-x tablet:right-0 tablet:flex-col tablet:center-y absolute flex justify-center gap-4"
+    >
+      <li>
+        <Link href={CONTACT_INFO.GitHub} aria-label="GitHub" newTab>
+          <Icon class="size-8" name="github" />
+        </Link>
+      </li>
+      <li>
+        <Link href={CONTACT_INFO.LinkedIn} aria-label="LinkedIn" newTab>
+          <Icon class="size-8" name="linkedin" />
+        </Link>
+      </li>
+      <li>
+        <Link href={CONTACT_INFO.Email} aria-label="Email">
+          <Icon class="size-8" name="email" />
+        </Link>
+      </li>
+      <li>
+        <Link href={CONTACT_INFO.WhatsApp} aria-label="WhatsApp" newTab>
+          <Icon class="size-8" name="whatsapp" />
+        </Link>
+      </li>
+    </ul>
+  </div>
   <a
     id="start-shortcut"
-    class="push-on-active text-green hover:text-orchid absolute bottom-8 left-1/2 -translate-x-1/2 aria-hidden:invisible aria-hidden:opacity-0"
+    class="push-on-active hover:text-orchid center-x absolute bottom-8"
     href="#bio"
     aria-label="Pular para o conteúdo principal"
     tabindex="1"
   >
-    <Icon class="size-12" name="start" />
+    <Icon class="tablet:h-8 tablet:w-16 h-6 w-12" name="start" />
   </a>
-  <div>
-    <h2 class="typo-title">
-      Oi, eu sou o <span
-        class="bg-linear-to-br from-orchid to-green bg-clip-text text-transparent"
-        >Ademir</span
-      >!
-    </h2>
-    <h3 class="typo-subheading-md text-silver">Desenvolvedor FullStack</h3>
-  </div>
-  <p class="typo-subheading-lg">Bem-vindo(a) ao meu portfólio</p>
-</section>
+</Content>

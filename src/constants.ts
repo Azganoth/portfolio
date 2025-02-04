@@ -68,7 +68,7 @@ export const PROJECTS_ORDER = [
   "tic-tac-toe",
   "body-mass-index-calculator",
   "skilled-e-learning",
-  "equalizer",
   "workit",
   "suite",
+  "equalizer",
 ];

@@ -1,6 +1,13 @@
 ---
 import Link from "@components/Link.svelte";
 import Content from "@layouts/Content.astro";
+
+export const CONTACT_INFO = {
+  Email: "mailto:ademirj.ferreirajunior@gmail.com",
+  WhatsApp: "https://wa.me/48991984443",
+  GitHub: "https://github.com/Azganoth",
+  LinkedIn: "https://www.linkedin.com/in/ademirjferreirajunior/",
+};
 ---
 
 <Content
@@ -15,15 +22,13 @@ import Content from "@layouts/Content.astro";
       Tem interesse? Manda uma mensagem!
     </h3>
     <div class="max-desktop:text-center mt-24">
-      <Link variant="prime" href="mailto:ademirj.ferreirajunior@gmail.com">
+      <Link variant="prime" href={CONTACT_INFO.Email}>
         ademirj.ferreirajunior@gmail.com
       </Link>
       <div class="desktop:items-start mt-8 flex flex-col items-center gap-2">
-        <Link href="https://wa.me/48991984443" newTab>Whatsapp</Link>
-        <Link href="https://github.com/Azganoth" newTab>GitHub</Link>
-        <Link href="https://www.linkedin.com/in/ademirjferreirajunior/" newTab>
-          LinkedIn
-        </Link>
+        <Link href={CONTACT_INFO.GitHub} newTab>GitHub</Link>
+        <Link href={CONTACT_INFO.LinkedIn} newTab>LinkedIn</Link>
+        <Link href={CONTACT_INFO.WhatsApp} newTab>Whatsapp</Link>
       </div>
     </div>
   </div>

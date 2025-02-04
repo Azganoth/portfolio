@@ -1,4 +1,5 @@
 import { PROJECTS_ORDER, TECH_ORDER, type Tech } from "@app/constants";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import type { ProjectEntry } from "@lib/contentful";
 import { contentfulClient } from "@lib/contentful";
 import { compareOrderBy } from "@utils/sort";
@@ -7,6 +8,7 @@ import { inferRemoteSize } from "astro:assets";
 export interface Project {
   name: string;
   title: string;
+  summary: string;
   description: string;
   website: string;
   repository: string;
@@ -51,7 +53,8 @@ export const getAllProjects = async (): Promise<Project[]> => {
         return {
           name: entry.fields.name,
           title: entry.fields.title,
-          description: entry.fields.description,
+          summary: entry.fields.summary,
+          description: documentToHtmlString(entry.fields.description),
           website: entry.fields.website,
           repository: entry.fields.repository,
           technologies: (entry.fields.technologies ?? []).sort(

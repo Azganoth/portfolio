@@ -1,9 +1,5 @@
 @layer components {
   /* Typography */
-  .typo-title {
-    @apply font-montserrat-alternates max-tablet:-tracking-wider text-2xl font-bold;
-  }
-
   .typo-heading-lg {
     @apply font-montserrat-alternates text-2xl font-bold;
   }
@@ -26,11 +22,6 @@
 
   .typo-code {
     @apply font-cascadia-code text-md font-semibold;
-  }
-
-  /* Decorations */
-  .code-indent {
-    @apply before:bg-silver/40 relative pl-8 before:absolute before:inset-y-0 before:left-[calc(1rem-1px)] before:w-0.5 before:content-[''];
   }
 
   /* Effects */

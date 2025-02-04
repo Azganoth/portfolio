@@ -16,6 +16,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/svelte": "^7.0.4",
+    "@contentful/rich-text-html-renderer": "^17.0.0",
     "@fontsource-variable/inter": "^5.1.0",
     "@fontsource/montserrat-alternates": "^5.1.0",
     "@fontsource/patua-one": "^5.1.0",

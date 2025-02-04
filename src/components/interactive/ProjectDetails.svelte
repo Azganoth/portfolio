@@ -25,7 +25,7 @@
 
 <dialog
   bind:this={dialog}
-  class="tablet:max-h-[896px] tablet:max-w-[640px] desktop:max-h-[540px] desktop:max-w-[1300px] bg-charcoal text-offwhite shadow-elevation z-20 m-auto max-h-[612px] max-w-[320px] overflow-hidden rounded-2xl backdrop:bg-black/90"
+  class="tablet:max-w-[640px] desktop:max-w-[1300px] bg-obsidian text-offwhite shadow-elevation desktop:h-[520px] starting:opacity-0 starting:scale-90 tablet:h-[calc(100dvh-8rem)] z-20 m-auto h-[calc(100dvh-4rem)] max-w-[320px] overflow-hidden rounded-2xl transition-[opacity,scale] duration-300 backdrop:bg-black/90"
   use:clickaway={{ ignoreSelf: true }}
   onclickaway={() => {
     open = false;
@@ -42,52 +42,51 @@
     >
       <Icon class="drop-shadow-contrast size-8" name="close" />
     </button>
-    <div class="desktop:grid-cols-[auto_1fr] grid">
+    <div
+      class="desktop:grid-cols-[auto_1fr] max-desktop:grid-rows-[auto_1fr] grid h-full"
+    >
       <Carousel slides={$activeProject.previews} />
       <article
-        class="desktop:px-8 desktop:pb-8 flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4"
+        class="desktop:px-8 desktop:pb-8 tablet:grid-cols-[auto_1fr_auto] tablet:grid-rows-[auto_1fr_auto] grid grid-cols-2 grid-rows-[auto_1fr_auto_auto] gap-4 overflow-auto px-6 pb-6 pt-4"
       >
-        <h3 class="typo-heading-md max-desktop:text-center">
+        <h3 class="typo-heading-md max-desktop:text-center col-span-full">
           {$activeProject.title}
         </h3>
-        <p class="mb-auto">{$activeProject.description}</p>
-        <ul
-          class="flex flex-wrap justify-center gap-2"
-          aria-label="Tecnologias usadas"
+        <article class="**:[p]:mb-4 col-span-full mb-auto h-full overflow-auto">
+          {@html $activeProject.description}
+        </article>
+        <div
+          class="max-tablet:row-start-3 max-tablet:col-span-full tablet:col-start-2 tablet:place-self-start place-items-center"
         >
-          {#each $activeProject.technologies as tech (tech)}
-            {@const { label, color } = TECH_META[tech]}
-            <li
-              class="desktop:flex desktop:items-center desktop:gap-2 desktop:rounded-2xl desktop:bg-slate desktop:px-3 desktop:py-2"
-              title={label}
-            >
-              <Icon class="desktop:size-5 size-6" name={tech} {color} />
-              <span
-                class="max-desktop:sr-only font-cascadia-code text-silver cursor-default font-bold"
-              >
-                {label}
-              </span>
-            </li>
-          {/each}
-        </ul>
-        <div class="flex items-center justify-between">
-          <Link
-            href={$activeProject.repository}
-            aria-label="Abrir repositório do projeto"
-            newTab
+          <ul
+            class="bg-charcoal flex flex-wrap justify-center gap-2 rounded-xl p-2"
+            aria-label="Tecnologias usadas"
           >
-            <Icon class="size-8" name="github" />
-          </Link>
-          <Link
-            class="flex items-center"
-            href={$activeProject.website}
-            aria-label="Abrir o site em uma nova aba"
-            newTab
-          >
-            Visitar
-            <Icon class="size-6" name="redirect" />
-          </Link>
+            {#each $activeProject.technologies as tech (tech)}
+              {@const { label, color } = TECH_META[tech]}
+              <li title={label}>
+                <Icon class="size-6" name={tech} {color} />
+              </li>
+            {/each}
+          </ul>
         </div>
+        <Link
+          class="tablet:row-start-3 self-center"
+          href={$activeProject.repository}
+          aria-label="Abrir repositório do projeto"
+          newTab
+        >
+          <Icon class="size-8" name="github" />
+        </Link>
+        <Link
+          class="flex self-center justify-self-end"
+          href={$activeProject.website}
+          aria-label="Abrir o site em uma nova aba"
+          newTab
+        >
+          Visitar
+          <Icon class="size-6" name="redirect" />
+        </Link>
       </article>
     </div>
   {/if}

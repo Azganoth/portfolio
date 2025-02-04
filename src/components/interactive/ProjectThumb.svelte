@@ -30,11 +30,9 @@
 <button
   type="button"
   class={[
-    "group/project-preview focus:outline-hidden tablet:max-w-[640px] tablet:grid-cols-[320px_1fr] tablet:grid-rows-[240px] tablet:gap-4 grid items-center gap-2",
+    "group/project-preview focus:outline-hidden tablet:max-w-[640px] tablet:grid-cols-[320px_1fr] tablet:grid-rows-[240px] tablet:gap-4 max-tablet:max-w-[320px] grid items-center gap-2",
     className,
   ]}
-  data-id={project.name}
-  aria-label="Show project details"
   onclick={handleclick}
   onkeydown={handlekeydown}
 >
@@ -52,13 +50,11 @@
   </div>
   <div class="max-tablet:px-4 tablet:pb-4 flex h-full flex-col gap-4">
     <h3
-      class="typo-heading-md group-hover/project-preview:text-green group-focus/project-preview:text-orchid group-active/project-preview:text-orchid text-center"
+      class="typo-heading-md group-hover/project-preview:text-teal group-focus/project-preview:text-orchid group-active/project-preview:text-orchid text-center"
     >
       {project.title}
     </h3>
-    <p class="max-tablet:hidden text-silver line-clamp-3 max-h-[4.5rem]">
-      {project.description.substring(0, project.description.indexOf(".") + 1)}
-    </p>
+    <p class="text-silver line-clamp-3 max-h-[4.5rem]">{project.summary}</p>
     <div class="mt-auto flex flex-wrap justify-center gap-2">
       {#each project.technologies as tech (tech)}
         <span

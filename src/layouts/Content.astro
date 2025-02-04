@@ -2,7 +2,7 @@
 interface Props {
   id: string;
   class?: string;
-  title: string;
+  title?: string;
 }
 
 const { id, class: className, title } = Astro.props;
@@ -10,11 +10,12 @@ const { id, class: className, title } = Astro.props;
 
 <section
   id={id}
-  class:list={[
-    "tablet:px-12 tablet:pt-32 desktop:px-16 desktop:pt-32 px-6 pt-28",
-    className,
-  ]}
+  class:list={["tablet:px-12 tablet:py-16 desktop:p-16 px-6 py-8", className]}
 >
-  <h2 class="typo-heading-lg max-tablet:text-center mb-8">{title}</h2>
+  {
+    title && (
+      <h2 class="typo-heading-lg max-tablet:text-center mb-8">{title}</h2>
+    )
+  }
   <slot />
 </section>

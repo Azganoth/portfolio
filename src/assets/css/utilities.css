@@ -1,12 +1,24 @@
-@utility width-em {
+@utility w-em {
   width: 1em;
 }
 
-@utility height-em {
+@utility h-em {
   height: 1em;
 }
 
 @utility size-em {
   width: 1em;
   height: 1em;
+}
+
+@utility center {
+  @apply -translate-1/2 left-1/2 top-1/2;
+}
+
+@utility center-x {
+  @apply left-1/2 -translate-x-1/2;
+}
+
+@utility center-y {
+  @apply top-1/2 -translate-y-1/2;
 }

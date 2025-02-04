@@ -17,7 +17,7 @@
 
 <a
   class={[
-    "font-inter hover:text-green text-offwhite font-bold",
+    "font-inter hover:text-teal text-offwhite font-bold",
     variant === "prime" &&
       "after:-z-1 after:bg-orchid hover:text-offwhite relative z-0 inline-block after:absolute after:-inset-x-0.5 after:bottom-[0.1875em] after:h-[1.125rem] after:origin-bottom after:scale-y-[33.33%] after:duration-300 after:ease-out after:content-[''] hover:after:scale-100 motion-safe:after:transition-[scale]",
     variant === "nav" &&

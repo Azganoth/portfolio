@@ -1,11 +1,6 @@
 <script lang="ts" module>
   const links: { label: string; link: string; description: string }[] = [
     {
-      label: "Início",
-      link: "#start",
-      description: "Ir para o início da página",
-    },
-    {
       label: "Sobre mim",
       link: "#bio",
       description: "Ir para a seção de biografia",
@@ -40,18 +35,18 @@
   let menuToggler = $state<HTMLButtonElement>();
 </script>
 
-<header
-  class="tablet:max-w-[704px] desktop:max-w-[880px] bg-charcoal shadow-elevation fixed left-1/2 top-4 z-10 flex max-h-16 min-h-16 w-full max-w-[311px] -translate-x-1/2 items-center justify-between rounded-2xl p-4 motion-safe:transition-[max-width]"
->
+<header>
   <h1
-    class="font-patua-one text-offwhite cursor-default text-xl tracking-wider"
+    class="font-patua-one text-offwhite max-tablet:center-x z-2 tablet:left-12 desktop:top-12 desktop:left-16 absolute top-8 cursor-default text-xl tracking-wider"
   >
     <span
       class="before:text-silver after:text-silver before:mr-0.5 before:content-['<'] after:ml-0.5 after:content-['/>']"
     >
       Azganoth
-    </span>
-    <span class="text-orchid motion-safe:animate-blink" aria-hidden="true">
+    </span><span
+      class="text-orchid motion-safe:animate-blink"
+      aria-hidden="true"
+    >
       _
     </span>
   </h1>
@@ -60,7 +55,7 @@
       <div>
         <button
           bind:this={menuToggler}
-          class="push-on-active hover:text-orchid block select-none"
+          class="push-on-active hover:text-orchid z-2 absolute right-8 top-[2.125rem] block select-none"
           type="button"
           onclick={() => {
             open = !open;
@@ -69,10 +64,10 @@
           aria-haspopup="true"
           aria-expanded={open}
         >
-          <Icon class="size-8" name="menu" />
+          <Icon class="size-8" name={open ? "close" : "menu"} />
         </button>
         <ul
-          class="bg-charcoal inert:invisible inert:-translate-y-2 inert:opacity-0 shadow-elevation fixed inset-x-0 top-24 origin-top rounded-2xl px-4 py-8 duration-300 ease-out motion-safe:transition-[visibility,opacity,translate]"
+          class="bg-charcoal inert:invisible inert:-translate-y-2 inert:opacity-0 shadow-elevation z-1 fixed inset-x-0 top-0 origin-top px-8 pb-8 pt-28 duration-300 ease-out motion-safe:transition-[visibility,opacity,translate]"
           inert={!open}
           use:clickaway={{ ignoreNodes: [menuToggler] }}
           onclickaway={() => {
@@ -80,7 +75,7 @@
           }}
         >
           {#each links as { label, link, description } (link)}
-            <li class="mt-4 text-center first:mt-0">
+            <li class="not-first:mt-4 text-center">
               <Link
                 variant="nav"
                 href={link}
@@ -96,7 +91,9 @@
         </ul>
       </div>
     {:else}
-      <ul class="flex">
+      <ul
+        class="z-1 desktop:center-x max-desktop:right-12 desktop:top-[3.375rem] absolute top-[2.375rem] flex"
+      >
         {#each links as { label, link, description } (link)}
           <li>
             <Link variant="nav" href={link} aria-label={description}>

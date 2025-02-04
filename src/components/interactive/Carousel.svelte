@@ -72,7 +72,7 @@
     {/each}
   </div>
   <button
-    class="push-on-active hover:text-orchid absolute left-0 top-1/2 -translate-y-1/2 select-none"
+    class="push-on-active hover:text-orchid center-y absolute left-0 select-none"
     type="button"
     onclick={() => {
       previousSlide();
@@ -82,7 +82,7 @@
     <Icon class="drop-shadow-contrast size-12" name="slide-left" />
   </button>
   <button
-    class="push-on-active hover:text-orchid absolute right-0 top-1/2 z-10 -translate-y-1/2 select-none"
+    class="push-on-active hover:text-orchid center-y absolute right-0 select-none"
     type="button"
     onclick={() => {
       nextSlide();
@@ -91,7 +91,7 @@
   >
     <Icon class="drop-shadow-contrast size-12" name="slide-right" />
   </button>
-  <ul class="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+  <ul class="center-x absolute bottom-4 flex gap-2">
     {#each { length: slides.length }, i}
       <li>
         <button

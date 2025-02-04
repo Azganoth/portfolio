@@ -8,7 +8,8 @@ import {
 interface ProjectEntryFields {
   name: EntryFieldTypes.Symbol;
   title: EntryFieldTypes.Symbol;
-  description: EntryFieldTypes.Text;
+  summary: EntryFieldTypes.Text;
+  description: EntryFieldTypes.RichText;
   website: EntryFieldTypes.Symbol;
   repository: EntryFieldTypes.Symbol;
   technologies?: EntryFieldTypes.Array<EntryFieldTypes.Symbol<Tech>>;
