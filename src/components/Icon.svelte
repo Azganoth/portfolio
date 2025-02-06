@@ -15,5 +15,5 @@
   {...color && { style: `--icon-color: ${color};` }}
   aria-hidden="true"
 >
-  <use xlink:href={`#icon-${name}`}></use>
+  <use xlink:href="#icon-{name}"></use>
 </svg>

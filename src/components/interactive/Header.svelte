@@ -37,20 +37,16 @@
 
 <header>
   <h1
-    class="font-patua-one text-offwhite max-tablet:center-x z-2 tablet:left-12 desktop:top-12 desktop:left-16 absolute top-8 cursor-default text-xl tracking-wider"
+    class="font-patua-one text-offwhite max-tablet:center-x z-2 tablet:left-12 desktop:top-12 desktop:left-16 absolute top-8 flex cursor-default gap-0.5 text-xl tracking-wider"
   >
-    <span
-      class="before:text-silver after:text-silver before:mr-0.5 before:content-['<'] after:ml-0.5 after:content-['/>']"
-    >
-      Azganoth
-    </span><span
-      class="text-orchid motion-safe:animate-blink"
-      aria-hidden="true"
-    >
-      _
+    <span class="text-silver" aria-hidden="true">&lt;</span>
+    <span>Azganoth</span>
+    <span class="text-silver flex" aria-hidden="true">
+      /&gt;
+      <span class="text-orchid motion-safe:animate-blink">_</span>
     </span>
   </h1>
-  <nav>
+  <nav aria-label="Navegação principal">
     {#if mobile.current}
       <div>
         <button
@@ -61,47 +57,56 @@
             open = !open;
           }}
           aria-label="Abrir menu de navegação"
-          aria-haspopup="true"
+          aria-haspopup="menu"
           aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           <Icon class="size-8" name={open ? "close" : "menu"} />
         </button>
-        <ul
+        <div
+          id="mobile-menu"
           class="bg-charcoal inert:invisible inert:-translate-y-2 inert:opacity-0 shadow-elevation z-1 fixed inset-x-0 top-0 origin-top px-8 pb-8 pt-28 duration-300 ease-out motion-safe:transition-[visibility,opacity,translate]"
+          role="menu"
           inert={!open}
+          aria-label="Seções principais"
           use:clickaway={{ ignoreNodes: [menuToggler] }}
           onclickaway={() => {
             open = false;
           }}
         >
           {#each links as { label, link, description } (link)}
-            <li class="not-first:mt-4 text-center">
-              <Link
-                variant="nav"
-                href={link}
-                onclick={() => {
-                  open = false;
-                }}
-                aria-label={description}
-              >
-                {label}
-              </Link>
-            </li>
-          {/each}
-        </ul>
-      </div>
-    {:else}
-      <ul
-        class="z-1 desktop:center-x max-desktop:right-12 desktop:top-[3.375rem] absolute top-[2.375rem] flex"
-      >
-        {#each links as { label, link, description } (link)}
-          <li>
-            <Link variant="nav" href={link} aria-label={description}>
+            <Link
+              variant="nav"
+              class="not-first:mt-4 block text-center"
+              role="menuitem"
+              href={link}
+              onclick={() => {
+                open = false;
+              }}
+              aria-label={description}
+            >
               {label}
             </Link>
-          </li>
+          {/each}
+        </div>
+      </div>
+    {:else}
+      <div
+        class="z-1 desktop:center-x max-desktop:right-12 desktop:top-[3.375rem] absolute top-[2.375rem] flex"
+        role="menubar"
+        aria-label="Seções principais"
+      >
+        {#each links as { label, link, description } (link)}
+          <Link
+            variant="nav"
+            role="menuitem"
+            href={link}
+            aria-label={description}
+          >
+            {label}
+          </Link>
         {/each}
-      </ul>
+      </div>
     {/if}
   </nav>
 </header>

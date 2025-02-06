@@ -1,3 +1,7 @@
+<script lang="ts" module>
+  export const PROJECT_LIST_ID = "project-list";
+</script>
+
 <script lang="ts">
   import { projectFilters } from "@app/store";
   import ProjectThumb from "@components/interactive/ProjectThumb.svelte";
@@ -25,15 +29,30 @@
 </script>
 
 {#if filteredProjects.length > 0}
-  <ul class={["flex flex-wrap justify-center gap-x-4 gap-y-12", className]}>
+  <ul
+    id={PROJECT_LIST_ID}
+    class={["flex flex-wrap justify-center gap-x-4 gap-y-12", className]}
+    role="region"
+    aria-label="Projetos"
+    aria-live="polite"
+    aria-atomic="true"
+  >
     {#each filteredProjects as project (project.name)}
-      <li animate:flip={{ duration: 300 }} transition:fade={{ duration: 150 }}>
+      <li
+        animate:flip={{ duration: 300 }}
+        transition:fade={{ duration: 150 }}
+        role="article"
+      >
         <ProjectThumb {project} />
       </li>
     {/each}
   </ul>
 {:else}
-  <p class="text-silver mb-8 px-8 text-center text-lg">
-    No projects developed using the selected stack.
+  <p
+    class="text-silver mb-8 px-8 text-center text-lg"
+    role="alert"
+    aria-live="assertive"
+  >
+    Nenhum projeto desenvolvido com o stack selecionado.
   </p>
 {/if}

@@ -3,10 +3,11 @@
   import swipe from "@utils/actions/swipe.svelte";
 
   interface Props {
+    id: string;
     slides: { src: string; width: number; height: number }[];
   }
 
-  let { slides }: Props = $props();
+  let { id, slides }: Props = $props();
 
   let activeSlide = $state(0);
   let lastSlide = $derived(slides.length - 1);
@@ -42,6 +43,7 @@
 <section
   class="group/carousel aspect-4/3 text-offwhite relative max-h-[540px] overflow-hidden"
   aria-label="Carousel"
+  aria-roledescription="carousel"
   use:swipe={{ threshold: 0 }}
   onswipemove={(event) => {
     swipeOffset = event.detail.coordsDiff.x;
@@ -58,57 +60,66 @@
   }}
 >
   <div
+    id="{id}-slides-container"
     class="translate-x-(--slide-offset) flex duration-300 ease-out motion-safe:transition-[translate]"
     style="--slide-offset: {slideOffset}"
   >
     {#each slides as slide, i (slide.src)}
       <img
         src={slide.src}
-        alt={`Slide ${activeSlide + 1} of ${+1}`}
+        alt="Slide {i + 1} of {slides.length}"
         width={slide.width}
         height={slide.height}
         aria-hidden={i !== activeSlide}
       />
     {/each}
   </div>
+
   <button
     class="push-on-active hover:text-orchid center-y absolute left-0 select-none"
     type="button"
+    aria-label="Slide anterior"
+    aria-controls="{id}-slides-container"
     onclick={() => {
       previousSlide();
     }}
-    aria-label="Previous slide"
   >
     <Icon class="drop-shadow-contrast size-12" name="slide-left" />
   </button>
   <button
     class="push-on-active hover:text-orchid center-y absolute right-0 select-none"
     type="button"
+    aria-label="Próximo slide"
+    aria-controls="{id}-slides-container"
     onclick={() => {
       nextSlide();
     }}
-    aria-label="Next slide"
   >
     <Icon class="drop-shadow-contrast size-12" name="slide-right" />
   </button>
-  <ul class="center-x absolute bottom-4 flex gap-2">
+
+  <div
+    class="center-x absolute bottom-4 flex gap-2"
+    role="tablist"
+    aria-label="Navegação de slides"
+  >
     {#each { length: slides.length }, i}
-      <li>
-        <button
-          class="push-on-active hover:text-orchid block select-none"
-          type="button"
-          onclick={() => {
-            activeSlide = i;
-          }}
-          aria-label={`Go to slide ${i + 1}`}
-          aria-current={i === activeSlide}
-        >
-          <Icon
-            class="drop-shadow-contrast tablet:size-5 size-4"
-            name={i === activeSlide ? "slide-dot-selected" : "slide-dot"}
-          />
-        </button>
-      </li>
+      <button
+        class="push-on-active hover:text-orchid block select-none"
+        type="button"
+        role="tab"
+        aria-label="Slide {i + 1}"
+        aria-selected={i === activeSlide}
+        aria-controls="{id}-slides-container"
+        onclick={() => {
+          activeSlide = i;
+        }}
+      >
+        <Icon
+          class="drop-shadow-contrast tablet:size-5 size-4"
+          name={i === activeSlide ? "slide-dot-selected" : "slide-dot"}
+        />
+      </button>
     {/each}
-  </ul>
+  </div>
 </section>

@@ -25,7 +25,6 @@
 </script>
 
 <a
-  id="back-to-top-shortcut"
   class="push-on-active tablet:right-12 tablet:bottom-16 desktop:right-16 hover:text-orchid text-offwhite fixed bottom-8 right-6 duration-300 ease-out aria-hidden:invisible aria-hidden:translate-y-full aria-hidden:opacity-0 motion-safe:transition-[visibility,opacity,translate,scale]"
   href="#start"
   aria-label="Voltar ao início"

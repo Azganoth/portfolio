@@ -1,8 +1,8 @@
 ---
 import Icon from "@components/Icon.svelte";
 import Link from "@components/Link.svelte";
+import { CONTACT_INFO } from "@components/views/Contact.astro";
 import Content from "@layouts/Content.astro";
-import { CONTACT_INFO } from "./Contact.astro";
 ---
 
 <Content id="start" class="relative flex min-h-dvh items-center">
@@ -43,7 +43,6 @@ import { CONTACT_INFO } from "./Contact.astro";
     </ul>
   </div>
   <a
-    id="start-shortcut"
     class="push-on-active hover:text-orchid center-x absolute bottom-8"
     href="#bio"
     aria-label="Pular para o conteúdo principal"
