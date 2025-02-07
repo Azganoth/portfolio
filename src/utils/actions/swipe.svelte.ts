@@ -1,3 +1,4 @@
+/* NOTE: Keep for future reference */
 import type { Action } from "svelte/action";
 
 type SwipeDirection = "up" | "down" | "left" | "right" | "none";
