@@ -18,6 +18,16 @@ interface ProjectEntryFields {
 
 export type ProjectEntry = EntrySkeletonType<ProjectEntryFields, "project">;
 
+interface PortfolioProjectsFields {
+  name: EntryFieldTypes.Symbol;
+  items: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<ProjectEntry>>;
+}
+
+export type PortfolioProjectsEntry = EntrySkeletonType<
+  PortfolioProjectsFields,
+  "portfolioProjects"
+>;
+
 export const contentfulClient = createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.DEV

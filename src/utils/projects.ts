@@ -1,6 +1,6 @@
-import { PROJECTS_ORDER, TECH_ORDER, type Tech } from "@app/constants";
+import { TECH_ORDER, type Tech } from "@app/constants";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import type { ProjectEntry } from "@lib/contentful";
+import type { PortfolioProjectsEntry } from "@lib/contentful";
 import { contentfulClient } from "@lib/contentful";
 import { compareOrderBy } from "@utils/sort";
 import { inferRemoteSize } from "astro:assets";
@@ -17,14 +17,15 @@ export interface Project {
 }
 
 export const getAllProjects = async (): Promise<Project[]> => {
-  const entries =
-    await contentfulClient.withoutUnresolvableLinks.getEntries<ProjectEntry>({
-      content_type: "project",
-    });
+  const projects =
+    await contentfulClient.withoutUnresolvableLinks.getEntry<PortfolioProjectsEntry>(
+      "7xLOF4tOhPnyTABeZwdDTR",
+    );
 
-  return (
-    await Promise.all(
-      entries.items.map(async (entry) => {
+  return await Promise.all(
+    projects.fields.items
+      .filter((entry) => entry !== undefined)
+      .map(async (entry) => {
         const previewImages = await Promise.all(
           entry.fields.previews
             .filter((asset) => !!asset)
@@ -63,6 +64,5 @@ export const getAllProjects = async (): Promise<Project[]> => {
           previews: previewImages,
         };
       }),
-    )
-  ).sort(compareOrderBy(PROJECTS_ORDER, (item) => item.name));
+  );
 };
