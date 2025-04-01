@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@import "$lib/assets/css/fonts.css";
+@import "$lib/assets/css/theme.css";
+@import "$lib/assets/css/components.css";
+@import "$lib/assets/css/utilities.css";
+
+:root {
+  --underscore: "_";
+}
+
+@layer base {
+  code {
+    @apply font-cascadia-code;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+}

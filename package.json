@@ -4,33 +4,44 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "astro": "astro",
-    "build": "astro check && astro build",
-    "check": "astro check",
-    "dev": "astro dev",
+    "build": "vite build",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "dev": "vite dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "preview": "astro preview",
-    "start": "astro dev"
+    "prepare": "svelte-kit sync || echo ''",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/svelte": "^7.0.4",
     "@contentful/rich-text-html-renderer": "^17.0.0",
     "@fontsource-variable/inter": "^5.1.0",
     "@fontsource/montserrat-alternates": "^5.1.0",
     "@fontsource/patua-one": "^5.1.0",
-    "@tailwindcss/vite": "^4.0.0",
-    "astro": "^5.1.7",
+    "@sveltejs/adapter-static": "^3.0.8",
+    "@sveltejs/enhanced-img": "^0.4.4",
+    "@sveltejs/kit": "^2.20.2",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tailwindcss/vite": "^4.1.3",
     "contentful": "^11.4.4",
-    "prettier": "^3.4.2",
-    "prettier-plugin-astro": "^0.14.1",
+    "mdsvex": "^0.12.3",
+    "prettier": "^3.5.3",
     "prettier-plugin-svelte": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "rollup-plugin-visualizer": "^5.12.0",
-    "sharp": "^0.33.5",
-    "svelte": "^5.19.1",
-    "tailwindcss": "^4.0.0",
-    "typescript": "^5.7.2"
+    "svelte": "^5.25.0",
+    "svelte-check": "^4.1.6",
+    "tailwindcss": "^4.1.3",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.6"
+  },
+  "packageManager": "pnpm@10.10.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ],
+    "ignoredBuiltDependencies": [
+      "@tailwindcss/oxide"
+    ]
   }
 }
