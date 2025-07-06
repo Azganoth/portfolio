@@ -1,3 +1,4 @@
+import { CONTENTFUL_PROJECTS_ENTRY_ID } from "$env/static/private";
 import { TECH_ORDER } from "$lib/constants";
 import type { PortfolioProjectsEntry } from "$lib/server/contentful";
 import { contentfulClient } from "$lib/server/contentful";
@@ -7,7 +8,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 export const getAllProjects = async (): Promise<ProjectData[]> => {
   const projects =
     await contentfulClient.withoutUnresolvableLinks.getEntry<PortfolioProjectsEntry>(
-      "7xLOF4tOhPnyTABeZwdDTR",
+      CONTENTFUL_PROJECTS_ENTRY_ID,
     );
 
   return await Promise.all(
