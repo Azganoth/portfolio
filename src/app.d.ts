@@ -16,23 +16,23 @@ declare global {
   }
 
   namespace App {
-    interface Error {}
-    interface Locals {}
+    // interface Error {}
+    // interface Locals {}
     interface PageData {
       projects?: string[];
     }
-    interface PageState {}
-    interface Platform {}
+    // interface PageState {}
+    // interface Platform {}
   }
 }
 
 declare module "svelte/elements" {
-  export interface HTMLAttributes<T> {
-    onclickaway?: (event: CustomEvent<ClickawayEventDetail>) => any;
+  export interface HTMLAttributes {
+    onclickaway?: (event: CustomEvent<ClickawayEventDetail>) => unknown;
 
-    onswipestart?: (event: CustomEvent<SwipeEventDetail>) => any;
-    onswipemove?: (event: CustomEvent<SwipeEventDetail>) => any;
-    onswipeend?: (event: CustomEvent<SwipeEventDetail>) => any;
+    onswipestart?: (event: CustomEvent<SwipeEventDetail>) => unknown;
+    onswipemove?: (event: CustomEvent<SwipeEventDetail>) => unknown;
+    onswipeend?: (event: CustomEvent<SwipeEventDetail>) => unknown;
   }
 }
 

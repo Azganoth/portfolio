@@ -10,10 +10,7 @@
   import { activeProject } from "$lib/store";
   import clickaway from "$lib/utils/actions/clickaway.svelte";
 
-  let open = $state(false);
-  $effect(() => {
-    open = !!$activeProject;
-  });
+  let open = $derived(!!$activeProject);
 
   let dialog = $state<HTMLDialogElement>();
   $effect(() => {
@@ -58,6 +55,7 @@
           {$activeProject.title}
         </h3>
         <article class="**:[p]:mb-4 col-span-full mb-auto h-full overflow-auto">
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html $activeProject.description}
         </article>
         <div

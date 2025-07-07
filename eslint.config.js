@@ -39,7 +39,7 @@ export default ts.config(
   },
   {
     plugins: {
-      // @ts-ignore
+      // @ts-expect-error This is fine for this plugin.
       onlyWarn,
     },
   },

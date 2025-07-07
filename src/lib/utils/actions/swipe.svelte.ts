@@ -23,16 +23,16 @@ const swipe: Action<
   let swiping = $state(false);
   let coordsStart = $state({ x: 0, y: 0 });
   let coordsEnd = $state({ x: 0, y: 0 });
-  let coordsDiff = $derived({
+  const coordsDiff = $derived({
     x: coordsEnd.x - coordsStart.x,
     y: coordsEnd.y - coordsStart.y,
   });
 
-  let threadholdExceeded = $derived(
+  const threadholdExceeded = $derived(
     Math.max(Math.abs(coordsDiff.x), Math.abs(coordsDiff.y)) >= threshold,
   );
 
-  let direction = $derived<SwipeDirection>(
+  const direction = $derived<SwipeDirection>(
     !threadholdExceeded
       ? "none"
       : Math.abs(coordsDiff.x) > Math.abs(coordsDiff.y)
