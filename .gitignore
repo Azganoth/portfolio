@@ -1,3 +1,6 @@
+# dependencies
+node_modules/
+
 # build output
 build/
 .vercel
@@ -5,15 +8,16 @@ build/
 # generated
 .svelte-kit/
 
-# dependencies
-node_modules/
-
 # logs
 pnpm-debug.log*
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
 
 # environment variables
 .env
-.env.production
+.env.*
+!.env.example
+!.env.test
 
 # macOS-specific files
 .DS_Store
