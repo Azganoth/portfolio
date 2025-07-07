@@ -56,8 +56,7 @@
     <a
       class="push-on-active hover:text-orchid center-x absolute bottom-8"
       href="#bio"
-      aria-label="Pular para o conteúdo principal"
-      tabindex="1"
+      aria-label="Ir para a biografia"
     >
       <Icon class="tablet:h-8 tablet:w-16 h-6 w-12" name="start" />
     </a>
