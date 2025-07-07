@@ -9,7 +9,7 @@
   const title = "Azganoth - Desenvolvedor Web FullStack";
   const description =
     "Portfólio para apresentar as minhas habilidades e projetos.";
-  const url = "https://azganoth.github.io/";
+  const url = "https://azganoth.vercel.app/";
   const metaImage = "/meta_image.png";
 </script>
 

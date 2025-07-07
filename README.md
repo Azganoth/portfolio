@@ -9,4 +9,4 @@ Portfólio feito para apresentar as minhas habilidades e projetos.
 
 Se sinta a vontade para explorar e me mandar mensagem caso tenha alguma pergunta ou oportunidade!
 
-[Me conheça!](https://azganoth.github.io/)
+[Me conheça!](https://azganoth.vercel.app/)
