@@ -84,7 +84,7 @@
           JavaScript, React, Vue e Node.
         </p>
         <div class="mt-4 text-center">
-          <Link variant="prime" href="/curriculo.pdf" newTab>Currículo</Link>
+          <Link variant="prime" href="/cv.pdf" newTab>Currículo</Link>
         </div>
       </div>
       <div class="max-tablet:hidden max-desktop:mt-12">
