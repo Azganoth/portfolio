@@ -5,13 +5,13 @@
 
 <script lang="ts">
   import { PROJECT_DETAILS_ID } from "$lib/components/ProjectDetails.svelte";
-  import { TECH_META } from "$lib/constants";
+  import type { Project } from "$lib/projects.schema";
   import { activeProject } from "$lib/store";
   import type { ClassValue } from "svelte/elements";
 
   interface Props {
     class?: ClassValue;
-    project: ProjectData;
+    project: Project;
   }
 
   let { class: className, project }: Props = $props();
@@ -38,8 +38,8 @@
     "group/project-preview focus:outline-hidden tablet:max-w-[640px] tablet:grid-cols-[320px_1fr] tablet:grid-rows-[240px] tablet:gap-4 max-tablet:max-w-[320px] grid items-center gap-2",
     className,
   ]}
-  aria-labelledby={composeTitleId(project.name)}
-  aria-describedby={composeSummaryId(project.name)}
+  aria-labelledby={composeTitleId(project.title)}
+  aria-describedby={composeSummaryId(project.title)}
   aria-haspopup="dialog"
   aria-controls={PROJECT_DETAILS_ID}
   onclick={handleclick}
@@ -52,7 +52,7 @@
     <img
       class="transition-[scale] duration-300 ease-out group-hover/project-preview:scale-110"
       role="presentation"
-      src={project.previews[0].src}
+      src={project.previews[0].url}
       width={project.previews[0].width}
       height={project.previews[0].height}
       loading="lazy"
@@ -61,23 +61,23 @@
   </div>
   <div class="max-tablet:px-4 tablet:pb-4 flex h-full flex-col gap-4">
     <h3
-      id={composeTitleId(project.name)}
+      id={composeTitleId(project.title)}
       class="typo-heading-md group-hover/project-preview:text-teal group-focus/project-preview:text-orchid group-active/project-preview:text-orchid text-center"
     >
       {project.title}
     </h3>
     <p
-      id={composeSummaryId(project.name)}
+      id={composeSummaryId(project.title)}
       class="text-silver line-clamp-3 max-h-[4.5rem]"
     >
       {project.summary}
     </p>
     <ul class="mt-auto flex flex-wrap justify-center gap-2">
-      {#each project.technologies as tech (tech)}
+      {#each project.tags as tag (tag)}
         <li
           class="bg-charcoal font-cascadia-code text-silver rounded-2xl px-2 font-bold"
         >
-          {TECH_META[tech].label}
+          {tag}
         </li>
       {/each}
     </ul>

@@ -1,4 +1,4 @@
+import type { Project } from "$lib/projects.schema";
 import { writable } from "svelte/store";
 
-export const activeProject = writable<ProjectData | undefined>();
-export const projectFilters = writable<string[]>([]);
+export const activeProject = writable<Project | undefined>();

@@ -4,7 +4,7 @@
 
   interface Props {
     id: string;
-    slides: { src: string; width: number; height: number }[];
+    slides: { url: string; width: number; height: number }[];
   }
 
   let { id, slides }: Props = $props();
@@ -67,11 +67,11 @@
     bind:this={scroller}
     class="grid snap-x snap-mandatory auto-cols-[100%] grid-flow-col items-center overflow-x-auto overscroll-contain"
   >
-    {#each slides as slide, i (slide.src)}
+    {#each slides as slide, i (slide.url)}
       <figure class="snap-center" bind:this={scrollerSlides[i]}>
         <img
           role="presentation"
-          src={slide.src}
+          src={slide.url}
           width={slide.width}
           height={slide.height}
           loading="lazy"

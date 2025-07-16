@@ -1,20 +1,8 @@
-import type { Tech } from "$lib/constants";
 import type { ClickawayEventDetail } from "@utils/actions/clickaway.svelte";
 import type { SwipeEventDetail } from "@utils/actions/swipe.svelte";
 import "svelte/elements";
 
 declare global {
-  interface ProjectData {
-    name: string;
-    title: string;
-    summary: string;
-    description: string;
-    website: string;
-    repository: string;
-    technologies: Tech[];
-    previews: { src: string; width: number; height: number }[];
-  }
-
   namespace App {
     // interface Error {}
     // interface Locals {}

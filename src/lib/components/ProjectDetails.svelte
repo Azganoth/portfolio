@@ -65,10 +65,10 @@
             class="bg-charcoal flex flex-wrap justify-center gap-2 rounded-xl p-2"
             aria-label="Tecnologias usadas"
           >
-            {#each $activeProject.technologies as tech (tech)}
-              {@const { label, color } = TECH_META[tech]}
+            {#each $activeProject.tags as tag (tag)}
+              {@const { label, color } = TECH_META["astro"]}
               <li title={label}>
-                <Icon class="size-6" name={tech} {color} />
+                <Icon class="size-6" name={tag} {color} />
               </li>
             {/each}
           </ul>

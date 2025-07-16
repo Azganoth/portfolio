@@ -5,7 +5,6 @@
   import Header from "$lib/components/Header.svelte";
   import Icon from "$lib/components/Icon.svelte";
   import Link from "$lib/components/Link.svelte";
-  import ProjectFilter from "$lib/components/ProjectFilter.svelte";
   import ProjectList from "$lib/components/ProjectList.svelte";
   import SkillSet from "$lib/components/SkillSet.svelte";
   import { CONTACT_INFO } from "$lib/constants";
@@ -137,7 +136,6 @@
     </div>
   </ContentLayout>
   <ContentLayout id="projects" title="Projetos">
-    <ProjectFilter class="pb-8" />
     <ProjectList class="pb-32" projects={data.props.projects} />
   </ContentLayout>
   <ContentLayout

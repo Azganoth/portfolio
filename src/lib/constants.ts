@@ -67,3 +67,8 @@ export const TECH_META: Record<Tech, { label: string; color: string }> = {
 };
 
 export const TECH_ORDER = Object.keys(TECH_META);
+
+export const PREVIEW_SIZE = {
+  width: 720,
+  height: 540,
+};
