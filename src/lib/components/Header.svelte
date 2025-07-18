@@ -27,6 +27,7 @@
   import Link from "$lib/components/Link.svelte";
   import Logo from "$lib/components/Logo.svelte";
   import { clickaway } from "$lib/utils/clickaway";
+  import { reveal } from "$lib/utils/reveal";
   import Icon from "@iconify/svelte";
   import { MediaQuery } from "svelte/reactivity";
 
@@ -88,8 +89,9 @@
       </div>
     {:else}
       <nav
-        class="z-1 center-x absolute bottom-[7.5rem] flex gap-4"
+        class="z-1 center-x reveal-slide-up absolute bottom-[7.5rem] flex gap-4 duration-700"
         aria-label="Seções principais"
+        {@attach reveal()}
       >
         {#each links as { label, link, description } (link)}
           <Link

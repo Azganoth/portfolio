@@ -5,16 +5,23 @@
   import ProjectList from "$lib/components/ProjectList.svelte";
   import Starfield from "$lib/components/Starfield.svelte";
   import { CONTACT_INFO, SKILLS, TAG_META } from "$lib/constants";
+  import { reveal } from "$lib/utils/reveal";
   import Icon from "@iconify/svelte";
   import type { PageProps } from "./$types";
 
   const { data }: PageProps = $props();
 
-  const contactList = [
+  const quickContactShortcuts = [
     ["GitHub", CONTACT_INFO.GitHub, "simple-icons:github"],
     ["LinkedIn", CONTACT_INFO.LinkedIn, "simple-icons:linkedin"],
     ["WhatsApp", CONTACT_INFO.WhatsApp, "simple-icons:whatsapp"],
     ["Email", CONTACT_INFO.Email, "simple-icons:gmail"],
+  ];
+
+  const contactList = [
+    ["ademirj.ferreirajunior@gmail.com", CONTACT_INFO.Email],
+    ["WhatsApp", CONTACT_INFO.WhatsApp],
+    ["LinkedIn", CONTACT_INFO.LinkedIn],
   ];
 </script>
 
@@ -27,19 +34,21 @@
   >
     <div class="relative w-full">
       <h1
-        class="tablet:text-start font-orbitron desktop:text-4xl mb-4 text-center text-3xl font-semibold"
+        class="tablet:text-start font-orbitron desktop:text-4xl reveal-slide-down mb-4 text-center text-3xl font-semibold duration-700"
+        {@attach reveal()}
       >
         Oi, eu sou o <br /><span class="text-purple">Ademir</span>
       </h1>
       <h2
-        class="text-gray tablet:text-start desktop:text-xl font-orbitron text-center text-lg font-semibold"
+        class="text-gray tablet:text-start desktop:text-xl reveal-slide-up font-orbitron text-center text-lg font-semibold duration-700"
+        {@attach reveal()}
       >
         Desenvolvedor FullStack
       </h2>
       <ul
         class="max-tablet:top-[calc(100%+2rem)] max-tablet:center-x tablet:right-0 tablet:flex-col tablet:center-y desktop:fixed desktop:right-8 absolute z-10 flex justify-center gap-4"
       >
-        {#each contactList as [label, url, icon] (url)}
+        {#each quickContactShortcuts as [label, url, icon] (url)}
           <li class="transition-all hover:scale-110">
             <Link href={url} aria-label={label} newTab>
               <Icon class="size-10" {icon} />
@@ -90,7 +99,10 @@
           para entregar projetos modernos e acessíveis.
         </p>
       </div>
-      <div class="max-tablet:hidden max-desktop:mt-12">
+      <div
+        class="max-tablet:hidden max-desktop:mt-12 reveal-fade duration-700"
+        {@attach reveal()}
+      >
         <enhanced:img
           class="rounded-4xl mx-auto"
           src={profileImage}
@@ -160,11 +172,14 @@
       <div
         class="desktop:items-start mt-24 flex flex-col items-center gap-3 text-lg"
       >
-        <Link href={CONTACT_INFO.Email} newTab>
-          ademirj.ferreirajunior@gmail.com
-        </Link>
-        <Link href={CONTACT_INFO.LinkedIn} newTab>LinkedIn</Link>
-        <Link href={CONTACT_INFO.WhatsApp} newTab>Whatsapp</Link>
+        {#each contactList as [label, url] (url)}
+          <Link
+            class="reveal-slide-up duration-700"
+            href={url}
+            newTab
+            {@attach reveal()}>{label}</Link
+          >
+        {/each}
       </div>
     </div>
     <Link

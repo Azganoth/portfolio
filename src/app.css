@@ -8,6 +8,8 @@
   --underscore: "_";
 }
 
+@variant in-view (&.is-visible);
+
 @layer base {
   code {
     @apply font-jetbrains-mono;

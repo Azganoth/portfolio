@@ -1,6 +1,7 @@
 <script lang="ts">
   import ProjectThumb from "$lib/components/ProjectThumb.svelte";
   import type { Project } from "$lib/projects.schema";
+  import { reveal } from "$lib/utils/reveal";
   import { flip } from "svelte/animate";
   import type { ClassValue } from "svelte/elements";
   import { fly } from "svelte/transition";
@@ -26,11 +27,13 @@
 
 <div class={["flex flex-col items-center", className]}>
   <ul class="flex flex-wrap justify-center gap-12" role="region">
-    {#each displayedProjects as project (project.title)}
+    {#each displayedProjects as project, i (project.title)}
       <li
+        class={[i < INITIAL_COUNT && "reveal-slide-up duration-700"]}
         role="article"
         animate:flip={{ duration: 150 }}
         transition:fly={{ y: 30, duration: 500 }}
+        {@attach reveal()}
       >
         <ProjectThumb {project} />
       </li>
