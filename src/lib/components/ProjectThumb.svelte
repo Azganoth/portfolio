@@ -46,7 +46,7 @@
   onkeydown={handlekeydown}
 >
   <div
-    class="bg-stardust group-focus:outline-purple group-active:outline-purple border-stardust overflow-hidden rounded-2xl border outline-4 outline-transparent"
+    class="bg-stardust group-focus:outline-purple group-active:outline-purple border-stardust relative overflow-hidden rounded-2xl border outline-4 outline-transparent"
   >
     <!-- Decorative image since title is already announced -->
     <img
@@ -58,6 +58,11 @@
       loading="lazy"
       alt=""
     />
+    <div
+      class="bg-stardust font-jetbrains-mono absolute bottom-1 left-1 rounded-xl px-2 py-1 text-sm font-semibold tracking-wide"
+    >
+      {project.year}
+    </div>
   </div>
   <div class="max-tablet:px-4 tablet:pb-4 flex h-full flex-col gap-4">
     <h3
