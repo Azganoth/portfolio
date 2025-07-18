@@ -1,12 +1,11 @@
 <script lang="ts">
-  import Icons from "$lib/components/Icons.svelte";
-  import ProjectDetails from "$lib/components/ProjectDetails.svelte";
+  import ProjectView from "$lib/components/ProjectView.svelte";
   import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
   import "../app.css";
 
   let { children } = $props();
 
-  const title = "Azganoth - Desenvolvedor Web FullStack";
+  const title = "Azganoth - Desenvolvedor FullStack";
   const description =
     "Portfólio para apresentar as minhas habilidades e projetos.";
   const url = "https://azganoth.vercel.app/";
@@ -41,5 +40,4 @@
 </svelte:head>
 
 {@render children()}
-<ProjectDetails />
-<Icons />
+<ProjectView />

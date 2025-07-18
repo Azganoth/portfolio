@@ -7,9 +7,9 @@ summary: Galeria de arte interativa para explorar pinturas e suas histórias.
 repository: https://github.com/Azganoth/galleria-slideshow-site
 website: https://azganoth.github.io/galleria-slideshow-site/
 tags:
-  - TypeScript
   - React
-  - Next.js
+  - Next
+  - TypeScript
 ---
 
 Galeria de arte interativa para explorar pinturas e suas histórias.

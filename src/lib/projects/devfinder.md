@@ -7,9 +7,9 @@ summary: Aplicativo para buscar e mostrar informações sobre perfis de usuário
 repository: https://github.com/Azganoth/github-user-search-app
 website: https://azganoth.github.io/github-user-search-app/
 tags:
-  - TypeScript
   - Vue
   - TailwindCSS
+  - TypeScript
 ---
 
 Aplicativo para buscar e mostrar informações sobre perfis de usuários do GitHub.

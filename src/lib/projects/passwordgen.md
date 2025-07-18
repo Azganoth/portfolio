@@ -7,8 +7,8 @@ summary: Aplicativo para gerar senhas com várias opções de customização e a
 repository: https://github.com/Azganoth/password-generator-app
 website: https://azganoth.github.io/password-generator-app/
 tags:
-  - CSS
   - Preact
+  - CSS
 ---
 
 Aplicativo para gerar senhas com várias opções de customização e avaliação de segurança.

@@ -7,11 +7,11 @@ summary: Jogo da velha com modo contra o computador ou outro jogador local.
 repository: https://github.com/Azganoth/tic-tac-toe
 website: https://azganoth.github.io/tic-tac-toe/
 tags:
-  - TypeScript
   - React
   - SASS
   - Vitest
   - Testing Library
+  - TypeScript
 ---
 
 Jogo da velha com modo contra o computador ou outro jogador local.

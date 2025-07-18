@@ -10,7 +10,7 @@
 
 @layer base {
   code {
-    @apply font-cascadia-code;
+    @apply font-jetbrains-mono;
   }
 
   button {

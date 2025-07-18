@@ -1,165 +1,179 @@
 <script lang="ts">
   import profileImage from "$lib/assets/images/profile.webp?enhanced";
-  import BackToTop from "$lib/components/BackToTop.svelte";
-  import ContentLayout from "$lib/components/ContentLayout.svelte";
   import Header from "$lib/components/Header.svelte";
-  import Icon from "$lib/components/Icon.svelte";
   import Link from "$lib/components/Link.svelte";
   import ProjectList from "$lib/components/ProjectList.svelte";
-  import SkillSet from "$lib/components/SkillSet.svelte";
-  import { CONTACT_INFO } from "$lib/constants";
+  import Starfield from "$lib/components/Starfield.svelte";
+  import { CONTACT_INFO, SKILLS, TAG_META } from "$lib/constants";
+  import Icon from "@iconify/svelte";
   import type { PageProps } from "./$types";
 
   const { data }: PageProps = $props();
+
+  const contactList = [
+    ["GitHub", CONTACT_INFO.GitHub, "simple-icons:github"],
+    ["LinkedIn", CONTACT_INFO.LinkedIn, "simple-icons:linkedin"],
+    ["WhatsApp", CONTACT_INFO.WhatsApp, "simple-icons:whatsapp"],
+    ["Email", CONTACT_INFO.Email, "simple-icons:gmail"],
+  ];
 </script>
 
+<Starfield />
 <Header />
 <main>
-  <ContentLayout id="start" class="relative flex min-h-dvh items-center">
+  <section
+    id="start"
+    class="tablet:px-12 tablet:py-16 desktop:p-16 relative flex min-h-dvh items-center px-6 py-8"
+  >
     <div class="relative w-full">
-      <h2
-        class="max-tablet:text-center font-montserrat-alternates desktop:text-4xl text-3xl font-bold"
+      <h1
+        class="tablet:text-start font-orbitron desktop:text-4xl mb-4 text-center text-3xl font-semibold"
       >
-        Oi, eu sou o <br /><span class="text-orchid">Ademir</span>
-      </h2>
-      <h3
-        class="text-silver max-tablet:text-center desktop:text-[2.25rem] text-xl font-medium"
+        Oi, eu sou o <br /><span class="text-purple">Ademir</span>
+      </h1>
+      <h2
+        class="text-gray tablet:text-start desktop:text-xl font-orbitron text-center text-lg font-semibold"
       >
         Desenvolvedor FullStack
-      </h3>
+      </h2>
       <ul
-        class="max-tablet:top-[calc(100%+2rem)] max-tablet:center-x tablet:right-0 tablet:flex-col tablet:center-y absolute flex justify-center gap-4"
+        class="max-tablet:top-[calc(100%+2rem)] max-tablet:center-x tablet:right-0 tablet:flex-col tablet:center-y desktop:fixed desktop:right-8 absolute z-10 flex justify-center gap-4"
       >
-        <li>
-          <Link href={CONTACT_INFO.GitHub} aria-label="GitHub" newTab>
-            <Icon class="size-8" name="github" />
-          </Link>
-        </li>
-        <li>
-          <Link href={CONTACT_INFO.LinkedIn} aria-label="LinkedIn" newTab>
-            <Icon class="size-8" name="linkedin" />
-          </Link>
-        </li>
-        <li>
-          <Link href={CONTACT_INFO.Email} aria-label="Email">
-            <Icon class="size-8" name="email" />
-          </Link>
-        </li>
-        <li>
-          <Link href={CONTACT_INFO.WhatsApp} aria-label="WhatsApp" newTab>
-            <Icon class="size-8" name="whatsapp" />
-          </Link>
-        </li>
+        {#each contactList as [label, url, icon] (url)}
+          <li class="transition-all hover:scale-110">
+            <Link href={url} aria-label={label} newTab>
+              <Icon class="size-10" {icon} />
+            </Link>
+          </li>
+        {/each}
       </ul>
     </div>
-    <a
-      class="push-on-active hover:text-orchid center-x absolute bottom-8"
-      href="#bio"
-      aria-label="Ir para a biografia"
+    <Link
+      class={[
+        "center-x bg-teal hover:bg-teal/90 font-jetbrains-mono text-void tablet:bottom-10 absolute bottom-8 flex items-center gap-2 rounded-full px-5 py-2 transition-all",
+        "before:bg-teal before:-z-1 before:absolute before:inset-0 before:animate-pulse before:rounded-full before:blur-sm before:content-['']",
+      ]}
+      variant="none"
+      href="/cv.pdf"
+      newTab
     >
-      <Icon class="tablet:h-8 tablet:w-16 h-6 w-12" name="start" />
-    </a>
-  </ContentLayout>
-  <ContentLayout
+      <span>Currículo</span>
+      <Icon icon="fa6-solid:arrow-up-right-from-square" />
+    </Link>
+  </section>
+  <section
     id="bio"
-    class="tablet:before:-skew-y-2 tablet:before:inset-y-8 desktop:before:-skew-y-1 before:bg-charcoal before:shadow-elevation before:-skew-y-4 before:-z-1 relative before:absolute before:inset-x-0 before:inset-y-5 before:content-['']"
-    title="Sobre mim"
+    class={[
+      "tablet:px-12 tablet:py-16 desktop:p-16 relative px-6 py-8",
+      "tablet:before:-skew-y-2 tablet:before:inset-y-8 desktop:before:-skew-y-1 before:bg-stardust before:shadow-elevation before:-skew-y-4 before:-z-1 before:absolute before:inset-x-0 before:inset-y-5 before:content-['']",
+    ]}
   >
+    <h2
+      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold"
+    >
+      Sobre mim
+    </h2>
     <div class="desktop:grid desktop:grid-cols-2 desktop:gap-16">
       <div>
         <p>
-          Me chamo Ademir José Ferreira Júnior, tenho 25 anos e moro em
-          Laguna-SC. Formado em Ciência da Computação pela UNISUL de Tubarão, me
-          especializei em desenvolvimento web full-stack. Acredito que a
-          evolução deve ser constante e me desafio a entregar projetos cada vez
-          melhores.
+          Sou um desenvolvedor full-stack apaixonado por construir soluções
+          robustas e escaláveis. Com uma sólida formação em Ciência da
+          Computação, meu projeto mais recente, <strong>Nexus</strong>,
+          demonstra minha capacidade de desenvolver uma aplicação completa a
+          partir do zero, utilizando um monorepo com <strong>Next.js</strong> no
+          frontend e <strong>Node.js/Express</strong> com
+          <strong>Prisma</strong>
+          no backend. Tenho experiência em todo o ciclo de vida do desenvolvimento,
+          desde a concepção e arquitetura até a automação de CI/CD com
+          <strong>Docker</strong>
+          e <strong>GitHub Actions</strong>, e busco constantemente me desafiar
+          para entregar projetos modernos e acessíveis.
         </p>
-        <p class="mt-4">
-          Minha jornada nessa área começou durante a graduação, quando
-          desenvolvi um app full-stack em equipe utilizando Angular e Spring
-          Boot para a matéria de programação web. Desde então aprofundei meus
-          conhecimentos em desenvolvimento web, completei vários cursos na Alura
-          e desenvolvi mais projetos explorando diversas outras tecnologias como
-          JavaScript, React, Vue e Node.
-        </p>
-        <div class="mt-4 text-center">
-          <Link variant="prime" href="/cv.pdf" newTab>Currículo</Link>
-        </div>
       </div>
       <div class="max-tablet:hidden max-desktop:mt-12">
         <enhanced:img
-          class="mx-auto rounded-2xl"
+          class="rounded-4xl mx-auto"
           src={profileImage}
           alt="Profile"
         />
       </div>
     </div>
-  </ContentLayout>
-  <ContentLayout id="skills" title="Habilidades">
-    <div
-      class="tablet:grid-cols-2 tablet:grid-rows-[repeat(9,80px)] tablet:gap-4 desktop:grid-cols-3 desktop:grid-rows-[repeat(10,48px)] grid gap-8"
+  </section>
+  <section id="skills" class="tablet:px-12 tablet:py-16 desktop:p-16 px-6 py-8">
+    <h2
+      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold"
     >
-      <SkillSet
-        class="tablet:col-start-1 tablet:row-start-1"
-        name="Linguagens"
-        set={["html5", "css3", "javascript", "typescript", "python"]}
-      />
-      <SkillSet
-        class="tablet:col-start-2 tablet:row-start-2 desktop:row-start-3"
-        name="Front-end"
-        set={[
-          "react",
-          "vue",
-          "svelte",
-          "next",
-          "astro",
-          "sass",
-          "tailwindcss",
-          "styledcomponents",
-        ]}
-      />
-      <SkillSet
-        class="tablet:col-start-2 tablet:row-start-6 desktop:col-start-3 desktop:row-start-2"
-        name="Back-end"
-        set={["node", "docker", "postgresql", "mongodb", "contentful"]}
-      />
-      <SkillSet
-        class="tablet:col-start-1 tablet:row-start-4 desktop:row-start-6"
-        name="Testes"
-        set={["jest", "vitest", "testinglibrary", "cypress", "storybook"]}
-      />
-      <SkillSet
-        class="tablet:col-start-1 tablet:row-start-7 desktop:col-start-3 desktop:row-start-7"
-        name="Ferramentas"
-        set={["git", "github", "githubactions", "figma"]}
-      />
+      Habilidades
+    </h2>
+    <div
+      class="desktop:gap-y-16 desktop:items-start desktop:flex-row flex flex-col flex-wrap items-center justify-center gap-8"
+    >
+      {#each Object.entries(SKILLS) as [category, skills] (category)}
+        <div class="max-w-96">
+          <h3
+            class="after:bg-yellow after:center-x relative mb-8 text-center font-semibold after:absolute after:-bottom-2 after:h-0.5 after:w-8 after:content-['']"
+          >
+            {category}
+          </h3>
+          <ul class="flex flex-wrap justify-center gap-4">
+            {#each skills as skill (skill)}
+              {@const { icon, color } = TAG_META[skill]}
+              <li
+                class="flex items-center gap-2 rounded-lg bg-white/5 py-2 pl-2 pr-3 text-sm transition-all hover:scale-110"
+              >
+                <Icon class="size-5" {icon} {color} />
+                <span
+                  class="font-jetbrains-mono cursor-default font-bold duration-300 ease-out"
+                  >{skill}</span
+                >
+              </li>
+            {/each}
+          </ul>
+        </div>
+      {/each}
     </div>
-  </ContentLayout>
-  <ContentLayout id="projects" title="Projetos">
-    <ProjectList class="pb-32" projects={data.props.projects} />
-  </ContentLayout>
-  <ContentLayout
-    id="contact"
-    class="bg-charcoal shadow-elevation min-h-dvh pb-44"
-    title="Contato"
+  </section>
+  <section
+    id="projects"
+    class="tablet:px-12 tablet:py-16 desktop:p-16 px-6 py-8"
   >
+    <h2
+      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold"
+    >
+      Projetos
+    </h2>
+    <ProjectList class="pb-32 pt-8" projects={data.props.projects} />
+  </section>
+  <section
+    id="contact"
+    class="tablet:px-12 tablet:py-16 desktop:p-16 relative min-h-dvh px-6 pb-44 pt-8"
+  >
+    <h2
+      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold"
+    >
+      Contato
+    </h2>
     <div>
-      <h3
-        class="typo-subheading-lg max-desktop:mx-auto max-desktop:text-center max-w-xs"
-      >
-        Tem interesse? Manda uma mensagem!
+      <h3 class="font-inter desktop:text-start text-center font-medium">
+        Tem interesse? Entre em contato!
       </h3>
-      <div class="max-desktop:text-center mt-24">
-        <Link variant="prime" href={CONTACT_INFO.Email}>
+      <div
+        class="desktop:items-start mt-24 flex flex-col items-center gap-3 text-lg"
+      >
+        <Link href={CONTACT_INFO.Email} newTab>
           ademirj.ferreirajunior@gmail.com
         </Link>
-        <div class="desktop:items-start mt-8 flex flex-col items-center gap-2">
-          <Link href={CONTACT_INFO.GitHub} newTab>GitHub</Link>
-          <Link href={CONTACT_INFO.LinkedIn} newTab>LinkedIn</Link>
-          <Link href={CONTACT_INFO.WhatsApp} newTab>Whatsapp</Link>
-        </div>
+        <Link href={CONTACT_INFO.LinkedIn} newTab>LinkedIn</Link>
+        <Link href={CONTACT_INFO.WhatsApp} newTab>Whatsapp</Link>
       </div>
     </div>
-  </ContentLayout>
+    <Link
+      class="center-x bg-teal hover:bg-teal/90 font-jetbrains-mono text-void tablet:bottom-16 absolute bottom-12 flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2 transition-all"
+      variant="none"
+      href="#start"
+    >
+      <Icon class="size-5" icon="fa6-solid:arrow-up" />
+      <span>Voltar ao início</span>
+    </Link>
+  </section>
 </main>
-<BackToTop />

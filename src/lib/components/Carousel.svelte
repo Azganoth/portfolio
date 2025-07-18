@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Icon from "$lib/components/Icon.svelte";
+  import Icon from "@iconify/svelte";
   import { onMount } from "svelte";
 
   interface Props {
@@ -50,16 +50,16 @@
   }
 
   function previousSlide() {
-    goToSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1);
+    goToSlide((currentSlide - 1 + slides.length) % slides.length);
   }
 
   function nextSlide() {
-    goToSlide(currentSlide === slides.length - 1 ? 0 : currentSlide + 1);
+    goToSlide((currentSlide + 1) % slides.length);
   }
 </script>
 
 <section
-  class="group/carousel text-offwhite aspect-4/3 relative overflow-hidden"
+  class="text-offwhite aspect-4/3 group relative overflow-hidden"
   aria-label="Carousel"
   aria-roledescription="carousel"
 >
@@ -85,36 +85,32 @@
   </div>
 
   <button
-    class="push-on-active hover:text-orchid center-y absolute left-0 select-none"
+    class="push-on-active hover:text-purple center-y not-group-hover:opacity-25 absolute left-0 transition-all"
     type="button"
     aria-label="Slide anterior"
     aria-controls="{id}-slides-container"
-    onclick={() => {
-      previousSlide();
-    }}
+    onclick={previousSlide}
   >
-    <Icon class="drop-shadow-contrast size-12" name="slide-left" />
+    <Icon class="drop-shadow-contrast size-10" icon="fa6-solid:chevron-left" />
   </button>
   <button
-    class="push-on-active hover:text-orchid center-y absolute right-0 select-none"
+    class="push-on-active hover:text-purple not-group-hover:opacity-25 center-y absolute right-0 transition-all"
     type="button"
     aria-label="Próximo slide"
     aria-controls="{id}-slides-container"
-    onclick={() => {
-      nextSlide();
-    }}
+    onclick={nextSlide}
   >
-    <Icon class="drop-shadow-contrast size-12" name="slide-right" />
+    <Icon class="drop-shadow-contrast size-10" icon="fa6-solid:chevron-right" />
   </button>
 
   <div
-    class="center-x absolute bottom-4 flex gap-2"
+    class="center-x not-group-hover:opacity-25 absolute bottom-4 flex transition-all"
     role="tablist"
     aria-label="Navegação de slides"
   >
     {#each { length: slides.length }, i}
       <button
-        class="push-on-active hover:text-orchid block select-none"
+        class="push-on-active hover:text-purple block"
         type="button"
         role="tab"
         aria-label="Slide {i + 1}"
@@ -125,8 +121,8 @@
         }}
       >
         <Icon
-          class="drop-shadow-contrast tablet:size-5 size-4"
-          name={i === currentSlide ? "slide-dot-selected" : "slide-dot"}
+          class="drop-shadow-contrast size-6"
+          icon={i === currentSlide ? "octicon:dot-fill-16" : "octicon:dot-16"}
         />
       </button>
     {/each}

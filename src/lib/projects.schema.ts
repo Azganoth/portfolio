@@ -7,8 +7,8 @@ export const projectSchema = z.object({
   category: z.string(),
   year: z.number(),
   summary: z.string(),
-  repository: z.url(),
-  website: z.url(),
+  repository: z.url().optional(),
+  website: z.url().optional(),
   tags: z.array(z.string()),
 });
 

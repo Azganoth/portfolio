@@ -3,7 +3,7 @@
   import type { Project } from "$lib/projects.schema";
   import { flip } from "svelte/animate";
   import type { ClassValue } from "svelte/elements";
-  import { fade } from "svelte/transition";
+  import { fly } from "svelte/transition";
 
   interface Props {
     class?: ClassValue;
@@ -11,22 +11,39 @@
   }
 
   let { class: className, projects }: Props = $props();
+
+  const INITIAL_COUNT = 5;
+  const SHOW_MORE_COUNT = 3;
+
+  let visibleCount = $state(INITIAL_COUNT);
+
+  const showMore = () => {
+    visibleCount = Math.min(visibleCount + SHOW_MORE_COUNT, projects.length);
+  };
+
+  const displayedProjects = $derived(projects.slice(0, visibleCount));
 </script>
 
-<ul
-  class={["flex flex-wrap justify-center gap-x-4 gap-y-12", className]}
-  role="region"
-  aria-label="Projetos"
-  aria-live="polite"
-  aria-atomic="true"
->
-  {#each projects as project (project.title)}
-    <li
-      animate:flip={{ duration: 300 }}
-      transition:fade={{ duration: 150 }}
-      role="article"
+<div class={["flex flex-col items-center", className]}>
+  <ul class="flex flex-wrap justify-center gap-12" role="region">
+    {#each displayedProjects as project (project.title)}
+      <li
+        role="article"
+        animate:flip={{ duration: 150 }}
+        transition:fly={{ y: 30, duration: 500 }}
+      >
+        <ProjectThumb {project} />
+      </li>
+    {/each}
+  </ul>
+
+  {#if visibleCount < projects.length}
+    <button
+      type="button"
+      class="bg-teal hover:bg-teal/90 text-void mt-16 rounded-full px-5 py-2 font-bold transition-all"
+      onclick={showMore}
     >
-      <ProjectThumb {project} />
-    </li>
-  {/each}
-</ul>
+      Mostrar mais
+    </button>
+  {/if}
+</div>

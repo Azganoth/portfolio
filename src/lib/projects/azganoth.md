@@ -7,9 +7,9 @@ summary: Portfólio pessoal para mostrar minhas habilidades, projetos e informa�
 repository: https://github.com/Azganoth/portfolio
 website: https://azganoth.vercel.app
 tags:
-  - TypeScript
   - Svelte
   - TailwindCSS
+  - TypeScript
 ---
 
 Portfólio pessoal para mostrar minhas habilidades, projetos e informações para contato.
