@@ -38,9 +38,14 @@
 </script>
 
 <header>
-  <div class="center-x z-2 desktop:top-12 absolute top-8" aria-hidden="true">
+  <Link
+    variant="none"
+    class="center-x z-2 desktop:top-12 absolute top-8"
+    href="/"
+    aria-label="Start"
+  >
     <Logo />
-  </div>
+  </Link>
   <nav aria-label="Navegação principal">
     {#if mobile.current}
       <div>
