@@ -9,7 +9,14 @@ export const SKILLS = {
   Linguagens: ["HTML", "CSS", "JavaScript", "TypeScript", "Python"],
   Frontend: ["React", "Next", "Vue", "Svelte", "SASS", "TailwindCSS"],
   Backend: ["Node", "PostgreSQL", "MongoDB", "Prisma"],
-  Testes: ["Jest", "Vitest", "Testing Library", "Cypress", "Storybook"],
+  Testes: [
+    "Jest",
+    "Vitest",
+    "Testing Library",
+    "Cypress",
+    "Storybook",
+    "Postman",
+  ],
   "DevOps & Ferramentas": ["Git", "GitHub", "Docker", "Figma"],
 };
 
@@ -49,6 +56,7 @@ export const TAG_META: Record<string, { color: string; icon: string }> = {
   "Testing Library": { color: "#E33332", icon: "simple-icons:testinglibrary" },
   Cypress: { color: "#69D3A7", icon: "simple-icons:cypress" },
   Storybook: { color: "#FF4785", icon: "simple-icons:storybook" },
+  Postman: { color: "#FF6C37", icon: "simple-icons:postman" },
   Git: { color: "#F05032", icon: "simple-icons:git" },
   GitHub: { color: "#E7E8E8", icon: "simple-icons:github" },
   Docker: { color: "#2496ED", icon: "simple-icons:docker" },
