@@ -4,9 +4,16 @@
   import Link from "$lib/components/Link.svelte";
   import ProjectList from "$lib/components/ProjectList.svelte";
   import Starfield from "$lib/components/Starfield.svelte";
-  import { CONTACT_INFO, SKILLS, TAG_META } from "$lib/constants";
+  import {
+    CONTACT_INFO,
+    PROJECT_LINK_BASE,
+    SKILLS,
+    TAG_META,
+  } from "$lib/constants";
+  import { activeProject } from "$lib/store";
   import { reveal } from "$lib/utils/reveal";
   import Icon from "@iconify/svelte";
+  import { onMount } from "svelte";
   import type { PageProps } from "./$types";
 
   const { data }: PageProps = $props();
@@ -23,7 +30,26 @@
     ["WhatsApp", CONTACT_INFO.WhatsApp],
     ["LinkedIn", CONTACT_INFO.LinkedIn],
   ];
+
+  const syncProjectView = () => {
+    const hash = window.location.hash;
+
+    if (hash.startsWith(PROJECT_LINK_BASE)) {
+      const slug = hash.substring(PROJECT_LINK_BASE.length);
+      const projectFromUrl = data.props.projects.find((p) => p.slug === slug);
+
+      if (projectFromUrl) {
+        $activeProject = projectFromUrl;
+      }
+    } else {
+      $activeProject = undefined;
+    }
+  };
+
+  onMount(syncProjectView);
 </script>
+
+<svelte:window on:hashchange={syncProjectView} />
 
 <Starfield />
 <Header />

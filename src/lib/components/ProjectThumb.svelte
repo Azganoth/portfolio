@@ -5,6 +5,7 @@
 
 <script lang="ts">
   import { PROJECT_DETAILS_ID } from "$lib/components/ProjectView.svelte";
+  import { PROJECT_LINK_BASE } from "$lib/constants";
   import type { Project } from "$lib/projects.schema";
   import { activeProject } from "$lib/store";
   import type { ClassValue } from "svelte/elements";
@@ -18,6 +19,7 @@
 
   function openProject() {
     $activeProject = project;
+    history.pushState(null, "", `${PROJECT_LINK_BASE}${project.slug}`);
   }
 
   function handleclick(event: MouseEvent) {

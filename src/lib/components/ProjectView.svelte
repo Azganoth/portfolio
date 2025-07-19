@@ -5,13 +5,12 @@
 <script lang="ts">
   import Carousel from "$lib/components/Carousel.svelte";
   import Link from "$lib/components/Link.svelte";
-  import { TAG_META } from "$lib/constants";
+  import { PROJECT_LINK_BASE, TAG_META } from "$lib/constants";
   import { activeProject } from "$lib/store";
   import { clickaway } from "$lib/utils/clickaway";
   import Icon from "@iconify/svelte";
 
   let open = $derived(!!$activeProject);
-
   let dialog = $state<HTMLDialogElement>();
   $effect(() => {
     if (open) {
@@ -20,6 +19,13 @@
       dialog?.close();
       // Reset the global store when the dialog is closed
       $activeProject = undefined;
+      if (window.location.hash.startsWith(PROJECT_LINK_BASE)) {
+        history.pushState(
+          null,
+          "",
+          window.location.pathname + window.location.search,
+        );
+      }
     }
   });
 </script>

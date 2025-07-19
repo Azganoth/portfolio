@@ -61,3 +61,5 @@ export const PREVIEW_SIZE = {
   width: 720,
   height: 540,
 };
+
+export const PROJECT_LINK_BASE = "#project-";
