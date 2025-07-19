@@ -1,5 +1,7 @@
+import { PROJECTS_ORDER } from "$lib/constants";
 import { projectSchema, type Project } from "$lib/projects.schema";
 import { composePreviews } from "$lib/utils/previews";
+import { compareOrderBy } from "$lib/utils/sort";
 import matter from "gray-matter";
 import { marked } from "marked";
 import fs from "node:fs/promises";
@@ -34,7 +36,7 @@ async function getAllProjects(): Promise<Project[]> {
   );
 
   // Sort projects by the 'order' field in the frontmatter
-  projects.sort((a, b) => a.order - b.order);
+  projects.sort(compareOrderBy(PROJECTS_ORDER, (p) => p.slug));
 
   return projects;
 }

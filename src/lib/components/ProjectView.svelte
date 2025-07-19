@@ -56,7 +56,9 @@
         >
           {$activeProject.title}
         </h3>
-        <article class="**:[p]:mb-4 col-span-full mb-auto h-full overflow-auto">
+        <article
+          class="prose prose-invert prose-neutral col-span-full mb-auto h-full overflow-auto"
+        >
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html $activeProject.description}
         </article>

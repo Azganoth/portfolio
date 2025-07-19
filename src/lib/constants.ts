@@ -13,6 +13,19 @@ export const SKILLS = {
   "DevOps & Ferramentas": ["Git", "GitHub", "Docker", "Figma"],
 };
 
+export const PROJECTS_ORDER = [
+  "azganoth",
+  "galleria",
+  "devfinder",
+  "tictactoe",
+  "passwordgen",
+  "bmicalc",
+  "skilled",
+  "workit",
+  "suite",
+  "equalizer",
+];
+
 export const TAG_META: Record<string, { color: string; icon: string }> = {
   HTML: { color: "#E34F26", icon: "simple-icons:html5" },
   CSS: { color: "#1572B6", icon: "simple-icons:css3" },
@@ -39,6 +52,9 @@ export const TAG_META: Record<string, { color: string; icon: string }> = {
   GitHub: { color: "#E7E8E8", icon: "simple-icons:github" },
   Docker: { color: "#2496ED", icon: "simple-icons:docker" },
   Figma: { color: "#F24E1E", icon: "simple-icons:figma" },
+  Express: { color: "#000000", icon: "simple-icons:express" },
+  "CSS Modules": { color: "#000000", icon: "simple-icons:cssmodules" },
+  SvelteKit: { color: "#FF3E00", icon: "simple-icons:svelte" },
 };
 
 export const PREVIEW_SIZE = {

@@ -4,6 +4,8 @@
 @import "$lib/assets/css/components.css";
 @import "$lib/assets/css/utilities.css";
 
+@plugin "@tailwindcss/typography";
+
 :root {
   --underscore: "_";
 }

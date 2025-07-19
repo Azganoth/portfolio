@@ -1,9 +1,8 @@
 ---
-order: 6
 title: Body Mass Index Calculator
 category: Tool
 year: 2024
-summary: Aplicativo para calcular o Índice de Massa Corporal (IMC).
+summary: Calculadora de IMC (Índice de Massa Corporal) com foco em design responsivo e acessibilidade.
 repository: https://github.com/Azganoth/bmi-calculator
 website: https://azganoth.github.io/bmi-calculator/
 tags:
@@ -12,12 +11,20 @@ tags:
   - JavaScript
 ---
 
-Aplicativo para calcular o Índice de Massa Corporal (IMC).
+Esta é uma ferramenta interativa para calcular o Índice de Massa Corporal (IMC). O projeto foi desenvolvido com tecnologias web fundamentais (HTML, CSS e JavaScript) para criar uma experiência de usuário simples, rápida, acessível e totalmente responsiva.
 
-O projeto foi construído com **HTML semântico** garantindo uma estrutura clara e acessível do conteúdo. A estilização foi desenvolvida com **CSS** e a interatividade foi implementada com **JavaScript**, incluindo validação de entrada e acessibilidade. Estilos e fontes foram instruídas a serem pré-carregadas para uma melhor experiência de usuário.
+### Principais Funcionalidades
 
-A implementação seguiu a abordagem **mobile-first**, com os estilos sendo desenvolvidos prioritariamente para dispositivos móveis e adaptados progressivamente para telas maiores. Atributos **ARIA** e outras técnicas foram utilizadas para aprimorar a acessibilidade.
+- **Cálculo de IMC**: Permite que os usuários insiram sua altura e peso para obter o resultado do IMC de forma instantânea.
+- **Validação de Entrada**: O formulário valida os dados inseridos para garantir que apenas números válidos sejam processados, fornecendo feedback ao usuário.
+- **Feedback Visual Claro**: Exibe o resultado de forma clara, indicando a faixa de peso correspondente (abaixo do peso, saudável, sobrepeso).
+- **Alta Acessibilidade**: A interface é totalmente navegável e funcional utilizando apenas o teclado, com suporte a leitores de tela através de atributos ARIA.
 
-O _deploy_ foi realizado via **GitHub Pages**, aproveitando sua integração com Git.
+### Ferramentas e Tecnologias
 
-Esse projeto reforçou minhas habilidades em manipulação de DOM e desenvolvimento de designs responsivos.
+Este projeto foi construído intencionalmente com **JavaScript puro** (vanilla JS) para focar na manipulação direta do DOM e na lógica de programação fundamental. A estrutura foi criada com **HTML semântico** e a estilização com **CSS** puro, seguindo uma abordagem **mobile-first** para garantir a responsividade em todos os dispositivos.
+
+### Desafios Técnicos e Aprendizados
+
+- **Manipulação do DOM e Lógica Interativa**: O principal desafio foi criar uma experiência de usuário fluida e reativa sem o uso de um framework. Desenvolvi toda a lógica de captura de dados, validação de entrada e exibição de resultados usando `addEventListener` e manipulação direta de elementos do DOM. Isso aprofundou meu conhecimento nos fundamentos do JavaScript e na interação com a árvore de elementos do HTML.
+- **Otimização da Experiência de Carregamento**: Para evitar o "Flash of Unstyled Content" (FOUC) e garantir que a interface fosse renderizada rapidamente, utilizei a tag `<link rel="preload">` no HTML. Essa técnica instrui o navegador a carregar os arquivos de CSS e as fontes principais com prioridade, resultando em uma melhoria perceptível na experiência de carregamento inicial para o usuário.
