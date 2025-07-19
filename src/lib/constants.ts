@@ -15,6 +15,7 @@ export const SKILLS = {
 
 export const PROJECTS_ORDER = [
   "azganoth",
+  "nexus",
   "galleria",
   "devfinder",
   "tictactoe",
