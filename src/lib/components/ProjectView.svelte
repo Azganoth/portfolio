@@ -58,50 +58,52 @@
         class="desktop:px-8 desktop:pb-8 flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4"
       >
         <h3
-          class="font-orbitron desktop:text-start col-span-full text-center text-xl font-bold"
+          class="font-orbitron desktop:text-start text-center text-xl font-bold"
         >
           {$activeProject.title}
         </h3>
         <article
-          class="prose prose-invert prose-neutral col-span-full mb-auto h-full overflow-auto"
+          class="prose prose-invert prose-neutral mb-auto h-full overflow-auto"
         >
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html $activeProject.description}
         </article>
-        <ul
-          class="bg-stardust flex flex-wrap justify-center gap-2 self-center rounded-xl p-2"
-          aria-label="Tecnologias usadas"
-        >
-          {#each $activeProject.tags as tag (tag)}
-            {@const { icon, color } = TAG_META[tag]}
-            <li title={tag}>
-              <Icon class="size-6" {icon} {color} />
-            </li>
-          {/each}
-        </ul>
-        <div class="flex justify-center gap-4">
-          {#if $activeProject.repository}
-            <Link
-              class="text-gray flex items-center gap-2"
-              href={$activeProject.repository}
-              aria-label="Abrir repositório do projeto"
-              newTab
-            >
-              Código
-              <Icon icon="fa6-solid:code" />
-            </Link>
-          {/if}
-          {#if $activeProject.website}
-            <Link
-              class="text-gray flex items-center gap-2"
-              href={$activeProject.website}
-              aria-label="Abrir o site em uma nova aba"
-              newTab
-            >
-              Visitar
-              <Icon icon="fa6-solid:arrow-up-right-from-square" />
-            </Link>
-          {/if}
+        <div class="tablet:flex-row tablet:justify-between flex flex-col gap-4">
+          <ul
+            class="bg-stardust flex flex-wrap justify-center gap-2 self-center rounded-xl p-2"
+            aria-label="Tecnologias usadas"
+          >
+            {#each $activeProject.tags as tag (tag)}
+              {@const { icon, color } = TAG_META[tag]}
+              <li title={tag}>
+                <Icon class="size-6" {icon} {color} />
+              </li>
+            {/each}
+          </ul>
+          <div class="flex justify-center gap-4">
+            {#if $activeProject.repository}
+              <Link
+                class="text-gray flex items-center gap-2"
+                href={$activeProject.repository}
+                aria-label="Abrir repositório do projeto"
+                newTab
+              >
+                Código
+                <Icon icon="fa6-solid:code" />
+              </Link>
+            {/if}
+            {#if $activeProject.website}
+              <Link
+                class="text-gray flex items-center gap-2"
+                href={$activeProject.website}
+                aria-label="Abrir o site em uma nova aba"
+                newTab
+              >
+                Visitar
+                <Icon icon="fa6-solid:arrow-up-right-from-square" />
+              </Link>
+            {/if}
+          </div>
         </div>
       </article>
     </div>
