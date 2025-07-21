@@ -7,7 +7,7 @@ export interface ProjectPreview {
 }
 
 export const composePreviews = (slug: string): ProjectPreview[] =>
-  Array.from({ length: 4 }, (_, i) => ({
+  Array.from({ length: slug === "simplemotionreact" ? 1 : 4 }, (_, i) => ({
     url: `/images/preview/${slug}_${i}.webp`,
     width: PREVIEW_SIZE.width,
     height: PREVIEW_SIZE.height,

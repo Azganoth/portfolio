@@ -27,6 +27,7 @@ export const PROJECTS_ORDER = [
   "devfinder",
   "tictactoe",
   "passwordgen",
+  "simplemotionreact",
   "bmicalc",
   "skilled",
   "workit",
