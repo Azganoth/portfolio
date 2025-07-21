@@ -1,13 +1,15 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
   import { onMount } from "svelte";
+  import type { ClassValue } from "svelte/elements";
 
   interface Props {
+    class?: ClassValue;
     id: string;
     slides: { url: string; width: number; height: number }[];
   }
 
-  let { id, slides }: Props = $props();
+  let { class: className, id, slides }: Props = $props();
 
   let scroller = $state<HTMLElement>();
   let scrollerSlides = $state<HTMLElement[]>([]);
@@ -59,7 +61,7 @@
 </script>
 
 <section
-  class="text-offwhite aspect-4/3 group relative overflow-hidden"
+  class={["text-offwhite aspect-4/3 group relative overflow-hidden", className]}
   aria-label="Carousel"
   aria-roledescription="carousel"
 >
@@ -85,7 +87,7 @@
   </div>
 
   <button
-    class="push-on-active hover:text-purple center-y not-group-hover:opacity-25 absolute left-0 transition-all"
+    class="push-on-active hover:text-purple center-y has-hover:not-group-hover:opacity-25 absolute left-0 transition-all"
     type="button"
     aria-label="Slide anterior"
     aria-controls="{id}-slides-container"
@@ -94,7 +96,7 @@
     <Icon class="drop-shadow-contrast size-10" icon="fa6-solid:chevron-left" />
   </button>
   <button
-    class="push-on-active hover:text-purple not-group-hover:opacity-25 center-y absolute right-0 transition-all"
+    class="push-on-active hover:text-purple has-hover:not-group-hover:opacity-25 center-y absolute right-0 transition-all"
     type="button"
     aria-label="Próximo slide"
     aria-controls="{id}-slides-container"
@@ -104,7 +106,7 @@
   </button>
 
   <div
-    class="center-x not-group-hover:opacity-25 absolute bottom-4 flex transition-all"
+    class="center-x has-hover:not-group-hover:opacity-25 absolute bottom-4 flex transition-all"
     role="tablist"
     aria-label="Navegação de slides"
   >
