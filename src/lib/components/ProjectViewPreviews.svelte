@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { clickaway } from "$lib/utils/clickaway";
   import type { ProjectPreview } from "$lib/utils/previews";
   import Icon from "@iconify/svelte";
 
@@ -8,6 +9,7 @@
 
   let { previews }: Props = $props();
 
+  let galleryExpandButton = $state<HTMLButtonElement>();
   let galleryExpanded = $state(false);
 
   let scroller = $state<HTMLElement>();
@@ -43,6 +45,7 @@
 
 <div class="desktop:pt-0 m-auto px-3 pt-3">
   <button
+    bind:this={galleryExpandButton}
     type="button"
     class="border-stardust hover:scale-102 group relative max-w-[400px] overflow-hidden rounded-2xl border transition-all"
     onclick={() => {
@@ -75,7 +78,16 @@
   ]}
   inert={!galleryExpanded}
 >
-  <div class="max-tablet:h-full relative m-auto p-4 py-12">
+  <div
+    class="max-tablet:h-full relative m-auto p-4 py-12"
+    onclickaway={() => {
+      galleryExpanded = false;
+    }}
+    {@attach clickaway({
+      ignoreSelf: true,
+      ignoreNodes: [galleryExpandButton],
+    })}
+  >
     <button
       class="push-on-active hover:text-purple tablet:top-2 absolute right-4 top-4 transition-colors"
       type="button"
