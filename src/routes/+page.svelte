@@ -56,7 +56,7 @@
 <main>
   <section
     id="start"
-    class="tablet:px-12 tablet:py-16 desktop:p-16 relative flex min-h-dvh items-center px-6 py-8"
+    class="tablet:px-12 tablet:py-16 desktop:p-16 relative flex min-h-svh items-center px-6 py-8"
   >
     <div class="relative w-full">
       <h1
