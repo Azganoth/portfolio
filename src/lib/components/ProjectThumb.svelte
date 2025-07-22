@@ -68,13 +68,13 @@
   </div>
   <div class="max-tablet:px-4 tablet:pb-4 flex h-full flex-col gap-4">
     <h3
-      id={composeTitleId(project.title)}
+      id={composeTitleId(project.slug)}
       class="font-orbitron group-hover:text-teal group-focus:text-purple group-active:text-purple text-center text-xl font-bold"
     >
       {project.title}
     </h3>
     <p
-      id={composeSummaryId(project.title)}
+      id={composeSummaryId(project.slug)}
       class="text-gray line-clamp-3 max-h-[4.5rem]"
     >
       {project.summary}

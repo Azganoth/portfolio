@@ -51,6 +51,7 @@ export const TAG_META: Record<string, { color: string; icon: string }> = {
   GitHub: { color: "#E7E8E8", icon: "simple-icons:github" },
   Docker: { color: "#2496ED", icon: "simple-icons:docker" },
   Figma: { color: "#F24E1E", icon: "simple-icons:figma" },
+  Vue: { color: "#4FC08D", icon: "simple-icons:vuedotjs" },
   Express: { color: "#000000", icon: "simple-icons:express" },
   "CSS Modules": { color: "#000000", icon: "simple-icons:cssmodules" },
   SvelteKit: { color: "#FF3E00", icon: "simple-icons:svelte" },

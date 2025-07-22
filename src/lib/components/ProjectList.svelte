@@ -1,6 +1,7 @@
 <script lang="ts">
   import ProjectThumb from "$lib/components/ProjectThumb.svelte";
   import type { Project } from "$lib/projects.schema";
+  import { activeProject } from "$lib/store";
   import { reveal } from "$lib/utils/reveal";
   import { flip } from "svelte/animate";
   import type { ClassValue } from "svelte/elements";
@@ -17,6 +18,18 @@
   const SHOW_MORE_COUNT = 3;
 
   let visibleCount = $state(INITIAL_COUNT);
+
+  // Auto show focused project
+  $effect(() => {
+    if ($activeProject) {
+      const activeIndex = projects.findIndex(
+        (p) => p.slug === $activeProject.slug,
+      );
+      if (activeIndex !== -1 && activeIndex >= visibleCount) {
+        visibleCount = activeIndex + 1;
+      }
+    }
+  });
 
   const showMore = () => {
     visibleCount = Math.min(visibleCount + SHOW_MORE_COUNT, projects.length);
