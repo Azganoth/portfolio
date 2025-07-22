@@ -3,8 +3,8 @@
 </script>
 
 <script lang="ts">
-  import Carousel from "$lib/components/Carousel.svelte";
   import Link from "$lib/components/Link.svelte";
+  import ProjectViewPreviews from "$lib/components/ProjectViewPreviews.svelte";
   import { PROJECT_LINK_BASE, TAG_META } from "$lib/constants";
   import { activeProject } from "$lib/store";
   import { clickaway } from "$lib/utils/clickaway";
@@ -33,7 +33,7 @@
 <dialog
   bind:this={dialog}
   id={PROJECT_DETAILS_ID}
-  class="tablet:max-w-[640px] desktop:max-w-[1300px] bg-void text-offwhite shadow-elevation desktop:h-[540px] starting:opacity-0 starting:scale-90 tablet:h-[calc(100dvh-8rem)] z-20 m-auto h-[calc(100dvh-4rem)] max-w-[320px] overflow-hidden rounded-2xl transition-all duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg"
+  class="tablet:max-w-[720px] desktop:max-w-[1200px] bg-void text-offwhite shadow-elevation starting:opacity-0 starting:scale-90 tablet:h-[calc(100dvh-8rem)] relative z-20 m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl transition-[opacity,scale] duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg"
   onclickaway={() => {
     open = false;
   }}
@@ -50,10 +50,8 @@
     >
       <Icon class="drop-shadow-contrast size-8" icon="fa6-solid:xmark" />
     </button>
-    <div
-      class="desktop:grid-cols-[720px_1fr] desktop:grid-rows-1 grid h-full grid-rows-[auto_1fr]"
-    >
-      <Carousel id="project" slides={$activeProject.previews} />
+    <div class="desktop:flex-row flex h-full flex-col">
+      <ProjectViewPreviews previews={$activeProject.previews} />
       <article
         class="desktop:px-8 desktop:pb-8 flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4"
       >
