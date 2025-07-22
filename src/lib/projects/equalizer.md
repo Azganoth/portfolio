@@ -24,5 +24,5 @@ O projeto foi construído com **HTML semântico** e estilizado com **CSS** puro.
 
 ### Desafios Técnicos e Aprendizados
 
-- **Posicionamento de Elementos Gráficos**: O principal desafio foi posicionar os elementos gráficos (padrões e imagens de fundo) de forma que se ajustassem corretamente em diferentes resoluções de tela sem quebrar o layout. Utilizei técnicas de posicionamento avançadas do CSS, como `position: absolute` e `transform`, em conjunto com `media queries`, para controlar o posicionamento exato dos elementos em cada breakpoint.
-- **Manutenção de um CSS Limpo com BEM**: Em um projeto com muitos elementos customizados, era crucial evitar que o CSS se tornasse confuso. A adoção da metodologia **BEM** resultou em classes com baixo acoplamento e alta coesão, tornando cada componente de estilo independente, fácil de entender e de manter.
+- **Posicionamento de Elementos Gráficos**: O principal desafio foi posicionar os elementos gráficos (padrões e imagens de fundo) de forma que se ajustassem corretamente em diferentes resoluções de tela sem quebrar o layout. Utilizei propriedades CSS como `position: absolute` e `transform`, em conjunto com `media queries`, para controlar o posicionamento exato dos elementos em cada breakpoint.
+- **Organização de CSS com BEM**: Em um projeto com muitos elementos customizados, era crucial evitar que o CSS se tornasse confuso. A adoção da metodologia **BEM** resultou em classes com baixo acoplamento e alta coesão, tornando cada componente de estilo independente, fácil de entender e de manter.

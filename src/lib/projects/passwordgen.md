@@ -11,7 +11,7 @@ tags:
   - CSS
 ---
 
-Esta é uma ferramenta frontend que permite aos usuários gerar senhas seguras e customizáveis. O projeto foi um exercício para construir uma aplicação reativa e leve, com foco total em boas práticas de HTML, CSS e, principalmente, acessibilidade.
+Esta é uma ferramenta que permite aos usuários gerar senhas seguras e customizáveis. O projeto foi um exercício para construir uma aplicação reativa e leve, com foco total em boas práticas de HTML, CSS e, principalmente, acessibilidade.
 
 ### Principais Funcionalidades
 
@@ -26,5 +26,5 @@ A aplicação foi desenvolvida com **Preact**, uma alternativa leve ao React, qu
 
 ### Desafios Técnicos e Aprendizados
 
-- **Desenvolvimento Reativo sem Ferramenta de Build**: O desafio principal foi utilizar uma biblioteca moderna como o Preact em um ambiente sem etapa de compilação. A solução foi usar módulos ES6 (`ESM`) nativos do navegador para importar o Preact de um CDN. Esse processo aprofundou meu entendimento sobre como os frameworks de componentes funcionam "por baixo dos panos" e como construir aplicações leves e com setup simplificado.
+- **Desenvolvimento Reativo sem Ferramenta de Build**: O desafio principal foi utilizar uma biblioteca moderna como o Preact em um ambiente sem etapa de compilação. A solução foi usar módulos ES6 (`ESM`) nativos do navegador para importar o Preact de um CDN e componentes entre si. Esse processo aprofundou meu entendimento sobre como os frameworks de componentes funcionam "por baixo dos panos" e como construir aplicações leves e com setup simplificado.
 - **Lógica de Geração de Senha Segura**: Desenvolvi um algoritmo em JavaScript que constrói dinamicamente o conjunto de caracteres possíveis com base nas opções selecionadas pelo usuário. A partir desse conjunto, a senha é gerada de forma aleatória, garantindo que todos os critérios definidos sejam atendidos.

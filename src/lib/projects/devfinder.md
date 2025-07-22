@@ -22,9 +22,9 @@ Este aplicativo permite a busca em tempo real de perfis de usuários no GitHub, 
 
 ### Ferramentas e Tecnologias
 
-A interface foi construída com **Vue.js 3** (utilizando a Composition API) e **TypeScript**, garantindo um desenvolvimento reativo, tipado e de fácil manutenção. Para a estilização, utilizei **TailwindCSS** pela sua agilidade e abordagem _utility-first_. O projeto foi configurado com **Vite** como ferramenta de build, proporcionando um ambiente de desenvolvimento rápido, e o deploy contínuo para o **GitHub Pages** foi automatizado com **GitHub Actions**.
+A interface foi construída com **Vue.js 3** (utilizando a Composition API) e **TypeScript**, garantindo um desenvolvimento reativo, tipado e de fácil manutenção. Para a estilização, utilizei **TailwindCSS** pela sua agilidade e abordagem utility-first. O projeto foi configurado com **Vite** como ferramenta de build, proporcionando um ambiente de desenvolvimento rápido, e o deploy contínuo para o **GitHub Pages** foi automatizado com **GitHub Actions**.
 
 ### Desafios Técnicos e Aprendizados
 
 - **Consumo de API Externa e Gerenciamento de Estado**: O desafio central foi gerenciar as chamadas à API REST do GitHub e refletir seus vários estados (carregando, sucesso, erro) na UI. Utilizei a Composition API do Vue para criar um estado reativo que era atualizado de forma síncrona com a resposta da API, resultando em uma interface dinâmica que fornece feedback claro ao usuário.
-- **Implementação de Troca de Tema com Persistência**: Um desafio interessante foi criar um seletor de tema reutilizável. A solução envolveu uma lógica que aplica classes CSS no elemento raiz do HTML e utiliza o `localStorage` do navegador para persistir a preferência do usuário entre as sessões, melhorando a experiência do usuário com um toque de personalização.
+- **Implementação de Troca de Tema com Persistência**: Um desafio interessante foi criar um seletor de tema reutilizável. A solução envolveu uma lógica que aplica classes CSS no elemento raiz do HTML e utiliza o `localStorage` do navegador para persistir a preferência do usuário entre as sessões, melhorando a experiência do usuário.

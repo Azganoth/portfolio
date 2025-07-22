@@ -18,7 +18,7 @@ Esta é uma implementação moderna do clássico Jogo da Velha, permitindo parti
 ### Principais Funcionalidades
 
 - **Dois Modos de Jogo**: O usuário pode escolher entre jogar contra outro jogador localmente ou desafiar o computador.
-- **IA com Algoritmo Minimax**: O oponente do computador joga de forma otimizada, calculando a melhor jogada possível para nunca perder, tornando as partidas desafiadoras.
+- **IA com Algoritmo Minimax**: O oponente do computador joga de forma otimizada, tornando as partidas desafiadoras.
 - **Persistência de Jogo**: O estado do jogo e os placares são salvos no `localStorage`, permitindo que o usuário feche e reabra o navegador sem perder seu progresso.
 - **Suporte a Múltiplos Idiomas**: A interface está disponível em português e inglês, com um sistema simples de localização.
 

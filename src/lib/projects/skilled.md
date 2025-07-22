@@ -10,17 +10,17 @@ tags:
   - TailwindCSS
 ---
 
-Esta é uma landing page moderna e responsiva para uma plataforma fictícia de cursos online. O projeto foi um exercício prático para construir uma interface complexa e visualmente rica, utilizando exclusivamente a abordagem _utility-first_ do TailwindCSS.
+Esta é uma landing page moderna e responsiva para uma plataforma fictícia de cursos online. O projeto foi um exercício prático para construir uma interface complexa e visualmente rica, utilizando exclusivamente a abordagem utility-first do TailwindCSS.
 
 ### Principais Funcionalidades
 
 - **Layout Multi-Grid**: A página apresenta um layout de grid complexo para os cards de cursos, que se adapta de forma fluida entre as resoluções de mobile, tablet e desktop.
-- **Hover States Interativos**: Botões e outros elementos interativos possuem _hover states_ que melhoram o feedback visual para o usuário.
+- **Hover States Interativos**: Botões e outros elementos interativos possuem hover states que melhoram o feedback visual para o usuário.
 - **Design Totalmente Responsivo**: Construído com uma abordagem mobile-first, o design garante uma experiência de usuário otimizada em todos os tamanhos de tela.
 
 ### Ferramentas e Tecnologias
 
-O projeto foi construído com **HTML semântico** para garantir uma estrutura clara e acessível. A estilização foi implementada inteiramente com **TailwindCSS**, aproveitando sua abordagem _utility-first_ para agilizar o desenvolvimento, diminuir a necessidade de CSS personalizado e garantir uma manutenção simplificada.
+O projeto foi construído com **HTML semântico** para garantir uma estrutura clara e acessível. A estilização foi implementada inteiramente com **TailwindCSS**, aproveitando sua abordagem utility-first para agilizar o desenvolvimento, diminuir a necessidade de CSS personalizado e garantir uma manutenção simplificada.
 
 ### Desafios Técnicos e Aprendizados
 

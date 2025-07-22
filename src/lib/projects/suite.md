@@ -24,5 +24,5 @@ O projeto foi construído utilizando apenas **HTML** e **CSS** puro. Para garant
 
 ### Desafios Técnicos e Aprendizados
 
-- **Implementação de Imagens Responsivas**: O desafio principal foi otimizar o carregamento de imagens em diferentes dispositivos. Utilizei a tag `<picture>` e os atributos `srcset` e `sizes` para permitir que o navegador escolhesse a imagem mais apropriada com base na largura da tela. Isso resultou em uma melhora significativa no tempo de carregamento em dispositivos móveis e uma otimização no consumo de banda.
+- **Implementação de Imagens Responsivas**: O desafio principal foi otimizar o carregamento de imagens em diferentes dispositivos. Utilizei a tag `<picture>` e os atributos `srcset` e `sizes` para permitir que o navegador escolhesse a imagem mais apropriada com base na largura da tela. Resultando em uma melhora significativa no tempo de carregamento em dispositivos móveis e uma otimização no consumo de banda.
 - **CSS Modular sem Pré-processador**: Outro desafio foi manter o CSS organizado e escalável sem as facilidades do SASS. Adotei a metodologia **BEM** de forma rigorosa, o que forçou uma estrutura de classes clara e modular. Como resultado, obtive um CSS de fácil manutenção e livre de conflitos, demonstrando a capacidade de criar arquiteturas de estilo robustas com ferramentas fundamentais.

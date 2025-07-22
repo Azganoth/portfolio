@@ -27,5 +27,5 @@ O projeto foi desenvolvido com **Next.js**, **React** e **TypeScript**, aproveit
 
 ### Desafios Técnicos e Aprendizados
 
-- **Construção de um Layout Masonry Responsivo**: O principal desafio técnico foi construir um componente de layout masonry do zero, que se ajusta dinamicamente a diferentes tamanhos de tela. A solução foi implementada com CSS puro e lógica em **TypeScript**, garantindo que as imagens se reorganizem de forma fluida sem o uso de bibliotecas externas.
+- **Construção de um Layout Masonry Responsivo**: O principal desafio técnico foi construir um componente de layout masonry do zero, que se ajusta dinamicamente a diferentes tamanhos de tela. A solução foi implementada com CSS e **TypeScript**, garantindo que as imagens se reorganizem de forma fluida sem o uso de bibliotecas externas.
 - **Otimização com Static Site Generation (SSG)**: Um objetivo chave era ter um site com carregamento quase instantâneo. Utilizei o SSG do Next.js para pré-renderizar todas as páginas da galeria durante o build, usando um arquivo `JSON` local como fonte de dados. Este processo aprofundou meu conhecimento em otimização de performance para aplicações web.
