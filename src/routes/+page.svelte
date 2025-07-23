@@ -130,7 +130,7 @@
         {@attach reveal()}
       >
         <enhanced:img
-          class="rounded-4xl mx-auto"
+          class="mx-auto max-w-[256px] rounded-full"
           src={profileImage}
           alt="Profile"
         />
