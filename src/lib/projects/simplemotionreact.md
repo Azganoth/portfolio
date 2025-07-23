@@ -2,7 +2,7 @@
 title: Simple Motion React
 category: Library
 year: 2024
-summary: Biblioteca de animação declarativa para React, inspirada no 'react-transition-group' e construída do zero.
+summary: Biblioteca de animação declarativa para React, inspirada na API de transição do Vue, com zero dependências.
 repository: https://github.com/Azganoth/simple-motion-react
 website: https://simple-motion-react.vercel.app/
 tags:
@@ -12,7 +12,7 @@ tags:
   - TypeScript
 ---
 
-Simple Motion React é uma biblioteca de animação leve e focada para orquestrar transições de componentes React com base no seu ciclo de vida. Inspirado pela API robusta e nativa de transições do `vue`, o projeto foi um exercício para construir do zero um sistema de transição com zero dependências, aprofundando nos conceitos internos do React.
+Simple Motion React é uma biblioteca de animação leve e focada para orquestrar transições de componentes React com base no seu ciclo de vida. Inspirado pela API robusta e nativa de transições do Vue, o projeto foi um exercício para construir do zero um sistema de transição com zero dependências, aprofundando nos conceitos internos do React.
 
 ### Principais Funcionalidades
 
