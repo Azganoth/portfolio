@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { dev } from "$app/environment";
   import ProjectView from "$lib/components/ProjectView.svelte";
   import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+  import { injectAnalytics } from "@vercel/analytics/sveltekit";
   import "../app.css";
 
   let { children } = $props();
@@ -10,6 +12,8 @@
     "Portfólio para apresentar as minhas habilidades e projetos.";
   const url = "https://azganoth.vercel.app/";
   const metaImage = "/meta_image.png";
+
+  injectAnalytics({ mode: dev ? "development" : "production" });
 </script>
 
 <svelte:head>
