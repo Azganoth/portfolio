@@ -108,25 +108,46 @@
     >
       Sobre mim
     </h2>
-    <div class="desktop:grid desktop:grid-cols-2 desktop:gap-16">
-      <div>
+    <div
+      class="desktop:flex-row flex flex-col items-center justify-center gap-16"
+    >
+      <div class="max-w-[60ch] space-y-5 text-center leading-7 text-white/75">
         <p>
-          Sou um desenvolvedor full-stack apaixonado por construir soluções
-          robustas e escaláveis. Com uma sólida formação em Ciência da
-          Computação, meu projeto mais recente, <strong>Nexus</strong>,
-          demonstra minha capacidade de desenvolver uma aplicação completa a
-          partir do zero, utilizando um monorepo com <strong>Next.js</strong> no
-          frontend e <strong>Node.js/Express</strong> com
-          <strong>Prisma</strong>
-          no backend. Tenho experiência em todo o ciclo de vida do desenvolvimento,
-          desde a concepção e arquitetura até a automação de CI/CD com
-          <strong>Docker</strong>
-          e <strong>GitHub Actions</strong>, e busco constantemente me desafiar
-          para entregar projetos modernos e acessíveis.
+          Olá! Sou Ademir, um desenvolvedor full-stack apaixonado por
+          transformar ideias em soluções digitais robustas, escaláveis e, acima
+          de tudo, acessíveis. Com uma sólida formação em Ciência da Computação,
+          minha jornada no desenvolvimento web é guiada pela curiosidade e pelo
+          desejo de dominar todo o ciclo de vida de um produto, desde a
+          concepção e arquitetura até a implantação em produção. Minha
+          experiência abrange tecnologias modernas como React, Next.js e Svelte
+          no front-end, e Node.js com Prisma e PostgreSQL no back-end, sempre
+          buscando a ferramenta certa para cada desafio.
+        </p>
+        <p>
+          O que realmente me move são os desafios técnicos que surgem ao longo
+          do caminho. Em projetos como o <Link
+            class="text-white"
+            href={`${PROJECT_LINK_BASE}nexus`}
+          >
+            Nexus
+          </Link>, por exemplo, dediquei-me a construir um sistema de
+          autenticação robusto e a otimizar a aplicação para garantir uma
+          experiência de usuário segura e estável. Não me contento em apenas
+          usar bibliotecas; busco entender como funcionam "por baixo dos panos",
+          o que me levou a criar a
+          <Link
+            class="text-white"
+            href={`${PROJECT_LINK_BASE}simplemotionreact`}
+          >
+            Simple Motion React
+          </Link>, minha própria biblioteca de animação , e a desenvolver
+          projetos com JavaScript puro para fortalecer meu conhecimento
+          fundamental. Estou sempre em busca de novos aprendizados e pronto para
+          colaborar na criação de tecnologia que tenha um impacto positivo.
         </p>
       </div>
       <div
-        class="max-tablet:hidden max-desktop:mt-12 reveal-fade duration-700"
+        class="max-tablet:hidden reveal-fade duration-700"
         {@attach reveal()}
       >
         <enhanced:img
