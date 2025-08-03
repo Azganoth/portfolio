@@ -39,11 +39,10 @@
 </script>
 
 <div class={["flex flex-col items-center", className]}>
-  <ul class="flex flex-wrap justify-center gap-12" role="region">
+  <ul class="flex flex-wrap justify-center gap-12">
     {#each displayedProjects as project, i (project.title)}
       <li
         class={[i < INITIAL_COUNT && "reveal-slide-up duration-700"]}
-        role="article"
         animate:flip={{ duration: 150 }}
         transition:fly={{ y: 30, duration: 500 }}
         {@attach reveal()}

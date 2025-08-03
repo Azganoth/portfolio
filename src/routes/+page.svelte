@@ -33,11 +33,9 @@
 
   const syncProjectView = () => {
     const hash = window.location.hash;
-
     if (hash.startsWith(PROJECT_LINK_BASE)) {
       const slug = hash.substring(PROJECT_LINK_BASE.length);
       const projectFromUrl = data.props.projects.find((p) => p.slug === slug);
-
       if (projectFromUrl) {
         $activeProject = projectFromUrl;
       }

@@ -3,6 +3,7 @@
 </script>
 
 <script lang="ts">
+  import { pushState } from "$app/navigation";
   import Link from "$lib/components/Link.svelte";
   import ProjectViewPreviews from "$lib/components/ProjectViewPreviews.svelte";
   import { PROJECT_LINK_BASE, TAG_META } from "$lib/constants";
@@ -15,16 +16,13 @@
   $effect(() => {
     if (open) {
       dialog?.showModal();
+      pushState(`${PROJECT_LINK_BASE}${$activeProject!.slug}`, {});
     } else {
       dialog?.close();
       // Reset the global store when the dialog is closed
       $activeProject = undefined;
       if (window.location.hash.startsWith(PROJECT_LINK_BASE)) {
-        history.pushState(
-          null,
-          "",
-          window.location.pathname + window.location.search,
-        );
+        pushState("", {});
       }
     }
   });
