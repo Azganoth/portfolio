@@ -3,10 +3,11 @@ import pt from "$lib/assets/locales/pt.json" with { type: "json" };
 import { DEFAULT_LOCALE } from "$lib/constants";
 import { derived, get, writable } from "svelte/store";
 
-const locales = { en, pt };
+export type Locale = "pt" | "en";
+export type LocaleStructure = typeof pt;
+const locales: Record<Locale, LocaleStructure> = { pt, en };
 
-export type Locale = keyof typeof locales;
-export type TranslationKey = keyof typeof en;
+export type TranslationKey = keyof LocaleStructure;
 
 export const locale = writable<Locale>(DEFAULT_LOCALE);
 
