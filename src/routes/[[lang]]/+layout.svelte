@@ -1,7 +1,7 @@
 <script lang="ts">
   import { dev } from "$app/environment";
   import ProjectView from "$lib/components/ProjectView.svelte";
-  import { locale, type Locale } from "$lib/i18n";
+  import { locale, t, type Locale } from "$lib/i18n";
   import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
   import { injectAnalytics } from "@vercel/analytics/sveltekit";
   import "../../app.css";
@@ -12,9 +12,8 @@
     $locale = data.lang as Locale;
   });
 
-  const title = "Azganoth - Desenvolvedor FullStack";
-  const description =
-    "Portfólio para apresentar as minhas habilidades e projetos.";
+  const title = $t("meta_title");
+  const description = $t("meta_description");
   const url = "https://azganoth.vercel.app/";
   const metaImage = "/meta_image.png";
 

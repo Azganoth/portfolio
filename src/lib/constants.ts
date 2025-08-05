@@ -8,15 +8,6 @@ export const CONTACT_INFO = {
   LinkedIn: "https://www.linkedin.com/in/ademirjferreirajunior/",
 };
 
-// --- SKILLS ---
-export const SKILLS = {
-  Linguagens: ["HTML", "CSS", "JavaScript", "TypeScript"],
-  Frontend: ["React", "Next", "Svelte", "SASS", "TailwindCSS"],
-  Backend: ["Node", "PostgreSQL", "Prisma"],
-  Testes: ["Jest", "Vitest", "Testing Library", "Storybook", "Postman"],
-  "DevOps & Ferramentas": ["Git", "GitHub", "Docker", "Figma"],
-};
-
 // --- PROJECTS ---
 export const PROJECTS_ORDER = [
   "azganoth",
