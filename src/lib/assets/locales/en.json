@@ -1,0 +1,6 @@
+{
+  "start_hello": "Hi, I am {name}",
+  "start_role": "FullStack Developer",
+  "common_language_openmenu": "Open language menu",
+  "common_language_change": "Change language to {language}"
+}

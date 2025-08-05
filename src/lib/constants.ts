@@ -1,3 +1,6 @@
+// NOTE: don't import anything, it will break vercel's middleware
+
+// --- CONTACT ---
 export const CONTACT_INFO = {
   Email: "mailto:ademirj.ferreirajunior@gmail.com",
   WhatsApp: "https://wa.me/48991984443",
@@ -5,6 +8,7 @@ export const CONTACT_INFO = {
   LinkedIn: "https://www.linkedin.com/in/ademirjferreirajunior/",
 };
 
+// --- SKILLS ---
 export const SKILLS = {
   Linguagens: ["HTML", "CSS", "JavaScript", "TypeScript"],
   Frontend: ["React", "Next", "Svelte", "SASS", "TailwindCSS"],
@@ -13,6 +17,7 @@ export const SKILLS = {
   "DevOps & Ferramentas": ["Git", "GitHub", "Docker", "Figma"],
 };
 
+// --- PROJECTS ---
 export const PROJECTS_ORDER = [
   "azganoth",
   "nexus",
@@ -27,6 +32,14 @@ export const PROJECTS_ORDER = [
   "suite",
   "equalizer",
 ];
+
+export const PROJECT_LINK_BASE = "#project-";
+
+// --- UI ---
+export const PREVIEW_SIZE = {
+  width: 720,
+  height: 540,
+};
 
 export const TAG_META: Record<string, { color: string; icon: string }> = {
   HTML: { color: "#E34F26", icon: "simple-icons:html5" },
@@ -57,9 +70,6 @@ export const TAG_META: Record<string, { color: string; icon: string }> = {
   SvelteKit: { color: "#FF3E00", icon: "simple-icons:svelte" },
 };
 
-export const PREVIEW_SIZE = {
-  width: 720,
-  height: 540,
-};
-
-export const PROJECT_LINK_BASE = "#project-";
+// --- i18n ---
+export const SUPPORTED_LOCALES: string[] = ["pt", "en"];
+export const DEFAULT_LOCALE = "pt";

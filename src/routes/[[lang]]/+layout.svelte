@@ -1,11 +1,16 @@
 <script lang="ts">
   import { dev } from "$app/environment";
   import ProjectView from "$lib/components/ProjectView.svelte";
+  import { locale, type Locale } from "$lib/i18n";
   import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
   import { injectAnalytics } from "@vercel/analytics/sveltekit";
-  import "../app.css";
+  import "../../app.css";
 
-  let { children } = $props();
+  let { data, children } = $props();
+
+  $effect(() => {
+    $locale = data.lang as Locale;
+  });
 
   const title = "Azganoth - Desenvolvedor FullStack";
   const description =

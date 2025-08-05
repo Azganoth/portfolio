@@ -1,15 +1,18 @@
 <script lang="ts">
   import profileImage from "$lib/assets/images/profile.webp?enhanced";
   import Header from "$lib/components/Header.svelte";
+  import LanguageSelector from "$lib/components/LanguageSelector.svelte";
   import Link from "$lib/components/Link.svelte";
   import ProjectList from "$lib/components/ProjectList.svelte";
   import Starfield from "$lib/components/Starfield.svelte";
+  import Translation from "$lib/components/Translation.svelte";
   import {
     CONTACT_INFO,
     PROJECT_LINK_BASE,
     SKILLS,
     TAG_META,
   } from "$lib/constants";
+  import { t } from "$lib/i18n";
   import { activeProject } from "$lib/store";
   import { reveal } from "$lib/utils/reveal";
   import Icon from "@iconify/svelte";
@@ -49,7 +52,12 @@
 
 <svelte:window on:hashchange={syncProjectView} />
 
+{#snippet name()}
+  <br /><span class="text-purple">Ademir</span>
+{/snippet}
+
 <Starfield />
+<LanguageSelector />
 <Header />
 <main>
   <section
@@ -61,13 +69,13 @@
         class="tablet:text-start font-orbitron desktop:text-4xl reveal-slide-down mb-4 text-center text-3xl font-semibold duration-700"
         {@attach reveal()}
       >
-        Oi, eu sou o <br /><span class="text-purple">Ademir</span>
+        <Translation key="start_hello" values={{ name }} />
       </h1>
       <h2
         class="text-gray tablet:text-start desktop:text-xl reveal-slide-up font-orbitron text-center text-lg font-semibold duration-700"
         {@attach reveal()}
       >
-        Desenvolvedor FullStack
+        {$t("start_role")}
       </h2>
       <ul
         class="max-tablet:top-[calc(100%+2rem)] max-tablet:center-x tablet:right-0 tablet:flex-col tablet:center-y desktop:fixed desktop:right-8 absolute z-10 flex justify-center gap-4"
