@@ -70,6 +70,15 @@ export const TAG_META: Record<string, { color: string; icon: string }> = {
   SvelteKit: { color: "#FF3E00", icon: "simple-icons:svelte" },
 };
 
+// IDs
+export const ID_START_SECTION = "start";
+export const ID_BIO_SECTION = "bio";
+export const ID_SKILLS_SECTION = "skills";
+export const ID_PROJECTS_SECTION = "projects";
+export const ID_CONTACT_SECTION = "contact";
+
+export const ID_MOBILE_MENU = "mobile-nav-menu";
+
 // --- i18n ---
 export const SUPPORTED_LOCALES: string[] = ["pt", "en"];
 export const DEFAULT_LOCALE = "pt";

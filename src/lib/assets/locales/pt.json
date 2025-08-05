@@ -2,5 +2,18 @@
   "start_hello": "Oi, eu sou o {name}",
   "start_role": "Desenvolvedor FullStack",
   "common_language_openmenu": "Abrir menu de linguagens",
-  "common_language_change": "Mudar idioma para {language}"
+  "common_language_change": "Mudar idioma para {language}",
+  "nav_start": "Início",
+  "nav_bio": "Sobre mim",
+  "nav_skills": "Habilidades",
+  "nav_projects": "Projetos",
+  "nav_contact": "Contato",
+  "a11y_go_to_home": "Ir para a página de início",
+  "a11y_go_to_bio": "Ir para a seção de biografia",
+  "a11y_go_to_skills": "Ir a seção de habilidades",
+  "a11y_go_to_projects": "Ir para a seção de projetos",
+  "a11y_go_to_contact": "Ir para a seção de contato",
+  "a11y_main_navigation": "Navegação principal",
+  "a11y_open_nav_menu": "Abrir menu de navegação",
+  "a11y_close_nav_menu": "Fechar menu de navegação"
 }
