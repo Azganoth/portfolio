@@ -69,6 +69,9 @@ export const ID_PROJECTS_SECTION = "projects";
 export const ID_CONTACT_SECTION = "contact";
 
 export const ID_MOBILE_MENU = "mobile-nav-menu";
+export const ID_PROJECT_DETAILS = "project-details-modal";
+export const ID_PROJECT_TITLE = "project-details-title";
+export const ID_IMAGE_GALLERY = "image-gallery-modal";
 
 // --- i18n ---
 export const SUPPORTED_LOCALES: string[] = ["pt", "en"];

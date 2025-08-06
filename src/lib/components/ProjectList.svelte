@@ -1,5 +1,6 @@
 <script lang="ts">
   import ProjectThumb from "$lib/components/ProjectThumb.svelte";
+  import { t } from "$lib/i18n";
   import type { Project } from "$lib/projects.schema";
   import { activeProject } from "$lib/store";
   import { reveal } from "$lib/utils/reveal";
@@ -19,7 +20,7 @@
 
   let visibleCount = $state(INITIAL_COUNT);
 
-  // Auto show focused project
+  // Show active project in the list
   $effect(() => {
     if ($activeProject) {
       const activeIndex = projects.findIndex(
@@ -55,10 +56,10 @@
   {#if visibleCount < projects.length}
     <button
       type="button"
-      class="bg-teal hover:bg-teal/90 text-void mt-16 rounded-full px-5 py-2 font-bold transition-all"
+      class="bg-teal push-on-active hover:bg-teal/90 text-void mt-16 rounded-full px-5 py-2 font-bold transition-all"
       onclick={showMore}
     >
-      Mostrar mais
+      {$t("projects_show_more")}
     </button>
   {/if}
 </div>

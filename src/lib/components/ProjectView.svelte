@@ -1,28 +1,46 @@
-<script lang="ts" module>
-  export const PROJECT_DETAILS_ID = "project-modal";
-</script>
-
 <script lang="ts">
   import { pushState } from "$app/navigation";
   import Link from "$lib/components/Link.svelte";
+  import { composeProjectLinkId } from "$lib/components/ProjectThumb.svelte";
   import ProjectViewPreviews from "$lib/components/ProjectViewPreviews.svelte";
-  import { PROJECT_LINK_BASE, TAG_META } from "$lib/constants";
+  import {
+    ID_PROJECT_DETAILS,
+    ID_PROJECT_TITLE,
+    PROJECT_LINK_BASE,
+    TAG_META,
+  } from "$lib/constants";
+  import { t } from "$lib/i18n";
   import { activeProject } from "$lib/store";
   import { clickaway } from "$lib/utils/clickaway";
   import Icon from "@iconify/svelte";
 
   let open = $derived(!!$activeProject);
   let dialog = $state<HTMLDialogElement>();
+
   $effect(() => {
     if (open) {
       dialog?.showModal();
-      pushState(`${PROJECT_LINK_BASE}${$activeProject!.slug}`, {});
+      try {
+        pushState(`${PROJECT_LINK_BASE}${$activeProject!.slug}`, {});
+      } catch {
+        // Ignore 'router not initialized' error when loading from a deeplink
+      }
     } else {
       dialog?.close();
-      // Reset the global store when the dialog is closed
+      // Reset the global store and url on close
+      const projectSlug = $activeProject?.slug;
       $activeProject = undefined;
       if (window.location.hash.startsWith(PROJECT_LINK_BASE)) {
         pushState("", {});
+      }
+
+      // Focus project thumb link on close
+      if (projectSlug) {
+        document
+          .querySelector(`#${composeProjectLinkId(projectSlug)}`)
+          ?.scrollIntoView({
+            block: "center",
+          });
       }
     }
   });
@@ -30,11 +48,15 @@
 
 <dialog
   bind:this={dialog}
-  id={PROJECT_DETAILS_ID}
+  id={ID_PROJECT_DETAILS}
   class="tablet:max-w-[720px] desktop:max-w-[1200px] bg-void text-offwhite shadow-elevation starting:opacity-0 starting:scale-90 tablet:h-[calc(100dvh-8rem)] z-20 m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl transition-[opacity,scale] duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg"
+  onclose={() => {
+    open = false;
+  }}
   onclickaway={() => {
     open = false;
   }}
+  aria-labelledby={ID_PROJECT_TITLE}
   {@attach clickaway({ ignoreSelf: true })}
 >
   {#if $activeProject}
@@ -44,7 +66,7 @@
       onclick={() => {
         open = false;
       }}
-      aria-label="Fechar detalhes do projeto"
+      aria-label={$t("a11y_close_project_details")}
     >
       <Icon class="drop-shadow-contrast size-8" icon="fa6-solid:xmark" />
     </button>
@@ -54,6 +76,7 @@
         class="desktop:px-8 desktop:pb-8 flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4"
       >
         <h3
+          id={ID_PROJECT_TITLE}
           class="font-orbitron desktop:text-start text-center text-xl font-bold"
         >
           {$activeProject.title}
@@ -67,11 +90,11 @@
         <div class="tablet:flex-row tablet:justify-between flex flex-col gap-4">
           <ul
             class="bg-stardust flex flex-wrap justify-center gap-2 self-center rounded-xl p-2"
-            aria-label="Tecnologias usadas"
+            aria-label={$t("a11y_used_technology")}
           >
             {#each $activeProject.tags as tag (tag)}
               {@const { icon, color } = TAG_META[tag]}
-              <li title={tag}>
+              <li aria-label={tag}>
                 <Icon class="size-6" {icon} {color} />
               </li>
             {/each}
@@ -81,7 +104,7 @@
               <Link
                 class="text-gray flex items-center gap-2"
                 href={$activeProject.repository}
-                aria-label="Abrir repositório do projeto"
+                aria-label={$t("a11y_go_to_repository")}
                 newTab
               >
                 Código
@@ -92,7 +115,7 @@
               <Link
                 class="text-gray flex items-center gap-2"
                 href={$activeProject.website}
-                aria-label="Abrir o site em uma nova aba"
+                aria-label={$t("a11y_go_to_website")}
                 newTab
               >
                 Visitar
