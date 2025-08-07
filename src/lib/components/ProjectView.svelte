@@ -107,7 +107,7 @@
                 aria-label={$t("a11y_go_to_repository")}
                 newTab
               >
-                Código
+                {$t("projects_code")}
                 <Icon icon="fa6-solid:code" />
               </Link>
             {/if}
@@ -118,7 +118,7 @@
                 aria-label={$t("a11y_go_to_website")}
                 newTab
               >
-                Visitar
+                {$t("projects_visit")}
                 <Icon icon="fa6-solid:arrow-up-right-from-square" />
               </Link>
             {/if}
