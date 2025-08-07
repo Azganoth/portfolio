@@ -8,6 +8,7 @@ website: https://simple-motion-react.vercel.app/
 tags:
   - React
   - Jest
+  - Testing Library
   - Storybook
   - TypeScript
 ---

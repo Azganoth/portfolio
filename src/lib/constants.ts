@@ -12,8 +12,8 @@ export const CONTACT_INFO = {
 export const PROJECTS_ORDER = [
   "azganoth",
   "nexus",
-  "galleria",
   "simplemotionreact",
+  "galleria",
   "devfinder",
   "tictactoe",
   "passwordgen",
