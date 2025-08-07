@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ID_IMAGE_GALLERY } from "$lib/constants";
   import { t } from "$lib/i18n";
-  import { clickaway } from "$lib/utils/clickaway";
+  import { clickaway } from "$lib/utils/clickaway.svelte";
   import { focustrap } from "$lib/utils/focustrap.svelte";
   import type { ProjectPreview } from "$lib/utils/previews";
   import Icon from "@iconify/svelte";

@@ -19,7 +19,7 @@ export const reveal = (options: RevealOptions = {}): Attachment => {
           }
         });
       },
-      { rootMargin, threshold },
+      { rootMargin, threshold: Number(threshold) },
     );
 
     observer.observe(node);

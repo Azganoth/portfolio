@@ -2,7 +2,7 @@
   import Link from "$lib/components/Link.svelte";
   import { DEFAULT_LOCALE } from "$lib/constants";
   import { locale, t, type Locale } from "$lib/i18n";
-  import { clickaway } from "$lib/utils/clickaway";
+  import { clickaway } from "$lib/utils/clickaway.svelte";
   import Icon from "@iconify/svelte";
 
   let languages: [label: string, value: Locale][] = [

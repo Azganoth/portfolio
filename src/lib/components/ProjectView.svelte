@@ -11,7 +11,7 @@
   } from "$lib/constants";
   import { t } from "$lib/i18n";
   import { activeProject } from "$lib/store";
-  import { clickaway } from "$lib/utils/clickaway";
+  import { clickaway } from "$lib/utils/clickaway.svelte";
   import Icon from "@iconify/svelte";
 
   let open = $derived(!!$activeProject);

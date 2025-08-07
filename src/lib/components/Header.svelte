@@ -9,8 +9,8 @@
     ID_SKILLS_SECTION,
   } from "$lib/constants";
   import { t } from "$lib/i18n";
-  import { clickaway } from "$lib/utils/clickaway";
-  import { reveal } from "$lib/utils/reveal";
+  import { clickaway } from "$lib/utils/clickaway.svelte";
+  import { reveal } from "$lib/utils/reveal.svelte";
   import Icon from "@iconify/svelte";
   import { MediaQuery } from "svelte/reactivity";
 

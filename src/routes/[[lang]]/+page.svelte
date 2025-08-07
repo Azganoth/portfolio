@@ -18,7 +18,7 @@
   } from "$lib/constants";
   import { t } from "$lib/i18n";
   import { activeProject } from "$lib/store";
-  import { reveal } from "$lib/utils/reveal";
+  import { reveal } from "$lib/utils/reveal.svelte";
   import Icon from "@iconify/svelte";
   import { onMount } from "svelte";
   import type { PageProps } from "./$types";
