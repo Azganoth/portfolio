@@ -76,6 +76,24 @@
 {#snippet name()}
   <br /><span class="text-purple">Ademir</span>
 {/snippet}
+{#snippet nexus()}
+  <Link
+    class="text-white"
+    href={`${PROJECT_LINK_BASE}nexus`}
+    onclick={(e) => e.stopPropagation()}
+  >
+    Nexus
+  </Link>
+{/snippet}
+{#snippet simplemotionreact()}
+  <Link
+    class="text-white"
+    href={`${PROJECT_LINK_BASE}simplemotionreact`}
+    onclick={(e) => e.stopPropagation()}
+  >
+    Simple Motion React
+  </Link>
+{/snippet}
 
 <Starfield />
 <LanguageSelector />
@@ -131,59 +149,29 @@
       "tablet:before:-skew-y-2 tablet:before:inset-y-8 desktop:before:-skew-y-1 before:bg-stardust before:shadow-elevation before:-skew-y-4 before:-z-1 before:absolute before:inset-x-0 before:inset-y-5 before:content-['']",
     ]}
   >
-    <h2
-      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold"
-    >
+    <h2 class="font-orbitron mb-8 text-center text-2xl font-bold">
       {$t("bio_title")}
     </h2>
-    <div
-      class="desktop:flex-row flex flex-col items-center justify-center gap-16"
-    >
-      <div class="max-w-[60ch] space-y-5 text-center leading-7 text-white/75">
-        <p>
-          Olá! Sou Ademir, um desenvolvedor full-stack apaixonado por
-          transformar ideias em soluções digitais robustas, escaláveis e, acima
-          de tudo, acessíveis. Com uma sólida formação em Ciência da Computação,
-          minha jornada no desenvolvimento web é guiada pela curiosidade e pelo
-          desejo de dominar todo o ciclo de vida de um produto, desde a
-          concepção e arquitetura até a implantação em produção. Minha
-          experiência abrange tecnologias modernas como React, Next.js e Svelte
-          no front-end, e Node.js com Prisma e PostgreSQL no back-end, sempre
-          buscando a ferramenta certa para cada desafio.
-        </p>
-        <p>
-          O que realmente me move são os desafios técnicos que surgem ao longo
-          do caminho. Em projetos como o <Link
-            class="text-white"
-            href={`${PROJECT_LINK_BASE}nexus`}
-          >
-            Nexus
-          </Link>, por exemplo, dediquei-me a construir um sistema de
-          autenticação robusto e a otimizar a aplicação para garantir uma
-          experiência de usuário segura e estável. Não me contento em apenas
-          usar bibliotecas; busco entender como funcionam "por baixo dos panos",
-          o que me levou a criar a
-          <Link
-            class="text-white"
-            href={`${PROJECT_LINK_BASE}simplemotionreact`}
-          >
-            Simple Motion React
-          </Link>, minha própria biblioteca de animação , e a desenvolver
-          projetos com JavaScript puro para fortalecer meu conhecimento
-          fundamental. Estou sempre em busca de novos aprendizados e pronto para
-          colaborar na criação de tecnologia que tenha um impacto positivo.
-        </p>
-      </div>
+    <div class="mx-auto max-w-[80ch] space-y-5 leading-7 text-white/90">
       <div
-        class="max-tablet:hidden reveal-fade duration-700"
+        class="max-tablet:hidden reveal-fade float-end ml-4 duration-700"
         {@attach reveal()}
       >
         <enhanced:img
-          class="mx-auto max-w-[256px] rounded-full"
+          class="shadow-elevation mx-auto max-w-[256px] rounded-full"
           src={profileImage}
           alt={$t("a11y_avatar_alt")}
         />
       </div>
+      <p>
+        {$t("bio_description_1")}
+      </p>
+      <p>
+        <Translation key="bio_description_2" values={{ nexus }} />
+      </p>
+      <p>
+        <Translation key="bio_description_3" values={{ simplemotionreact }} />
+      </p>
     </div>
   </section>
   <section
