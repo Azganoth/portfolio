@@ -16,7 +16,7 @@
     PROJECT_LINK_BASE,
     TAG_META,
   } from "$lib/constants";
-  import { t } from "$lib/i18n";
+  import { locale, t } from "$lib/i18n";
   import { activeProject } from "$lib/store";
   import { reveal } from "$lib/utils/reveal.svelte";
   import Icon from "@iconify/svelte";
@@ -59,7 +59,9 @@
     const hash = window.location.hash;
     if (hash.startsWith(PROJECT_LINK_BASE)) {
       const slug = hash.substring(PROJECT_LINK_BASE.length);
-      const projectFromUrl = data.props.projects.find((p) => p.slug === slug);
+      const projectFromUrl = data.props.projects[$locale].find(
+        (p) => p.slug === slug,
+      );
       if (projectFromUrl) {
         $activeProject = projectFromUrl;
       }
@@ -221,7 +223,7 @@
     >
       {$t("projects_title")}
     </h2>
-    <ProjectList class="pb-32 pt-8" projects={data.props.projects} />
+    <ProjectList class="pb-32 pt-8" projects={data.props.projects[$locale]} />
   </section>
   <section
     id={ID_CONTACT_SECTION}
