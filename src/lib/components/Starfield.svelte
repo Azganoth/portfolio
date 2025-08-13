@@ -58,7 +58,7 @@
           layer.stars.push({
             x: random() * w,
             y: random() * document.body.scrollHeight, // Stars are positioned along the whole page
-            r: random() * layer.size,
+            r: layer.size,
             pulseOffset: random() * Math.PI * 2, // Randomize starting pulse strength
             pulseSpeed: 0.0005 + random() * 0.001, // Randomize speed (0.0005 - 0.0015, used against milliseconds)
           });
