@@ -40,7 +40,7 @@
 </script>
 
 <div class={["flex flex-col items-center", className]}>
-  <ul class="flex flex-wrap justify-center gap-12">
+  <ul class="desktop:gap-8 flex flex-wrap justify-center gap-16">
     {#each displayedProjects as project, i (project.title)}
       <li
         class={[i < INITIAL_COUNT && "reveal-slide-up duration-700"]}

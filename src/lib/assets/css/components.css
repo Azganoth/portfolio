@@ -1,4 +1,8 @@
 @layer components {
+  .section {
+    @apply tablet:px-12 tablet:py-16 desktop:p-16 mx-auto max-w-[1440px] px-6 py-8;
+  }
+
   .push-on-active {
     @apply transition-[scale] duration-300 ease-out motion-safe:active:scale-90;
   }

@@ -103,7 +103,7 @@
 <main>
   <section
     id={ID_START_SECTION}
-    class="tablet:px-12 tablet:py-16 desktop:p-16 relative flex min-h-svh items-center px-6 py-8"
+    class="section relative flex min-h-svh items-center"
   >
     <div class="relative w-full">
       <h1
@@ -147,8 +147,8 @@
   <section
     id={ID_BIO_SECTION}
     class={[
-      "tablet:px-12 tablet:py-16 desktop:p-16 relative px-6 py-8",
-      "tablet:before:-skew-y-2 tablet:before:inset-y-8 desktop:before:-skew-y-1 before:bg-stardust before:shadow-elevation before:-skew-y-4 before:-z-1 before:absolute before:inset-x-0 before:inset-y-5 before:content-['']",
+      "section relative",
+      "tablet:before:-skew-y-2 tablet:before:inset-y-8 desktop:before:-skew-y-1 before:bg-stardust before:shadow-elevation before:-skew-y-4 before:center-x before:-z-1 before:absolute before:inset-y-5 before:w-dvw before:content-['']",
     ]}
   >
     <h2 class="font-orbitron mb-8 text-center text-2xl font-bold">
@@ -160,7 +160,7 @@
         {@attach reveal()}
       >
         <enhanced:img
-          class="shadow-elevation mx-auto max-w-[256px] rounded-full"
+          class="mx-auto max-w-[256px] rounded-full"
           src={profileImage}
           alt={$t("a11y_avatar_alt")}
         />
@@ -176,12 +176,9 @@
       </p>
     </div>
   </section>
-  <section
-    id={ID_SKILLS_SECTION}
-    class="tablet:px-12 tablet:py-16 desktop:p-16 px-6 py-8"
-  >
+  <section id={ID_SKILLS_SECTION} class="section">
     <h2
-      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold"
+      class="font-orbitron desktop:text-start desktop:mb-16 mb-8 text-center text-2xl font-bold"
     >
       {$t("skills_title")}
     </h2>
@@ -191,7 +188,7 @@
       {#each categorizedSkills as [category, skills] (category)}
         <div class="max-w-96">
           <h3
-            class="after:bg-yellow after:center-x relative mb-8 text-center font-semibold after:absolute after:-bottom-2 after:h-0.5 after:w-8 after:content-['']"
+            class="after:bg-yellow after:center-x relative mb-12 text-center text-lg font-semibold after:absolute after:-bottom-4 after:h-1 after:w-8 after:rounded-full after:content-['']"
           >
             {category}
           </h3>
@@ -199,11 +196,11 @@
             {#each skills as skill (skill)}
               {@const { icon, color } = TAG_META[skill]}
               <li
-                class="flex items-center gap-2 rounded-lg bg-white/5 py-2 pl-2 pr-3 text-sm transition-all hover:scale-110"
+                class="flex items-center gap-2 rounded-lg bg-white/5 p-3 text-sm transition-all hover:scale-110"
               >
                 <Icon class="size-5" {icon} {color} />
                 <span
-                  class="font-jetbrains-mono cursor-default font-bold duration-300 ease-out"
+                  class="font-jetbrains-mono text-offwhite/90 cursor-default font-bold tracking-wide duration-300 ease-out"
                 >
                   {skill}
                 </span>
@@ -214,10 +211,7 @@
       {/each}
     </div>
   </section>
-  <section
-    id={ID_PROJECTS_SECTION}
-    class="tablet:px-12 tablet:py-16 desktop:p-16 px-6 py-8"
-  >
+  <section id={ID_PROJECTS_SECTION} class="section">
     <h2
       class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold"
     >
@@ -225,10 +219,7 @@
     </h2>
     <ProjectList class="pb-32 pt-8" projects={data.props.projects[$locale]} />
   </section>
-  <section
-    id={ID_CONTACT_SECTION}
-    class="tablet:px-12 tablet:py-16 desktop:p-16 relative min-h-dvh px-6 pb-44 pt-8"
-  >
+  <section id={ID_CONTACT_SECTION} class="section relative min-h-svh pb-44">
     <h2
       class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold"
     >
