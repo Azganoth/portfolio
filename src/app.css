@@ -13,6 +13,10 @@
 @variant in-view (&.is-visible);
 
 @layer base {
+  body {
+    @apply overflow-x-hidden;
+  }
+
   code {
     @apply font-jetbrains-mono;
   }
