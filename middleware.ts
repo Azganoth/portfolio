@@ -1,5 +1,5 @@
 import { next, rewrite } from "@vercel/functions";
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "./src/lib/constants";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "./src/lib/shared/constants";
 
 const parseCookies = (cookieHeader: string | null) => {
   const cookies: Record<string, string> = {};
@@ -23,8 +23,7 @@ export function middleware(request: Request) {
   // Prioritize cookie
   if (langCookie && SUPPORTED_LOCALES.includes(langCookie)) {
     lang = langCookie;
-  }
-  // Check browser preference
+  } // Check browser preference
   else if (langHeader) {
     const langBrowser = langHeader.split(",")[0].split("-")[0];
     if (SUPPORTED_LOCALES.includes(langBrowser)) {
