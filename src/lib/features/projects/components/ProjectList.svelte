@@ -1,9 +1,9 @@
 <script lang="ts">
-  import ProjectThumb from "$lib/components/ProjectThumb.svelte";
-  import { t } from "$lib/i18n";
-  import type { Project } from "$lib/projects.schema";
-  import { activeProject } from "$lib/store";
-  import { reveal } from "$lib/utils/reveal.svelte";
+  import { t } from "$lib/features/i18n/translation";
+  import ProjectThumb from "$lib/features/projects/components/ProjectThumb.svelte";
+  import type { Project } from "$lib/features/projects/schema";
+  import { selectedProject } from "$lib/features/projects/store";
+  import { reveal } from "$lib/shared/attachments/reveal.svelte";
   import { flip } from "svelte/animate";
   import type { ClassValue } from "svelte/elements";
   import { fly } from "svelte/transition";
@@ -22,9 +22,9 @@
 
   // Show active project in the list
   $effect(() => {
-    if ($activeProject) {
+    if ($selectedProject) {
       const activeIndex = projects.findIndex(
-        (p) => p.slug === $activeProject.slug,
+        (p) => p.slug === $selectedProject.slug,
       );
       if (activeIndex !== -1 && activeIndex >= visibleCount) {
         visibleCount = activeIndex + 1;

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Link from "$lib/components/Link.svelte";
-  import { DEFAULT_LOCALE } from "$lib/constants";
-  import { locale, t, type Locale } from "$lib/i18n";
-  import { clickaway } from "$lib/utils/clickaway.svelte";
+  import { locale, t, type Locale } from "$lib/features/i18n/translation";
+  import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
+  import Link from "$lib/shared/components/Link.svelte";
+  import { DEFAULT_LOCALE } from "$lib/shared/constants";
   import Icon from "@iconify/svelte";
 
   let languages: [label: string, value: Locale][] = [

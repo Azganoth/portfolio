@@ -1,8 +1,8 @@
-import { PROJECTS_ORDER, SUPPORTED_LOCALES } from "$lib/constants";
-import type { Locale } from "$lib/i18n";
-import { projectSchema, type Project } from "$lib/projects.schema";
-import { composePreviews } from "$lib/utils/previews";
-import { compareOrderBy } from "$lib/utils/sort";
+import type { Locale } from "$lib/features/i18n/translation";
+import { type Project, projectSchema } from "$lib/features/projects/schema";
+import { PROJECTS_ORDER, SUPPORTED_LOCALES } from "$lib/shared/constants";
+import { composePreviews } from "$lib/shared/utils/previews";
+import { compareOrderBy } from "$lib/shared/utils/sort";
 import matter from "gray-matter";
 import { marked } from "marked";
 import fs from "node:fs/promises";
@@ -40,7 +40,7 @@ const processProjects = async (dirPath: string) => {
   return projects;
 };
 
-const projectsDir = path.join(process.cwd(), "src/lib/projects");
+const projectsDir = path.join(process.cwd(), "src/lib/features/projects/data");
 
 const getAllProjects = async () =>
   Object.fromEntries(

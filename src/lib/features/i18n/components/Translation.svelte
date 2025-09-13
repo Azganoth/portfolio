@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { t, type TranslationKey } from "$lib/i18n";
+  import { t, type TranslationKey } from "$lib/features/i18n/translation";
   import type { Snippet } from "svelte";
 
   interface TranslationProps {

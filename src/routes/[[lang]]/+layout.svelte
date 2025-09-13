@@ -1,7 +1,7 @@
 <script lang="ts">
   import { dev } from "$app/environment";
-  import ProjectView from "$lib/components/ProjectView.svelte";
-  import { locale, t, type Locale } from "$lib/i18n";
+  import { locale, t, type Locale } from "$lib/features/i18n/translation";
+  import ProjectView from "$lib/features/projects/components/ProjectView.svelte";
   import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
   import { injectAnalytics } from "@vercel/analytics/sveltekit";
   import "../../app.css";

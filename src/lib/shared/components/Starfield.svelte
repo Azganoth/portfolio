@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mulberry32 } from "$lib/utils/random";
+  import { mulberry32 } from "$lib/shared/utils/random";
   import { onMount } from "svelte";
 
   const random = mulberry32(1);

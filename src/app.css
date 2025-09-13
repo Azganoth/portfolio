@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@import "$lib/assets/css/fonts.css";
-@import "$lib/assets/css/theme.css";
-@import "$lib/assets/css/components.css";
-@import "$lib/assets/css/utilities.css";
+@import "$lib/shared/styles/fonts.css";
+@import "$lib/shared/styles/theme.css";
+@import "$lib/shared/styles/components.css";
+@import "$lib/shared/styles/utilities.css";
 
 @plugin "@tailwindcss/typography";
 

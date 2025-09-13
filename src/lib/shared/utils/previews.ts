@@ -1,4 +1,4 @@
-import { PREVIEW_SIZE } from "$lib/constants";
+import { PREVIEW_SIZE } from "$lib/shared/constants";
 
 export interface ProjectPreview {
   url: string;

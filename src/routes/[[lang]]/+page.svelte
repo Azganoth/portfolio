@@ -1,11 +1,13 @@
 <script lang="ts">
-  import profileImage from "$lib/assets/images/profile.webp?enhanced";
-  import Header from "$lib/components/Header.svelte";
-  import LanguageSelector from "$lib/components/LanguageSelector.svelte";
-  import Link from "$lib/components/Link.svelte";
-  import ProjectList from "$lib/components/ProjectList.svelte";
-  import Starfield from "$lib/components/Starfield.svelte";
-  import Translation from "$lib/components/Translation.svelte";
+  import Translation from "$lib/features/i18n/components/Translation.svelte";
+  import { locale, t } from "$lib/features/i18n/translation";
+  import ProjectList from "$lib/features/projects/components/ProjectList.svelte";
+  import { selectedProject } from "$lib/features/projects/store";
+  import { reveal } from "$lib/shared/attachments/reveal.svelte";
+  import Header from "$lib/shared/components/Header.svelte";
+  import LanguageSelector from "$lib/features/i18n/components/LanguageSelector.svelte";
+  import Link from "$lib/shared/components/Link.svelte";
+  import Starfield from "$lib/shared/components/Starfield.svelte";
   import {
     CONTACT_INFO,
     ID_BIO_SECTION,
@@ -15,10 +17,8 @@
     ID_START_SECTION,
     PROJECT_LINK_BASE,
     TAG_META,
-  } from "$lib/constants";
-  import { locale, t } from "$lib/i18n";
-  import { activeProject } from "$lib/store";
-  import { reveal } from "$lib/utils/reveal.svelte";
+  } from "$lib/shared/constants";
+  import profileImage from "$lib/shared/images/profile.webp?enhanced";
   import Icon from "@iconify/svelte";
   import { onMount } from "svelte";
   import type { PageProps } from "./$types";
@@ -63,10 +63,10 @@
         (p) => p.slug === slug,
       );
       if (projectFromUrl) {
-        $activeProject = projectFromUrl;
+        $selectedProject = projectFromUrl;
       }
     } else {
-      $activeProject = undefined;
+      $selectedProject = undefined;
     }
   };
 

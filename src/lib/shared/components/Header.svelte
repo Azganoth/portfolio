@@ -1,16 +1,16 @@
 <script lang="ts">
-  import Link from "$lib/components/Link.svelte";
-  import Logo from "$lib/components/Logo.svelte";
+  import { t } from "$lib/features/i18n/translation";
+  import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
+  import { reveal } from "$lib/shared/attachments/reveal.svelte";
+  import Link from "$lib/shared/components/Link.svelte";
+  import Logo from "$lib/shared/components/Logo.svelte";
   import {
     ID_BIO_SECTION,
     ID_CONTACT_SECTION,
     ID_MOBILE_MENU,
     ID_PROJECTS_SECTION,
     ID_SKILLS_SECTION,
-  } from "$lib/constants";
-  import { t } from "$lib/i18n";
-  import { clickaway } from "$lib/utils/clickaway.svelte";
-  import { reveal } from "$lib/utils/reveal.svelte";
+  } from "$lib/shared/constants";
   import Icon from "@iconify/svelte";
   import { MediaQuery } from "svelte/reactivity";
 

@@ -3,11 +3,11 @@
 </script>
 
 <script lang="ts">
-  import Link from "$lib/components/Link.svelte";
-  import { ID_PROJECT_DETAILS, PROJECT_LINK_BASE } from "$lib/constants";
-  import { t } from "$lib/i18n";
-  import type { Project } from "$lib/projects.schema";
-  import { activeProject } from "$lib/store";
+  import { t } from "$lib/features/i18n/translation";
+  import type { Project } from "$lib/features/projects/schema";
+  import { selectedProject } from "$lib/features/projects/store";
+  import Link from "$lib/shared/components/Link.svelte";
+  import { ID_PROJECT_DETAILS, PROJECT_LINK_BASE } from "$lib/shared/constants";
   import type { ClassValue } from "svelte/elements";
 
   interface Props {
@@ -22,7 +22,7 @@
   const summaryId = `project-summary-${project.slug}`;
 
   function openProject() {
-    $activeProject = project;
+    $selectedProject = project;
   }
 
   function handleclick(event: MouseEvent) {

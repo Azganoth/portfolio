@@ -1,6 +1,6 @@
-import en from "$lib/assets/locales/en.json" with { type: "json" };
-import pt from "$lib/assets/locales/pt.json" with { type: "json" };
-import { DEFAULT_LOCALE } from "$lib/constants";
+import en from "$lib/features/i18n/locales/en.json" with { type: "json" };
+import pt from "$lib/features/i18n/locales/pt.json" with { type: "json" };
+import { DEFAULT_LOCALE } from "$lib/shared/constants";
 import { derived, get, writable } from "svelte/store";
 
 export type Locale = "pt" | "en";

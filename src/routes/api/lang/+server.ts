@@ -1,4 +1,4 @@
-import { type Locale } from "$lib/i18n";
+import { type Locale } from "$lib/features/i18n/translation";
 import { json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 

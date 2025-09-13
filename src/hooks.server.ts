@@ -1,5 +1,5 @@
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "$lib/constants";
-import { type Locale } from "$lib/i18n";
+import { type Locale } from "$lib/features/i18n/translation";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "$lib/shared/constants";
 import type { Handle } from "@sveltejs/kit";
 
 export const handle: Handle = async ({ event, resolve }) => {

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { ProjectPreview } from "./utils/previews";
+import type { ProjectPreview } from "../../shared/utils/previews";
 
 export const projectSchema = z.object({
   title: z.string(),

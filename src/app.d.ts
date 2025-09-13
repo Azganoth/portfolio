@@ -1,5 +1,5 @@
-import type { Locale } from "$lib/i18n";
-import type { Project } from "$lib/projects.schema";
+import type { Locale } from "$lib/features/i18n/translation";
+import type { Project } from "$lib/features/projects/schema";
 import type { ClickawayEventDetail } from "@utils/clickaway.svelte";
 import "svelte/elements";
 

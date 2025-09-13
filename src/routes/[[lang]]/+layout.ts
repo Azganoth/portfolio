@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "$lib/constants";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "$lib/shared/constants";
 import { error } from "@sveltejs/kit";
 import type { LayoutLoad } from "./$types";
 
