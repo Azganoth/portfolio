@@ -2,7 +2,7 @@
 title: Nexus
 category: Web App
 year: 2025
-summary: A full-stack link aggregation platform with a management dashboard, secure authentication, and continuous deployment.
+summary: A link aggregation platform with a management dashboard, secure authentication, and continuous deployment.
 repository: https://github.com/Azganoth/nexus
 website: https://nexusapp.fly.dev
 tags:

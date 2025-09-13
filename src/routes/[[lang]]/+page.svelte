@@ -41,16 +41,19 @@
   const categorizedSkills = $derived<[category: string, skills: string[]][]>([
     [
       $t("skills_category_languages"),
-      ["HTML", "CSS", "JavaScript", "TypeScript"],
+      ["HTML", "CSS", "JavaScript", "TypeScript", "Python"],
     ],
     [
       $t("skills_category_frontend"),
-      ["React", "Next", "Svelte", "SASS", "TailwindCSS"],
+      ["React", "Next", "Vue", "Svelte", "SASS", "TailwindCSS"],
     ],
-    [$t("skills_category_backend"), ["Node", "PostgreSQL", "Prisma"]],
+    [
+      $t("skills_category_backend"),
+      ["Node", "PostgreSQL", "MongoDB", "Prisma", "Mongoose", "GraphQL"],
+    ],
     [
       $t("skills_category_tests"),
-      ["Jest", "Vitest", "Testing Library", "Storybook", "Postman"],
+      ["Jest", "Vitest", "Testing Library", "Cypress", "Storybook", "Postman"],
     ],
     [$t("skills_category_devops"), ["Git", "GitHub", "Docker", "Figma"]],
   ]);
