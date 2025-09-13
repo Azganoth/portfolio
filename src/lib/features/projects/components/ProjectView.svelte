@@ -83,7 +83,7 @@
         <article
           class="prose prose-invert prose-neutral mb-auto h-full max-w-none overflow-auto [&_img]:m-0"
         >
-          {#if $selectedProject.previews.length > 1}
+          {#if $selectedProject.previews.length > 0}
             <div
               class="tablet:float-end tablet:mx-8 tablet:mb-0 mx-auto mb-8 w-fit"
             >
