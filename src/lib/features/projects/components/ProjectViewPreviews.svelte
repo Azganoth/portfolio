@@ -1,9 +1,9 @@
 <script lang="ts">
   import { t } from "$lib/features/i18n/translation";
+  import type { ProjectPreview } from "$lib/features/projects/schema";
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
   import { focustrap } from "$lib/shared/attachments/focustrap.svelte";
   import { ID_IMAGE_GALLERY } from "$lib/shared/constants";
-  import type { ProjectPreview } from "$lib/shared/utils/previews";
   import Icon from "@iconify/svelte";
 
   interface Props {
@@ -55,35 +55,33 @@
 
 <svelte:window onkeydown={handleKeydown} />
 
-<div class="desktop:pt-0 m-auto px-3 pt-3">
-  <button
-    bind:this={galleryOpenButton}
-    type="button"
-    class="border-stardust hover:scale-102 group relative max-w-[400px] overflow-hidden rounded-2xl border transition-all"
-    onclick={() => {
-      galleryOpen = true;
-    }}
-    aria-label={$t("a11y_open_image_gallery")}
-    aria-haspopup="dialog"
-    aria-controls={ID_IMAGE_GALLERY}
+<button
+  bind:this={galleryOpenButton}
+  type="button"
+  class="border-stardust hover:scale-102 group relative max-w-[400px] overflow-hidden rounded-2xl border transition-all"
+  onclick={() => {
+    galleryOpen = true;
+  }}
+  aria-label={$t("a11y_open_image_gallery")}
+  aria-haspopup="dialog"
+  aria-controls={ID_IMAGE_GALLERY}
+>
+  <img
+    class="aspect-4/3 max-h-52 w-auto object-cover"
+    src={previews[0].url}
+    width={previews[0].width}
+    height={previews[0].height}
+    alt=""
+  />
+  <div
+    class="absolute bottom-1 right-1 flex items-center gap-2 rounded-xl bg-black/50 p-2"
   >
-    <img
-      class="aspect-4/3 object-cover"
-      src={previews[0].url}
-      width={previews[0].width}
-      height={previews[0].height}
-      alt=""
-    />
-    <div
-      class="absolute bottom-1 right-1 flex items-center gap-2 rounded-xl bg-black/50 p-2"
-    >
-      <span class="font-jetbrains-mono text-xs font-bold">
-        1/{previews.length}
-      </span>
-      <Icon class="size-4" icon="fa6-solid:expand" />
-    </div>
-  </button>
-</div>
+    <span class="font-jetbrains-mono text-xs font-bold">
+      1/{previews.length}
+    </span>
+    <Icon class="size-4" icon="fa6-solid:expand" />
+  </div>
+</button>
 
 <div
   id={ID_IMAGE_GALLERY}
@@ -117,7 +115,7 @@
       <Icon class="size-8" icon="fa6-solid:xmark" />
     </button>
 
-    <div class="tablet:hidden h-full space-y-4 overflow-y-auto">
+    <div class="tablet:hidden space-y-16! h-full overflow-y-auto">
       {#each previews as slide (slide.url)}
         <img class="rounded-2xl" src={slide.url} alt="" />
       {/each}
@@ -131,7 +129,7 @@
       {#each previews as slide, i (slide.url)}
         <figure
           id={`slide-${i}`}
-          class="snap-center"
+          class="select-none snap-center"
           bind:this={scrollerSlides[i]}
           role="region"
         >

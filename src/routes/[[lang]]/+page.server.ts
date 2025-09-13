@@ -1,13 +1,43 @@
 import type { Locale } from "$lib/features/i18n/translation";
-import { type Project, projectSchema } from "$lib/features/projects/schema";
-import { PROJECTS_ORDER, SUPPORTED_LOCALES } from "$lib/shared/constants";
-import { composePreviews } from "$lib/shared/utils/previews";
+import {
+  type Project,
+  type ProjectPreview,
+  projectSchema,
+} from "$lib/features/projects/schema";
+import {
+  PREVIEW_SIZE,
+  PROJECTS_ORDER,
+  SUPPORTED_LOCALES,
+} from "$lib/shared/constants";
 import { compareOrderBy } from "$lib/shared/utils/sort";
 import matter from "gray-matter";
 import { marked } from "marked";
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { PageServerLoad } from "./$types";
+
+const composePreviews = async (slug: string) => {
+  const previews: ProjectPreview[] = [];
+  const staticPath = path.join(process.cwd(), "static");
+
+  for (let i = 0; true; i++) {
+    const imagePath = `/images/preview/${slug}_${i}.webp`;
+    const filePath = path.join(staticPath, imagePath);
+
+    try {
+      await fs.access(filePath, fs.constants.F_OK);
+      previews.push({
+        url: imagePath,
+        width: PREVIEW_SIZE.width,
+        height: PREVIEW_SIZE.height,
+      });
+    } catch {
+      break;
+    }
+  }
+
+  return previews;
+};
 
 const processProjects = async (dirPath: string) => {
   const filenames = await fs.readdir(dirPath);
@@ -29,7 +59,7 @@ const processProjects = async (dirPath: string) => {
           slug,
           ...frontmatter,
           description,
-          previews: composePreviews(slug),
+          previews: await composePreviews(slug),
         };
       }),
   );

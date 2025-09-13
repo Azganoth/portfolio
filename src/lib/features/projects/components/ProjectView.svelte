@@ -70,8 +70,7 @@
     >
       <Icon class="drop-shadow-contrast size-8" icon="fa6-solid:xmark" />
     </button>
-    <div class="desktop:flex-row flex h-full flex-col">
-      <ProjectViewPreviews previews={$selectedProject.previews} />
+    <div class="flex h-full flex-col">
       <article
         class="desktop:px-8 desktop:pb-8 flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4"
       >
@@ -82,8 +81,15 @@
           {$selectedProject.title}
         </h3>
         <article
-          class="prose prose-invert prose-neutral mb-auto h-full overflow-auto"
+          class="prose prose-invert prose-neutral mb-auto h-full max-w-none overflow-auto [&_img]:m-0"
         >
+          {#if $selectedProject.previews.length > 1}
+            <div
+              class="tablet:float-end tablet:mx-8 tablet:mb-0 mx-auto mb-8 w-fit"
+            >
+              <ProjectViewPreviews previews={$selectedProject.previews} />
+            </div>
+          {/if}
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html $selectedProject.description}
         </article>

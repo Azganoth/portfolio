@@ -1,5 +1,4 @@
 import { z } from "zod";
-import type { ProjectPreview } from "../../shared/utils/previews";
 
 export const projectSchema = z.object({
   title: z.string(),
@@ -16,3 +15,9 @@ export type Project = z.infer<typeof projectSchema> & {
   description: string;
   previews: ProjectPreview[];
 };
+
+export interface ProjectPreview {
+  url: string;
+  width: number;
+  height: number;
+}

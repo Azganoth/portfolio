@@ -8,6 +8,7 @@
   import { selectedProject } from "$lib/features/projects/store";
   import Link from "$lib/shared/components/Link.svelte";
   import { ID_PROJECT_DETAILS, PROJECT_LINK_BASE } from "$lib/shared/constants";
+  import Icon from "@iconify/svelte";
   import type { ClassValue } from "svelte/elements";
 
   interface Props {
@@ -48,18 +49,27 @@
   aria-describedby={summaryId}
 >
   <div
-    class="bg-stardust group-focus-within:outline-purple border-stardust relative overflow-hidden rounded-2xl border outline-4 outline-transparent"
+    class="bg-stardust group-focus-within:outline-purple border-stardust relative grid place-items-center overflow-hidden rounded-2xl border outline-4 outline-transparent"
   >
-    <!-- Decorative image since title is already announced -->
-    <img
-      class="transition-all duration-300 ease-out group-focus-within:scale-110 group-hover:scale-110"
-      role="presentation"
-      src={project.previews[0].url}
-      width={project.previews[0].width}
-      height={project.previews[0].height}
-      loading="lazy"
-      alt=""
-    />
+    {#if project.previews.length > 0}
+      <!-- Decorative image since title is already announced -->
+      <img
+        class="transition-all duration-300 ease-out group-focus-within:scale-110 group-hover:scale-110"
+        role="presentation"
+        src={project.previews[0].url}
+        width={project.previews[0].width}
+        height={project.previews[0].height}
+        loading="lazy"
+        alt=""
+      />
+    {:else}
+      <div class="aspect-[4/3] w-full">
+        <Icon
+          icon="fa6-solid:code"
+          class="text-gray/50 relative left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+    {/if}
     <div
       class="bg-stardust font-jetbrains-mono absolute bottom-1 left-1 rounded-xl px-2 py-1 text-sm font-semibold tracking-wide"
     >
