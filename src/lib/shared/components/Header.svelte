@@ -99,7 +99,7 @@
           {#each links as { label, link, description } (link)}
             <li>
               <Link
-                class="font-orbitron block text-center text-lg"
+                class="font-orbitron block text-center text-lg tracking-wide"
                 href={link}
                 onclick={() => {
                   open = false;
@@ -120,7 +120,7 @@
         {#each links as { label, link, description } (link)}
           <li>
             <Link
-              class="font-orbitron hover:text-purple before:font-jetbrains-mono block whitespace-nowrap before:pr-1 before:text-white/15 before:content-['/']"
+              class="font-orbitron hover:text-purple before:font-jetbrains-mono block whitespace-nowrap tracking-wide before:pr-1 before:text-white/15 before:content-['/']"
               variant="none"
               href={link}
               aria-label={description}

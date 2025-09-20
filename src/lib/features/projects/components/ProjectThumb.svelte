@@ -77,7 +77,10 @@
     </div>
   </div>
   <div class="max-tablet:px-4 tablet:pb-4 flex h-full flex-col gap-4">
-    <h3 id={titleId} class="font-orbitron text-center text-xl font-bold">
+    <h3
+      id={titleId}
+      class="font-orbitron text-center text-xl font-bold tracking-wide"
+    >
       <Link
         id={linkId}
         class="hover:text-teal focus:text-purple active:text-purple after:z-1 outline-none after:absolute after:inset-0 after:content-['']"

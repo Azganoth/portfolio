@@ -60,29 +60,29 @@
   {@attach clickaway({ ignoreSelf: true })}
 >
   {#if $selectedProject}
-    <button
-      class="push-on-active hover:text-purple absolute right-4 top-4 z-10"
-      type="button"
-      onclick={() => {
-        open = false;
-      }}
-      aria-label={$t("a11y_close_project_details")}
-    >
-      <Icon class="drop-shadow-contrast size-8" icon="fa6-solid:xmark" />
-    </button>
     <div class="flex h-full flex-col">
       <article
         class="desktop:px-8 desktop:pb-8 flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4"
       >
-        <h3
-          id={ID_PROJECT_TITLE}
-          class="font-orbitron desktop:text-start text-center text-xl font-bold"
-        >
-          {$selectedProject.title}
-        </h3>
-        <article
-          class="prose prose-invert prose-neutral mb-auto h-full max-w-none overflow-auto [&_img]:m-0"
-        >
+        <header>
+          <h1
+            id={ID_PROJECT_TITLE}
+            class="font-orbitron desktop:text-start text-center text-xl font-bold tracking-wide"
+          >
+            {$selectedProject.title}
+          </h1>
+          <button
+            class="push-on-active hover:text-purple absolute right-4 top-4 z-10"
+            type="button"
+            onclick={() => {
+              open = false;
+            }}
+            aria-label={$t("a11y_close_project_details")}
+          >
+            <Icon class="drop-shadow-contrast size-8" icon="fa6-solid:xmark" />
+          </button>
+        </header>
+        <article class="markdown mb-auto h-full max-w-none overflow-auto pr-4">
           {#if $selectedProject.previews.length > 0}
             <div
               class="tablet:float-end tablet:mx-8 tablet:mb-0 mx-auto mb-8 w-fit"

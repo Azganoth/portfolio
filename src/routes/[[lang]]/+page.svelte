@@ -1,11 +1,11 @@
 <script lang="ts">
+  import LanguageSelector from "$lib/features/i18n/components/LanguageSelector.svelte";
   import Translation from "$lib/features/i18n/components/Translation.svelte";
   import { locale, t } from "$lib/features/i18n/translation";
   import ProjectList from "$lib/features/projects/components/ProjectList.svelte";
   import { selectedProject } from "$lib/features/projects/store";
   import { reveal } from "$lib/shared/attachments/reveal.svelte";
   import Header from "$lib/shared/components/Header.svelte";
-  import LanguageSelector from "$lib/features/i18n/components/LanguageSelector.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import Starfield from "$lib/shared/components/Starfield.svelte";
   import {
@@ -53,9 +53,9 @@
     ],
     [
       $t("skills_category_tests"),
-      ["Jest", "Vitest", "Testing Library", "Cypress", "Storybook", "Postman"],
+      ["Vitest", "Jest", "Testing Library", "Storybook"],
     ],
-    [$t("skills_category_devops"), ["Git", "GitHub", "Docker", "Figma"]],
+    [$t("skills_category_devops"), ["Git", "Docker", "Figma"]],
   ]);
 
   const syncProjectView = () => {
@@ -110,13 +110,13 @@
   >
     <div class="relative w-full">
       <h1
-        class="tablet:text-start font-orbitron desktop:text-4xl reveal-slide-down mb-4 text-center text-3xl font-semibold duration-700"
+        class="tablet:text-start font-orbitron desktop:text-4xl reveal-slide-down mb-4 text-center text-3xl font-semibold tracking-wide duration-700"
         {@attach reveal()}
       >
         <Translation key="start_hello" values={{ name }} />
       </h1>
       <h2
-        class="text-gray tablet:text-start desktop:text-xl reveal-slide-up font-orbitron text-center text-lg font-semibold duration-700"
+        class="text-gray tablet:text-start desktop:text-xl reveal-slide-up font-orbitron text-center text-lg font-semibold tracking-wide duration-700"
         {@attach reveal()}
       >
         {$t("start_role")}
@@ -154,7 +154,7 @@
       "tablet:before:-skew-y-2 tablet:before:inset-y-8 desktop:before:-skew-y-1 before:bg-stardust before:shadow-elevation before:-skew-y-4 before:center-x before:-z-1 before:absolute before:inset-y-5 before:w-dvw before:content-['']",
     ]}
   >
-    <h2 class="font-orbitron mb-8 text-center text-2xl font-bold">
+    <h2 class="font-orbitron mb-8 text-center text-2xl font-bold tracking-wide">
       {$t("bio_title")}
     </h2>
     <div class="mx-auto max-w-[80ch] space-y-5 leading-7 text-white/90">
@@ -181,7 +181,7 @@
   </section>
   <section id={ID_SKILLS_SECTION} class="section">
     <h2
-      class="font-orbitron desktop:text-start desktop:mb-16 mb-8 text-center text-2xl font-bold"
+      class="font-orbitron desktop:text-start desktop:mb-16 mb-8 text-center text-2xl font-bold tracking-wide"
     >
       {$t("skills_title")}
     </h2>
@@ -198,15 +198,17 @@
           <ul class="flex flex-wrap justify-center gap-4">
             {#each skills as skill (skill)}
               {@const { icon, color } = TAG_META[skill]}
-              <li
-                class="flex items-center gap-2 rounded-lg bg-white/5 p-3 text-sm transition-all hover:scale-110"
-              >
-                <Icon class="size-5" {icon} {color} />
-                <span
-                  class="font-jetbrains-mono text-offwhite/90 cursor-default font-bold tracking-wide duration-300 ease-out"
+              <li class="reveal-slide-up duration-700" {@attach reveal()}>
+                <div
+                  class="flex items-center gap-2 rounded-lg bg-white/5 p-3 text-sm transition-all hover:scale-110"
                 >
-                  {skill}
-                </span>
+                  <Icon class="size-5" {icon} {color} />
+                  <span
+                    class="font-jetbrains-mono text-offwhite/90 cursor-default font-bold tracking-wide duration-300 ease-out"
+                  >
+                    {skill}
+                  </span>
+                </div>
               </li>
             {/each}
           </ul>
@@ -216,7 +218,7 @@
   </section>
   <section id={ID_PROJECTS_SECTION} class="section">
     <h2
-      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold"
+      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold tracking-wide"
     >
       {$t("projects_title")}
     </h2>
@@ -224,7 +226,7 @@
   </section>
   <section id={ID_CONTACT_SECTION} class="section relative min-h-svh pb-44">
     <h2
-      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold"
+      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold tracking-wide"
     >
       {$t("contact_title")}
     </h2>
