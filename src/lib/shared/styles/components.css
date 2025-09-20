@@ -1,9 +1,9 @@
 @layer components {
   .section {
-    @apply tablet:px-12 tablet:py-16 desktop:p-16 mx-auto max-w-[1440px] px-6 py-8;
+    @apply mx-auto max-w-[1440px] px-6 py-8 md:px-12 md:py-16 xl:p-16;
   }
 
-  .push-on-active {
+  .tap-push {
     @apply transition-[scale] duration-300 ease-out motion-safe:active:scale-90;
   }
 
@@ -28,7 +28,7 @@
   }
 
   .markdown {
-    @apply text-offwhite font-inter text-md leading-relaxed;
+    @apply text-foreground font-inter text-md leading-relaxed;
 
     h1,
     h2,
@@ -50,19 +50,19 @@
     }
 
     p {
-      @apply text-gray mb-4;
+      @apply text-muted-foreground mb-4;
     }
 
     a {
-      @apply text-purple transition-colors hover:underline;
+      @apply text-primary transition-colors hover:underline;
     }
 
     ul {
-      @apply text-gray marker:text-purple mb-4 ml-6 list-outside list-disc;
+      @apply text-muted-foreground marker:text-primary mb-4 ml-6 list-outside list-disc;
     }
 
     ol {
-      @apply text-gray marker:text-purple mb-4 ml-6 list-outside list-decimal;
+      @apply text-muted-foreground marker:text-primary mb-4 ml-6 list-outside list-decimal;
     }
 
     li {
@@ -74,19 +74,19 @@
     }
 
     code {
-      @apply font-jetbrains-mono bg-stardust text-teal rounded px-1 py-0.5 text-sm;
+      @apply font-jetbrains-mono bg-muted text-secondary rounded px-1 py-0.5 text-sm;
     }
 
     pre {
-      @apply bg-stardust mb-4 overflow-x-auto rounded-xl p-4;
+      @apply bg-muted mb-4 overflow-x-auto rounded-xl p-4;
     }
 
     pre code {
-      @apply text-offwhite bg-transparent p-0;
+      @apply text-foreground bg-transparent p-0;
     }
 
     blockquote {
-      @apply border-purple text-gray my-4 border-l-4 pl-4 italic;
+      @apply border-primary text-muted-foreground my-4 border-l-4 pl-4 italic;
     }
 
     img {
@@ -94,23 +94,23 @@
     }
 
     hr {
-      @apply border-stardust my-6;
+      @apply border-muted my-6;
     }
 
     table {
-      @apply border-stardust my-6 w-full table-auto border-collapse text-left;
+      @apply border-muted my-6 w-full table-auto border-collapse text-left;
     }
 
     thead {
-      @apply bg-stardust;
+      @apply bg-muted;
     }
 
     th {
-      @apply font-orbitron border-stardust border-b px-4 py-2 font-medium tracking-wide text-white first:rounded-tl-xl last:rounded-tr-xl;
+      @apply font-orbitron border-muted border-b px-4 py-2 font-medium tracking-wide text-white first:rounded-tl-xl last:rounded-tr-xl;
     }
 
     td {
-      @apply border-stardust text-gray border-b px-4 py-2;
+      @apply border-muted text-muted-foreground border-b px-4 py-2;
     }
   }
 }

@@ -40,7 +40,7 @@
 </script>
 
 <div class={["flex flex-col items-center", className]}>
-  <ul class="desktop:gap-8 flex flex-wrap justify-center gap-16">
+  <ul class="flex flex-wrap justify-center gap-16 xl:gap-8">
     {#each displayedProjects as project, i (project.title)}
       <li
         class={[i < INITIAL_COUNT && "reveal-slide-up duration-700"]}
@@ -56,7 +56,7 @@
   {#if visibleCount < projects.length}
     <button
       type="button"
-      class="bg-teal push-on-active hover:bg-teal/90 text-void mt-16 rounded-full px-5 py-2 font-bold transition-all"
+      class="bg-secondary tap-push hover:bg-secondary/90 text-background mt-16 rounded-full px-5 py-2 font-bold transition-all"
       onclick={showMore}
     >
       {$t("projects_show_more")}

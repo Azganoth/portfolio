@@ -18,7 +18,7 @@
 <a
   class={[
     "font-bold transition-all",
-    variant === "default" && "font-inter hover:text-teal",
+    variant === "default" && "font-inter hover:text-secondary",
     className,
   ]}
   {...newTab && { target: "_blank" }}

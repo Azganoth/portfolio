@@ -42,14 +42,14 @@
 
 <article
   class={[
-    "focus:outline-hidden tablet:max-w-[640px] tablet:grid-cols-[320px_1fr] tablet:grid-rows-[240px] tablet:gap-6 group relative grid max-w-[320px] items-center gap-2 transition-all focus-within:-translate-y-1 hover:-translate-y-1",
+    "focus:outline-hidden group relative grid max-w-[320px] items-center gap-2 transition-all focus-within:-translate-y-1 hover:-translate-y-1 md:max-w-[640px] md:grid-cols-[320px_1fr] md:grid-rows-[240px] md:gap-6",
     className,
   ]}
   aria-labelledby={titleId}
   aria-describedby={summaryId}
 >
   <div
-    class="bg-stardust group-focus-within:outline-purple border-stardust relative grid place-items-center overflow-hidden rounded-2xl border outline-4 outline-transparent"
+    class="bg-muted group-focus-within:outline-primary border-muted relative grid place-items-center overflow-hidden rounded-2xl border outline-4 outline-transparent"
   >
     {#if project.previews.length > 0}
       <!-- Decorative image since title is already announced -->
@@ -66,24 +66,24 @@
       <div class="aspect-[4/3] w-full">
         <Icon
           icon="fa6-solid:code"
-          class="text-gray/50 relative left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2"
+          class="text-muted-foreground/50 relative left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2"
         />
       </div>
     {/if}
     <div
-      class="bg-stardust font-jetbrains-mono absolute bottom-1 left-1 rounded-xl px-2 py-1 text-sm font-semibold tracking-wide"
+      class="bg-muted font-jetbrains-mono absolute bottom-1 left-1 rounded-xl px-2 py-1 text-sm font-semibold tracking-wide"
     >
       {project.year}
     </div>
   </div>
-  <div class="max-tablet:px-4 tablet:pb-4 flex h-full flex-col gap-4">
+  <div class="flex h-full flex-col gap-4 max-md:px-4 md:pb-4">
     <h3
       id={titleId}
       class="font-orbitron text-center text-xl font-bold tracking-wide"
     >
       <Link
         id={linkId}
-        class="hover:text-teal focus:text-purple active:text-purple after:z-1 outline-none after:absolute after:inset-0 after:content-['']"
+        class="hover:text-secondary focus:text-primary active:text-primary after:z-1 outline-none after:absolute after:inset-0 after:content-['']"
         href={`${PROJECT_LINK_BASE}${project.slug}`}
         variant="none"
         aria-haspopup="dialog"
@@ -95,13 +95,13 @@
         {project.title}
       </Link>
     </h3>
-    <p id={summaryId} class="text-gray line-clamp-3 max-h-[4.5rem]">
+    <p id={summaryId} class="text-muted-foreground line-clamp-3 max-h-[4.5rem]">
       {project.summary}
     </p>
     <ul class="mt-auto flex flex-wrap justify-center gap-2">
       {#each project.tags as tag (tag)}
         <li
-          class="bg-stardust font-jetbrains-mono text-gray rounded-2xl px-2 font-bold"
+          class="bg-muted font-jetbrains-mono text-muted-foreground rounded-2xl px-2 font-bold"
         >
           {tag}
         </li>

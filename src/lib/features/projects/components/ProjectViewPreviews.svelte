@@ -58,7 +58,7 @@
 <button
   bind:this={galleryOpenButton}
   type="button"
-  class="border-stardust hover:scale-102 group relative max-w-[400px] overflow-hidden rounded-2xl border transition-all"
+  class="border-muted hover:scale-102 group relative max-w-[400px] overflow-hidden rounded-2xl border transition-all"
   onclick={() => {
     galleryOpen = true;
   }}
@@ -95,7 +95,7 @@
   {@attach focustrap({ active: galleryOpen })}
 >
   <div
-    class="max-tablet:h-full relative m-auto p-4 py-12"
+    class="relative m-auto p-4 py-12 max-md:h-full"
     onclickaway={() => {
       galleryOpen = false;
     }}
@@ -105,7 +105,7 @@
     })}
   >
     <button
-      class="push-on-active hover:text-purple tablet:top-2 absolute right-4 top-4 transition-colors"
+      class="tap-push hover:text-primary absolute right-4 top-4 transition-colors md:top-2"
       type="button"
       onclick={() => {
         galleryOpen = false;
@@ -115,14 +115,14 @@
       <Icon class="size-8" icon="fa6-solid:xmark" />
     </button>
 
-    <div class="tablet:hidden space-y-16! h-full overflow-y-auto">
+    <div class="space-y-16! h-full overflow-y-auto md:hidden">
       {#each previews as slide (slide.url)}
         <img class="rounded-2xl" src={slide.url} alt="" />
       {/each}
     </div>
     <div
       bind:this={scroller}
-      class="max-tablet:hidden grid max-w-[720px] snap-x snap-mandatory auto-cols-[100%] grid-flow-col items-center gap-4 overflow-x-auto overscroll-contain"
+      class="grid max-w-[720px] snap-x snap-mandatory auto-cols-[100%] grid-flow-col items-center gap-4 overflow-x-auto overscroll-contain max-md:hidden"
       aria-roledescription="carousel"
       aria-live="polite"
     >
@@ -138,9 +138,9 @@
       {/each}
     </div>
 
-    <div class="max-tablet:hidden center-x absolute bottom-0 flex items-center">
+    <div class="center-x absolute bottom-0 flex items-center max-md:hidden">
       <button
-        class="push-on-active hover:text-purple transition-colors"
+        class="tap-push hover:text-primary transition-colors"
         onclick={() =>
           goToSlide((currentSlide - 1 + previews.length) % previews.length)}
         aria-label={$t("a11y_previous_image")}
@@ -150,7 +150,7 @@
       <div class="flex" role="tablist">
         {#each { length: previews.length }, i}
           <button
-            class="push-on-active hover:text-purple block transition-colors"
+            class="tap-push hover:text-primary block transition-colors"
             type="button"
             role="tab"
             onclick={() => goToSlide(i)}
@@ -168,7 +168,7 @@
         {/each}
       </div>
       <button
-        class="push-on-active hover:text-purple transition-colors"
+        class="tap-push hover:text-primary transition-colors"
         onclick={() => goToSlide((currentSlide + 1) % previews.length)}
         aria-label={$t("a11y_next_image")}
       >

@@ -49,7 +49,7 @@
 <dialog
   bind:this={dialog}
   id={ID_PROJECT_DETAILS}
-  class="tablet:max-w-[720px] desktop:max-w-[1200px] bg-void text-offwhite shadow-elevation starting:opacity-0 starting:scale-90 tablet:h-[calc(100dvh-8rem)] z-20 m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl transition-[opacity,scale] duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg"
+  class="bg-background text-foreground shadow-elevation starting:opacity-0 starting:scale-90 z-20 m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl transition-[opacity,scale] duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg md:h-[calc(100dvh-8rem)] md:max-w-[720px] xl:max-w-[1200px]"
   onclose={() => {
     open = false;
   }}
@@ -62,17 +62,17 @@
   {#if $selectedProject}
     <div class="flex h-full flex-col">
       <article
-        class="desktop:px-8 desktop:pb-8 flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4"
+        class="flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4 xl:px-8 xl:pb-8"
       >
         <header>
           <h1
             id={ID_PROJECT_TITLE}
-            class="font-orbitron desktop:text-start text-center text-xl font-bold tracking-wide"
+            class="font-orbitron text-center text-xl font-bold tracking-wide xl:text-start"
           >
             {$selectedProject.title}
           </h1>
           <button
-            class="push-on-active hover:text-purple absolute right-4 top-4 z-10"
+            class="tap-push hover:text-primary absolute right-4 top-4 z-10"
             type="button"
             onclick={() => {
               open = false;
@@ -84,18 +84,16 @@
         </header>
         <article class="markdown mb-auto h-full max-w-none overflow-auto pr-4">
           {#if $selectedProject.previews.length > 0}
-            <div
-              class="tablet:float-end tablet:mx-8 tablet:mb-0 mx-auto mb-8 w-fit"
-            >
+            <div class="mx-auto mb-8 w-fit md:float-end md:mx-8 md:mb-0">
               <ProjectViewPreviews previews={$selectedProject.previews} />
             </div>
           {/if}
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html $selectedProject.description}
         </article>
-        <div class="tablet:flex-row tablet:justify-between flex flex-col gap-4">
+        <div class="flex flex-col gap-4 md:flex-row md:justify-between">
           <ul
-            class="bg-stardust flex flex-wrap justify-center gap-2 self-center rounded-xl p-2"
+            class="bg-muted flex flex-wrap justify-center gap-2 self-center rounded-xl p-2"
             aria-label={$t("a11y_used_technology")}
           >
             {#each $selectedProject.tags as tag (tag)}
@@ -108,7 +106,7 @@
           <div class="flex justify-center gap-4">
             {#if $selectedProject.repository}
               <Link
-                class="text-gray flex items-center gap-2"
+                class="text-muted-foreground flex items-center gap-2"
                 href={$selectedProject.repository}
                 aria-label={$t("a11y_go_to_repository")}
                 newTab
@@ -119,7 +117,7 @@
             {/if}
             {#if $selectedProject.website}
               <Link
-                class="text-gray flex items-center gap-2"
+                class="text-muted-foreground flex items-center gap-2"
                 href={$selectedProject.website}
                 aria-label={$t("a11y_go_to_website")}
                 newTab

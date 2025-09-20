@@ -79,7 +79,7 @@
 <svelte:window onhashchange={syncProjectView} />
 
 {#snippet name()}
-  <br /><span class="text-purple">Ademir</span>
+  <br /><span class="text-primary">Ademir</span>
 {/snippet}
 {#snippet nexus()}
   <Link
@@ -110,19 +110,19 @@
   >
     <div class="relative w-full">
       <h1
-        class="tablet:text-start font-orbitron desktop:text-4xl reveal-slide-down mb-4 text-center text-3xl font-semibold tracking-wide duration-700"
+        class="font-orbitron reveal-slide-down mb-4 text-center text-3xl font-semibold tracking-wide duration-700 md:text-start xl:text-4xl"
         {@attach reveal()}
       >
         <Translation key="start_hello" values={{ name }} />
       </h1>
       <h2
-        class="text-gray tablet:text-start desktop:text-xl reveal-slide-up font-orbitron text-center text-lg font-semibold tracking-wide duration-700"
+        class="text-muted-foreground reveal-slide-up font-orbitron text-center text-lg font-semibold tracking-wide duration-700 md:text-start xl:text-xl"
         {@attach reveal()}
       >
         {$t("start_role")}
       </h2>
       <ul
-        class="max-tablet:top-[calc(100%+2rem)] max-tablet:center-x tablet:right-0 tablet:flex-col tablet:center-y desktop:fixed desktop:right-8 absolute z-10 flex justify-center gap-4"
+        class="max-md:center-x md:center-y absolute z-10 flex justify-center gap-4 max-md:top-[calc(100%+2rem)] md:right-0 md:flex-col xl:fixed xl:right-8"
       >
         {#each quickContactShortcuts as [label, url, icon] (url)}
           <li class="transition-all hover:scale-110">
@@ -135,8 +135,8 @@
     </div>
     <Link
       class={[
-        "center-x bg-teal hover:bg-teal/90 font-jetbrains-mono text-void tablet:bottom-10 absolute bottom-8 flex items-center gap-2 rounded-full px-5 py-2 transition-all",
-        "before:bg-teal before:-z-1 before:absolute before:inset-0 before:animate-pulse before:rounded-full before:blur-sm before:content-['']",
+        "center-x bg-secondary hover:bg-secondary/90 font-jetbrains-mono text-background absolute bottom-8 flex items-center gap-2 rounded-full px-5 py-2 transition-all md:bottom-10",
+        "before:bg-secondary before:-z-1 before:absolute before:inset-0 before:animate-pulse before:rounded-full before:blur-sm before:content-['']",
       ]}
       variant="none"
       href="/cv.pdf"
@@ -151,7 +151,7 @@
     id={ID_BIO_SECTION}
     class={[
       "section relative",
-      "tablet:before:-skew-y-2 tablet:before:inset-y-8 desktop:before:-skew-y-1 before:bg-stardust before:shadow-elevation before:-skew-y-4 before:center-x before:-z-1 before:absolute before:inset-y-5 before:w-dvw before:content-['']",
+      "before:bg-muted before:shadow-elevation before:-skew-y-4 before:center-x before:-z-1 before:absolute before:inset-y-5 before:w-dvw before:content-[''] md:before:inset-y-8 md:before:-skew-y-2 xl:before:-skew-y-1",
     ]}
   >
     <h2 class="font-orbitron mb-8 text-center text-2xl font-bold tracking-wide">
@@ -159,7 +159,7 @@
     </h2>
     <div class="mx-auto max-w-[80ch] space-y-5 leading-7 text-white/90">
       <div
-        class="max-tablet:hidden reveal-fade float-end ml-4 duration-700"
+        class="reveal-fade float-end ml-4 duration-700 max-md:hidden"
         {@attach reveal()}
       >
         <enhanced:img
@@ -181,17 +181,17 @@
   </section>
   <section id={ID_SKILLS_SECTION} class="section">
     <h2
-      class="font-orbitron desktop:text-start desktop:mb-16 mb-8 text-center text-2xl font-bold tracking-wide"
+      class="font-orbitron mb-8 text-center text-2xl font-bold tracking-wide xl:mb-16 xl:text-start"
     >
       {$t("skills_title")}
     </h2>
     <div
-      class="desktop:gap-y-16 desktop:items-start desktop:flex-row flex flex-col flex-wrap items-center justify-center gap-8"
+      class="flex flex-col flex-wrap items-center justify-center gap-8 xl:flex-row xl:items-start xl:gap-y-16"
     >
       {#each categorizedSkills as [category, skills] (category)}
         <div class="max-w-96">
           <h3
-            class="after:bg-yellow after:center-x relative mb-12 text-center text-lg font-semibold after:absolute after:-bottom-4 after:h-1 after:w-8 after:rounded-full after:content-['']"
+            class="after:bg-primary after:center-x relative mb-12 text-center text-lg font-semibold after:absolute after:-bottom-4 after:h-1 after:w-8 after:rounded-full after:content-['']"
           >
             {category}
           </h3>
@@ -204,7 +204,7 @@
                 >
                   <Icon class="size-5" {icon} {color} />
                   <span
-                    class="font-jetbrains-mono text-offwhite/90 cursor-default font-bold tracking-wide duration-300 ease-out"
+                    class="font-jetbrains-mono text-foreground/90 cursor-default font-bold tracking-wide duration-300 ease-out"
                   >
                     {skill}
                   </span>
@@ -218,7 +218,7 @@
   </section>
   <section id={ID_PROJECTS_SECTION} class="section">
     <h2
-      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold tracking-wide"
+      class="font-orbitron mb-8 text-center text-2xl font-bold tracking-wide xl:text-start"
     >
       {$t("projects_title")}
     </h2>
@@ -226,17 +226,15 @@
   </section>
   <section id={ID_CONTACT_SECTION} class="section relative min-h-svh pb-44">
     <h2
-      class="font-orbitron desktop:text-start mb-8 text-center text-2xl font-bold tracking-wide"
+      class="font-orbitron mb-8 text-center text-2xl font-bold tracking-wide xl:text-start"
     >
       {$t("contact_title")}
     </h2>
     <div>
-      <h3 class="font-inter desktop:text-start text-center font-medium">
+      <h3 class="font-inter text-center font-medium xl:text-start">
         {$t("contact_message")}
       </h3>
-      <ul
-        class="desktop:items-start mt-24 flex flex-col items-center gap-3 text-lg"
-      >
+      <ul class="mt-24 flex flex-col items-center gap-3 text-lg xl:items-start">
         {#each contactList as [label, url] (url)}
           <li class="reveal-slide-up duration-700" {@attach reveal()}>
             <Link href={url} newTab>{label}</Link>
@@ -245,7 +243,7 @@
       </ul>
     </div>
     <Link
-      class="center-x bg-teal hover:bg-teal/90 font-jetbrains-mono text-void tablet:bottom-16 absolute bottom-12 flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2 transition-all"
+      class="center-x bg-secondary hover:bg-secondary/90 font-jetbrains-mono text-background absolute bottom-12 flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2 transition-all md:bottom-16"
       variant="none"
       href="#start"
     >

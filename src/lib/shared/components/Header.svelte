@@ -60,7 +60,7 @@
 <header>
   <Link
     variant="none"
-    class="center-x z-2 desktop:top-12 absolute top-8"
+    class="center-x z-2 absolute top-8 xl:top-12"
     href="/"
     aria-label={$t("a11y_go_to_home")}
   >
@@ -71,7 +71,7 @@
       <div>
         <button
           bind:this={menuToggler}
-          class="push-on-active hover:text-purple z-2 absolute right-8 top-[2.125rem] block transition-all"
+          class="tap-push hover:text-primary z-2 absolute right-8 top-[2.125rem] block transition-all"
           type="button"
           onclick={() => {
             open = !open;
@@ -89,7 +89,7 @@
         </button>
         <ul
           id={ID_MOBILE_MENU}
-          class="bg-stardust inert:invisible inert:-translate-y-2 inert:opacity-0 shadow-elevation z-1 fixed inset-x-0 top-0 origin-top space-y-4 px-8 pb-8 pt-28 duration-300 ease-out motion-safe:transition-all"
+          class="bg-muted inert:invisible inert:-translate-y-2 inert:opacity-0 shadow-elevation z-1 fixed inset-x-0 top-0 origin-top space-y-4 px-8 pb-8 pt-28 duration-300 ease-out motion-safe:transition-all"
           inert={!open}
           onclickaway={() => {
             open = false;
@@ -120,7 +120,7 @@
         {#each links as { label, link, description } (link)}
           <li>
             <Link
-              class="font-orbitron hover:text-purple before:font-jetbrains-mono block whitespace-nowrap tracking-wide before:pr-1 before:text-white/15 before:content-['/']"
+              class="font-orbitron hover:text-primary before:font-jetbrains-mono block whitespace-nowrap tracking-wide before:pr-1 before:text-white/15 before:content-['/']"
               variant="none"
               href={link}
               aria-label={description}

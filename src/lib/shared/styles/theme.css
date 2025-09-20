@@ -5,23 +5,24 @@
   --font-jetbrains-mono: "JetBrains Mono", monospace;
   --font-orbitron: Orbitron, sans-serif;
 
+  /* Breakpoints */
   --breakpoint-*: initial;
-  --breakpoint-tablet: 768px;
-  --breakpoint-desktop: 1280px;
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px */
+  --breakpoint-lg: 64rem; /* 1024px */
+  --breakpoint-xl: 80rem; /* 1280px */
+  --breakpoint-2xl: 96rem; /* 1536px */
 
-  --color-*: initial;
-  --color-black: #000;
-  --color-white: #fff;
-  --color-void: #0f0f0f;
-  --color-stardust: #1e1e1e;
-  --color-offwhite: #f0f0f0;
-  --color-gray: #a0a0a0;
-  --color-purple: #8a49ff;
-  --color-teal: #00d1d9;
-  --color-pink: #fb64b6;
-  --color-yellow: #fada2b;
+  /* Colors */
+  --color-background: oklch(0.16 0.0003 271);
+  --color-foreground: oklch(0.95 0.0003 271);
+  --color-muted: oklch(0.23 0.0003 271);
+  --color-muted-foreground: oklch(0.7 0.0003 271);
+  --color-primary: oklch(0.58 0.25115 293);
+  --color-secondary: oklch(0.78 0.13299 199);
+  --color-accent: oklch(0.71 0.20172 349);
 
-  --text-*: initial;
+  /* Typography Scale */
   --text-xs: 0.75rem;
   --text-xs--line-height: 1rem;
   --text-sm: 0.875rem;
@@ -38,13 +39,22 @@
   --text-3xl--line-height: 3rem;
   --text-4xl: 3rem;
   --text-4xl--line-height: 3.5rem;
+  --text-5xl: 4rem;
+  --text-5xl--line-height: 1;
+  --text-6xl: 5rem;
+  --text-6xl--line-height: 1;
 
-  --shadow-*: initial;
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 oklch(0 0 0 / 0.5);
   --shadow-elevation:
-    0 10px 15px -3px rgb(0 0 0 / 0.25), 0 4px 6px -4px rgb(0 0 0 / 0.25);
+    0 10px 15px -3px oklch(0 0 0 / 0.25), 0 4px 6px -4px oklch(0 0 0 / 0.25);
+  --shadow-glow:
+    0 0 20px -5px var(--color-primary) / 0.3, 0 8px 10px -6px oklch(0 0 0 / 0.5);
+  --shadow-glow-lg:
+    0 0 30px -5px var(--color-primary) / 0.5,
+    0 20px 25px -5px oklch(0 0 0 / 0.5);
 
-  --drop-shadow-*: initial;
-  --drop-shadow-contrast: 0 1px 2px rgb(0 0 0 / 0.5);
+  --drop-shadow-contrast: 0 1px 2px oklch(0 0 0 / 0.5);
 
   --animate-blink: blink 3s ease-in-out infinite;
 

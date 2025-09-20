@@ -37,7 +37,7 @@
   <button
     bind:this={toggler}
     type="button"
-    class="push-on-active hover:text-purple block transition-all"
+    class="tap-push hover:text-primary block transition-all"
     onclick={() => {
       open = !open;
     }}
@@ -50,7 +50,7 @@
   </button>
   <div
     id="language-list"
-    class="bg-stardust inert:invisible inert:scale-90 inert:opacity-0 shadow-elevation z-1 absolute bottom-0 right-12 flex origin-bottom-right flex-col gap-1 space-y-4 rounded-2xl p-6 ease-out motion-safe:transition-all"
+    class="bg-muted inert:invisible inert:scale-90 inert:opacity-0 shadow-elevation z-1 absolute bottom-0 right-12 flex origin-bottom-right flex-col gap-1 space-y-4 rounded-2xl p-6 ease-out motion-safe:transition-all"
     role="menu"
     inert={!open}
     onclickaway={() => {
@@ -63,7 +63,7 @@
       <Link
         class={[
           "text-center",
-          value === $locale ? "text-yellow" : "hover:text-teal",
+          value === $locale ? "text-primary" : "hover:text-secondary",
         ]}
         {href}
         variant="none"
