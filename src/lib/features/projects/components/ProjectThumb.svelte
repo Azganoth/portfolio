@@ -42,7 +42,7 @@
 
 <article
   class={[
-    "focus:outline-hidden group relative grid max-w-[320px] items-center gap-2 transition-all focus-within:-translate-y-1 hover:-translate-y-1 md:max-w-[640px] md:grid-cols-[320px_1fr] md:grid-rows-[240px] md:gap-6",
+    "focus:outline-hidden group relative grid max-w-[320px] items-center gap-2 transition-transform focus-within:-translate-y-1 hover:-translate-y-1 md:max-w-[640px] md:grid-cols-[320px_1fr] md:grid-rows-[240px] md:gap-6",
     className,
   ]}
   aria-labelledby={titleId}
@@ -54,7 +54,7 @@
     {#if project.previews.length > 0}
       <!-- Decorative image since title is already announced -->
       <img
-        class="transition-all duration-300 ease-out group-focus-within:scale-110 group-hover:scale-110"
+        class="transition-transform duration-300 ease-out group-focus-within:scale-110 group-hover:scale-110"
         role="presentation"
         src={project.previews[0].url}
         width={project.previews[0].width}

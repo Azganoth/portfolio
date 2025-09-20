@@ -125,7 +125,7 @@
         class="max-md:center-x md:center-y absolute z-10 flex justify-center gap-4 max-md:top-[calc(100%+2rem)] md:right-0 md:flex-col xl:fixed xl:right-8"
       >
         {#each quickContactShortcuts as [label, url, icon] (url)}
-          <li class="transition-all hover:scale-110">
+          <li class="transition-transform hover:scale-110">
             <Link href={url} aria-label={label} newTab>
               <Icon class="size-10" {icon} />
             </Link>
@@ -135,7 +135,7 @@
     </div>
     <Link
       class={[
-        "center-x bg-secondary hover:bg-secondary/90 font-jetbrains-mono text-background absolute bottom-8 flex items-center gap-2 rounded-full px-5 py-2 transition-all md:bottom-10",
+        "center-x bg-secondary hover:bg-secondary/90 font-jetbrains-mono text-background absolute bottom-8 flex items-center gap-2 rounded-full px-5 py-2 transition-colors md:bottom-10",
         "before:bg-secondary before:-z-1 before:absolute before:inset-0 before:animate-pulse before:rounded-full before:blur-sm before:content-['']",
       ]}
       variant="none"
@@ -200,7 +200,7 @@
               {@const { icon, color } = TAG_META[skill]}
               <li class="reveal-slide-up duration-700" {@attach reveal()}>
                 <div
-                  class="flex items-center gap-2 rounded-lg bg-white/5 p-3 text-sm transition-all hover:scale-110"
+                  class="flex items-center gap-2 rounded-lg bg-white/5 p-3 text-sm transition-transform hover:scale-110"
                 >
                   <Icon class="size-5" {icon} {color} />
                   <span
@@ -243,7 +243,7 @@
       </ul>
     </div>
     <Link
-      class="center-x bg-secondary hover:bg-secondary/90 font-jetbrains-mono text-background absolute bottom-12 flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2 transition-all md:bottom-16"
+      class="center-x bg-secondary hover:bg-secondary/90 font-jetbrains-mono text-background absolute bottom-12 flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2 transition-colors md:bottom-16"
       variant="none"
       href="#start"
     >

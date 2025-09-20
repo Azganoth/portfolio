@@ -56,7 +56,7 @@
   {#if visibleCount < projects.length}
     <button
       type="button"
-      class="bg-secondary tap-push hover:bg-secondary/90 text-background mt-16 rounded-full px-5 py-2 font-bold transition-all"
+      class="bg-secondary tap-push hover:bg-secondary/90 text-background mt-16 rounded-full px-5 py-2 font-bold transition-[scale,background-color]"
       onclick={showMore}
     >
       {$t("projects_show_more")}

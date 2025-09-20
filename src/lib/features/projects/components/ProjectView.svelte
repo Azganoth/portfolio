@@ -72,7 +72,7 @@
             {$selectedProject.title}
           </h1>
           <button
-            class="tap-push hover:text-primary absolute right-4 top-4 z-10"
+            class="tap-push hover:text-primary absolute right-4 top-4 z-10 transition-[scale,color]"
             type="button"
             onclick={() => {
               open = false;
@@ -84,7 +84,7 @@
         </header>
         <article class="markdown mb-auto h-full max-w-none overflow-auto pr-4">
           {#if $selectedProject.previews.length > 0}
-            <div class="mx-auto mb-8 w-fit md:float-end md:mx-8 md:mb-0">
+            <div class="mx-auto mb-8 mt-2 w-fit md:float-end md:mx-8 md:mb-0">
               <ProjectViewPreviews previews={$selectedProject.previews} />
             </div>
           {/if}

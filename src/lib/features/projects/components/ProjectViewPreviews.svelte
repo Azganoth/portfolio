@@ -58,7 +58,7 @@
 <button
   bind:this={galleryOpenButton}
   type="button"
-  class="border-muted hover:scale-102 group relative max-w-[400px] overflow-hidden rounded-2xl border transition-all"
+  class="border-muted hover:scale-102 group relative max-w-[400px] overflow-hidden rounded-2xl border transition-transform"
   onclick={() => {
     galleryOpen = true;
   }}
@@ -105,7 +105,7 @@
     })}
   >
     <button
-      class="tap-push hover:text-primary absolute right-4 top-4 transition-colors md:top-2"
+      class="tap-push hover:text-primary absolute right-4 top-4 transition-[scale,color] md:top-2"
       type="button"
       onclick={() => {
         galleryOpen = false;
@@ -140,7 +140,7 @@
 
     <div class="center-x absolute bottom-0 flex items-center max-md:hidden">
       <button
-        class="tap-push hover:text-primary transition-colors"
+        class="tap-push hover:text-primary transition-[scale,color]"
         onclick={() =>
           goToSlide((currentSlide - 1 + previews.length) % previews.length)}
         aria-label={$t("a11y_previous_image")}
@@ -150,7 +150,7 @@
       <div class="flex" role="tablist">
         {#each { length: previews.length }, i}
           <button
-            class="tap-push hover:text-primary block transition-colors"
+            class="tap-push hover:text-primary block transition-[scale,color]"
             type="button"
             role="tab"
             onclick={() => goToSlide(i)}
@@ -168,7 +168,7 @@
         {/each}
       </div>
       <button
-        class="tap-push hover:text-primary transition-colors"
+        class="tap-push hover:text-primary transition-[scale,color]"
         onclick={() => goToSlide((currentSlide + 1) % previews.length)}
         aria-label={$t("a11y_next_image")}
       >

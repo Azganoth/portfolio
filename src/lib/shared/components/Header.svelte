@@ -71,7 +71,7 @@
       <div>
         <button
           bind:this={menuToggler}
-          class="tap-push hover:text-primary z-2 absolute right-8 top-[2.125rem] block transition-all"
+          class="tap-push hover:text-primary z-2 absolute right-8 top-[2.125rem] block transition-[scale,color]"
           type="button"
           onclick={() => {
             open = !open;

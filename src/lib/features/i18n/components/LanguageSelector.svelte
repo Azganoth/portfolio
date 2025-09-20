@@ -37,7 +37,7 @@
   <button
     bind:this={toggler}
     type="button"
-    class="tap-push hover:text-primary block transition-all"
+    class="tap-push hover:text-primary block transition-[scale,color]"
     onclick={() => {
       open = !open;
     }}

@@ -17,7 +17,7 @@
 
 <a
   class={[
-    "font-bold transition-all",
+    "font-bold transition-colors",
     variant === "default" && "font-inter hover:text-secondary",
     className,
   ]}
