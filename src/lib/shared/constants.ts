@@ -1,14 +1,19 @@
 // NOTE: don't import anything, it will break vercel's middleware
 
-// --- CONTACT ---
-export const CONTACT_INFO = {
-  Email: "mailto:ademirj.ferreirajunior@gmail.com",
-  WhatsApp: "https://wa.me/48991984443",
-  GitHub: "https://github.com/Azganoth",
-  LinkedIn: "https://www.linkedin.com/in/ademirjferreirajunior/",
+// --- CONFIGURATION & DEFAULTS ---
+
+export const SUPPORTED_LOCALES = ["pt", "en"];
+export const DEFAULT_LOCALE = "pt";
+
+export const PREVIEW_SIZE = {
+  width: 720,
+  height: 540,
 };
 
-// --- PROJECTS ---
+export const PROJECT_LINK_BASE = "#project-";
+
+// --- CONTENT ---
+
 export const PROJECTS_ORDER = [
   "azganoth",
   "nexus",
@@ -25,13 +30,20 @@ export const PROJECTS_ORDER = [
   "equalizer",
 ];
 
-export const PROJECT_LINK_BASE = "#project-";
+// --- IDENTIFIERS ---
 
-// --- UI ---
-export const PREVIEW_SIZE = {
-  width: 720,
-  height: 540,
-};
+export const ID_START_SECTION = "start";
+export const ID_BIO_SECTION = "bio";
+export const ID_SKILLS_SECTION = "skills";
+export const ID_PROJECTS_SECTION = "projects";
+export const ID_CONTACT_SECTION = "contact";
+
+export const ID_MOBILE_MENU = "mobile-nav-menu";
+export const ID_PROJECT_DETAILS = "project-details-modal";
+export const ID_PROJECT_TITLE = "project-details-title";
+export const ID_IMAGE_GALLERY = "image-gallery-modal";
+
+// --- METADATA ---
 
 export const TAG_META: Record<string, { color: string; icon: string }> = {
   HTML: { color: "#E34F26", icon: "simple-icons:html5" },
@@ -69,19 +81,3 @@ export const TAG_META: Record<string, { color: string; icon: string }> = {
   "CSS Modules": { color: "#FFFFFF", icon: "simple-icons:cssmodules" },
   SvelteKit: { color: "#FF3E00", icon: "simple-icons:svelte" },
 };
-
-// IDs
-export const ID_START_SECTION = "start";
-export const ID_BIO_SECTION = "bio";
-export const ID_SKILLS_SECTION = "skills";
-export const ID_PROJECTS_SECTION = "projects";
-export const ID_CONTACT_SECTION = "contact";
-
-export const ID_MOBILE_MENU = "mobile-nav-menu";
-export const ID_PROJECT_DETAILS = "project-details-modal";
-export const ID_PROJECT_TITLE = "project-details-title";
-export const ID_IMAGE_GALLERY = "image-gallery-modal";
-
-// --- i18n ---
-export const SUPPORTED_LOCALES: string[] = ["pt", "en"];
-export const DEFAULT_LOCALE = "pt";

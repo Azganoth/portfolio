@@ -1,7 +1,11 @@
 <script lang="ts">
   import LanguageSelector from "$lib/features/i18n/components/LanguageSelector.svelte";
   import Translation from "$lib/features/i18n/components/Translation.svelte";
-  import { locale, t } from "$lib/features/i18n/translation";
+  import {
+    locale,
+    t,
+    type TranslationKey,
+  } from "$lib/features/i18n/translation";
   import ProjectList from "$lib/features/projects/components/ProjectList.svelte";
   import { selectedProject } from "$lib/features/projects/store";
   import { reveal } from "$lib/shared/attachments/reveal.svelte";
@@ -9,7 +13,6 @@
   import Link from "$lib/shared/components/Link.svelte";
   import Starfield from "$lib/shared/components/Starfield.svelte";
   import {
-    CONTACT_INFO,
     ID_BIO_SECTION,
     ID_CONTACT_SECTION,
     ID_PROJECTS_SECTION,
@@ -18,6 +21,11 @@
     PROJECT_LINK_BASE,
     TAG_META,
   } from "$lib/shared/constants";
+  import {
+    CONTACT_LIST,
+    CONTACT_SHORTCUTS,
+    SKILLS_BY_CATEGORY,
+  } from "$lib/shared/data";
   import profileImage from "$lib/shared/images/profile.webp?enhanced";
   import Icon from "@iconify/svelte";
   import { onMount } from "svelte";
@@ -25,38 +33,12 @@
 
   const { data }: PageProps = $props();
 
-  const quickContactShortcuts = [
-    ["GitHub", CONTACT_INFO.GitHub, "simple-icons:github"],
-    ["LinkedIn", CONTACT_INFO.LinkedIn, "simple-icons:linkedin"],
-    ["WhatsApp", CONTACT_INFO.WhatsApp, "simple-icons:whatsapp"],
-    ["Email", CONTACT_INFO.Email, "simple-icons:gmail"],
-  ];
-
-  const contactList = [
-    ["ademirj.ferreirajunior@gmail.com", CONTACT_INFO.Email],
-    ["WhatsApp", CONTACT_INFO.WhatsApp],
-    ["LinkedIn", CONTACT_INFO.LinkedIn],
-  ];
-
-  const categorizedSkills = $derived<[category: string, skills: string[]][]>([
-    [
-      $t("skills_category_languages"),
-      ["HTML", "CSS", "JavaScript", "TypeScript", "Python"],
-    ],
-    [
-      $t("skills_category_frontend"),
-      ["React", "Next", "Vue", "Svelte", "SASS", "TailwindCSS"],
-    ],
-    [
-      $t("skills_category_backend"),
-      ["Node", "PostgreSQL", "MongoDB", "Prisma", "Mongoose", "GraphQL"],
-    ],
-    [
-      $t("skills_category_tests"),
-      ["Vitest", "Jest", "Testing Library", "Storybook"],
-    ],
-    [$t("skills_category_devops"), ["Git", "Docker", "Figma"]],
-  ]);
+  const categorizedSkills = $derived(
+    Object.entries(SKILLS_BY_CATEGORY).map(([category, skills]) => ({
+      category: $t(category as TranslationKey),
+      skills,
+    })),
+  );
 
   const syncProjectView = () => {
     const hash = window.location.hash;
@@ -124,9 +106,9 @@
       <ul
         class="max-md:center-x md:center-y absolute z-10 flex justify-center gap-4 max-md:top-[calc(100%+2rem)] md:right-0 md:flex-col xl:fixed xl:right-8"
       >
-        {#each quickContactShortcuts as [label, url, icon] (url)}
+        {#each CONTACT_SHORTCUTS as { label, href, icon } (href)}
           <li class="transition-transform hover:scale-110">
-            <Link href={url} aria-label={label} newTab>
+            <Link {href} aria-label={label} newTab>
               <Icon class="size-10" {icon} />
             </Link>
           </li>
@@ -188,7 +170,7 @@
     <div
       class="flex flex-col flex-wrap items-center justify-center gap-8 xl:flex-row xl:items-start xl:gap-y-16"
     >
-      {#each categorizedSkills as [category, skills] (category)}
+      {#each categorizedSkills as { category, skills } (category)}
         <div class="max-w-96">
           <h3
             class="after:bg-primary after:center-x relative mb-12 text-center text-lg font-semibold after:absolute after:-bottom-4 after:h-1 after:w-8 after:rounded-full after:content-['']"
@@ -235,9 +217,9 @@
         {$t("contact_message")}
       </h3>
       <ul class="mt-24 flex flex-col items-center gap-3 text-lg xl:items-start">
-        {#each contactList as [label, url] (url)}
+        {#each CONTACT_LIST as { label, href } (href)}
           <li class="reveal-slide-up duration-700" {@attach reveal()}>
-            <Link href={url} newTab>{label}</Link>
+            <Link {href} newTab>{label}</Link>
           </li>
         {/each}
       </ul>
