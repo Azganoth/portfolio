@@ -84,13 +84,13 @@
   >
     <div class="relative w-full">
       <h1
-        class="font-orbitron reveal-slide-down mb-4 text-center text-3xl font-semibold tracking-wide duration-700 md:text-start xl:text-4xl"
+        class="font-orbitron reveal-slide-down leading-16 md:leading-20 mb-4 text-center text-4xl font-semibold tracking-wide duration-700 md:text-start md:text-5xl"
         {@attach reveal()}
       >
         <Translation key="start_hello" values={{ name }} />
       </h1>
       <h2
-        class="text-muted-foreground reveal-slide-up font-orbitron text-center text-lg font-semibold tracking-wide duration-700 md:text-start xl:text-xl"
+        class="text-muted-foreground reveal-slide-up font-orbitron text-center text-lg font-semibold tracking-wide duration-700 md:text-start md:text-xl"
         {@attach reveal()}
       >
         {$t("start_role")}

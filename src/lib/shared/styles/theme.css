@@ -40,9 +40,9 @@
   --text-4xl: 3rem;
   --text-4xl--line-height: 3.5rem;
   --text-5xl: 4rem;
-  --text-5xl--line-height: 1;
+  --text-4xl--line-height: 4.5rem;
   --text-6xl: 5rem;
-  --text-6xl--line-height: 1;
+  --text-4xl--line-height: 5.5rem;
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 oklch(0 0 0 / 0.5);
