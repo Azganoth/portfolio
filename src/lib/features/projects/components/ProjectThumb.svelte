@@ -3,11 +3,13 @@
 </script>
 
 <script lang="ts">
+  import { pushState } from "$app/navigation";
   import { t } from "$lib/features/i18n/translation";
+  import { getLocalizedPath } from "$lib/features/i18n/utils";
   import type { Project } from "$lib/features/projects/schema";
   import { selectedProject } from "$lib/features/projects/store";
   import Link from "$lib/shared/components/Link.svelte";
-  import { ID_PROJECT_DETAILS, PROJECT_LINK_BASE } from "$lib/shared/constants";
+  import { ID_PROJECT_DETAILS } from "$lib/shared/constants";
   import Icon from "@iconify/svelte";
   import type { ClassValue } from "svelte/elements";
 
@@ -22,8 +24,10 @@
   const titleId = `project-title-${project.slug}`;
   const summaryId = `project-summary-${project.slug}`;
 
+  const href = getLocalizedPath(`/projects/${project.slug}`);
   function openProject() {
     $selectedProject = project;
+    pushState(href, { selectedProject: project });
   }
 
   function handleclick(event: MouseEvent) {
@@ -84,7 +88,7 @@
       <Link
         id={linkId}
         class="hover:text-secondary focus:text-primary active:text-primary after:z-1 outline-none after:absolute after:inset-0 after:content-['']"
-        href={`${PROJECT_LINK_BASE}${project.slug}`}
+        {href}
         variant="none"
         aria-haspopup="dialog"
         aria-controls={ID_PROJECT_DETAILS}

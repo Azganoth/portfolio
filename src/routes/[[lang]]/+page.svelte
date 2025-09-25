@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import LanguageSelector from "$lib/features/i18n/components/LanguageSelector.svelte";
   import Translation from "$lib/features/i18n/components/Translation.svelte";
   import {
@@ -6,6 +7,7 @@
     t,
     type TranslationKey,
   } from "$lib/features/i18n/translation";
+  import { getLocalizedPath } from "$lib/features/i18n/utils";
   import ProjectList from "$lib/features/projects/components/ProjectList.svelte";
   import { selectedProject } from "$lib/features/projects/store";
   import { reveal } from "$lib/shared/attachments/reveal.svelte";
@@ -18,7 +20,6 @@
     ID_PROJECTS_SECTION,
     ID_SKILLS_SECTION,
     ID_START_SECTION,
-    PROJECT_LINK_BASE,
     TAG_META,
   } from "$lib/shared/constants";
   import {
@@ -28,7 +29,6 @@
   } from "$lib/shared/data";
   import profileImage from "$lib/shared/images/profile.webp?enhanced";
   import Icon from "@iconify/svelte";
-  import { onMount } from "svelte";
   import type { PageProps } from "./$types";
 
   const { data }: PageProps = $props();
@@ -40,25 +40,17 @@
     })),
   );
 
-  const syncProjectView = () => {
-    const hash = window.location.hash;
-    if (hash.startsWith(PROJECT_LINK_BASE)) {
-      const slug = hash.substring(PROJECT_LINK_BASE.length);
-      const projectFromUrl = data.props.projects[$locale].find(
-        (p) => p.slug === slug,
-      );
-      if (projectFromUrl) {
-        $selectedProject = projectFromUrl;
-      }
-    } else {
-      $selectedProject = undefined;
-    }
-  };
-
-  onMount(syncProjectView);
+  // Sync state from Shallow Routing (History API)
+  $effect(() => {
+    $selectedProject = page.state.selectedProject;
+  });
 </script>
 
-<svelte:window onhashchange={syncProjectView} />
+<svelte:head>
+  <title>
+    Ademir | {$selectedProject ? $selectedProject.title : "Portfolio"}
+  </title>
+</svelte:head>
 
 {#snippet name()}
   <br /><span class="text-primary">Ademir</span>
@@ -66,7 +58,7 @@
 {#snippet nexus()}
   <Link
     class="text-white"
-    href={`${PROJECT_LINK_BASE}nexus`}
+    href={getLocalizedPath("/projects/nexus")}
     onclick={(e) => e.stopPropagation()}
   >
     Nexus
@@ -75,7 +67,7 @@
 {#snippet simplemotionreact()}
   <Link
     class="text-white"
-    href={`${PROJECT_LINK_BASE}simplemotionreact`}
+    href={getLocalizedPath("/projects/simplemotionreact")}
     onclick={(e) => e.stopPropagation()}
   >
     Simple Motion React

@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { pushState } from "$app/navigation";
+  import { goto } from "$app/navigation";
+  import { page } from "$app/stores";
   import { t } from "$lib/features/i18n/translation";
-  import { composeProjectLinkId } from "$lib/features/projects/components/ProjectThumb.svelte";
+  import { getLocalizedPath } from "$lib/features/i18n/utils";
   import ProjectViewPreviews from "$lib/features/projects/components/ProjectViewPreviews.svelte";
   import { selectedProject } from "$lib/features/projects/store";
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
@@ -10,7 +11,6 @@
   import {
     ID_PROJECT_DETAILS,
     ID_PROJECT_TITLE,
-    PROJECT_LINK_BASE,
     TAG_META,
   } from "$lib/shared/constants";
   import Icon from "@iconify/svelte";
@@ -19,34 +19,21 @@
   let dialog = $state<HTMLDialogElement>();
 
   function handleClose() {
-    $selectedProject = undefined;
+    if ($page.state.selectedProject) {
+      history.back();
+    } else if ($page.route.id?.includes("projects/[slug]")) {
+      const homeHref = getLocalizedPath("/");
+      goto(homeHref);
+    } else {
+      $selectedProject = undefined;
+    }
   }
 
   $effect(() => {
     if (open) {
       dialog?.showModal();
-      try {
-        pushState(`${PROJECT_LINK_BASE}${$selectedProject!.slug}`, {});
-      } catch {
-        // Ignore 'router not initialized' error when loading from a deeplink
-      }
     } else {
       dialog?.close();
-      // Reset the global store and url on close
-      const projectSlug = $selectedProject?.slug;
-      $selectedProject = undefined;
-      if (window.location.hash.startsWith(PROJECT_LINK_BASE)) {
-        pushState("", {});
-      }
-
-      // Focus project thumb link on close
-      if (projectSlug) {
-        document
-          .querySelector(`#${composeProjectLinkId(projectSlug)}`)
-          ?.scrollIntoView({
-            block: "center",
-          });
-      }
     }
   });
 </script>

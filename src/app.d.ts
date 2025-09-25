@@ -10,7 +10,9 @@ declare global {
     interface PageData {
       projects?: Record<Locale, Project[]>;
     }
-    // interface PageState {}
+    interface PageState {
+      selectedProject?: Project;
+    }
     // interface Platform {}
   }
 }
