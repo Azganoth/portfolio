@@ -5,6 +5,7 @@
   import ProjectViewPreviews from "$lib/features/projects/components/ProjectViewPreviews.svelte";
   import { selectedProject } from "$lib/features/projects/store";
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
+  import { focustrap } from "$lib/shared/attachments/focustrap.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import {
     ID_PROJECT_DETAILS,
@@ -16,6 +17,10 @@
 
   let open = $derived(!!$selectedProject);
   let dialog = $state<HTMLDialogElement>();
+
+  function handleClose() {
+    $selectedProject = undefined;
+  }
 
   $effect(() => {
     if (open) {
@@ -50,14 +55,11 @@
   bind:this={dialog}
   id={ID_PROJECT_DETAILS}
   class="bg-background text-foreground shadow-elevation starting:opacity-0 starting:scale-90 z-20 m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl transition-[opacity,scale] duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg md:h-[calc(100dvh-8rem)] md:max-w-[720px] xl:max-w-[1200px]"
-  onclose={() => {
-    open = false;
-  }}
-  onclickaway={() => {
-    open = false;
-  }}
+  onclose={handleClose}
+  onclickaway={handleClose}
   aria-labelledby={ID_PROJECT_TITLE}
   {@attach clickaway({ ignoreSelf: true })}
+  {@attach focustrap()}
 >
   {#if $selectedProject}
     <div class="flex h-full flex-col">
@@ -74,9 +76,7 @@
           <button
             class="tap-push hover:text-primary absolute right-4 top-4 z-10 transition-[scale,color]"
             type="button"
-            onclick={() => {
-              open = false;
-            }}
+            onclick={handleClose}
             aria-label={$t("a11y_close_project_details")}
           >
             <Icon class="drop-shadow-contrast size-8" icon="fa6-solid:xmark" />
