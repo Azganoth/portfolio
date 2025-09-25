@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
+  import { afterNavigate, goto } from "$app/navigation";
   import { page } from "$app/stores";
   import { t } from "$lib/features/i18n/translation";
   import { getLocalizedPath } from "$lib/features/i18n/utils";
+  import { composeProjectLinkId } from "$lib/features/projects/components/ProjectThumb.svelte";
   import ProjectViewPreviews from "$lib/features/projects/components/ProjectViewPreviews.svelte";
   import { selectedProject } from "$lib/features/projects/store";
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
@@ -14,6 +15,7 @@
     TAG_META,
   } from "$lib/shared/constants";
   import Icon from "@iconify/svelte";
+  import { tick } from "svelte";
 
   let open = $derived(!!$selectedProject);
   let dialog = $state<HTMLDialogElement>();
@@ -29,11 +31,38 @@
     }
   }
 
+  let lastSelectedProjectSlug = $state<string>();
+  $effect(() => {
+    if ($selectedProject) {
+      lastSelectedProjectSlug = $selectedProject.slug;
+    }
+  });
+
+  function restoreFocus() {
+    if (!lastSelectedProjectSlug) return;
+
+    const thumbLink = document.querySelector<HTMLElement>(
+      `#${composeProjectLinkId(lastSelectedProjectSlug)}`,
+    );
+    if (thumbLink) {
+      thumbLink.scrollIntoView({ block: "center" });
+      thumbLink.focus({ preventScroll: true });
+      lastSelectedProjectSlug = undefined;
+    }
+  }
+
+  afterNavigate(() => {
+    if (!open) {
+      restoreFocus();
+    }
+  });
+
   $effect(() => {
     if (open) {
       dialog?.showModal();
     } else {
       dialog?.close();
+      tick().then(restoreFocus);
     }
   });
 </script>
