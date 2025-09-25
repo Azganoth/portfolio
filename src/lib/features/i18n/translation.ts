@@ -17,7 +17,11 @@ export const getTranslation = (key: TranslationKey) =>
 export const t = derived(
   locale,
   (loc) => (key: TranslationKey, values?: Record<string, string>) => {
-    let text = locales[loc][key];
+    let text = locales[loc]?.[key];
+    if (!text) {
+      console.warn(`Missing translation for key: ${key}`);
+      return key;
+    }
     if (values) {
       Object.entries(values).forEach(([key, value]) => {
         text = text.replaceAll(`{${key}}`, value);
