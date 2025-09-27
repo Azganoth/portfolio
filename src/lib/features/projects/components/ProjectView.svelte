@@ -74,7 +74,7 @@
   onclose={handleClose}
   onclickaway={handleClose}
   aria-labelledby={ID_PROJECT_TITLE}
-  {@attach clickaway({ ignoreSelf: true })}
+  {@attach clickaway({ ignoreSelf: true, enabled: open })}
   {@attach focustrap()}
 >
   {#if $selectedProject}

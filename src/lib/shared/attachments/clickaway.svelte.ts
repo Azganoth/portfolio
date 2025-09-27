@@ -8,15 +8,18 @@ export type ClickawayEventDetail = {
 type ClickawayOptions = {
   ignoreSelf?: boolean;
   ignoreNodes?: Node[];
+  enabled?: boolean;
 };
 
 export const clickaway = (
   options: ClickawayOptions = {},
 ): Attachment<HTMLElement> => {
-  const { ignoreSelf = false, ignoreNodes = [] } = options;
+  const { ignoreSelf = false, ignoreNodes = [], enabled = true } = options;
 
   return (node) => {
     const listener = (event: MouseEvent | TouchEvent) => {
+      if (!enabled) return;
+
       const { target } = event;
       if (
         node &&
