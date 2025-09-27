@@ -49,5 +49,10 @@
   "a11y_used_technology": "Used technologies",
   "a11y_project_details": "Project details",
   "a11y_open_project_details": "Open project details",
-  "a11y_close_project_details": "Close project details"
+  "a11y_close_project_details": "Close project details",
+  "error_not_found_title": "404 Not Found",
+  "error_not_found_description": "The page you are looking for does not exist.",
+  "error_generic_title": "Error",
+  "error_generic_description": "An unexpected error occurred.",
+  "error_back_home": "Back to Home"
 }

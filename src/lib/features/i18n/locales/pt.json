@@ -49,5 +49,10 @@
   "a11y_used_technology": "Tecnologias utilizadas",
   "a11y_project_details": "Detalhes do projeto",
   "a11y_open_project_details": "Abrir detalhes do projeto",
-  "a11y_close_project_details": "Fechar detalhes do projeto"
+  "a11y_close_project_details": "Fechar detalhes do projeto",
+  "error_not_found_title": "404 Página não encontrada",
+  "error_not_found_description": "A página que você está procurando não existe.",
+  "error_generic_title": "Erro",
+  "error_generic_description": "Ocorreu um erro inesperado.",
+  "error_back_home": "Voltar para o Início"
 }

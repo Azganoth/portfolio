@@ -48,7 +48,9 @@
 
 <svelte:head>
   <title>
-    Ademir | {$selectedProject ? $selectedProject.title : "Portfolio"}
+    {$selectedProject
+      ? `${$selectedProject.title} | Azganoth`
+      : $t("meta_title")}
   </title>
 </svelte:head>
 
