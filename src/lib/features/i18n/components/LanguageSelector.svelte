@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import { locale, t, type Locale } from "$lib/features/i18n/translation";
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
   import Link from "$lib/shared/components/Link.svelte";
@@ -31,6 +32,12 @@
       console.error("Failed to save language preference:", error);
     }
   };
+
+  console.log(page);
+
+  let rawCurrentPath = $derived(
+    page.url.pathname.replace(new RegExp(`^/${$locale}(/|$)`), "/"),
+  );
 </script>
 
 <div class="fixed bottom-10 right-8 z-10">
@@ -59,7 +66,10 @@
     {@attach clickaway({ ignoreNodes: [toggler] })}
   >
     {#each languages as [label, value] (value)}
-      {@const href = value === DEFAULT_LOCALE ? "/" : `/${value}`}
+      {@const href =
+        value === DEFAULT_LOCALE
+          ? rawCurrentPath
+          : `/${value}${rawCurrentPath === "/" ? "" : rawCurrentPath}`}
       <Link
         class={[
           "text-center",
