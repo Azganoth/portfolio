@@ -33,8 +33,6 @@
     }
   };
 
-  console.log(page);
-
   let rawCurrentPath = $derived(
     page.url.pathname.replace(new RegExp(`^/${$locale}(/|$)`), "/"),
   );

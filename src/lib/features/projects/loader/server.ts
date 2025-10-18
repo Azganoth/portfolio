@@ -3,7 +3,7 @@ import {
   type ProjectPreview,
   projectSchema,
 } from "$lib/features/projects/schema";
-import { PROJECTS_ORDER, PREVIEW_SIZE } from "$lib/shared/constants";
+import { PREVIEW_SIZE, PROJECTS_ORDER } from "$lib/shared/constants";
 import { compareOrderBy } from "$lib/shared/utils/sort";
 import matter from "gray-matter";
 import { marked } from "marked";
@@ -33,31 +33,40 @@ const composePreviews = async (slug: string) => {
   return previews;
 };
 
-export const getProject = async (locale: string, slug: string): Promise<Project | null> => {
-   const projectsDir = path.join(process.cwd(), "src/lib/features/projects/data");
-   const fullPath = path.join(projectsDir, locale, `${slug}.md`);
-   
-   try {
-       await fs.access(fullPath, fs.constants.F_OK);
-   } catch {
-       return null;
-   }
+export const getProject = async (
+  locale: string,
+  slug: string,
+): Promise<Project | null> => {
+  const projectsDir = path.join(
+    process.cwd(),
+    "src/lib/features/projects/data",
+  );
+  const fullPath = path.join(projectsDir, locale, `${slug}.md`);
 
-   const fileContents = await fs.readFile(fullPath, "utf8");
-   const { data, content } = matter(fileContents);
-   const frontmatter = await projectSchema.parseAsync(data);
-   const description = await marked.parse(content);
+  try {
+    await fs.access(fullPath, fs.constants.F_OK);
+  } catch {
+    return null;
+  }
 
-   return {
-       slug,
-       ...frontmatter,
-       description,
-       previews: await composePreviews(slug),
-   };
-}
+  const fileContents = await fs.readFile(fullPath, "utf8");
+  const { data, content } = matter(fileContents);
+  const frontmatter = await projectSchema.parseAsync(data);
+  const description = await marked.parse(content);
+
+  return {
+    slug,
+    ...frontmatter,
+    description,
+    previews: await composePreviews(slug),
+  };
+};
 
 export const getAllProjects = async (locale: string): Promise<Project[]> => {
-  const projectsDir = path.join(process.cwd(), "src/lib/features/projects/data");
+  const projectsDir = path.join(
+    process.cwd(),
+    "src/lib/features/projects/data",
+  );
   const dirPath = path.join(projectsDir, locale);
   const filenames = await fs.readdir(dirPath);
 
@@ -69,7 +78,7 @@ export const getAllProjects = async (locale: string): Promise<Project[]> => {
         return getProject(locale, slug);
       }),
   );
-  
+
   const validProjects = projects.filter((p): p is Project => p !== null);
 
   // Sort projects by the 'order' field in the frontmatter
