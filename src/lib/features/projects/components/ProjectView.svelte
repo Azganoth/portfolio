@@ -9,11 +9,7 @@
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
   import { focustrap } from "$lib/shared/attachments/focustrap.svelte";
   import Link from "$lib/shared/components/Link.svelte";
-  import {
-    ID_PROJECT_DETAILS,
-    ID_PROJECT_TITLE,
-    TAG_META,
-  } from "$lib/shared/constants";
+  import { ID_PROJECT_DETAILS, ID_PROJECT_TITLE } from "$lib/shared/constants";
   import Icon from "@iconify/svelte";
   import { tick } from "svelte";
 
@@ -82,13 +78,18 @@
       <article
         class="flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4 xl:px-8 xl:pb-8"
       >
-        <header>
+        <header class="flex flex-col items-center gap-4 md:flex-row">
           <h1
             id={ID_PROJECT_TITLE}
             class="font-orbitron text-center text-xl font-bold tracking-wide xl:text-start"
           >
             {$selectedProject.title}
           </h1>
+          <div
+            class="bg-muted text-muted-foreground text-gray w-fit rounded-lg px-3 py-1 text-sm font-bold tracking-wide"
+          >
+            {$selectedProject.year} • {$selectedProject.category.toUpperCase()}
+          </div>
           <button
             class="tap-push hover:text-primary absolute right-4 top-4 z-10 transition-[scale,color]"
             type="button"
@@ -107,42 +108,29 @@
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html $selectedProject.description}
         </article>
-        <div class="flex flex-col gap-4 md:flex-row md:justify-between">
-          <ul
-            class="bg-muted flex flex-wrap justify-center gap-2 self-center rounded-xl p-2"
-            aria-label={$t("a11y_used_technology")}
-          >
-            {#each $selectedProject.tags as tag (tag)}
-              {@const { icon, color } = TAG_META[tag]}
-              <li aria-label={tag}>
-                <Icon class="size-6" {icon} {color} />
-              </li>
-            {/each}
-          </ul>
-          <div class="flex justify-center gap-4">
-            {#if $selectedProject.repository}
-              <Link
-                class="text-muted-foreground flex items-center gap-2"
-                href={$selectedProject.repository}
-                aria-label={$t("a11y_go_to_repository")}
-                newTab
-              >
-                {$t("projects_code")}
-                <Icon icon="fa6-solid:code" />
-              </Link>
-            {/if}
-            {#if $selectedProject.website}
-              <Link
-                class="text-muted-foreground flex items-center gap-2"
-                href={$selectedProject.website}
-                aria-label={$t("a11y_go_to_website")}
-                newTab
-              >
-                {$t("projects_visit")}
-                <Icon icon="fa6-solid:arrow-up-right-from-square" />
-              </Link>
-            {/if}
-          </div>
+        <div class="mt-4 flex justify-center gap-6 md:justify-end">
+          {#if $selectedProject.repository}
+            <Link
+              class="text-gray flex items-center gap-2"
+              href={$selectedProject.repository}
+              aria-label={$t("a11y_go_to_repository")}
+              newTab
+            >
+              {$t("projects_code")}
+              <Icon icon="fa6-solid:code" />
+            </Link>
+          {/if}
+          {#if $selectedProject.website}
+            <Link
+              class="text-gray flex items-center gap-2"
+              href={$selectedProject.website}
+              aria-label={$t("a11y_go_to_website")}
+              newTab
+            >
+              {$t("projects_visit")}
+              <Icon icon="fa6-solid:arrow-up-right-from-square" />
+            </Link>
+          {/if}
         </div>
       </article>
     </div>

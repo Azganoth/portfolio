@@ -9,7 +9,7 @@
   import type { Project } from "$lib/features/projects/schema";
   import { selectedProject } from "$lib/features/projects/store";
   import Link from "$lib/shared/components/Link.svelte";
-  import { ID_PROJECT_DETAILS } from "$lib/shared/constants";
+  import { ID_PROJECT_DETAILS, TAG_META } from "$lib/shared/constants";
   import Icon from "@iconify/svelte";
   import type { ClassValue } from "svelte/elements";
 
@@ -75,9 +75,9 @@
       </div>
     {/if}
     <div
-      class="bg-muted font-jetbrains-mono absolute bottom-1 left-1 rounded-xl px-2 py-1 text-sm font-semibold tracking-wide"
+      class="bg-muted font-jetbrains-mono absolute bottom-2 left-2 rounded-xl px-3 py-1 text-xs font-bold tracking-wide"
     >
-      {project.year}
+      {project.year} • {project.category.toUpperCase()}
     </div>
   </div>
   <div class="flex h-full flex-col gap-4 max-md:px-4 md:pb-4">
@@ -102,12 +102,15 @@
     <p id={summaryId} class="text-muted-foreground line-clamp-3 max-h-[4.5rem]">
       {project.summary}
     </p>
-    <ul class="mt-auto flex flex-wrap justify-center gap-2">
+    <ul class="mt-auto flex flex-wrap justify-center gap-3">
       {#each project.tags as tag (tag)}
-        <li
-          class="bg-muted font-jetbrains-mono text-muted-foreground rounded-2xl px-2 font-bold"
-        >
-          {tag}
+        {@const { color, icon } = TAG_META[tag] ?? TAG_META["fallback"]}
+        <li title={tag}>
+          <Icon
+            class="text-muted group-hover:text-(--brand) size-6 transition-colors duration-300"
+            style="--brand: {color}"
+            {icon}
+          />
         </li>
       {/each}
     </ul>
