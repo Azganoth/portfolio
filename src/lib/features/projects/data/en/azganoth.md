@@ -2,7 +2,7 @@
 title: Azganoth
 category: Portfolio
 year: 2025
-summary: Personal portfolio to showcase my skills, projects, and contact information.
+summary: Personal portfolio developed with SvelteKit and TailwindCSS, focused on content, immersion, and performance.
 repository: https://github.com/Azganoth/portfolio
 website: https://azganoth.vercel.app
 tags:
@@ -12,22 +12,63 @@ tags:
   - TypeScript
 ---
 
-My personal portfolio, a showcase for my skills, projects, and contact information, with support for Portuguese and English. It was built with **SvelteKit** to ensure a reactive, high-performance user experience and to streamline development.
+My personal portfolio, a showcase for my skills, projects, and contact information, with multi-language support. Built using **Svelte 5**, **SvelteKit**, and **TailwindCSS**, the project focuses on performance, accessibility, and internationalization.
 
-### Main Features
+---
 
-- **Interactive and Modern Design**: The interface was completely designed with a dark theme, modern typography, and an animated starfield background with a parallax effect to create an immersive browsing experience.
-- **Progressive Loading and Animations**: Projects are loaded progressively to avoid overwhelming the visitor, and subtle animations are applied to elements as they enter the screen, guiding the user's focus.
-- **Multi-language Support**: The portfolio is fully localized, offering complete support for Portuguese and English, with automatic detection of the user's preferred language for a more accessible browsing experience.
+## 🧩 Technical Challenges & Solutions
 
-### Tools and Technologies
+### 1. Background Animation (Canvas API)
 
-The project is built with **SvelteKit** and **TypeScript**, ensuring agile, reactive, and type-safe development. Styling is done with **TailwindCSS**, and iconography is managed by the **Iconify** library. Continuous deployment is handled by **Vercel**, taking advantage of its optimized integration with SvelteKit.
+**The Problem:** Create a "starfield" effect with parallax layers that is visually rich but lightweight enough not to impact the main thread or page scrolling.
 
-### Technical Challenges and Learnings
+**The Solution:** Instead of manipulating thousands of DOM elements, I implemented the `Starfield.svelte` component, which uses the **Canvas API** to "paint" stars onto a canvas only within the user's viewport. The component manages the rendering lifecycle with `requestAnimationFrame`, optimizing position and opacity calculations.
 
-- **Animated Background with Parallax Effect**: To create an immersive design without compromising performance, I developed a Svelte component that uses the HTML `<canvas>` API to render multiple layers of stars. Each layer moves at a different speed based on the scroll position (`window.scrollY`), creating a parallax effect. The animation is optimized with `requestAnimationFrame` to ensure fluidity.
-- **High-Performance Image Carousel**: To show previews of my projects, I needed a lightweight and accessible carousel. The solution was to implement a component using the native `IntersectionObserver` API to detect which slide is visible and update the pagination. Navigation between slides is handled with CSS Scroll Snap, resulting in a smooth, high-performance user experience without relying on external libraries or complex code.
-- **Framework Migration and Refactoring**: One of the initial challenges was the decision to migrate from **Astro** to **SvelteKit**. SvelteKit offered a more integrated development experience and a great balance between features and performance. This process required a complete refactoring of all components and data-loading logic, deepening my knowledge of component architecture and state management in general.
-- **Simplifying Content Management**: Using Contentful as a CMS was adding an unnecessary layer of complexity. I opted for a simpler and more controlled solution, moving all content to **local Markdown files** with `frontmatter`. This required creating server-side logic with `gray-matter` and `marked` to read, process, and render these files dynamically, giving me full control over the data and simplifying the deployment process.
-- **Custom Localization System Implementation**: To offer a multi-language experience, a custom localization system was developed, overcoming the limitations of legacy libraries for Svelte. The architecture consists of a **global Store** to manage the active language's messages, **JSON files** to store translations, and a **Cookie** to persist the user's choice. Initial language detection is optimized by a middleware on Vercel, which analyzes the browser's preferences or the visitor's Cookie.
+**Result:**
+
+- Ensures stable FPS.
+- Avoids main thread overload and unnecessary calculations.
+
+### 2. Hybrid Internationalization (i18n)
+
+**The Problem:** Offer support for multiple languages (PT/EN) with automatic detection and persistence, without Flash of Untranslated Content (FOUC) and compatible with **SSR**.
+
+**The Solution:** I implemented a custom solution combining **Middleware** (Vercel) and **Svelte Stores**. The middleware intercepts the request, checks cookies and `Accept-Language` headers, and redirects to the correct language if necessary.
+
+**Result:**
+
+- Language state is injected into the HTML during **SSR**.
+- Ensures the client receives the page already translated.
+- Optimized for SEO.
+
+### 3. Dependency-Free Carousel
+
+**The Problem:** Display project previews in an interactive carousel without adding the weight of third-party libraries (which often bring blocking JavaScript and unnecessary styles).
+
+**The Solution:** I implemented a carousel using **CSS Scroll Snap** for native and smooth navigation physics. To manage pagination state, I used the `IntersectionObserver` API to detect which slide is visible in the viewport.
+
+**Result:**
+
+- Zero impact on the main thread.
+- Fluid and native navigation.
+
+---
+
+## 🏗️ Architecture
+
+### Modern Frontend
+
+- **SvelteKit:** Hybrid rendering (SSR for content, CSR for interactivity).
+- **TailwindCSS:** Uses the new engine for on-demand CSS compilation.
+
+### Content & Data
+
+- **Git-based CMS:** Projects and texts are stored as extended Markdown files with Frontmatter. This allows content versioning alongside code and simplifies the build, eliminating the need for an external CMS.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Language:** TypeScript
+- **Framework:** Svelte/SvelteKit
+- **Styles:** TailwindCSS

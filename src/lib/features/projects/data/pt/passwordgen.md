@@ -2,7 +2,7 @@
 title: Password Generator
 category: Tool
 year: 2025
-summary: Ferramenta para geração de senhas seguras, focada em acessibilidade.
+summary: Aplicação interativa desenvolvida com Preact e ESM (Buildless), focada em acessibilidade e manipulação de estado complexo.
 repository: https://github.com/Azganoth/password-generator-app
 website: https://azganoth.github.io/password-generator-app/
 tags:
@@ -11,20 +11,49 @@ tags:
   - CSS
 ---
 
-Esta é uma ferramenta que permite aos usuários gerar senhas seguras e customizáveis. O projeto foi um exercício para construir uma aplicação reativa e leve, com foco total em boas práticas de HTML, CSS e, principalmente, acessibilidade.
+Este projeto é um estudo técnico sobre o desenvolvimento web moderno sem ferramentas de _build_ complexas (**Buildless Workflow**). A aplicação utiliza **Preact** carregado diretamente via módulos **ESM** nativos do navegador, combinando a reatividade de uma biblioteca **Virtual DOM** com a simplicidade de uma estrutura estática.
 
-### Principais Funcionalidades
+---
 
-- **Geração de Senha Customizável**: O usuário pode definir o comprimento da senha e incluir ou excluir tipos de caracteres (maiúsculas, minúsculas, números e símbolos).
-- **Avaliação de Força da Senha**: Uma interface visual indica a força da senha gerada em tempo real, incentivando a criação de senhas mais seguras.
-- **Funcionalidade de Copiar**: Um botão permite copiar a senha gerada para a área de transferência com um único clique, fornecendo feedback visual da ação.
-- **Alta Acessibilidade**: Toda a interface foi desenvolvida para ser completamente navegável e utilizável via teclado e leitores de tela, utilizando atributos ARIA.
+## 🧩 Desafios Técnicos & Soluções
 
-### Ferramentas e Tecnologias
+### 1. Arquitetura "Buildless" com HTM
 
-A aplicação foi desenvolvida com **Preact**, uma alternativa leve ao React, que foi importada diretamente no navegador via CDN, eliminando a necessidade de uma ferramenta de compilação como Vite ou Webpack. A estilização foi feita com **CSS** puro, e a estrutura segue as melhores práticas de **HTML semântico** e **acessibilidade (ARIA)** para garantir uma experiência inclusiva para todos os usuários.
+**O Problema:** Utilizar componentes baseados em estado e JSX sem depender de _bundlers_ (**Webpack**/**Vite**) ou _transpilers_ (**Babel**), reduzindo a complexidade da infraestrutura de desenvolvimento.
 
-### Desafios Técnicos e Aprendizados
+**A Solução:** Adotei a biblioteca `htm` (**Hyperscript Tagged Markup**) combinada com **Preact**. O `htm` utiliza **Tagged Templates** nativos do JavaScript para processar sintaxe similar ao JSX diretamente no navegador.
 
-- **Desenvolvimento Reativo sem Ferramenta de Build**: O desafio principal foi utilizar uma biblioteca moderna como o Preact em um ambiente sem etapa de compilação. A solução foi usar módulos ES6 (`ESM`) nativos do navegador para importar o Preact de um CDN e componentes entre si. Esse processo aprofundou meu entendimento sobre como os frameworks de componentes funcionam "por baixo dos panos" e como construir aplicações leves e com setup simplificado.
-- **Lógica de Geração de Senha Segura**: Desenvolvi um algoritmo em JavaScript que constrói dinamicamente o conjunto de caracteres possíveis com base nas opções selecionadas pelo usuário. A partir desse conjunto, a senha é gerada de forma aleatória, garantindo que todos os critérios definidos sejam atendidos.
+**Resultado:**
+
+- Permitiu escrever componentes funcionais modernos com _Hooks_ (`useState`, `useMemo`).
+- Roda nativamente em qualquer browser moderno, sem precisar de compilação.
+
+### 2. Acessibilidade em Aplicações Dinâmicas (ARIA)
+
+**O Problema:** Garantir que atualizações dinâmicas na tela (como a mudança na força da senha ou a geração de um novo hash) sejam percebidas por leitores de tela.
+
+**A Solução:** Implementação robusta de atributos **WAI-ARIA**. Utilizei `aria-live="assertive"` e `aria-atomic="true"` no componente de exibição de senha e no medidor de força. Sliders e checkboxes foram implementados com labels semânticos.
+
+**Resultado:**
+
+- Leitores de tela anunciam imediatamente quando uma nova senha é gerada ou o status muda.
+- Navegabilidade total via teclado.
+
+---
+
+## 🏗️ Arquitetura
+
+A lógica da aplicação é separada em componentes funcionais isolados, gerenciando estado local e efeitos colaterais.
+
+- **Gerenciamento de Estado:** Uso de Hooks (`useState`) para controlar os parâmetros de geração (comprimento, tipos de caracteres) e a senha resultante.
+- **Otimização:** Uso de `useMemo` para recalcular a força da senha apenas quando o input muda, e `useCallback` para memorizar a função de geração, evitando re-renderizações desnecessárias.
+- **Lógica de Geração:** Algoritmo de embaralhamento de arrays (Fisher-Yates simplificado) para garantir que a senha contenha uma distribuição mista dos caracteres selecionados.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Core:** Preact (via ESM)
+- **Templating:** HTM
+- **Estilos:** CSS
+- **Deploy:** GitHub Pages

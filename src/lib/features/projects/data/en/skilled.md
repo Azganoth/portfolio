@@ -2,7 +2,7 @@
 title: Skilled E-learning
 category: Landing Page
 year: 2023
-summary: A responsive landing page for a fictional e-learning platform.
+summary: Landing page developed with Utility-First approach (TailwindCSS), focused on Pixel-Perfect implementation and fluid responsiveness.
 repository: https://github.com/Azganoth/skilled-elearning-landing-page
 website: https://azganoth.github.io/skilled-elearning-landing-page/
 tags:
@@ -10,19 +10,50 @@ tags:
   - TailwindCSS
 ---
 
-This is a modern and responsive landing page for a fictional online course platform. The project was a practical exercise in building a complex and visually rich interface using exclusively the utility-first approach of TailwindCSS.
+This project explores the **Utility-First** styling methodology for developing fast and consistent interfaces. Using **TailwindCSS**, the focus was translating a static design into a web page, managing design tokens (colors, spacing, typography) directly through framework configuration, ensuring a foundation for styles.
 
-### Main Features
+---
 
-- **Multi-Grid Layout**: The page features a complex grid layout for the course cards, which adapts fluidly across mobile, tablet, and desktop resolutions.
-- **Interactive Hover States**: Buttons and other interactive elements have hover states that improve visual feedback for the user.
-- **Fully Responsive Design**: Built with a mobile-first approach, the design ensures an optimized user experience across all screen sizes.
+## 🧩 Technical Challenges & Solutions
 
-### Tools and Technologies
+### 1. Adaptive Responsive Grid
 
-The project was built with **semantic HTML** to ensure a clear and accessible structure. Styling was implemented entirely with **TailwindCSS**, leveraging its utility-first approach to speed up development, reduce the need for custom CSS, and ensure simplified maintenance.
+**The Problem:** The layout required a transition from a single column (mobile) to a two-column grid (tablet) and three columns (desktop), with cards needing to maintain precise visual alignments relative to the header and footer.
 
-### Technical Challenges and Learnings
+**The Solution:** Implementation of **CSS Grid** via utility classes (`grid`, `grid-cols-1`, `tablet:grid-cols-2`, `desktop:grid-cols-3`). Utilizing breakpoint prefixes (`tablet:`, `desktop:`) allowed for dramatic redefinition of the layout structure.
 
-- **Building Complex Layouts with a Utility-First Approach**: The main challenge was creating an asymmetrical and responsive card grid without writing a single line of custom CSS. I used **TailwindCSS's** grid system and responsive utility classes (`md:`, `lg:`) to build the complex layout directly in the HTML. This deepened my knowledge of how to create custom designs quickly and declaratively, strengthening my skills with CSS frameworks.
-- **Ensuring Consistency in Responsive Design**: Maintaining visual and spacing consistency across 3 different breakpoints was crucial. I adopted a strict **mobile-first** approach, developing for the smallest screen first and then adding classes to adapt the layout for larger screens. The result was a fluid and consistent interface across all devices.
+**Result:**
+
+- Accessibility maintained (does not alter DOM order).
+- Logical reading flow preserved.
+
+### 2. Design Tokens and JIT Customization
+
+**The Problem:** Implementing specific brand colors and complex gradients (like `from-outrageous-orange to-frostbite`) that don't exist in the default TailwindCSS palette.
+
+**The Solution:** Theme extension in `tailwind.config.js`. I mapped design colors (e.g., `yankees-blue`, `sasquatch-socks`) to semantic names in the configuration file.
+
+**Result:**
+
+- Enabled **IntelliSense** in the IDE.
+- Guaranteed that any future color palette adjustment would propagate automatically throughout the application.
+- Style architecture resilient to changes.
+
+---
+
+## 🏗️ Architecture
+
+Choosing TailwindCSS eliminated the need for monolithic CSS files and specificity issues.
+
+- **Utility-First:** HTML describes not just structure, but also appearance and responsive behavior of elements.
+- **Mobile-First:** Base code defines appearance on mobile devices. Classes with conditional prefixes (breakpoints) add complexity only when screen width permits, optimizing rendering.
+- **JIT (Just-In-Time) Compiler:** Use of arbitrary values (e.g., `w-[343px]`) for fine **Pixel-Perfect** adjustments required by the original design, without bloating the final CSS bundle.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Markup:** Semantic HTML
+- **Styling:** TailwindCSS
+- **Config:** PostCSS
+- **Deploy:** GitHub Pages

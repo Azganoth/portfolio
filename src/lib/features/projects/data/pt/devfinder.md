@@ -2,7 +2,7 @@
 title: GitHub User Search
 category: Web App
 year: 2023
-summary: Aplicativo para buscar e mostrar informações sobre perfis de usuários do GitHub.
+summary: Buscador de perfis do GitHub construído com Vue.js (Composition API) e renderização híbrida via Vite SSG.
 repository: https://github.com/Azganoth/github-user-search-app
 website: https://azganoth.github.io/github-user-search-app/
 tags:
@@ -11,20 +11,50 @@ tags:
   - TypeScript
 ---
 
-Este aplicativo permite a busca em tempo real de perfis de usuários no GitHub, exibindo suas informações detalhadas como bio, estatísticas e data de criação. O projeto foi uma excelente oportunidade para aprofundar meus conhecimentos no ecossistema Vue.js e em interações com APIs externas.
+Esta aplicação consome a API pública do GitHub para exibir perfis de desenvolvedores com detalhes ricos. O projeto vai além de uma **SPA** tradicional ao implementar **Static Site Generation (SSG)**, garantindo que o conteúdo inicial seja entregue como HTML estático para máxima performance e SEO, antes de ser hidratado pelo **Vue.js** para interatividade.
 
-### Principais Funcionalidades
+---
 
-- **Busca de Usuários via API**: Consome a API REST oficial do GitHub para buscar e exibir dados de perfis de forma dinâmica.
-- **Tratamento de Erros**: A interface fornece feedback claro para o usuário em casos de erro, como "usuário não encontrado" ou falhas na requisição.
-- **Seletor de Tema (Claro/Escuro)**: Permite ao usuário alternar entre os temas claro e escuro, com a preferência sendo salva no `localStorage` para persistir entre as sessões.
-- **Design Responsivo**: Desenvolvido com uma abordagem mobile-first para garantir uma experiência de uso consistente em qualquer dispositivo.
+## 🧩 Desafios Técnicos & Soluções
 
-### Ferramentas e Tecnologias
+### 1. Lógica de Tema Reativa (Dark Mode)
 
-A interface foi construída com **Vue.js 3** (utilizando a Composition API) e **TypeScript**, garantindo um desenvolvimento reativo, tipado e de fácil manutenção. Para a estilização, utilizei **TailwindCSS** pela sua agilidade e abordagem utility-first. O projeto foi configurado com **Vite** como ferramenta de build, proporcionando um ambiente de desenvolvimento rápido, e o deploy contínuo para o **GitHub Pages** foi automatizado com **GitHub Actions**.
+**O Problema:** Criar um sistema de temas que respeite a preferência do sistema operacional, permita _override_ manual pelo usuário e persista essa escolha, sem recarregar a página.
 
-### Desafios Técnicos e Aprendizados
+**A Solução:** Utilizei o `watchEffect` da Composition API para sincronizar reativamente o estado do tema com o DOM (adicionando classes no `<html>`) e o `localStorage`. A inicialização verifica inteligentemente: `localStorage` > `prefers-color-scheme` > Padrão.
 
-- **Consumo de API Externa e Gerenciamento de Estado**: O desafio central foi gerenciar as chamadas à API REST do GitHub e refletir seus vários estados (carregando, sucesso, erro) na UI. Utilizei a Composition API do Vue para criar um estado reativo que era atualizado de forma síncrona com a resposta da API, resultando em uma interface dinâmica que fornece feedback claro ao usuário.
-- **Implementação de Troca de Tema com Persistência**: Um desafio interessante foi criar um seletor de tema reutilizável. A solução envolveu uma lógica que aplica classes CSS no elemento raiz do HTML e utiliza o `localStorage` do navegador para persistir a preferência do usuário entre as sessões, melhorando a experiência do usuário.
+**Resultado:**
+
+- Experiência consistente.
+- Sem "flashes" de tema incorreto.
+
+### 2. Tipagem Estrita de API Externa
+
+**O Problema:** A API do GitHub retorna objetos JSON complexos com muitos campos opcionais (`nullable`). Consumir isso sem tipagem rigorosa levaria a erros de _runtime_ silenciosos.
+
+**A Solução:** Definição completa de interfaces TypeScript (`Profile`, `PublicUser`, `PrivateUser`) espelhando a resposta da API.
+
+**Resultado:**
+
+- Habilitou o autocompletar na IDE.
+- Permite detecção de erros em tempo de compilação ao acessar propriedades que poderiam ser nulas.
+- Código robusto.
+
+---
+
+## 🏗️ Arquitetura
+
+O projeto adota uma arquitetura moderna focada em **Performance (DX & UX)**.
+
+- **Vue 3 + Script Setup:** Código conciso e performático, com lógica de negócios separada visualmente da marcação.
+- **Vite SSG:** Utilização do plugin `vite-ssg` para gerar uma aplicação que combina os benefícios de sites estáticos (carregamento instantâneo) com a riqueza de uma Single Page Application (SPA).
+- **TailwindCSS:** Estilização baseada em utilitários, permitindo um design responsivo e adaptável (Dark Mode) sem a sobrecarga de _dead code_ em produção.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Vue.js
+- **Build:** Vite + Vite SSG
+- **Linguagem:** TypeScript
+- **Estilos:** TailwindCSS

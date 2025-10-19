@@ -2,31 +2,54 @@
 title: Tic Tac Toe
 category: Game
 year: 2023
-summary: Tic Tac Toe game with a challenging AI opponent (Minimax algorithm).
+summary: Robust tic-tac-toe game with AI engine (Minimax), internationalization, and automated test coverage.
 repository: https://github.com/Azganoth/tic-tac-toe
 website: https://azganoth.github.io/tic-tac-toe/
 tags:
   - React
-  - SASS
-  - Vitest
-  - Testing Library
   - TypeScript
 ---
 
-This is a modern implementation of the classic Tic Tac Toe game, allowing matches between two local players or against an AI opponent. The project was an opportunity to delve into game algorithms, automated testing, and state management in React.
+This project demonstrates the application of software engineering practices in a playful domain. More than a simple game, it is an exercise in **Clean Architecture** on the frontend, rigorously separating business logic (game rules, AI) from the presentation layer (**React**), ensuring code is testable, maintainable, and localizable.
 
-### Main Features
+---
 
-- **Two Game Modes**: The user can choose between playing against another player locally or challenging the computer.
-- **AI with Minimax Algorithm**: The computer opponent plays optimally, making the matches challenging.
-- **Game Persistence**: The game state and scores are saved in `localStorage`, allowing the user to close and reopen the browser without losing their progress.
-- **Multi-language Support**: The interface is available in Portuguese and English, with a simple localization system.
+## 🧩 Technical Challenges & Solutions
 
-### Tools and Technologies
+### 1. AI Algorithm
 
-The application was built with **React** and **TypeScript**, using **Vite** for a fast development environment. Styling was done with **SASS** combined with **CSS Modules** to create modular and easily maintainable styles. The quality and robustness of the code are ensured by a comprehensive test suite with **Vitest** and **React Testing Library**.
+**The Problem:** Create a challenging single-player experience where the CPU doesn't just play randomly, but plays to win (or draw).
 
-### Technical Challenges and Learnings
+**The Solution:** Implementation of the **Recursive Minimax** algorithm. The algorithm simulates the complete game decision tree at each turn, evaluating all possible future scenarios and assigning scores to terminal states.
 
-- **Implementing the AI with the Minimax Algorithm**: The most complex challenge was creating a computer opponent that was truly challenging. To do this, I studied and implemented the **Minimax** algorithm, which recursively analyzes all possible move trees to determine the optimal move. The result is an AI that plays perfectly, making the single-player mode an experience of logic and strategy.
-- **Comprehensive Test Coverage**: Ensuring that the complex game and AI logic was bug-free was crucial. I created a test suite with **Vitest** and **React Testing Library** that covered both the pure game functions (unit tests on the Minimax algorithm) and user interactions in the interface (integration tests), resulting in a stable and easily maintainable application.
+**Result:**
+
+- Chooses the move that maximizes CPU gain.
+
+### 2. Reliability and Refactoring (TDD)
+
+**The Problem:** Win detection logic and the Minimax algorithm are prone to off-by-one errors and regressions during refactoring.
+
+**The Solution:** Adoption of **Test-Driven Development (TDD)** with **Vitest**. I wrote unit tests for pure game logic functions before integrating with the UI and used **React Testing Library** for integration tests.
+
+**Result:**
+
+- Ensures user interaction triggers correct state changes.
+- Shields the project against regressions.
+
+---
+
+## 🏗️ Architecture
+
+- **Separation of Concerns:** Game logic resides in testable reducers and pure utilities, decoupled from visual components.
+- **Internationalization (i18n):** Custom translation system via **React Context** (`TranslationContext`), allowing native support for multiple languages (`en`, `pt-BR`) without heavy external libraries.
+- **Hybrid State Management:** Combination of `useReducer` for complex turn transition logic and `localStorage` for data persistence, allowing the user to reload the page without losing progress.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, TypeScript
+- **Styles:** SASS & SASS Modules
+- **Tests:** Vitest, Testing Library
+- **Build:** Vite

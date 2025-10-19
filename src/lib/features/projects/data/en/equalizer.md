@@ -2,7 +2,7 @@
 title: Equalizer
 category: Landing Page
 year: 2023
-summary: A modern and responsive landing page for a fictional music app.
+summary: High-fidelity (Pixel-Perfect) implementation of a responsive landing page, utilizing CSS variables and BEM methodology for scalable style architecture.
 repository: https://github.com/Azganoth/equalizer-landing-page
 website: https://azganoth.github.io/equalizer-landing-page/
 tags:
@@ -10,19 +10,58 @@ tags:
   - CSS
 ---
 
-This is a visually impactful landing page for a fictional mobile sound equalizer application. The project was a practical exercise focused on building complex and responsive layouts using pure CSS and code organization methodologies.
+This project was developed as a solution to a **Frontend Mentor** challenge, focusing on visual fidelity and writing clean, performant CSS without reliance on frameworks. The main objective was to demonstrate mastery over the **Box Model**, positioning, and CSS architecture in a design scenario with complex decorative elements (overlapping backgrounds).
 
-### Main Features
+---
 
-- **Fully Responsive Design**: Fluidly adapts to different screen sizes, from mobile devices to desktops, following a mobile-first approach.
-- **Complex Graphic Elements**: Features background patterns and positioned images to create a rich and modern visual experience.
-- **Semantic Structure**: Built with semantic HTML to ensure maximum accessibility and search engine optimization.
+## 🧩 Technical Challenges & Solutions
 
-### Tools and Technologies
+### 1. Positioning Decorative Assets
 
-The project was built with **semantic HTML** and styled with pure **CSS**. To organize the styles in a scalable way, I applied the **BEM (Block, Element, Modifier)** methodology, which resulted in modular and easy-to-maintain code. The design approach was strictly **mobile-first**, ensuring a high-quality experience on mobile devices that expands to larger screens.
+**The Problem:** The design required geometric background patterns (`bg-pattern-1.svg`, `bg-pattern-2.svg`) that overflow the main container or are positioned asymmetrically.
 
-### Technical Challenges and Learnings
+**The Solution:** I used `position: absolute` anchored to `relative` containers with calculated coordinates and `z-index` to control the stacking order.
 
-- **Positioning of Graphic Elements**: The main challenge was positioning the graphic elements (background patterns and images) so that they adjusted correctly on different screen resolutions without breaking the layout. I used CSS properties like `position: absolute` and `transform`, along with `media queries`, to control the exact positioning of the elements at each breakpoint.
-- **CSS Organization with BEM**: In a project with many custom elements, it was crucial to prevent the CSS from becoming confusing. Adopting the **BEM** methodology resulted in classes with low coupling and high cohesion, making each component's style independent, easy to understand, and maintainable.
+**Result:**
+
+- Precise visual elements.
+- No interference with the reading flow of the main content.
+
+### 2. Responsive Typography
+
+**The Problem:** The typographic scale needed to adapt drastically between mobile and desktop (e.g., headings varying from 40px to 88px).
+
+**The Solution:** I controlled the base typography on the `html` element and made precise adjustments in components via **Media Queries**.
+
+**Result:**
+
+- Readability guaranteed on any device.
+- Consistent visual hierarchy.
+
+---
+
+## 🏗️ Architecture
+
+### BEM Methodology (Block, Element, Modifier)
+
+To avoid excessive specificity and style leakage, common problems in pure CSS, I strictly adopted the **BEM** convention. This resulted in decoupled components (like `.premium` and `.header`), facilitating maintenance and ensuring classes are self-explanatory.
+
+### Mobile-First Strategy
+
+Development began with the mobile viewport, ensuring the base layout was lightweight and functional.
+
+- **Code:** Default CSS serves mobile devices, while **Media Queries** (`min-width: 768px`, `min-width: 1440px`) progressively add complexity for larger screens.
+- **Benefit:** Optimized performance on mobile devices (fewer overrides) and more predictable code.
+
+### CSS Custom Properties (Variables)
+
+I defined a design token system in `:root` for colors (`--aquamarine-blue`, `--mirage-grey`), centralizing theme management. This allows global palette changes by modifying a single line of code, simulating the flexibility of preprocessors like SASS, but using only native browser features.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Markup:** Semantic HTML
+- **Styles:** CSS
+- **Workflow:** Prettier
+- **Deploy:** GitHub Pages

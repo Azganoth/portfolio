@@ -2,7 +2,7 @@
 title: Suite
 category: Landing Page
 year: 2023
-summary: Landing page responsiva com foco em otimização de performance através de imagens responsivas.
+summary: Solução de marketing focada em otimização de assets e arquitetura CSS escalável, com ênfase em Responsive Images e Core Web Vitals.
 repository: https://github.com/Azganoth/suite-landing-page
 website: https://azganoth.github.io/suite-landing-page/
 tags:
@@ -10,19 +10,48 @@ tags:
   - CSS
 ---
 
-Esta é uma landing page para uma consultoria de marketing fictícia. O projeto foi um exercício focado em duas áreas críticas do desenvolvimento frontend: otimização de performance e a criação de uma arquitetura de CSS escalável sem o uso de pré-processadores.
+Suite é uma landing page desenvolvida com foco estrito em **Performance de Renderização** e **Otimização de Assets**. O projeto supera o layout responsivo tradicional ao implementar estratégias nativas de carregamento de imagens para reduzir o uso de largura de banda em dispositivos móveis, garantindo um **LCP** (Largest Contentful Paint) otimizado.
 
-### Principais Funcionalidades
+---
 
-- **Design Totalmente Responsivo**: Construído com uma abordagem mobile-first, o layout se adapta de forma fluida a dispositivos móveis, tablets e desktops.
-- **Imagens Otimizadas**: Utiliza imagens responsivas para servir a versão mais apropriada de cada imagem com base no dispositivo do usuário, otimizando o tempo de carregamento e o consumo de dados.
-- **Estrutura Semântica e Modular**: O código foi estruturado com HTML semântico e a metodologia BEM para garantir acessibilidade e um CSS de fácil manutenção.
+## 🧩 Desafios Técnicos & Soluções
 
-### Ferramentas e Tecnologias
+### 1. Estratégia de Imagens Responsivas
 
-O projeto foi construído utilizando apenas **HTML** e **CSS** puro. Para garantir a organização e escalabilidade do código, apliquei a metodologia **BEM (Block, Element, Modifier)** na estruturação dos estilos. A abordagem de design foi **mobile-first**, garantindo uma base sólida para a responsividade.
+**O Problema:** O design especificava imagens de destaque distintas para mobile e tablet/desktop. Servir a imagem de desktop para um celular desperdiçaria dados e atrasaria o carregamento.
 
-### Desafios Técnicos e Aprendizados
+**A Solução:** Em vez de usar CSS ou JavaScript para trocar as imagens, utilizei o atributo `srcset` e `sizes` diretamente na tag `<img>`.
 
-- **Implementação de Imagens Responsivas**: O desafio principal foi otimizar o carregamento de imagens em diferentes dispositivos. Utilizei a tag `<picture>` e os atributos `srcset` e `sizes` para permitir que o navegador escolhesse a imagem mais apropriada com base na largura da tela. Resultando em uma melhora significativa no tempo de carregamento em dispositivos móveis e uma otimização no consumo de banda.
-- **CSS Modular sem Pré-processador**: Outro desafio foi manter o CSS organizado e escalável sem as facilidades do SASS. Adotei a metodologia **BEM** de forma rigorosa, o que forçou uma estrutura de classes clara e modular. Como resultado, obtive um CSS de fácil manutenção e livre de conflitos, demonstrando a capacidade de criar arquiteturas de estilo robustas com ferramentas fundamentais.
+**Resultado:**
+
+- O navegador baixa apenas o recurso necessário.
+- Economia de largura de banda.
+- Tempo de interação acelerado.
+
+### 2. Arquitetura CSS Escalável (BEM)
+
+**O Problema:** Manter a especificidade do CSS baixa e o código organizado sem o uso de pré-processadores em um layout com elementos sobrepostos complexos.
+
+**A Solução:** Adoção rigorosa da metodologia **BEM (Block, Element, Modifier)**. Isolei estilos em blocos lógicos (`.hero`, `.card`, `.footer`) e utilizei **CSS Custom Properties** (`--dark-blue`, `--cream`) no `:root`.
+
+**Resultado:**
+
+- Evita _bleeding_ de estilos.
+- Facilita a manutenção do tema visual sem necessidade de recompilação.
+
+---
+
+## 🏗️ Arquitetura
+
+- **HTML Semântico:** Estrutura baseada em _landmarks_ (`<header>`, `<main>`, `<nav>`, `<footer>`) para garantir acessibilidade e SEO.
+- **Mobile-First Development:** O CSS base é escrito para dispositivos móveis. Media queries (`min-width: 768px`, `min-width: 1440px`) são usadas para _adicionar_ complexidade de layout em telas maiores, mantendo o parseamento do CSS mais rápido em dispositivos limitados.
+- **Layouts Modernos:** Combinação de **CSS Grid** para a estrutura macro (layout da página) e **Flexbox** para alinhamentos micro (componentes internos), explorando o melhor de cada especificação.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Markup:** HTML Semântico
+- **Estilos:** CSS
+- **Imagens:** WebP & Srcset
+- **Deploy:** GitHub Pages

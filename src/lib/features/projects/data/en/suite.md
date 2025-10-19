@@ -2,7 +2,7 @@
 title: Suite
 category: Landing Page
 year: 2023
-summary: A responsive landing page with a focus on performance optimization through responsive images.
+summary: Marketing solution focused on asset optimization and scalable CSS architecture, with emphasis on Responsive Images and Core Web Vitals.
 repository: https://github.com/Azganoth/suite-landing-page
 website: https://azganoth.github.io/suite-landing-page/
 tags:
@@ -10,19 +10,48 @@ tags:
   - CSS
 ---
 
-This is a landing page for a fictional marketing consultancy. The project was an exercise focused on two critical areas of frontend development: performance optimization and creating a scalable CSS architecture without the use of pre-processors.
+Suite is a landing page developed with a strict focus on **Rendering Performance** and **Asset Optimization**. The project surpasses traditional responsive layout by implementing native image loading strategies to reduce bandwidth usage on mobile devices, ensuring an optimized **LCP** (Largest Contentful Paint).
 
-### Main Features
+---
 
-- **Fully Responsive Design**: Built with a mobile-first approach, the layout adapts fluidly to mobile devices, tablets, and desktops.
-- **Optimized Images**: Uses responsive images to serve the most appropriate version of each image based on the user's device, optimizing loading time and data consumption.
-- **Semantic and Modular Structure**: The code was structured with semantic HTML and the BEM methodology to ensure accessibility and an easily maintainable CSS.
+## 🧩 Technical Challenges & Solutions
 
-### Tools and Technologies
+### 1. Responsive Images Strategy
 
-The project was built using only pure **HTML** and **CSS**. To ensure code organization and scalability, I applied the **BEM (Block, Element, Modifier)** methodology in structuring the styles. The design approach was **mobile-first**, ensuring a solid foundation for responsiveness.
+**The Problem:** The design specified distinct hero images for mobile and tablet/desktop. Serving the desktop image to a mobile phone would waste data and delay loading.
 
-### Technical Challenges and Learnings
+**The Solution:** Instead of using CSS or JavaScript to swap images, I used the `srcset` and `sizes` attributes directly on the `<img>` tag.
 
-- **Implementing Responsive Images**: The main challenge was optimizing image loading across different devices. I used the `<picture>` tag and the `srcset` and `sizes` attributes to allow the browser to choose the most appropriate image based on the screen width. This resulted in a significant improvement in loading time on mobile devices and an optimization in bandwidth consumption.
-- **Modular CSS without a Pre-processor**: Another challenge was keeping the CSS organized and scalable without the conveniences of SASS. I rigorously adopted the **BEM** methodology, which enforced a clear and modular class structure. As a result, I achieved an easily maintainable and conflict-free CSS, demonstrating the ability to create robust style architectures with fundamental tools.
+**Result:**
+
+- The browser downloads only the necessary resource.
+- Bandwidth savings.
+- Accelerated time to interaction.
+
+### 2. Scalable CSS Architecture (BEM)
+
+**The Problem:** Keep CSS specificity low and code organized without using preprocessors in a layout with complex overlapping elements.
+
+**The Solution:** Rigorous adoption of **BEM (Block, Element, Modifier)** methodology. I isolated styles into logical blocks (`.hero`, `.card`, `.footer`) and used **CSS Custom Properties** (`--dark-blue`, `--cream`) in `:root`.
+
+**Result:**
+
+- Avoids style bleeding.
+- Facilitates visual theme maintenance without recompilation.
+
+---
+
+## 🏗️ Architecture
+
+- **Semantic HTML:** Structure based on landmarks (`<header>`, `<main>`, `<nav>`, `<footer>`) to ensure accessibility and SEO.
+- **Mobile-First Development:** Base CSS is written for mobile devices. Media queries (`min-width: 768px`, `min-width: 1440px`) are used to *add* layout complexity on larger screens, keeping CSS parsing faster on limited devices.
+- **Modern Layouts:** Combination of **CSS Grid** for macro structure (page layout) and **Flexbox** for micro alignments (internal components), exploiting the best of each specification.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Markup:** Semantic HTML
+- **Styles:** CSS
+- **Images:** WebP & Srcset
+- **Deploy:** GitHub Pages

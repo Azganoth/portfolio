@@ -1,8 +1,8 @@
 ---
 title: Body Mass Index Calculator
 category: Tool
-year: 2024
-summary: Calculadora de IMC (Índice de Massa Corporal) com foco em design responsivo e acessibilidade.
+year: 2023
+summary: Ferramenta de cálculo de IMC desenvolvida com Vanilla JavaScript, focada em acessibilidade (WAI-ARIA) e otimização de performance de renderização.
 repository: https://github.com/Azganoth/bmi-calculator
 website: https://azganoth.github.io/bmi-calculator/
 tags:
@@ -11,20 +11,54 @@ tags:
   - JavaScript
 ---
 
-Esta é uma ferramenta interativa para calcular o Índice de Massa Corporal (IMC). O projeto foi desenvolvido com tecnologias web fundamentais (HTML, CSS e JavaScript) para criar uma experiência de usuário simples, rápida, acessível e totalmente responsiva.
+Este projeto é um exercício de engenharia focado em **Web Nativa**. O objetivo foi construir uma aplicação interativa e acessível sem a sobrecarga de _frameworks_ modernos, demonstrando como APIs nativas do **DOM** e padrões de projeto fundamentais podem entregar performance superior e uma experiência de usuário robusta com zero dependências.
 
-### Principais Funcionalidades
+---
 
-- **Cálculo de IMC**: Permite que os usuários insiram sua altura e peso para obter o resultado do IMC de forma instantânea.
-- **Validação de Entrada**: O formulário valida os dados inseridos para garantir que apenas números válidos sejam processados, fornecendo feedback ao usuário.
-- **Feedback Visual Claro**: Exibe o resultado de forma clara, indicando a faixa de peso correspondente (abaixo do peso, saudável, sobrepeso).
-- **Alta Acessibilidade**: A interface é totalmente navegável e funcional utilizando apenas o teclado, com suporte a leitores de tela através de atributos ARIA.
+## 🧩 Desafios Técnicos & Soluções
 
-### Ferramentas e Tecnologias
+### 1. Componente de Abas Acessível (WAI-ARIA)
 
-Este projeto foi construído intencionalmente com **JavaScript puro** (vanilla JS) para focar na manipulação direta do DOM e na lógica de programação fundamental. A estrutura foi criada com **HTML semântico** e a estilização com **CSS** puro, seguindo uma abordagem **mobile-first** para garantir a responsividade em todos os dispositivos.
+**O Problema:** Criar um sistema de abas (_Metric_ vs _Imperial_) que fosse não apenas funcional, mas totalmente compatível com leitores de tela e navegação por teclado, sem usar bibliotecas de UI.
 
-### Desafios Técnicos e Aprendizados
+**A Solução:** Implementei manualmente o padrão de design **WAI-ARIA Tabs**. Utilizei JavaScript para manipular atributos ARIA (`aria-selected`, `aria-hidden`, `tabindex`) em tempo real e adicionei _event listeners_ para as setas (`ArrowLeft`, `ArrowRight`).
 
-- **Manipulação do DOM e Lógica Interativa**: O principal desafio foi criar uma experiência de usuário fluida e reativa sem o uso de um framework. Desenvolvi toda a lógica de captura de dados, validação de entrada e exibição de resultados usando `addEventListener` e manipulação direta de elementos do DOM. Isso aprofundou meu conhecimento nos fundamentos do JavaScript e na interação com a árvore de elementos do HTML.
-- **Otimização da Experiência de Carregamento**: Para evitar o Flash of Unstyled Content (FOUC) e garantir que a interface fosse renderizada rapidamente, utilizei a tag `<link rel="preload">` no HTML. Essa técnica instrui o navegador a carregar os arquivos de CSS e as fontes principais com prioridade, resultando em uma melhoria perceptível na experiência de carregamento inicial para o usuário.
+**Resultado:**
+
+- Permite que o foco transite fluidamente entre as abas.
+- Replica o comportamento nativo esperado por usuários de tecnologias assistivas.
+
+### 2. Reatividade e DOM Manipulation
+
+**O Problema:** Atualizar a interface instantaneamente conforme o usuário digita, incluindo a classificação do IMC e faixas de peso ideal, sem o _data-binding_ automático de _frameworks_.
+
+**A Solução:** Desenvolvi uma arquitetura baseada em eventos (`input`) que aciona um pipeline de cálculo e renderização. Utilizei **Template Literals** para injeção dinâmica de HTML e desacoplei a lógica de validação (`isPositiveNumber`) e conversão de unidades.
+
+**Resultado:**
+
+- Substitui a necessidade de um **Virtual DOM** para esta escala de projeto.
+- Facilita testes e manutenção.
+
+---
+
+## 🏗️ Arquitetura
+
+### Critical Rendering Path
+
+O projeto foi otimizado para o **Core Web Vitals**, especificamente **LCP** (Largest Contentful Paint) e **CLS** (Cumulative Layout Shift).
+
+- **Preloading:** Uso de `<link rel="preload">` para fontes e CSS crítico, garantindo renderização imediata sem **FOUC** (Flash of Unstyled Content).
+- **CSS Architecture:** Uso de Variáveis CSS (`:root`) para _design tokens_ e metodologia **BEM** para escopo de estilos.
+
+### Mobile-First Strategy
+
+O CSS foi escrito seguindo estritamente a abordagem **Mobile-First**. O layout padrão é vertical (_stack_) e utiliza Flexbox/Grid para reorganização complexa em _viewports_ maiores (Tablet/Desktop), garantindo que dispositivos móveis carreguem apenas o CSS essencial para sua renderização.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Core:** JavaScript (ES6+)
+- **Estilos:** CSS
+- **Acessibilidade:** WAI-ARIA
+- **Performance:** Resource Hints (Uso estratégico de `preload`)

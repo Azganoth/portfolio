@@ -2,7 +2,7 @@
 title: Equalizer
 category: Landing Page
 year: 2023
-summary: Landing page moderna e responsiva para um app de música (fictício).
+summary: Implementação de alta fidelidade (Pixel-Perfect) de uma landing page responsiva, utilizando variáveis CSS e metodologia BEM para a arquitetura de estilos escalável.
 repository: https://github.com/Azganoth/equalizer-landing-page
 website: https://azganoth.github.io/equalizer-landing-page/
 tags:
@@ -10,19 +10,58 @@ tags:
   - CSS
 ---
 
-Esta é uma landing page visualmente impactante para um aplicativo mobile fictício de equalização de som. O projeto foi um exercício prático focado na construção de layouts complexos e responsivos, utilizando CSS puro e metodologias de organização de código.
+Este projeto foi desenvolvido como uma solução para um desafio **Frontend Mentor**, focando na fidelidade visual e na escrita de um CSS limpo e performático, sem a dependência de frameworks. O objetivo principal foi demonstrar domínio sobre o **Box Model**, posicionamento e arquitetura de CSS em um cenário de design com elementos decorativos complexos (_backgrounds_ sobrepostos).
 
-### Principais Funcionalidades
+---
 
-- **Design Totalmente Responsivo**: Adapta-se de forma fluida a diferentes tamanhos de tela, desde dispositivos móveis até desktops, seguindo uma abordagem mobile-first.
-- **Elementos Gráficos Complexos**: Apresenta padrões de fundo e imagens posicionadas de forma a criar uma experiência visual rica e moderna.
-- **Estrutura Semântica**: Construído com HTML semântico para garantir a máxima acessibilidade e otimização para motores de busca.
+## 🧩 Desafios Técnicos & Soluções
 
-### Ferramentas e Tecnologias
+### 1. Posicionamento de Assets Decorativos
 
-O projeto foi construído com **HTML semântico** e estilizado com **CSS** puro. Para organizar os estilos de forma escalável, apliquei a metodologia **BEM (Block, Element, Modifier)**, que resultou em um código modular e de fácil manutenção. A abordagem de design foi estritamente **mobile-first**, garantindo uma experiência de alta qualidade em dispositivos móveis que se expande para telas maiores.
+**O Problema:** O design exigia padrões geométricos de fundo (`bg-pattern-1.svg`, `bg-pattern-2.svg`) que transbordam o _container_ principal ou se posicionam de forma assimétrica.
 
-### Desafios Técnicos e Aprendizados
+**A Solução:** Utilizei `position: absolute` ancorado a containers `relative` com coordenadas calculadas e `z-index` para controlar a ordem de empilhamento.
 
-- **Posicionamento de Elementos Gráficos**: O principal desafio foi posicionar os elementos gráficos (padrões e imagens de fundo) de forma que se ajustassem corretamente em diferentes resoluções de tela sem quebrar o layout. Utilizei propriedades CSS como `position: absolute` e `transform`, em conjunto com `media queries`, para controlar o posicionamento exato dos elementos em cada breakpoint.
-- **Organização de CSS com BEM**: Em um projeto com muitos elementos customizados, era crucial evitar que o CSS se tornasse confuso. A adoção da metodologia **BEM** resultou em classes com baixo acoplamento e alta coesão, tornando cada componente de estilo independente, fácil de entender e de manter.
+**Resultado:**
+
+- Elementos visuais precisos.
+- Sem interferência no fluxo de leitura do conteúdo principal.
+
+### 2. Tipografia Responsiva
+
+**O Problema:** A escala tipográfica precisava se adaptar drasticamente entre mobile e desktop (ex: títulos variando de 40px para 88px).
+
+**A Solução:** Controlei a tipografia base no elemento `html` e ajustes pontuais nos componentes via **Media Queries**.
+
+**Resultado:**
+
+- Legibilidade garantida em qualquer dispositivo.
+- Hierarquia visual consistente.
+
+---
+
+## 🏗️ Arquitetura
+
+### Metodologia BEM (Block, Element, Modifier)
+
+Para evitar especificidade excessiva e vazamento de estilos, problemas comuns em CSS puro, adotei estritamente a convenção **BEM**. Isso resultou em componentes desacoplados (como `.premium` e `.header`), facilitando a manutenção e garantindo que as classes sejam auto-explicativas.
+
+### Estratégia Mobile-First
+
+O desenvolvimento iniciou-se pela viewport móvel, garantindo que o layout base fosse leve e funcional.
+
+- **Código:** O CSS padrão atende dispositivos móveis, enquanto **Media Queries** (`min-width: 768px`, `min-width: 1440px`) adicionam complexidade progressivamente para telas maiores.
+- **Benefício:** Performance otimizada em dispositivos móveis (menos _overrides_) e código mais previsível.
+
+### CSS Custom Properties (Variáveis)
+
+Defini um sistema de design tokens no `:root` para cores (`--aquamarine-blue`, `--mirage-grey`), centralizando a gestão do tema. Isso permite alterações globais de paleta com a modificação de uma única linha de código, simulando a flexibilidade de pré-processadores como SASS, mas usando apenas recursos nativos do navegador.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Markup:** HTML Semântico
+- **Estilos:** CSS
+- **Workflow:** Prettier
+- **Deploy:** GitHub Pages

@@ -1,8 +1,8 @@
 ---
 title: Body Mass Index Calculator
 category: Tool
-year: 2024
-summary: A BMI (Body Mass Index) calculator with a focus on responsive design and accessibility.
+year: 2023
+summary: BMI calculation tool developed with Vanilla JavaScript, focused on accessibility (WAI-ARIA) and rendering performance optimization.
 repository: https://github.com/Azganoth/bmi-calculator
 website: https://azganoth.github.io/bmi-calculator/
 tags:
@@ -11,20 +11,54 @@ tags:
   - JavaScript
 ---
 
-This is an interactive tool for calculating Body Mass Index (BMI). The project was developed with fundamental web technologies (HTML, CSS, and JavaScript) to create a simple, fast, accessible, and fully responsive user experience.
+This project is an engineering exercise focused on **Native Web**. The objective was to build an interactive and accessible application without the overhead of modern frameworks, demonstrating how native **DOM** APIs and fundamental design patterns can deliver superior performance and a robust user experience with zero dependencies.
 
-### Main Features
+---
 
-- **BMI Calculation**: Allows users to input their height and weight to get their BMI result instantly.
-- **Input Validation**: The form validates the entered data to ensure only valid numbers are processed, providing feedback to the user.
-- **Clear Visual Feedback**: Displays the result clearly, indicating the corresponding weight range (underweight, healthy, overweight).
-- **High Accessibility**: The interface is fully navigable and functional using only the keyboard, with support for screen readers through ARIA attributes.
+## 🧩 Technical Challenges & Solutions
 
-### Tools and Technologies
+### 1. Accessible Tabs Component (WAI-ARIA)
 
-This project was intentionally built with **vanilla JavaScript** to focus on direct DOM manipulation and fundamental programming logic. The structure was created with **semantic HTML**, and styling was done with pure **CSS**, following a **mobile-first** approach to ensure responsiveness across all devices.
+**The Problem:** Create a tab system (Metric vs Imperial) that is not only functional but fully compatible with screen readers and keyboard navigation, without using UI libraries.
 
-### Technical Challenges and Learnings
+**The Solution:** I manually implemented the **WAI-ARIA Tabs** design pattern. I used JavaScript to manipulate ARIA attributes (`aria-selected`, `aria-hidden`, `tabindex`) in real-time and added event listeners for arrow keys (`ArrowLeft`, `ArrowRight`).
 
-- **DOM Manipulation and Interactive Logic**: The main challenge was creating a fluid and reactive user experience without using a framework. I developed all the logic for data capture, input validation, and result display using `addEventListener` and direct DOM element manipulation. This deepened my knowledge of JavaScript fundamentals and interaction with the HTML element tree.
-- **Optimizing the Loading Experience**: To avoid the Flash of Unstyled Content (FOUC) and ensure the interface rendered quickly, I used the `<link rel="preload">` tag in the HTML. This technique instructs the browser to load the CSS files and main fonts with priority, resulting in a noticeable improvement in the initial loading experience for the user.
+**Result:**
+
+- Allows focus to transition fluidly between tabs.
+- Replicates the native behavior expected by users of assistive technologies.
+
+### 2. Reactivity and DOM Manipulation
+
+**The Problem:** Update the interface instantly as the user types, including BMI classification and ideal weight ranges, without the automatic data-binding of frameworks.
+
+**The Solution:** I developed an event-based architecture (`input`) that triggers a calculation and rendering pipeline. I used **Template Literals** for dynamic HTML injection and decoupled validation logic (`isPositiveNumber`) and unit conversion.
+
+**Result:**
+
+- Replaces the need for a **Virtual DOM** for this project scale.
+- Facilitates testing and maintenance.
+
+---
+
+## 🏗️ Architecture
+
+### Critical Rendering Path
+
+The project was optimized for **Core Web Vitals**, specifically **LCP** (Largest Contentful Paint) and **CLS** (Cumulative Layout Shift).
+
+- **Preloading:** Use of `<link rel="preload">` for fonts and critical CSS, ensuring immediate rendering without **FOUC** (Flash of Unstyled Content).
+- **CSS Architecture:** Use of CSS Variables (`:root`) for design tokens and **BEM** methodology for style scoping.
+
+### Mobile-First Strategy
+
+The CSS was written strictly following the **Mobile-First** approach. The default layout is vertical (stack) and uses Flexbox/Grid for complex reorganization on larger viewports (Tablet/Desktop), ensuring mobile devices load only the essential CSS for their rendering.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Core:** JavaScript (ES6+)
+- **Styles:** CSS
+- **Accessibility:** WAI-ARIA
+- **Performance:** Resource Hints (Strategic use of `preload`)

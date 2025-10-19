@@ -2,7 +2,7 @@
 title: Tree Sitter Lua
 category: Library
 year: 2018
-summary: A complete Lua language grammar for the Tree-sitter parser, with an external scanner for strings and comments.
+summary: Complete Lua language grammar for the Tree-sitter parser, with external scanner for strings and comments.
 repository: https://github.com/Azganoth/tree-sitter-lua
 tags:
   - JavaScript
@@ -12,30 +12,75 @@ tags:
   - Lua
 ---
 
-A complete Lua language grammar (compatible with version 5.4) for the Tree-sitter parsing system. The project was written in C and JavaScript (for the grammar definition), and includes an external scanner to handle complex rules like comments and strings.
+A complete grammar of the **Lua** language (compatible with version 5.4) for the **Tree-sitter** parsing system. The project was written in **JavaScript** (grammar definition) and **C** (external scanner); the external scanner handles complex rules like comments and strings.
 
-The library is published and consumable in multiple ecosystems, including Node.js (NPM), Rust (Crates.io), and Swift (SPM).
+The library is published and consumable in multiple ecosystems, including **Node.js** (NPM), **Rust** (Crates.io), and **Swift** (SPM).
 
-### Key Features
+---
 
-- **Lua 5.4 Parsing**: Complete parsing of Lua 5.4 syntax, including support for `shebang` and local variable attributes (e.g., `<const>` and `<close>`).
-- **Efficient External Scanner**: Includes an external scanner in C to correctly parse the syntax of comments (short and long) and strings (short and long), which cannot be handled by the declarative grammar alone.
-- **Multi-language Bindings**: Generates native bindings for integration into different environments, including **Node.js**, **Rust**, and **Swift**.
-- **Testing and CI**: Continuous Integration setup with **GitHub Actions** to run the test suite (`tree-sitter test`) and ensure the grammar's correctness across multiple operating systems.
+## 🧩 Technical Challenges & Solutions
 
-### Tools and Technologies
+### 1. Grammar and Operator Precedence
 
-The core grammar is defined in **JavaScript** (`grammar.js`), which is compiled by the **Tree-sitter CLI** to generate the parser in **C** (`parser.c`). An external scanner (`scanner.c`) is written in **C** to handle stateful parsing rules.
+**The Problem:** Define the grammar in `grammar.js` to resolve LR(1) parsing conflicts common in dynamic languages.
 
-Bindings are provided for:
+**The Solution:** Careful definition of operator precedence (e.g., `PREC.COMPARATIVE`, `PREC.UNARY`) and refactoring of complex rules like `binary_expression`.
+
+**Result:**
+
+- Elimination of ambiguities.
+- Precise parsing.
+
+### 2. External Scanner for Strings and Comments
+
+**The Problem:** **Tree-sitter**'s declarative grammar cannot handle long Lua strings and comments (e.g., `[=[ ... ]=]`), which may have a variable number of equal signs.
+
+**The Solution:** It was necessary to implement an external scanner in **C** (`scanner.c`) that manages state (storing delimiter depth).
+
+**Result:**
+
+- Correct parse of complex text blocks.
+
+### 3. Support for Lua 5.4 Syntax
+
+**The Problem:** Keep the grammar updated with the latest language specifications.
+
+**The Solution:** The project was updated to fully support the **Lua 5.4** specification. This included adding new rules, such as local variable attributes (`<const>` and `<close>`) and complex hexadecimal literals.
+
+**Result:**
+
+- Full compatibility with the latest language version.
+
+### 4. Multi-Language Build Configuration
+
+**The Problem:** Provide the library to multiple ecosystems (**Node.js**, **Rust**, **Swift**) with distinct build systems.
+
+**The Solution:** I configured specific build pipelines: `binding.gyp` for **Node.js** and `Cargo.toml` with `build.rs` for **Rust**. A third-party contribution ensured build for **Swift** (`Package.swift`).
+
+**Result:**
+
+- Ensures the same **C** sources (`parser.c` and `scanner.c`) are compiled correctly.
+- Library natively consumable in various environments.
+
+---
+
+## 🏗️ Architecture
+
+The grammar core is defined in **JavaScript** (`grammar.js`), which is compiled by the **Tree-sitter CLI** to generate the parser in **C** (`parser.c`). An external scanner (`scanner.c`) is written in **C** to handle parsing rules requiring state.
+
+### Multi-language Bindings
+
+Bindings are provided natively for:
 
 - **Node.js**: Using `node-gyp` and `nan` to compile the C++ wrapper.
-- **Rust**: Using `cc` in `build.rs` to compile the C sources and link with the Rust crate.
-- **Swift**: Using the **Swift Package Manager** (`Package.swift`) to expose the C headers.
+- **Rust**: Using `cc` in `build.rs` to compile C sources and link with the Rust crate.
+- **Swift**: Using **Swift Package Manager** (`Package.swift`) to expose C headers.
 
-### Technical Challenges and Learnings
+---
 
-- **Grammar and Operator Precedence**: The main challenge was defining the grammar in `grammar.js` to resolve LR(1) parsing conflicts. This required careful definition of operator precedence (e.g., `PREC.COMPARATIVE`, `PREC.UNARY`) and refactoring complex rules like `binary_expression` to eliminate ambiguities.
-- **External Scanner for Strings and Comments**: Tree-sitter's declarative grammar cannot handle Lua's long strings and comments (e.g., `[=[ ... ]=]`), which can have a variable number of `=`. It was necessary to implement an external scanner in C (`scanner.c`) that manages state (storing the `depth` of the delimiters) to correctly parse these text blocks.
-- **Lua 5.4 Syntax Support**: The project was updated to fully support the Lua 5.4 specification. This included adding new rules, such as local variable attributes (`<const>` and `<close>`), and expanding the number syntax to support complex hexadecimal literals.
-- **Multi-Language Build Configuration**: Providing the library to multiple ecosystems required configuring distinct build systems: `binding.gyp` for Node.js, `Cargo.toml` with a `build.rs` script for Rust, and `Package.swift` for Swift. The challenge was ensuring the same C sources (`parser.c` and `scanner.c`) were compiled and linked correctly in all these environments.
+## 🛠️ Tech Stack
+
+- **Grammar:** JavaScript
+- **Parsing:** C
+- **Bindings:** Node.js, Rust, Swift
+- **CI:** GitHub Actions

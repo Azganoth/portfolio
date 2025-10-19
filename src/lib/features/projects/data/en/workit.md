@@ -2,7 +2,7 @@
 title: Workit
 category: Landing Page
 year: 2023
-summary: A landing page for a fictional market research service.
+summary: Responsive landing page with modular CSS architecture via SASS, focused on Developer Experience (DX) and scalable maintenance.
 repository: https://github.com/Azganoth/workit-landing-page
 website: https://azganoth.github.io/workit-landing-page/
 tags:
@@ -10,19 +10,52 @@ tags:
   - SASS
 ---
 
-This is a landing page for a fictional market research service. The project was an opportunity to delve into advanced CSS techniques, focusing on creating a style codebase that was organized, scalable, and easy to maintain.
+Workit is a case study on architecture and style organization. Unlike approaches using pure CSS, here the focus was on **Developer Experience (DX)** and maintainability. Utilizing the **SASS (SCSS)** preprocessor allowed for the creation of a programmatic, modular, and highly reusable design system.
 
-### Main Features
+---
 
-- **Fully Responsive Design**: The interface adapts fluidly to mobile devices, tablets, and desktops, following a mobile-first approach.
-- **Clear and Semantic Structure**: Built with semantic HTML to ensure maximum accessibility and search engine optimization.
-- **Modular and Scalable Styling**: The CSS was structured using the BEM methodology, resulting in independent and reusable style components.
+## 🧩 Technical Challenges & Solutions
 
-### Tools and Technologies
+### 1. Breakpoint Management and Nesting
 
-The project was built with **semantic HTML** and styled with the **SASS** pre-processor. To organize the CSS, I adopted the **BEM (Block, Element, Modifier)** methodology, which resulted in a modular, conflict-free, and easy-to-understand style codebase. The design approach was mobile-first, using `media queries` to progressively adapt the layout for larger screens.
+**The Problem:** Standard Media Query syntax in pure CSS often forces the separation of responsive logic from the original selector, making reading difficult ("Context Switching").
 
-### Technical Challenges and Learnings
+**The Solution:** I developed a system of **SASS Mixins** (`abstracts/_mixins.scss`) to abstract media query complexity. The `@include breakpoint(tablet)` mixin allows nesting the responsive rule _inside_ the component itself.
 
-- **Applying the BEM Methodology**: The main challenge was to rigorously apply the **BEM** naming convention in conjunction with the **SASS** file architecture. By separating styles by components (blocks), the codebase became extremely clean, predictable, and scalable, making it easier to maintain and add new elements without the risk of CSS conflicts.
-- **Advanced SASS Usage**: To reduce code repetition, I utilized advanced **SASS** features, such as **mixins** to reuse style blocks (e.g., for buttons and `media queries`) and **nesting** to mirror the HTML structure. This resulted in a leaner (DRY) CSS codebase that is much simpler to maintain.
+**Result:**
+
+- Maintains code cohesion.
+- Prevents typos (validation via `$breakpoints` configuration map).
+
+### 2. Hybrid Responsive Variables
+
+**The Problem:** Changing spacing values or font sizes across multiple breakpoints usually requires a lot of code repetition.
+
+**The Solution:** I created a hybrid strategy combining **SASS** and **CSS Custom Properties**. The `responsive-var` mixin accepts values for mobile, tablet, and desktop and automatically generates the necessary media queries.
+
+**Result:**
+
+- Layout adapts to different screens just by changing variable values.
+- Eliminates the need to rewrite style rules.
+
+---
+
+## 🏗️ Architecture
+
+The project structure follows the adapted **7-1 Pattern**:
+
+- **Abstracts:** Variables, Mixins, and Functions (no direct CSS output).
+- **Base/Globals:** Reset and base typography.
+- **Layout:** Macro structure (`_header.scss`, `_content.scss`, `_footer.scss`).
+- **Components:** Reusable and independent elements (`_buttons.scss`, `_headings.scss`).
+
+This separation, combined with **BEM** methodology, ensures CSS specificity remains simple and predictable, avoiding style conflicts.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Markup:** Semantic HTML
+- **Preprocessor:** SASS (SCSS)
+- **Design Tokens:** CSS Custom Properties
+- **Deploy:** GitHub Pages
