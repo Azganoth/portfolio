@@ -6,10 +6,7 @@ summary: Complete Lua language grammar for the Tree-sitter parser, with external
 repository: https://github.com/Azganoth/tree-sitter-lua
 tags:
   - JavaScript
-  - Node
   - C
-  - Rust
-  - Lua
 ---
 
 A complete grammar of the **Lua** language (compatible with version 5.4) for the **Tree-sitter** parsing system. The project was written in **JavaScript** (grammar definition) and **C** (external scanner); the external scanner handles complex rules like comments and strings.

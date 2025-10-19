@@ -6,9 +6,9 @@ summary: Ferramenta de cálculo de IMC desenvolvida com Vanilla JavaScript, foca
 repository: https://github.com/Azganoth/bmi-calculator
 website: https://azganoth.github.io/bmi-calculator/
 tags:
+  - JavaScript
   - HTML
   - CSS
-  - JavaScript
 ---
 
 Este projeto é um exercício de engenharia focado em **Web Nativa**. O objetivo foi construir uma aplicação interativa e acessível sem a sobrecarga de _frameworks_ modernos, demonstrando como APIs nativas do **DOM** e padrões de projeto fundamentais podem entregar performance superior e uma experiência de usuário robusta com zero dependências.

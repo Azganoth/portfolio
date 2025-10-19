@@ -9,7 +9,6 @@ tags:
   - Next
   - React
   - TypeScript
-  - CSS Modules
 ---
 
 Galleria é uma aplicação **Next.js** focada na exibição de arte de alta fidelidade. O projeto utiliza **Static Site Generation (SSG)** para garantir que o conteúdo seja entregue instantaneamente, combinando a robustez do **React** com um algoritmo de layout "_Masonry_" para criar uma experiência visual coesa e responsiva.

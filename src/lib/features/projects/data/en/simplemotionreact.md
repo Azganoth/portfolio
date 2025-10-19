@@ -7,10 +7,10 @@ repository: https://github.com/Azganoth/simple-motion-react
 website: https://simple-motion-react.vercel.app/
 tags:
   - React
+  - TypeScript
   - Jest
   - Testing Library
   - Storybook
-  - TypeScript
 ---
 
 **Simple Motion React** is a component transition library for **React** with an API inspired by **Vue.js**. Developed as a software engineering case study, the project implements an extended lifecycle management system "from scratch", allowing animation of component mounting and, crucially, unmounting, with a focus on **DX** (Developer Experience) and performance.

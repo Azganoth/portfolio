@@ -6,10 +6,7 @@ summary: Gramática completa da linguagem Lua para o parser Tree-sitter, com sca
 repository: https://github.com/Azganoth/tree-sitter-lua
 tags:
   - JavaScript
-  - Node
   - C
-  - Rust
-  - Lua
 ---
 
 Uma gramática completa da linguagem **Lua** (compatível com a versão 5.4) para o sistema de _parsing_ **Tree-sitter**. O projeto foi escrito em **JavaScript** (definição da gramática) e **C** (_scanner_ externo), o _scanner_ externo lida com regras complexas como comentários e strings.

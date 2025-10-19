@@ -8,6 +8,9 @@ website: https://azganoth.github.io/tic-tac-toe/
 tags:
   - React
   - TypeScript
+  - SASS
+  - Vitest
+  - Testing Library
 ---
 
 This project demonstrates the application of software engineering practices in a playful domain. More than a simple game, it is an exercise in **Clean Architecture** on the frontend, rigorously separating business logic (game rules, AI) from the presentation layer (**React**), ensuring code is testable, maintainable, and localizable.

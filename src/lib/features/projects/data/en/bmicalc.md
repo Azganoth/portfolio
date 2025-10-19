@@ -6,9 +6,9 @@ summary: BMI calculation tool developed with Vanilla JavaScript, focused on acce
 repository: https://github.com/Azganoth/bmi-calculator
 website: https://azganoth.github.io/bmi-calculator/
 tags:
+  - JavaScript
   - HTML
   - CSS
-  - JavaScript
 ---
 
 This project is an engineering exercise focused on **Native Web**. The objective was to build an interactive and accessible application without the overhead of modern frameworks, demonstrating how native **DOM** APIs and fundamental design patterns can deliver superior performance and a robust user experience with zero dependencies.

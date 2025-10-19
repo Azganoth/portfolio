@@ -6,10 +6,9 @@ summary: Personal portfolio developed with SvelteKit and TailwindCSS, focused on
 repository: https://github.com/Azganoth/portfolio
 website: https://azganoth.vercel.app
 tags:
-  - SvelteKit
   - Svelte
-  - TailwindCSS
   - TypeScript
+  - TailwindCSS
 ---
 
 My personal portfolio, a showcase for my skills, projects, and contact information, with multi-language support. Built using **Svelte 5**, **SvelteKit**, and **TailwindCSS**, the project focuses on performance, accessibility, and internationalization.

@@ -7,7 +7,6 @@ repository: https://github.com/Azganoth/password-generator-app
 website: https://azganoth.github.io/password-generator-app/
 tags:
   - Preact
-  - HTML
   - CSS
 ---
 

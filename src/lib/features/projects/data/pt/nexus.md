@@ -8,6 +8,7 @@ website: https://nexusapp.fly.dev
 tags:
   - Next
   - React
+  - TypeScript
   - TailwindCSS
   - Node
   - Express
@@ -16,7 +17,6 @@ tags:
   - Docker
   - Jest
   - Testing Library
-  - TypeScript
 ---
 
 O Nexus é uma aplicação "_Link-in-Bio_" completa, projetada para simular um produto **SaaS** real. O projeto adota uma arquitetura de **Monorepo** para compartilhar contratos de dados e lógica entre o frontend (**Next.js**) e o backend (**Express**), demonstrando domínio sobre o ciclo de vida completo de desenvolvimento de software, desde a modelagem de dados até a orquestração de containers.

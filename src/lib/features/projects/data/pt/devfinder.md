@@ -7,8 +7,8 @@ repository: https://github.com/Azganoth/github-user-search-app
 website: https://azganoth.github.io/github-user-search-app/
 tags:
   - Vue
-  - TailwindCSS
   - TypeScript
+  - TailwindCSS
 ---
 
 Esta aplicação consome a API pública do GitHub para exibir perfis de desenvolvedores com detalhes ricos. O projeto vai além de uma **SPA** tradicional ao implementar **Static Site Generation (SSG)**, garantindo que o conteúdo inicial seja entregue como HTML estático para máxima performance e SEO, antes de ser hidratado pelo **Vue.js** para interatividade.
