@@ -34,8 +34,12 @@
   };
 
   let rawCurrentPath = $derived(
-    page.url.pathname.replace(new RegExp(`^/${$locale}(/|$)`), "/"),
+    page.params.lang
+      ? page.url.pathname.replace(new RegExp(`^/${page.params.lang}(/|$)`), "/")
+      : page.url.pathname,
   );
+
+  let currentLang = $derived((page.params.lang as Locale) || DEFAULT_LOCALE);
 </script>
 
 <div class="fixed bottom-10 right-8 z-10">
@@ -71,7 +75,7 @@
       <Link
         class={[
           "text-center",
-          value === $locale ? "text-primary" : "hover:text-secondary",
+          value === currentLang ? "text-primary" : "hover:text-secondary",
         ]}
         {href}
         variant="none"
@@ -80,7 +84,7 @@
           changeLanguage(value);
           open = false;
         }}
-        aria-current={value === $locale && "page"}
+        aria-current={value === currentLang && "page"}
         aria-label={$t("common_language_change", {
           language: label.toLowerCase(),
         })}
