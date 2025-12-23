@@ -2,7 +2,7 @@
 title: Nexus
 category: Web App
 year: 2025
-summary: Link aggregation SaaS platform built in a Monorepo with scalable Full-Stack architecture, advanced JWT security, and End-to-End Type-Safety.
+summary: Link aggregation SaaS platform built in a Monorepo with scalable Full-Stack architecture.
 repository: https://github.com/Azganoth/nexus
 website: https://nexusapp.fly.dev
 tags:
