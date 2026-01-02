@@ -42,11 +42,11 @@
   let currentLang = $derived((page.params.lang as Locale) || DEFAULT_LOCALE);
 </script>
 
-<div class="fixed bottom-10 right-8 z-10">
+<div class="fixed right-8 bottom-10 z-10">
   <button
     bind:this={toggler}
     type="button"
-    class="tap-push hover:text-primary block transition-[scale,color]"
+    class="tap-push block transition-[scale,color] hover:text-primary"
     onclick={() => {
       open = !open;
     }}
@@ -59,7 +59,7 @@
   </button>
   <div
     id="language-list"
-    class="bg-muted inert:invisible inert:scale-90 inert:opacity-0 shadow-elevation z-1 absolute bottom-0 right-12 flex origin-bottom-right flex-col gap-1 space-y-4 rounded-2xl p-6 ease-out motion-safe:transition-all"
+    class="absolute right-12 bottom-0 z-1 flex origin-bottom-right flex-col gap-1 space-y-4 rounded-2xl bg-muted p-6 shadow-elevation ease-out inert:invisible inert:scale-90 inert:opacity-0 motion-safe:transition-all"
     role="menu"
     inert={!open}
     onclickaway={() => {

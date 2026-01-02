@@ -109,7 +109,7 @@
 
 <div
   aria-hidden="true"
-  class="**:[canvas]:fixed **:[canvas]:inset-0.5 **:[canvas]:-z-50 fixed inset-0 -z-50"
+  class="fixed inset-0 -z-50 **:[canvas]:fixed **:[canvas]:inset-0.5 **:[canvas]:-z-50"
 >
   <canvas bind:this={canvasFar}></canvas>
   <canvas bind:this={canvasMid}></canvas>

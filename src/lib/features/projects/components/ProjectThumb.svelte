@@ -4,6 +4,7 @@
 
 <script lang="ts">
   import { pushState } from "$app/navigation";
+  import { resolve } from "$app/paths";
   import { t } from "$lib/features/i18n/translation";
   import { getLocalizedPath } from "$lib/features/i18n/utils";
   import type { Project } from "$lib/features/projects/schema";
@@ -20,14 +21,14 @@
 
   let { class: className, project }: Props = $props();
 
-  const linkId = composeProjectLinkId(project.slug);
-  const titleId = `project-title-${project.slug}`;
-  const summaryId = `project-summary-${project.slug}`;
+  const linkId = $derived(composeProjectLinkId(project.slug));
+  const titleId = $derived(`project-title-${project.slug}`);
+  const summaryId = $derived(`project-summary-${project.slug}`);
 
-  const href = getLocalizedPath(`/projects/${project.slug}`);
+  const href = $derived(getLocalizedPath(`/projects/${project.slug}`));
   function openProject() {
     $selectedProject = project;
-    pushState(href, { selectedProject: project });
+    pushState(resolve(href), { selectedProject: project });
   }
 
   function handleclick(event: MouseEvent) {
@@ -46,14 +47,14 @@
 
 <article
   class={[
-    "focus:outline-hidden group relative grid max-w-[320px] items-center gap-2 transition-transform focus-within:-translate-y-1 hover:-translate-y-1 md:max-w-[640px] md:grid-cols-[320px_1fr] md:grid-rows-[240px] md:gap-6",
+    "group relative grid max-w-[320px] items-center gap-2 transition-transform focus-within:-translate-y-1 hover:-translate-y-1 focus:outline-hidden md:max-w-160 md:grid-cols-[320px_1fr] md:grid-rows-[240px] md:gap-6",
     className,
   ]}
   aria-labelledby={titleId}
   aria-describedby={summaryId}
 >
   <div
-    class="bg-muted group-focus-within:outline-primary border-muted relative grid place-items-center overflow-hidden rounded-2xl border outline-4 outline-transparent"
+    class="relative grid place-items-center overflow-hidden rounded-2xl border border-muted bg-muted outline-4 outline-transparent group-focus-within:outline-primary"
   >
     {#if project.previews.length > 0}
       <!-- Decorative image since title is already announced -->
@@ -67,15 +68,15 @@
         alt=""
       />
     {:else}
-      <div class="aspect-[4/3] w-full">
+      <div class="aspect-4/3 w-full">
         <Icon
           icon="fa6-solid:code"
-          class="text-muted-foreground/50 relative left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2"
+          class="relative top-1/2 left-1/2 size-24 -translate-x-1/2 -translate-y-1/2 text-muted-foreground/50"
         />
       </div>
     {/if}
     <div
-      class="bg-muted font-jetbrains-mono absolute bottom-2 left-2 rounded-xl px-3 py-1 text-xs font-bold tracking-wide"
+      class="absolute bottom-2 left-2 rounded-xl bg-muted px-3 py-1 font-mono text-xs font-bold tracking-wide"
     >
       {project.year} • {project.category.toUpperCase()}
     </div>
@@ -83,11 +84,11 @@
   <div class="flex h-full flex-col gap-4 max-md:px-4 md:pb-4">
     <h3
       id={titleId}
-      class="font-orbitron text-center text-xl font-bold tracking-wide"
+      class="text-center font-display text-xl font-bold tracking-wide"
     >
       <Link
         id={linkId}
-        class="hover:text-secondary focus:text-primary active:text-primary after:z-1 outline-none after:absolute after:inset-0 after:content-['']"
+        class="outline-none after:absolute after:inset-0 after:z-1 after:content-[''] hover:text-secondary focus:text-primary active:text-primary"
         {href}
         variant="none"
         aria-haspopup="dialog"
@@ -99,7 +100,7 @@
         {project.title}
       </Link>
     </h3>
-    <p id={summaryId} class="text-muted-foreground line-clamp-3 max-h-[4.5rem]">
+    <p id={summaryId} class="line-clamp-3 max-h-18 text-muted-foreground">
       {project.summary}
     </p>
     <ul class="mt-auto flex flex-wrap justify-center gap-3">
@@ -107,7 +108,7 @@
         {@const { color, icon } = TAG_META[tag] ?? TAG_META["fallback"]}
         <li title={tag}>
           <Icon
-            class="text-muted group-hover:text-(--brand) size-6 transition-colors duration-300"
+            class="size-6 text-muted transition-colors duration-300 group-hover:text-(--brand)"
             style="--brand: {color}"
             {icon}
           />

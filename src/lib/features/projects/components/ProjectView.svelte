@@ -1,5 +1,6 @@
 <script lang="ts">
   import { afterNavigate, goto } from "$app/navigation";
+  import { resolve } from "$app/paths";
   import { page } from "$app/stores";
   import { t } from "$lib/features/i18n/translation";
   import { getLocalizedPath } from "$lib/features/i18n/utils";
@@ -21,7 +22,7 @@
       history.back();
     } else if ($page.route.id?.includes("projects/[slug]")) {
       const homeHref = getLocalizedPath("/");
-      goto(homeHref);
+      goto(resolve(homeHref));
     } else {
       $selectedProject = undefined;
     }
@@ -66,7 +67,7 @@
 <dialog
   bind:this={dialog}
   id={ID_PROJECT_DETAILS}
-  class="bg-background text-foreground shadow-elevation starting:opacity-0 starting:scale-90 z-20 m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl transition-[opacity,scale] duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg md:h-[calc(100dvh-8rem)] md:max-w-[720px] xl:max-w-[1200px]"
+  class="z-20 m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl bg-background text-foreground shadow-elevation transition-[opacity,scale] duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg md:h-[calc(100dvh-8rem)] md:max-w-180 xl:max-w-300 starting:scale-90 starting:opacity-0"
   onclose={handleClose}
   onclickaway={handleClose}
   aria-labelledby={ID_PROJECT_TITLE}
@@ -76,32 +77,32 @@
   {#if $selectedProject}
     <div class="flex h-full flex-col">
       <article
-        class="flex flex-col gap-4 overflow-auto px-6 pb-6 pt-4 xl:px-8 xl:pb-8"
+        class="flex flex-col gap-4 overflow-auto px-6 pt-4 pb-6 xl:px-8 xl:pb-8"
       >
         <header class="flex flex-col items-center gap-4 md:flex-row">
           <h1
             id={ID_PROJECT_TITLE}
-            class="font-orbitron text-center text-xl font-bold tracking-wide xl:text-start"
+            class="text-center font-display text-xl font-bold tracking-wide xl:text-start"
           >
             {$selectedProject.title}
           </h1>
           <div
-            class="bg-muted text-muted-foreground text-gray w-fit rounded-lg px-3 py-1 text-sm font-bold tracking-wide"
+            class="text-gray w-fit rounded-lg bg-muted px-3 py-1 text-sm font-bold tracking-wide text-muted-foreground"
           >
             {$selectedProject.year} • {$selectedProject.category.toUpperCase()}
           </div>
           <button
-            class="tap-push hover:text-primary absolute right-4 top-4 z-10 transition-[scale,color]"
+            class="tap-push absolute top-4 right-4 z-10 transition-[scale,color] hover:text-primary"
             type="button"
             onclick={handleClose}
             aria-label={$t("a11y_close_project_details")}
           >
-            <Icon class="drop-shadow-contrast size-8" icon="fa6-solid:xmark" />
+            <Icon class="size-8 drop-shadow-contrast" icon="fa6-solid:xmark" />
           </button>
         </header>
         <article class="markdown mb-auto h-full max-w-none overflow-auto pr-4">
           {#if $selectedProject.previews.length > 0}
-            <div class="mx-auto mb-8 mt-2 w-fit md:float-end md:mx-8 md:mb-0">
+            <div class="mx-auto mt-2 mb-8 w-fit md:float-end md:mx-8 md:mb-0">
               <ProjectViewPreviews previews={$selectedProject.previews} />
             </div>
           {/if}

@@ -58,7 +58,7 @@
 <button
   bind:this={galleryOpenButton}
   type="button"
-  class="border-muted hover:scale-102 group relative max-w-[400px] overflow-hidden rounded-2xl border transition-transform"
+  class="group relative max-w-100 overflow-hidden rounded-2xl border border-muted transition-transform hover:scale-102"
   onclick={() => {
     galleryOpen = true;
   }}
@@ -74,9 +74,9 @@
     alt=""
   />
   <div
-    class="absolute bottom-1 right-1 flex items-center gap-2 rounded-xl bg-black/50 p-2"
+    class="absolute right-1 bottom-1 flex items-center gap-2 rounded-xl bg-black/50 p-2"
   >
-    <span class="font-jetbrains-mono text-xs font-bold">
+    <span class="font-mono text-xs font-bold">
       1/{previews.length}
     </span>
     <Icon class="size-4" icon="fa6-solid:expand" />
@@ -105,7 +105,7 @@
     })}
   >
     <button
-      class="tap-push hover:text-primary absolute right-4 top-4 transition-[scale,color] md:top-2"
+      class="tap-push absolute top-4 right-4 transition-[scale,color] hover:text-primary md:top-2"
       type="button"
       onclick={() => {
         galleryOpen = false;
@@ -115,21 +115,21 @@
       <Icon class="size-8" icon="fa6-solid:xmark" />
     </button>
 
-    <div class="space-y-16! h-full overflow-y-auto md:hidden">
+    <div class="h-full space-y-16! overflow-y-auto md:hidden">
       {#each previews as slide (slide.url)}
         <img class="rounded-2xl" src={slide.url} alt="" />
       {/each}
     </div>
     <div
       bind:this={scroller}
-      class="grid max-w-[720px] snap-x snap-mandatory auto-cols-[100%] grid-flow-col items-center gap-4 overflow-x-auto overscroll-contain max-md:hidden"
+      class="grid max-w-180 snap-x snap-mandatory auto-cols-[100%] grid-flow-col items-center gap-4 overflow-x-auto overscroll-contain max-md:hidden"
       aria-roledescription="carousel"
       aria-live="polite"
     >
       {#each previews as slide, i (slide.url)}
         <figure
           id={`slide-${i}`}
-          class="select-none snap-center"
+          class="snap-center select-none"
           bind:this={scrollerSlides[i]}
           role="region"
         >
@@ -138,9 +138,9 @@
       {/each}
     </div>
 
-    <div class="center-x absolute bottom-0 flex items-center max-md:hidden">
+    <div class="absolute bottom-0 center-x flex items-center max-md:hidden">
       <button
-        class="tap-push hover:text-primary transition-[scale,color]"
+        class="tap-push transition-[scale,color] hover:text-primary"
         onclick={() =>
           goToSlide((currentSlide - 1 + previews.length) % previews.length)}
         aria-label={$t("a11y_previous_image")}
@@ -150,7 +150,7 @@
       <div class="flex" role="tablist">
         {#each { length: previews.length }, i}
           <button
-            class="tap-push hover:text-primary block transition-[scale,color]"
+            class="tap-push block transition-[scale,color] hover:text-primary"
             type="button"
             role="tab"
             onclick={() => goToSlide(i)}
@@ -168,7 +168,7 @@
         {/each}
       </div>
       <button
-        class="tap-push hover:text-primary transition-[scale,color]"
+        class="tap-push transition-[scale,color] hover:text-primary"
         onclick={() => goToSlide((currentSlide + 1) % previews.length)}
         aria-label={$t("a11y_next_image")}
       >

@@ -14,7 +14,7 @@ const composePreviews = async (slug: string) => {
   const previews: ProjectPreview[] = [];
   const staticPath = path.join(process.cwd(), "static");
 
-  for (let i = 0; true; i++) {
+  for (let i = 0; ; i++) {
     const imagePath = `/images/preview/${slug}_${i}.webp`;
     const filePath = path.join(staticPath, imagePath);
 

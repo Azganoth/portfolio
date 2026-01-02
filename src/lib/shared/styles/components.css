@@ -1,6 +1,6 @@
 @layer components {
   .section {
-    @apply mx-auto max-w-[1440px] px-6 py-8 md:px-12 md:py-16 xl:p-16;
+    @apply mx-auto max-w-360 px-6 py-8 md:px-12 md:py-16 xl:p-16;
   }
 
   .tap-push {
@@ -8,27 +8,27 @@
   }
 
   .reveal-slide-up {
-    @apply not-in-view:opacity-0 not-in-view:motion-safe:translate-y-2 motion-safe:transition-[opacity,translate];
+    @apply not-in-view:opacity-0 motion-safe:transition-[opacity,translate] not-in-view:motion-safe:translate-y-2;
   }
 
   .reveal-slide-down {
-    @apply not-in-view:opacity-0 not-in-view:motion-safe:-translate-y-2 motion-safe:transition-[opacity,translate];
+    @apply not-in-view:opacity-0 motion-safe:transition-[opacity,translate] not-in-view:motion-safe:-translate-y-2;
   }
 
   .reveal-slide-left {
-    @apply not-in-view:opacity-0 not-in-view:motion-safe:translate-x-2 motion-safe:transition-[opacity,translate];
+    @apply not-in-view:opacity-0 motion-safe:transition-[opacity,translate] not-in-view:motion-safe:translate-x-2;
   }
 
   .reveal-slide-right {
-    @apply not-in-view:opacity-0 not-in-view:motion-safe:-translate-x-2 motion-safe:transition-[opacity,translate];
+    @apply not-in-view:opacity-0 motion-safe:transition-[opacity,translate] not-in-view:motion-safe:-translate-x-2;
   }
 
   .reveal-fade {
-    @apply not-in-view:opacity-0 motion-safe:transition-[opacity];
+    @apply not-in-view:opacity-0 motion-safe:transition-opacity;
   }
 
   .markdown {
-    @apply text-foreground font-inter text-md leading-relaxed;
+    @apply font-body text-md leading-relaxed text-foreground;
 
     h1,
     h2,
@@ -36,7 +36,7 @@
     h4,
     h5,
     h6 {
-      @apply font-orbitron mb-4 mt-6 font-medium tracking-wide;
+      @apply mt-6 mb-4 font-display font-medium tracking-wide;
     }
 
     h1 {
@@ -50,19 +50,19 @@
     }
 
     p {
-      @apply text-foreground/80 mb-4;
+      @apply mb-4 text-foreground/80;
     }
 
     a {
-      @apply text-primary font-medium transition-colors hover:underline;
+      @apply font-medium text-primary transition-colors hover:underline;
     }
 
     ul {
-      @apply text-foreground/80 marker:text-secondary mb-4 ml-6 list-outside list-disc;
+      @apply mb-4 ml-6 list-outside list-disc text-foreground/80 marker:text-secondary;
     }
 
     ol {
-      @apply text-foreground/80 marker:text-secondary mb-4 ml-6 list-outside list-decimal;
+      @apply mb-4 ml-6 list-outside list-decimal text-foreground/80 marker:text-secondary;
     }
 
     li {
@@ -70,23 +70,23 @@
     }
 
     strong {
-      @apply text-foreground font-bold;
+      @apply font-bold text-foreground;
     }
 
     code {
-      @apply font-jetbrains-mono bg-muted text-secondary rounded px-1 py-0.5 text-sm;
+      @apply rounded bg-muted px-1 py-0.5 font-mono text-sm text-secondary;
     }
 
     pre {
-      @apply bg-muted mb-4 overflow-x-auto rounded-xl p-4;
+      @apply mb-4 overflow-x-auto rounded-xl bg-muted p-4;
     }
 
     pre code {
-      @apply text-foreground bg-transparent p-0;
+      @apply bg-transparent p-0 text-foreground;
     }
 
     blockquote {
-      @apply border-primary text-muted-foreground my-4 border-l-4 pl-4 italic;
+      @apply my-4 border-l-4 border-primary pl-4 text-muted-foreground italic;
     }
 
     img {
@@ -94,11 +94,11 @@
     }
 
     hr {
-      @apply border-muted my-6;
+      @apply my-6 border-muted;
     }
 
     table {
-      @apply border-muted my-6 w-full table-auto border-collapse text-left;
+      @apply my-6 w-full table-auto border-collapse border-muted text-left;
     }
 
     thead {
@@ -106,11 +106,11 @@
     }
 
     th {
-      @apply font-orbitron border-muted border-b px-4 py-2 font-medium tracking-wide first:rounded-tl-xl last:rounded-tr-xl;
+      @apply border-b border-muted px-4 py-2 font-display font-medium tracking-wide first:rounded-tl-xl last:rounded-tr-xl;
     }
 
     td {
-      @apply border-muted text-foreground/80 border-b px-4 py-2;
+      @apply border-b border-muted px-4 py-2 text-foreground/80;
     }
   }
 }

@@ -13,7 +13,7 @@
   import { reveal } from "$lib/shared/attachments/reveal.svelte";
   import Header from "$lib/shared/components/Header.svelte";
   import Link from "$lib/shared/components/Link.svelte";
-  import Starfield from "$lib/shared/components/Starfield.svelte";
+  import StarfieldBackground from "$lib/shared/components/StarfieldBackground.svelte";
   import {
     ID_BIO_SECTION,
     ID_CONTACT_SECTION,
@@ -76,7 +76,7 @@
   </Link>
 {/snippet}
 
-<Starfield />
+<StarfieldBackground />
 <LanguageSelector />
 <Header />
 <main>
@@ -86,19 +86,19 @@
   >
     <div class="relative w-full">
       <h1
-        class="font-orbitron reveal-slide-down leading-16 md:leading-20 mb-4 text-center text-4xl font-semibold tracking-wide duration-700 md:text-start md:text-5xl"
+        class="reveal-slide-down mb-4 text-center font-display text-4xl leading-16 font-semibold tracking-wide duration-700 md:text-start md:text-5xl md:leading-20"
         {@attach reveal()}
       >
         <Translation key="start_hello" values={{ name }} />
       </h1>
       <h2
-        class="text-muted-foreground reveal-slide-up font-orbitron text-center text-lg font-semibold tracking-wide duration-700 md:text-start md:text-xl"
+        class="reveal-slide-up text-center font-display text-lg font-semibold tracking-wide text-muted-foreground duration-700 md:text-start md:text-xl"
         {@attach reveal()}
       >
         {$t("start_role")}
       </h2>
       <ul
-        class="max-md:center-x md:center-y absolute z-10 flex justify-center gap-4 max-md:top-[calc(100%+2rem)] md:right-0 md:flex-col xl:fixed xl:right-8"
+        class="absolute z-10 flex justify-center gap-4 max-md:top-[calc(100%+2rem)] max-md:center-x md:center-y md:right-0 md:flex-col xl:fixed xl:right-8"
       >
         {#each CONTACT_SHORTCUTS as { label, href, icon } (href)}
           <li class="transition-transform hover:scale-110">
@@ -111,8 +111,8 @@
     </div>
     <Link
       class={[
-        "center-x bg-secondary hover:bg-secondary/90 font-jetbrains-mono text-background absolute bottom-8 flex items-center gap-2 rounded-full px-5 py-2 transition-colors md:bottom-10",
-        "before:bg-secondary before:-z-1 before:absolute before:inset-0 before:animate-pulse before:rounded-full before:blur-sm before:content-['']",
+        "absolute bottom-8 center-x flex items-center gap-2 rounded-full bg-secondary px-5 py-2 font-mono text-background transition-colors hover:bg-secondary/90 md:bottom-10",
+        "before:absolute before:inset-0 before:-z-1 before:animate-pulse before:rounded-full before:bg-secondary before:blur-sm before:content-['']",
       ]}
       variant="none"
       href="/cv.pdf"
@@ -127,10 +127,10 @@
     id={ID_BIO_SECTION}
     class={[
       "section relative",
-      "before:bg-muted before:shadow-elevation before:-skew-y-4 before:center-x before:-z-1 before:absolute before:inset-y-5 before:w-dvw before:content-[''] md:before:inset-y-8 md:before:-skew-y-2 xl:before:-skew-y-1",
+      "before:absolute before:inset-y-5 before:center-x before:-z-1 before:w-dvw before:-skew-y-4 before:bg-muted before:shadow-elevation before:content-[''] md:before:inset-y-8 md:before:-skew-y-2 xl:before:-skew-y-1",
     ]}
   >
-    <h2 class="font-orbitron mb-8 text-center text-2xl font-bold tracking-wide">
+    <h2 class="mb-8 text-center font-display text-2xl font-bold tracking-wide">
       {$t("bio_title")}
     </h2>
     <div class="mx-auto max-w-[80ch] space-y-5 leading-7 text-white/90">
@@ -157,7 +157,7 @@
   </section>
   <section id={ID_SKILLS_SECTION} class="section">
     <h2
-      class="font-orbitron mb-8 text-center text-2xl font-bold tracking-wide xl:mb-16 xl:text-start"
+      class="mb-8 text-center font-display text-2xl font-bold tracking-wide xl:mb-16 xl:text-start"
     >
       {$t("skills_title")}
     </h2>
@@ -167,7 +167,7 @@
       {#each categorizedSkills as { category, skills } (category)}
         <div class="max-w-96">
           <h3
-            class="after:bg-primary after:center-x relative mb-12 text-center text-lg font-semibold after:absolute after:-bottom-4 after:h-1 after:w-8 after:rounded-full after:content-['']"
+            class="relative mb-12 text-center text-lg font-semibold after:absolute after:-bottom-4 after:center-x after:h-1 after:w-8 after:rounded-full after:bg-primary after:content-['']"
           >
             {category}
           </h3>
@@ -180,7 +180,7 @@
                 >
                   <Icon class="size-5" {icon} {color} />
                   <span
-                    class="font-jetbrains-mono text-foreground/90 cursor-default font-bold tracking-wide duration-300 ease-out"
+                    class="cursor-default font-mono font-bold tracking-wide text-foreground/90 duration-300 ease-out"
                   >
                     {skill}
                   </span>
@@ -194,20 +194,20 @@
   </section>
   <section id={ID_PROJECTS_SECTION} class="section">
     <h2
-      class="font-orbitron mb-8 text-center text-2xl font-bold tracking-wide xl:text-start"
+      class="mb-8 text-center font-display text-2xl font-bold tracking-wide xl:text-start"
     >
       {$t("projects_title")}
     </h2>
-    <ProjectList class="pb-32 pt-8" projects={data.props.projects[$locale]} />
+    <ProjectList class="pt-8 pb-32" projects={data.props.projects[$locale]} />
   </section>
   <section id={ID_CONTACT_SECTION} class="section relative min-h-svh pb-44">
     <h2
-      class="font-orbitron mb-8 text-center text-2xl font-bold tracking-wide xl:text-start"
+      class="mb-8 text-center font-display text-2xl font-bold tracking-wide xl:text-start"
     >
       {$t("contact_title")}
     </h2>
     <div>
-      <h3 class="font-inter text-center font-medium xl:text-start">
+      <h3 class="text-center font-body font-medium xl:text-start">
         {$t("contact_message")}
       </h3>
       <ul class="mt-24 flex flex-col items-center gap-3 text-lg xl:items-start">
@@ -219,7 +219,7 @@
       </ul>
     </div>
     <Link
-      class="center-x bg-secondary hover:bg-secondary/90 font-jetbrains-mono text-background absolute bottom-12 flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2 transition-colors md:bottom-16"
+      class="absolute bottom-12 center-x flex items-center gap-2 rounded-full bg-secondary px-5 py-2 font-mono whitespace-nowrap text-background transition-colors hover:bg-secondary/90 md:bottom-16"
       variant="none"
       href="#start"
     >

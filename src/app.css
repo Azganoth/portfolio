@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@import "$lib/shared/styles/fonts.css";
-@import "$lib/shared/styles/theme.css";
-@import "$lib/shared/styles/components.css";
-@import "$lib/shared/styles/utilities.css";
+@import "./lib/shared/styles/fonts.css";
+@import "./lib/shared/styles/theme.css";
+@import "./lib/shared/styles/components.css";
+@import "./lib/shared/styles/utilities.css";
 
 :root {
   --underscore: "_";
@@ -16,7 +16,7 @@
   }
 
   code {
-    @apply font-jetbrains-mono;
+    @apply font-mono;
   }
 
   button {
@@ -28,7 +28,7 @@
   }
 
   :focus-visible {
-    @apply outline-primary outline-2 outline-offset-2;
+    @apply outline-2 outline-offset-2 outline-primary;
   }
 
   /* Scrollbar */
@@ -41,6 +41,6 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/30 hover:bg-primary/50 rounded-full transition-colors;
+    @apply rounded-full bg-muted-foreground/30 transition-colors hover:bg-primary/50;
   }
 }

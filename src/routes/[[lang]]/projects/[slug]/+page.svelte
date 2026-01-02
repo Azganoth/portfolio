@@ -5,6 +5,7 @@
   let { data }: PageProps = $props();
 
   // On mount, set the selected project
+  // svelte-ignore state_referenced_locally
   $selectedProject = data.project;
 </script>
 

@@ -60,7 +60,7 @@
 <header>
   <Link
     variant="none"
-    class="center-x z-2 absolute top-8 xl:top-12"
+    class="absolute top-8 center-x z-2 xl:top-12"
     href="/"
     aria-label={$t("a11y_go_to_home")}
   >
@@ -71,7 +71,7 @@
       <div>
         <button
           bind:this={menuToggler}
-          class="tap-push hover:text-primary z-2 absolute right-8 top-[2.125rem] block transition-[scale,color]"
+          class="tap-push absolute top-8.5 right-8 z-2 block transition-[scale,color] hover:text-primary"
           type="button"
           onclick={() => {
             open = !open;
@@ -89,7 +89,7 @@
         </button>
         <ul
           id={ID_MOBILE_MENU}
-          class="bg-muted inert:invisible inert:-translate-y-2 inert:opacity-0 shadow-elevation z-1 fixed inset-x-0 top-0 origin-top space-y-4 px-8 pb-8 pt-28 duration-300 ease-out motion-safe:transition-all"
+          class="fixed inset-x-0 top-0 z-1 origin-top space-y-4 bg-muted px-8 pt-28 pb-8 shadow-elevation duration-300 ease-out inert:invisible inert:-translate-y-2 inert:opacity-0 motion-safe:transition-all"
           inert={!open}
           onclickaway={() => {
             open = false;
@@ -99,7 +99,7 @@
           {#each links as { label, link, description } (link)}
             <li>
               <Link
-                class="font-orbitron block text-center text-lg tracking-wide"
+                class="block text-center font-display text-lg tracking-wide"
                 href={link}
                 onclick={() => {
                   open = false;
@@ -114,13 +114,13 @@
       </div>
     {:else}
       <ul
-        class="z-1 center-x reveal-slide-up absolute bottom-[7.5rem] flex gap-4 duration-700"
+        class="reveal-slide-up absolute bottom-30 center-x z-1 flex gap-4 duration-700"
         {@attach reveal()}
       >
         {#each links as { label, link, description } (link)}
           <li>
             <Link
-              class="font-orbitron hover:text-primary before:font-jetbrains-mono block whitespace-nowrap tracking-wide before:pr-1 before:text-white/15 before:content-['/']"
+              class="block font-display tracking-wide whitespace-nowrap before:pr-1 before:font-mono before:text-white/15 before:content-['/'] hover:text-primary"
               variant="none"
               href={link}
               aria-label={description}

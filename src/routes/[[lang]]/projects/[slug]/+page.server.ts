@@ -3,7 +3,7 @@ import { DEFAULT_LOCALE } from "$lib/shared/constants";
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async ({ params, locals }) => {
+export const load: PageServerLoad = async ({ params }) => {
   const { lang = DEFAULT_LOCALE, slug } = params;
   const project = await getProject(lang, slug);
 

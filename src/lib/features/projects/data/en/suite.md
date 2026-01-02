@@ -44,7 +44,7 @@ Suite is a landing page developed with a strict focus on **Rendering Performance
 ## 🏗️ Architecture
 
 - **Semantic HTML:** Structure based on landmarks (`<header>`, `<main>`, `<nav>`, `<footer>`) to ensure accessibility and SEO.
-- **Mobile-First Development:** Base CSS is written for mobile devices. Media queries (`min-width: 768px`, `min-width: 1440px`) are used to *add* layout complexity on larger screens, keeping CSS parsing faster on limited devices.
+- **Mobile-First Development:** Base CSS is written for mobile devices. Media queries (`min-width: 768px`, `min-width: 1440px`) are used to _add_ layout complexity on larger screens, keeping CSS parsing faster on limited devices.
 - **Modern Layouts:** Combination of **CSS Grid** for macro structure (page layout) and **Flexbox** for micro alignments (internal components), exploiting the best of each specification.
 
 ---
