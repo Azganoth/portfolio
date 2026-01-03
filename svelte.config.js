@@ -9,7 +9,7 @@ const config = {
     adapter: adapter(),
     prerender: {
       handleMissingId: "warn",
-      entries: ["/", "/en"],
+      entries: ["/", "/en/"],
     },
   },
 };

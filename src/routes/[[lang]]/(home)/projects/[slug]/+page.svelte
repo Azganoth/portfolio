@@ -4,9 +4,10 @@
 
   let { data }: PageProps = $props();
 
-  // On mount, set the selected project so the Dialog (in Root Layout) opens.
-  // svelte-ignore state_referenced_locally
-  projectStore.selected = data.project;
+  // On mount/update, set the selected project so the Dialog opens.
+  $effect(() => {
+    projectStore.selected = data.project;
+  });
 </script>
 
 <svelte:head>

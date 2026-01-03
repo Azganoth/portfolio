@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { afterNavigate, goto } from "$app/navigation";
+  import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import { t } from "$lib/features/i18n/translation.svelte";
   import { composeProjectLinkId } from "$lib/features/projects/components/ProjectThumb.svelte";
@@ -16,16 +16,28 @@
   let open = $derived(!!projectStore.selected);
   let dialog = $state<HTMLDialogElement>();
 
-  function handleClose() {
-    if (page.state.selectedProject) {
-      history.back();
-    } else if (page.route.id?.includes("projects/[slug]")) {
-      const homeHref = getLocalizedPath("/");
-      goto(homeHref);
+  async function handleClose() {
+    if (
+      page.state.selectedProject ||
+      page.route.id?.includes("projects/[slug]")
+    ) {
+      // Home page handles deselecting the project
+      await goto(getLocalizedPath("/"), { noScroll: true });
     } else {
       projectStore.selected = undefined;
     }
   }
+
+  // Sync state from Shallow Routing (History API) & Navigation
+  $effect(() => {
+    if (page.state.selectedProject) {
+      projectStore.selected = page.state.selectedProject;
+    } else if (!page.route.id?.includes("projects/[slug]")) {
+      // If no shallow state, close dialog UNLESS we are on a deep link route.
+      // Check if route.id is defined to avoid clearing during hydration mismatches.
+      projectStore.selected = undefined;
+    }
+  });
 
   let lastSelectedProjectSlug = $state<string>();
   $effect(() => {
@@ -37,21 +49,17 @@
   function restoreFocus() {
     if (!lastSelectedProjectSlug) return;
 
-    const thumbLink = document.querySelector<HTMLElement>(
-      `#${composeProjectLinkId(lastSelectedProjectSlug)}`,
-    );
-    if (thumbLink) {
-      thumbLink.scrollIntoView({ block: "center" });
-      thumbLink.focus({ preventScroll: true });
-      lastSelectedProjectSlug = undefined;
-    }
-  }
+    const projectLinkId = `#${composeProjectLinkId(lastSelectedProjectSlug)}`;
 
-  afterNavigate(() => {
-    if (!open) {
-      restoreFocus();
-    }
-  });
+    // Use nested requestAnimationFrame to ensure browser layout/scroll is settled
+    requestAnimationFrame(() => {
+      const thumbLink = document.querySelector<HTMLElement>(projectLinkId);
+      thumbLink?.scrollIntoView({ block: "center", behavior: "smooth" });
+      thumbLink?.focus({ preventScroll: true });
+
+      lastSelectedProjectSlug = undefined;
+    });
+  }
 
   $effect(() => {
     if (open) {

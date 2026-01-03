@@ -1,4 +1,3 @@
-import { resolve } from "$app/paths";
 import { page } from "$app/state";
 
 /**
@@ -7,7 +6,7 @@ import { page } from "$app/state";
 export const getLocalizedPath = (path: string) => {
   const lang = page.params.lang;
   path = path.startsWith("/") ? path : `/${path}`;
-  return resolve(lang ? `/${lang}${path}` : path);
+  return lang ? `/${lang}${path}` : path;
 };
 
 /**
@@ -20,5 +19,5 @@ export const getUnlocalizedPath = (path: string) => {
     path = path.replace(new RegExp(`^/${lang}(/|$)`), "/");
   }
 
-  return resolve(path);
+  return path;
 };

@@ -30,9 +30,7 @@
     }
   };
 
-  let rawCurrentPath = $derived(
-    getUnlocalizedPath(page.url.pathname, page.params.lang),
-  );
+  let rawCurrentPath = $derived(getUnlocalizedPath(page.url.pathname));
 
   let currentLang = $derived((page.params.lang as Locale) || DEFAULT_LOCALE);
 </script>
