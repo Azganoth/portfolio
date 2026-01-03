@@ -1,4 +1,11 @@
+<script lang="ts">
+  import type { SVGAttributes } from "svelte/elements";
+
+  let props: SVGAttributes<SVGElement> = $props();
+</script>
+
 <svg
+  {...props}
   width="159"
   height="36"
   viewBox="0 0 159 36"

@@ -1,4 +1,4 @@
-import { type Locale } from "$lib/features/i18n/translation";
+import { type Locale } from "$lib/features/i18n/translation.svelte";
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "$lib/shared/constants";
 import type { Handle } from "@sveltejs/kit";
 

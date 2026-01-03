@@ -1,37 +1,36 @@
 <script lang="ts">
   import { afterNavigate, goto } from "$app/navigation";
-  import { resolve } from "$app/paths";
-  import { page } from "$app/stores";
-  import { t } from "$lib/features/i18n/translation";
-  import { getLocalizedPath } from "$lib/features/i18n/utils";
+  import { page } from "$app/state";
+  import { t } from "$lib/features/i18n/translation.svelte";
   import { composeProjectLinkId } from "$lib/features/projects/components/ProjectThumb.svelte";
   import ProjectViewPreviews from "$lib/features/projects/components/ProjectViewPreviews.svelte";
-  import { selectedProject } from "$lib/features/projects/store";
+  import { projectStore } from "$lib/features/projects/store.svelte";
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
   import { focustrap } from "$lib/shared/attachments/focustrap.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import { ID_PROJECT_DETAILS, ID_PROJECT_TITLE } from "$lib/shared/constants";
+  import { getLocalizedPath } from "$lib/shared/utils";
   import Icon from "@iconify/svelte";
   import { tick } from "svelte";
 
-  let open = $derived(!!$selectedProject);
+  let open = $derived(!!projectStore.selected);
   let dialog = $state<HTMLDialogElement>();
 
   function handleClose() {
-    if ($page.state.selectedProject) {
+    if (page.state.selectedProject) {
       history.back();
-    } else if ($page.route.id?.includes("projects/[slug]")) {
+    } else if (page.route.id?.includes("projects/[slug]")) {
       const homeHref = getLocalizedPath("/");
-      goto(resolve(homeHref));
+      goto(homeHref);
     } else {
-      $selectedProject = undefined;
+      projectStore.selected = undefined;
     }
   }
 
   let lastSelectedProjectSlug = $state<string>();
   $effect(() => {
-    if ($selectedProject) {
-      lastSelectedProjectSlug = $selectedProject.slug;
+    if (projectStore.selected) {
+      lastSelectedProjectSlug = projectStore.selected.slug;
     }
   });
 
@@ -74,64 +73,89 @@
   {@attach clickaway({ ignoreSelf: true, enabled: open })}
   {@attach focustrap()}
 >
-  {#if $selectedProject}
-    <div class="flex h-full flex-col">
-      <article
-        class="flex flex-col gap-4 overflow-auto px-6 pt-4 pb-6 xl:px-8 xl:pb-8"
+  {#if projectStore.selected}
+    <div class="relative flex h-full flex-col overflow-y-auto">
+      <button
+        class="tap-push absolute top-4 right-4 z-10 text-muted-foreground transition-colors hover:text-foreground"
+        type="button"
+        onclick={handleClose}
+        aria-label={t("a11y_close_project_details")}
       >
-        <header class="flex flex-col items-center gap-4 md:flex-row">
-          <h1
-            id={ID_PROJECT_TITLE}
-            class="text-center font-display text-xl font-bold tracking-wide xl:text-start"
-          >
-            {$selectedProject.title}
-          </h1>
-          <div
-            class="text-gray w-fit rounded-lg bg-muted px-3 py-1 text-sm font-bold tracking-wide text-muted-foreground"
-          >
-            {$selectedProject.year} • {$selectedProject.category.toUpperCase()}
+        <Icon class="size-8 drop-shadow-contrast" icon="fa6-solid:xmark" />
+      </button>
+
+      <article class="flex flex-col gap-8 px-6 py-8 md:px-10 md:py-10">
+        <!-- Header -->
+        <header class="flex flex-col gap-4">
+          <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <h1
+              id={ID_PROJECT_TITLE}
+              class="font-display text-3xl font-bold tracking-tight md:text-4xl"
+            >
+              {projectStore.selected.title}
+            </h1>
+            <span
+              class="text-sm font-bold tracking-wider text-muted-foreground uppercase"
+            >
+              {projectStore.selected.year} • {projectStore.selected.category}
+            </span>
           </div>
-          <button
-            class="tap-push absolute top-4 right-4 z-10 transition-[scale,color] hover:text-primary"
-            type="button"
-            onclick={handleClose}
-            aria-label={$t("a11y_close_project_details")}
-          >
-            <Icon class="size-8 drop-shadow-contrast" icon="fa6-solid:xmark" />
-          </button>
+          {#if projectStore.selected.tags.length > 0}
+            <div class="flex flex-wrap gap-2">
+              {#each projectStore.selected.tags as tag (tag)}
+                <span
+                  class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary"
+                >
+                  {tag}
+                </span>
+              {/each}
+            </div>
+          {/if}
+          <p class="text-lg leading-relaxed text-muted-foreground">
+            {projectStore.selected.summary}
+          </p>
+          <div class="flex flex-wrap gap-4 pt-2">
+            {#if projectStore.selected.repository}
+              <Link
+                class="flex items-center gap-2 rounded-lg bg-muted px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted/80 hover:text-foreground"
+                href={projectStore.selected.repository}
+                aria-label={t("a11y_go_to_repository")}
+                newTab
+                variant="none"
+              >
+                <Icon icon="fa6-solid:code" class="size-4" />
+                {t("projects_code")}
+              </Link>
+            {/if}
+            {#if projectStore.selected.website}
+              <Link
+                class="text-primary-foreground hover:text-primary-foreground flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold transition-colors hover:bg-primary/90"
+                href={projectStore.selected.website}
+                aria-label={t("a11y_go_to_website")}
+                newTab
+                variant="none"
+              >
+                <Icon
+                  icon="fa6-solid:arrow-up-right-from-square"
+                  class="size-4"
+                />
+                {t("projects_visit")}
+              </Link>
+            {/if}
+          </div>
         </header>
-        <article class="markdown mb-auto h-full max-w-none overflow-auto pr-4">
-          {#if $selectedProject.previews.length > 0}
+
+        <hr class="border-muted" />
+
+        <!-- Description -->
+        <div class="markdown">
+          {#if projectStore.selected.previews.length > 0}
             <div class="mx-auto mt-2 mb-8 w-fit md:float-end md:mx-8 md:mb-0">
-              <ProjectViewPreviews previews={$selectedProject.previews} />
+              <ProjectViewPreviews previews={projectStore.selected.previews} />
             </div>
           {/if}
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-          {@html $selectedProject.description}
-        </article>
-        <div class="mt-4 flex justify-center gap-6 md:justify-end">
-          {#if $selectedProject.repository}
-            <Link
-              class="text-gray flex items-center gap-2"
-              href={$selectedProject.repository}
-              aria-label={$t("a11y_go_to_repository")}
-              newTab
-            >
-              {$t("projects_code")}
-              <Icon icon="fa6-solid:code" />
-            </Link>
-          {/if}
-          {#if $selectedProject.website}
-            <Link
-              class="text-gray flex items-center gap-2"
-              href={$selectedProject.website}
-              aria-label={$t("a11y_go_to_website")}
-              newTab
-            >
-              {$t("projects_visit")}
-              <Icon icon="fa6-solid:arrow-up-right-from-square" />
-            </Link>
-          {/if}
+          {@html projectStore.selected.description}
         </div>
       </article>
     </div>

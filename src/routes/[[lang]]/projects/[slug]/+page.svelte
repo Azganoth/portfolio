@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { selectedProject } from "$lib/features/projects/store";
+  import { projectStore } from "$lib/features/projects/store.svelte";
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();
 
   // On mount, set the selected project
   // svelte-ignore state_referenced_locally
-  $selectedProject = data.project;
+  projectStore.selected = data.project;
 </script>
 
 <!-- 

@@ -17,12 +17,12 @@ importers:
       '@fontsource-variable/inter':
         specifier: ^5.2.8
         version: 5.2.8
-      '@fontsource-variable/jetbrains-mono':
-        specifier: ^5.2.8
-        version: 5.2.8
-      '@fontsource-variable/orbitron':
-        specifier: ^5.2.8
-        version: 5.2.8
+      '@fontsource-variable/space-grotesk':
+        specifier: ^5.2.10
+        version: 5.2.10
+      '@fontsource/space-mono':
+        specifier: ^5.2.9
+        version: 5.2.9
       '@iconify/svelte':
         specifier: ^5.1.0
         version: 5.1.0(svelte@5.46.1)
@@ -476,11 +476,11 @@ packages:
   '@fontsource-variable/inter@5.2.8':
     resolution: {integrity: sha512-kOfP2D+ykbcX/P3IFnokOhVRNoTozo5/JxhAIVYLpea/UBmCQ/YWPBfWIDuBImXX/15KH+eKh4xpEUyS2sQQGQ==}
 
-  '@fontsource-variable/jetbrains-mono@5.2.8':
-    resolution: {integrity: sha512-WBA9elru6Jdp5df2mES55wuOO0WIrn3kpXnI4+W2ek5u3ZgLS9XS4gmIlcQhiZOWEKl95meYdvK7xI+ETLCq/Q==}
+  '@fontsource-variable/space-grotesk@5.2.10':
+    resolution: {integrity: sha512-yJQO/o35/hAP3CFnpdFTwQku2yzJOae2HIpBmqkOVoxhhXJaQP3g+b6Jrz7u+eI7A5ZdCIf88uMWpBJdFiGr5w==}
 
-  '@fontsource-variable/orbitron@5.2.8':
-    resolution: {integrity: sha512-Jazvuj2cgBq663z1j/+JdwH2ztqQ8RaGhJgdHYphFbtfowiFaR74R8UgZl7x1skbXmUMWWH1jXfG7mrYFIYK0A==}
+  '@fontsource/space-mono@5.2.9':
+    resolution: {integrity: sha512-b61faFOHEISQ/pD25G+cfGY9o/WW6lRv6hBQQfpWvEJ4y1V+S4gmth95EVyBE2VL3qDYHeVQ8nBzrplzdXTDDg==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1625,6 +1625,7 @@ packages:
   next@15.4.6:
     resolution: {integrity: sha512-us++E/Q80/8+UekzB3SAGs71AlLDsadpFMXVNM/uQ0BMwsh9m3mr0UNQIfjKed8vpWXsASe+Qifrnu1oLIcKEQ==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
+    deprecated: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/CVE-2025-66478 for more details.
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
@@ -2308,9 +2309,9 @@ snapshots:
 
   '@fontsource-variable/inter@5.2.8': {}
 
-  '@fontsource-variable/jetbrains-mono@5.2.8': {}
+  '@fontsource-variable/space-grotesk@5.2.10': {}
 
-  '@fontsource-variable/orbitron@5.2.8': {}
+  '@fontsource/space-mono@5.2.9': {}
 
   '@humanfs/core@0.19.1': {}
 

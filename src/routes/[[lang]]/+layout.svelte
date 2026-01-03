@@ -1,19 +1,31 @@
 <script lang="ts">
   import { dev } from "$app/environment";
-  import { locale, t, type Locale } from "$lib/features/i18n/translation";
+  import LanguageSelector from "$lib/features/i18n/components/LanguageSelector.svelte";
+  import {
+    t,
+    translationStore,
+    type Locale,
+  } from "$lib/features/i18n/translation.svelte";
   import ProjectView from "$lib/features/projects/components/ProjectView.svelte";
+  import Header from "$lib/shared/components/Header.svelte";
+  import StarfieldBackground from "$lib/shared/components/StarfieldBackground.svelte";
   import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+  import spaceGroteskWoff2 from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
   import { injectAnalytics } from "@vercel/analytics/sveltekit";
   import "../../app.css";
 
   let { data, children } = $props();
 
   $effect(() => {
-    $locale = data.lang as Locale;
+    translationStore.locale = data.lang as Locale;
   });
 
-  const title = $t("meta_title");
-  const description = $t("meta_description");
+  $effect(() => {
+    document.documentElement.setAttribute("lang", translationStore.locale);
+  });
+
+  const title = $derived(t("meta_title"));
+  const description = $derived(t("meta_description"));
   const url = "https://azganoth.vercel.app/";
   const metaImage = "/meta_image.png";
 
@@ -26,6 +38,13 @@
     as="font"
     type="font/woff2"
     href={interVarWoff2}
+    crossorigin="anonymous"
+  />
+  <link
+    rel="preload"
+    as="font"
+    type="font/woff2"
+    href={spaceGroteskWoff2}
     crossorigin="anonymous"
   />
   <title>{title}</title>
@@ -47,5 +66,8 @@
   <meta property="twitter:image" content={metaImage} />
 </svelte:head>
 
+<StarfieldBackground />
+<LanguageSelector />
+<Header />
 {@render children()}
 <ProjectView />

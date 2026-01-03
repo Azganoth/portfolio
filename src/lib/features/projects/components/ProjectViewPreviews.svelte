@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { t } from "$lib/features/i18n/translation";
+  import { t } from "$lib/features/i18n/translation.svelte";
   import type { ProjectPreview } from "$lib/features/projects/schema";
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
   import { focustrap } from "$lib/shared/attachments/focustrap.svelte";
@@ -62,7 +62,7 @@
   onclick={() => {
     galleryOpen = true;
   }}
-  aria-label={$t("a11y_open_image_gallery")}
+  aria-label={t("a11y_open_image_gallery")}
   aria-haspopup="dialog"
   aria-controls={ID_IMAGE_GALLERY}
 >
@@ -110,12 +110,12 @@
       onclick={() => {
         galleryOpen = false;
       }}
-      aria-label={$t("a11y_close_image_gallery")}
+      aria-label={t("a11y_close_image_gallery")}
     >
       <Icon class="size-8" icon="fa6-solid:xmark" />
     </button>
 
-    <div class="h-full space-y-16! overflow-y-auto md:hidden">
+    <div class="flex h-full flex-col gap-16 overflow-y-auto md:hidden">
       {#each previews as slide (slide.url)}
         <img class="rounded-2xl" src={slide.url} alt="" />
       {/each}
@@ -143,7 +143,7 @@
         class="tap-push transition-[scale,color] hover:text-primary"
         onclick={() =>
           goToSlide((currentSlide - 1 + previews.length) % previews.length)}
-        aria-label={$t("a11y_previous_image")}
+        aria-label={t("a11y_previous_image")}
       >
         <Icon class="size-10" icon="fa6-solid:chevron-left" />
       </button>
@@ -155,7 +155,7 @@
             role="tab"
             onclick={() => goToSlide(i)}
             aria-selected={i === currentSlide}
-            aria-label={$t("a11y_jump_to_image", { name: String(i) })}
+            aria-label={t("a11y_jump_to_image", { name: String(i) })}
             aria-controls={`slide-${i}`}
           >
             <Icon
@@ -170,7 +170,7 @@
       <button
         class="tap-push transition-[scale,color] hover:text-primary"
         onclick={() => goToSlide((currentSlide + 1) % previews.length)}
-        aria-label={$t("a11y_next_image")}
+        aria-label={t("a11y_next_image")}
       >
         <Icon class="size-10" icon="fa6-solid:chevron-right" />
       </button>

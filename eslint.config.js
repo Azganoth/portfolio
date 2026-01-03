@@ -36,6 +36,10 @@ export default ts.config(
         svelteConfig,
       },
     },
+    rules: {
+      // Resolve gets called in the getLocalizedPath utility
+      "svelte/no-navigation-without-resolve": "off",
+    },
   },
   {
     plugins: {

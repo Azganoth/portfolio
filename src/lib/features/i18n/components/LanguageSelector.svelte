@@ -1,9 +1,10 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import { locale, t, type Locale } from "$lib/features/i18n/translation";
+  import { t, type Locale } from "$lib/features/i18n/translation.svelte";
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import { DEFAULT_LOCALE } from "$lib/shared/constants";
+  import { getUnlocalizedPath } from "$lib/shared/utils";
   import Icon from "@iconify/svelte";
 
   let languages: [label: string, value: Locale][] = [
@@ -13,10 +14,6 @@
 
   let open = $state(false);
   let toggler = $state<HTMLButtonElement>();
-
-  $effect(() => {
-    document.documentElement.setAttribute("lang", $locale);
-  });
 
   const changeLanguage = async (newLang: Locale) => {
     // Save preference in a cookie
@@ -34,9 +31,7 @@
   };
 
   let rawCurrentPath = $derived(
-    page.params.lang
-      ? page.url.pathname.replace(new RegExp(`^/${page.params.lang}(/|$)`), "/")
-      : page.url.pathname,
+    getUnlocalizedPath(page.url.pathname, page.params.lang),
   );
 
   let currentLang = $derived((page.params.lang as Locale) || DEFAULT_LOCALE);
@@ -50,7 +45,7 @@
     onclick={() => {
       open = !open;
     }}
-    aria-label={$t("common_language_openmenu")}
+    aria-label={t("a11y_language_openmenu")}
     aria-haspopup="menu"
     aria-expanded={open}
     aria-controls="language-list"
@@ -59,7 +54,7 @@
   </button>
   <div
     id="language-list"
-    class="absolute right-12 bottom-0 z-1 flex origin-bottom-right flex-col gap-1 space-y-4 rounded-2xl bg-muted p-6 shadow-elevation ease-out inert:invisible inert:scale-90 inert:opacity-0 motion-safe:transition-all"
+    class="absolute right-12 bottom-0 z-1 flex origin-bottom-right flex-col gap-3 rounded-2xl bg-muted p-6 shadow-elevation ease-out inert:invisible inert:scale-90 inert:opacity-0 motion-safe:transition-all"
     role="menu"
     inert={!open}
     onclickaway={() => {
@@ -71,7 +66,7 @@
       {@const href =
         value === DEFAULT_LOCALE
           ? rawCurrentPath
-          : `/${value}${rawCurrentPath === "/" ? "" : rawCurrentPath}`}
+          : `/${value}${rawCurrentPath}`}
       <Link
         class={[
           "text-center",
@@ -85,7 +80,7 @@
           open = false;
         }}
         aria-current={value === currentLang && "page"}
-        aria-label={$t("common_language_change", {
+        aria-label={t("a11y_language_change", {
           language: label.toLowerCase(),
         })}
       >

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { t } from "$lib/features/i18n/translation";
+  import { t } from "$lib/features/i18n/translation.svelte";
   import ProjectThumb from "$lib/features/projects/components/ProjectThumb.svelte";
   import type { Project } from "$lib/features/projects/schema";
-  import { selectedProject } from "$lib/features/projects/store";
+  import { projectStore } from "$lib/features/projects/store.svelte";
   import { reveal } from "$lib/shared/attachments/reveal.svelte";
   import { flip } from "svelte/animate";
   import type { ClassValue } from "svelte/elements";
@@ -22,9 +22,9 @@
 
   // Show active project in the list
   $effect(() => {
-    if ($selectedProject) {
+    if (projectStore.selected) {
       const activeIndex = projects.findIndex(
-        (p) => p.slug === $selectedProject.slug,
+        (p) => p.slug === projectStore.selected?.slug,
       );
       if (activeIndex !== -1 && activeIndex >= visibleCount) {
         visibleCount = activeIndex + 1;
@@ -40,12 +40,15 @@
 </script>
 
 <div class={["flex flex-col items-center", className]}>
-  <ul class="flex flex-wrap justify-center gap-16 xl:gap-8">
+  <ul class="flex flex-col gap-24 md:gap-32">
     {#each displayedProjects as project, i (project.title)}
       <li
-        class={[i < INITIAL_COUNT && "reveal-slide-up duration-700"]}
+        class={[
+          "group/project-item",
+          i < INITIAL_COUNT && "reveal-slide-up duration-700",
+        ]}
         animate:flip={{ duration: 150 }}
-        transition:fly={{ y: 30, duration: 500 }}
+        transition:fly={{ y: 50, duration: 700 }}
         {@attach reveal()}
       >
         <ProjectThumb {project} />
@@ -56,10 +59,10 @@
   {#if visibleCount < projects.length}
     <button
       type="button"
-      class="tap-push mt-16 rounded-full bg-secondary px-5 py-2 font-bold text-background transition-[scale,background-color] hover:bg-secondary/90"
+      class="tap-push mt-24 rounded-full bg-secondary px-8 py-3 font-mono text-lg font-bold text-background shadow-[0_0_20px_-5px_var(--color-secondary)] transition-[scale,background-color] hover:scale-105 hover:bg-secondary/90 md:mt-32"
       onclick={showMore}
     >
-      {$t("projects_show_more")}
+      {t("projects_show_more")}
     </button>
   {/if}
 </div>
