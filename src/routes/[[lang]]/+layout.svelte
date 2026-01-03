@@ -6,8 +6,6 @@
     translationStore,
     type Locale,
   } from "$lib/features/i18n/translation.svelte";
-  import ProjectView from "$lib/features/projects/components/ProjectView.svelte";
-  import Header from "$lib/shared/components/Header.svelte";
   import StarfieldBackground from "$lib/shared/components/StarfieldBackground.svelte";
   import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
   import spaceGroteskWoff2 from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
@@ -68,6 +66,4 @@
 
 <StarfieldBackground />
 <LanguageSelector />
-<Header />
 {@render children()}
-<ProjectView />

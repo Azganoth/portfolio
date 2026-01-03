@@ -1,14 +1,29 @@
+import type { Locale } from "$lib/features/i18n/translation.svelte";
 import {
   type Project,
   type ProjectPreview,
   projectSchema,
 } from "$lib/features/projects/schema";
-import { PREVIEW_SIZE, PROJECTS_ORDER } from "$lib/shared/constants";
+import {
+  PREVIEW_SIZE,
+  PROJECTS_ORDER,
+  SUPPORTED_LOCALES,
+} from "$lib/shared/constants";
 import { compareOrderBy } from "$lib/shared/utils/sort";
 import matter from "gray-matter";
 import { marked } from "marked";
 import fs from "node:fs/promises";
 import path from "node:path";
+
+export const getProjectsMap = async () =>
+  Object.fromEntries(
+    await Promise.all(
+      SUPPORTED_LOCALES.map(
+        async (locale) =>
+          [locale, await getAllProjects(locale)] as [Locale, Project[]],
+      ),
+    ),
+  );
 
 const composePreviews = async (slug: string) => {
   const previews: ProjectPreview[] = [];

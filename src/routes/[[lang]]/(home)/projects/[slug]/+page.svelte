@@ -4,12 +4,11 @@
 
   let { data }: PageProps = $props();
 
-  // On mount, set the selected project
+  // On mount, set the selected project so the Dialog (in Root Layout) opens.
   // svelte-ignore state_referenced_locally
   projectStore.selected = data.project;
 </script>
 
-<!-- 
-    This is a "deep link" landing page, used to set the store data. 
-    The ProjectView dialog is rendered by the root layout.
-  -->
+<svelte:head>
+  <title>{data.project.title} | Azganoth</title>
+</svelte:head>
