@@ -1,28 +1,4 @@
 @layer components {
-  .tap-push {
-    @apply transition-[scale] duration-300 ease-out motion-safe:active:scale-90;
-  }
-
-  .reveal-slide-up {
-    @apply not-in-view:opacity-0 motion-safe:transition-[opacity,translate] not-in-view:motion-safe:translate-y-2;
-  }
-
-  .reveal-slide-down {
-    @apply not-in-view:opacity-0 motion-safe:transition-[opacity,translate] not-in-view:motion-safe:-translate-y-2;
-  }
-
-  .reveal-slide-left {
-    @apply not-in-view:opacity-0 motion-safe:transition-[opacity,translate] not-in-view:motion-safe:translate-x-2;
-  }
-
-  .reveal-slide-right {
-    @apply not-in-view:opacity-0 motion-safe:transition-[opacity,translate] not-in-view:motion-safe:-translate-x-2;
-  }
-
-  .reveal-fade {
-    @apply not-in-view:opacity-0 motion-safe:transition-opacity;
-  }
-
   .markdown {
     @apply font-body text-md leading-relaxed text-foreground;
 

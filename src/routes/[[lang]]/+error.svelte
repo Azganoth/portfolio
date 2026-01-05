@@ -2,7 +2,6 @@
   import { page } from "$app/state";
   import LanguageSelector from "$lib/features/i18n/components/LanguageSelector.svelte";
   import { t } from "$lib/features/i18n/translation.svelte";
-  import { reveal } from "$lib/shared/attachments/reveal.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import Logo from "$lib/shared/components/Logo.svelte";
   import Starfield from "$lib/shared/components/StarfieldBackground.svelte";
@@ -30,23 +29,18 @@
     <Logo />
   </div>
 
-  <h1
-    class="mb-8 font-display text-3xl font-bold tracking-wide md:text-4xl"
-    {@attach reveal()}
-  >
+  <h1 class="mb-8 font-display text-3xl font-bold tracking-wide md:text-4xl">
     {title}
   </h1>
-  <p class="text-lg text-muted-foreground" {@attach reveal()}>
+  <p class="text-lg text-muted-foreground">
     {description}
   </p>
 
-  <div class="reveal-slide-up duration-700" {@attach reveal()}>
-    <Link
-      href={getLocalizedPath("/")}
-      class="mt-24 block rounded-full bg-secondary px-6 py-3 font-mono text-background transition-colors hover:bg-secondary/90"
-      variant="none"
-    >
-      {t("error_back_home")}
-    </Link>
-  </div>
+  <Link
+    href={getLocalizedPath("/")}
+    class="mt-24 block rounded-full bg-secondary px-6 py-3 font-mono text-background transition-colors hover:bg-secondary/90"
+    variant="none"
+  >
+    {t("error_back_home")}
+  </Link>
 </main>

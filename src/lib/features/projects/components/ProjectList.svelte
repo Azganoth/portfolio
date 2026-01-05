@@ -3,10 +3,8 @@
   import ProjectThumb from "$lib/features/projects/components/ProjectThumb.svelte";
   import type { Project } from "$lib/features/projects/schema";
   import { projectStore } from "$lib/features/projects/store.svelte";
-  import { reveal } from "$lib/shared/attachments/reveal.svelte";
-  import { flip } from "svelte/animate";
+  import Reveal from "$lib/shared/components/Reveal.svelte";
   import type { ClassValue } from "svelte/elements";
-  import { fly } from "svelte/transition";
 
   interface Props {
     class?: ClassValue;
@@ -41,18 +39,13 @@
 
 <div class={["flex flex-col items-center", className]}>
   <ul class="flex flex-col gap-24 md:gap-32">
-    {#each displayedProjects as project, i (project.title)}
-      <li
-        class={[
-          "group/project-item",
-          i < INITIAL_COUNT && "reveal-slide-up duration-700",
-        ]}
-        animate:flip={{ duration: 150 }}
-        transition:fly={{ y: 50, duration: 700 }}
-        {@attach reveal()}
+    {#each displayedProjects as project (project.title)}
+      <Reveal
+        tag="li"
+        class="group/project-item duration-500 not-in-view:translate-y-32 not-in-view:opacity-0"
       >
         <ProjectThumb {project} />
-      </li>
+      </Reveal>
     {/each}
   </ul>
 

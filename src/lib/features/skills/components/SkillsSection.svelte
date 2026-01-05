@@ -3,10 +3,10 @@
     t,
     type TranslationKey,
   } from "$lib/features/i18n/translation.svelte";
-  import { reveal } from "$lib/shared/attachments/reveal.svelte";
+  import { SKILLS_BY_CATEGORY } from "$lib/features/skills/data";
+  import Reveal from "$lib/shared/components/Reveal.svelte";
   import Section from "$lib/shared/components/Section.svelte";
   import { ID_SKILLS_SECTION, TAG_META } from "$lib/shared/constants";
-  import { SKILLS_BY_CATEGORY } from "$lib/features/skills/data";
   import Icon from "@iconify/svelte";
 
   const categorizedSkills = $derived(
@@ -29,9 +29,12 @@
           {category}
         </h3>
         <ul class="flex flex-wrap justify-center gap-4">
-          {#each skills as skill (skill)}
+          {#each skills as skill, i (skill)}
             {@const { icon, color } = TAG_META[skill]}
-            <li class="reveal-slide-up duration-700" {@attach reveal()}>
+            <Reveal
+              class="delay-(--delay) duration-500 not-in-view:translate-y-4 not-in-view:opacity-0"
+              style={`--delay: ${i * 100}ms`}
+            >
               <div
                 class="group flex items-center gap-2 rounded-lg bg-white/5 p-3 text-sm transition-transform hover:scale-110"
               >
@@ -46,7 +49,7 @@
                   {skill}
                 </span>
               </div>
-            </li>
+            </Reveal>
           {/each}
         </ul>
       </div>
