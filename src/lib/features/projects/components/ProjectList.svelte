@@ -42,7 +42,7 @@
     {#each displayedProjects as project (project.title)}
       <Reveal
         tag="li"
-        class="group/project-item duration-500 not-in-view:translate-y-32 not-in-view:opacity-0"
+        class="group/project-item duration-400 ease-out-expo not-in-view:translate-y-32 not-in-view:opacity-0"
       >
         <ProjectThumb {project} />
       </Reveal>
@@ -52,7 +52,7 @@
   {#if visibleCount < projects.length}
     <button
       type="button"
-      class="mt-24 rounded-full bg-secondary px-8 py-3 font-mono text-lg font-bold text-background shadow-[0_0_20px_-5px_var(--color-secondary)] transition-all hover:scale-102 hover:bg-secondary/90 active:scale-98 md:mt-32"
+      class="mt-24 rounded-full bg-secondary px-8 py-3 font-mono text-lg font-bold text-background shadow-[0_0_20px_-5px_var(--color-secondary)] transition-all ease-snappy hover:scale-102 hover:bg-secondary/90 active:scale-98 md:mt-32"
       onclick={showMore}
     >
       {t("projects_show_more")}

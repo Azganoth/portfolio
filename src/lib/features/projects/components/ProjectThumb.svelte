@@ -55,7 +55,7 @@
   <!-- Visuals -->
   <div class="perspective-1000 w-full flex-1">
     <div
-      class="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-muted shadow-2xl transition-shadow duration-500 ease-out outline-none group-focus-within:ring-4 group-focus-within:ring-primary"
+      class="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-muted shadow-2xl transition-shadow duration-400 ease-out outline-none group-focus-within:ring-4 group-focus-within:ring-primary"
     >
       {#if project.previews.length > 0}
         <img
@@ -75,7 +75,7 @@
         </div>
       {/if}
       <div
-        class="absolute inset-0 bg-linear-to-tr from-white/5 to-transparent opacity-0 transition-opacity duration-500 group-focus-within:opacity-100 group-hover:opacity-100"
+        class="absolute inset-0 bg-linear-to-tr from-white/5 to-transparent opacity-0 transition-opacity duration-400 group-focus-within:opacity-100 group-hover:opacity-100"
       ></div>
     </div>
   </div>
@@ -91,7 +91,7 @@
       >
         <Link
           id={linkId}
-          class="transition-colors outline-none group-focus-within:text-primary after:absolute after:inset-0 after:z-1 after:content-[''] hover:text-primary"
+          class="outline-none group-focus-within:text-primary after:absolute after:inset-0 after:z-1 after:content-[''] hover:text-primary"
           {href}
           variant="none"
           aria-haspopup="dialog"

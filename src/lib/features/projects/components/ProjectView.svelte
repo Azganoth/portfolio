@@ -125,7 +125,7 @@
           <div class="flex flex-wrap gap-4 pt-2">
             {#if projectStore.selected.repository}
               <Link
-                class="flex items-center gap-2 rounded-lg bg-muted px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted/80 hover:text-foreground"
+                class="flex items-center gap-2 rounded-lg bg-muted px-4 py-2 text-sm font-semibold text-foreground hover:bg-muted/80 hover:text-foreground"
                 href={projectStore.selected.repository}
                 aria-label={t("a11y_go_to_repository")}
                 newTab
@@ -137,7 +137,7 @@
             {/if}
             {#if projectStore.selected.website}
               <Link
-                class="text-primary-foreground hover:text-primary-foreground flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold transition-colors hover:bg-primary/90"
+                class="text-primary-foreground hover:text-primary-foreground flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold hover:bg-primary/90"
                 href={projectStore.selected.website}
                 aria-label={t("a11y_go_to_website")}
                 newTab

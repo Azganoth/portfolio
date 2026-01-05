@@ -2,6 +2,7 @@
   import Translation from "$lib/features/i18n/components/Translation.svelte";
   import { t } from "$lib/features/i18n/translation.svelte";
   import Link from "$lib/shared/components/Link.svelte";
+  import Reveal from "$lib/shared/components/Reveal.svelte";
   import Section from "$lib/shared/components/Section.svelte";
   import { ID_BIO_SECTION } from "$lib/shared/constants";
   import profileImage from "$lib/shared/images/profile.webp?enhanced";
@@ -9,7 +10,7 @@
   import Icon from "@iconify/svelte";
 
   const cardClass =
-    "group relative flex flex-col overflow-hidden rounded-3xl bg-muted/20 p-6 shadow-sm ring-1 ring-white/10 backdrop-blur-md";
+    "relative flex flex-col overflow-hidden rounded-3xl bg-muted/20 p-6 shadow-sm ring-1 ring-white/10 backdrop-blur-md";
 </script>
 
 {#snippet nexus()}
@@ -36,7 +37,13 @@
     class="mx-auto grid max-w-5xl grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-[auto_auto]"
   >
     <!-- Profile Card -->
-    <div class={[cardClass, "min-h-90 p-0!"]}>
+    <Reveal
+      class={[
+        cardClass,
+        "duration-700 ease-out-expo not-in-view:-translate-x-4 not-in-view:opacity-0",
+        "min-h-90 p-0!",
+      ]}
+    >
       <div
         class="absolute inset-0 z-0 after:absolute after:inset-0 after:bg-linear-to-t after:from-background/90 after:via-background/20 after:to-transparent"
       >
@@ -60,10 +67,16 @@
           {t("contact_status_available")}
         </div>
       </div>
-    </div>
+    </Reveal>
 
     <!-- Intro Card -->
-    <div class={[cardClass, "md:col-span-2"]}>
+    <Reveal
+      class={[
+        cardClass,
+        "duration-700 ease-out-expo not-in-view:translate-x-4 not-in-view:opacity-0",
+        "md:col-span-2",
+      ]}
+    >
       <h2 class="mb-4 font-display text-2xl font-bold text-foreground">
         {t("bio_title")}
       </h2>
@@ -78,10 +91,16 @@
           <Translation key="bio_description_3" values={{ simplemotionreact }} />
         </p>
       </div>
-    </div>
+    </Reveal>
 
     <!-- Stats Bar -->
-    <div class={[cardClass, "md:col-span-3"]}>
+    <Reveal
+      class={[
+        cardClass,
+        "delay-1000 duration-700 ease-out-expo not-in-view:translate-y-4 not-in-view:opacity-0",
+        "md:col-span-3",
+      ]}
+    >
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div class="flex items-center gap-4">
           <div
@@ -131,6 +150,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </Reveal>
   </div>
 </Section>

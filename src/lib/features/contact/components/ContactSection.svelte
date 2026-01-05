@@ -41,7 +41,7 @@
     <div class="flex flex-col gap-4">
       <button
         type="button"
-        class="group relative w-full gap-6 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold transition-all hover:scale-102 hover:bg-white/10 hover:text-primary active:scale-98"
+        class="group relative w-full gap-6 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold transition-all ease-snappy hover:scale-102 hover:bg-white/10 hover:text-primary active:scale-98"
         onclick={copyEmail}
       >
         <span class="font-mono tracking-widest uppercase">
@@ -54,7 +54,7 @@
       </button>
       <div class="grid gap-4 md:grid-cols-2">
         <Link
-          class="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold transition-colors hover:bg-white/10 hover:text-primary"
+          class="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold hover:bg-white/10 hover:text-primary"
           variant="none"
           href={CONTACT_INFO.WhatsApp}
           newTab
@@ -63,7 +63,7 @@
           <span>Whatsapp</span>
         </Link>
         <Link
-          class="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold transition-colors hover:bg-white/10 hover:text-primary"
+          class="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold hover:bg-white/10 hover:text-primary"
           variant="none"
           href={CONTACT_INFO.LinkedIn}
           newTab
@@ -72,7 +72,7 @@
           <span>LinkedIn</span>
         </Link>
         <Link
-          class="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold transition-colors hover:bg-white/10 hover:text-primary"
+          class="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold hover:bg-white/10 hover:text-primary"
           variant="none"
           href={CONTACT_INFO.GitHub}
           newTab
@@ -81,7 +81,7 @@
           <span>GitHub</span>
         </Link>
         <Link
-          class="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold transition-colors hover:bg-white/10 hover:text-primary"
+          class="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold hover:bg-white/10 hover:text-primary"
           variant="none"
           href="/cv.pdf"
           newTab

@@ -38,7 +38,7 @@
 
   <Link
     href={getLocalizedPath("/")}
-    class="mt-24 block rounded-full bg-secondary px-6 py-3 font-mono text-background transition-colors hover:bg-secondary/90"
+    class="mt-24 block rounded-full bg-secondary px-6 py-3 font-mono text-background hover:bg-secondary/90"
     variant="none"
   >
     {t("error_back_home")}

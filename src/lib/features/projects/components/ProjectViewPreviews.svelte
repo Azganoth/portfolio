@@ -58,7 +58,7 @@
 <button
   bind:this={galleryOpenButton}
   type="button"
-  class="group relative max-w-100 overflow-hidden rounded-2xl border border-muted transition-transform hover:scale-102 active:scale-98"
+  class="group relative max-w-100 overflow-hidden rounded-2xl border border-muted transition-transform ease-snappy hover:scale-102 active:scale-98"
   onclick={() => {
     galleryOpen = true;
   }}
@@ -105,7 +105,7 @@
     })}
   >
     <button
-      class="absolute top-4 right-4 transition-all hover:scale-110 hover:text-primary active:scale-95 md:top-2"
+      class="absolute top-4 right-4 transition-all ease-snappy hover:scale-110 hover:text-primary active:scale-95 md:top-2"
       type="button"
       onclick={() => {
         galleryOpen = false;
@@ -140,7 +140,7 @@
 
     <div class="absolute bottom-0 center-x flex items-center max-md:hidden">
       <button
-        class="transition-all hover:scale-110 hover:text-primary active:scale-95"
+        class="transition-all ease-snappy hover:scale-110 hover:text-primary active:scale-95"
         onclick={() =>
           goToSlide((currentSlide - 1 + previews.length) % previews.length)}
         aria-label={t("a11y_previous_image")}
@@ -150,7 +150,7 @@
       <div class="flex" role="tablist">
         {#each { length: previews.length }, i}
           <button
-            class="block transition-all hover:scale-110 hover:text-primary active:scale-95"
+            class="block transition-all ease-snappy hover:scale-110 hover:text-primary active:scale-95"
             type="button"
             role="tab"
             onclick={() => goToSlide(i)}
@@ -168,7 +168,7 @@
         {/each}
       </div>
       <button
-        class="transition-all hover:scale-110 hover:text-primary active:scale-95"
+        class="transition-all ease-snappy hover:scale-110 hover:text-primary active:scale-95"
         onclick={() => goToSlide((currentSlide + 1) % previews.length)}
         aria-label={t("a11y_next_image")}
       >

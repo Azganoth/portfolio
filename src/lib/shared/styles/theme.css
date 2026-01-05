@@ -56,6 +56,12 @@
 
   --drop-shadow-contrast: 0 1px 2px oklch(0 0 0 / 0.5);
 
+  /* Animation */
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1); /* layout changes */
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1); /* micro-interactions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1); /* entering screen */
+  --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0); /* leaving screen */
+
   --animate-blink: blink 3s ease-in-out infinite;
 
   @keyframes blink {
@@ -67,4 +73,6 @@
       opacity: 1;
     }
   }
+
+  --default-transition-duration: 200ms;
 }

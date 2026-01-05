@@ -17,7 +17,7 @@
 
 <a
   class={[
-    "font-bold transition-colors",
+    "font-bold transition-all ease-snappy",
     variant === "default" && "font-body hover:text-secondary",
     className,
   ]}

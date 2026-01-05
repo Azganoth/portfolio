@@ -39,7 +39,7 @@
   <button
     bind:this={toggler}
     type="button"
-    class="block transition-all hover:scale-110 hover:text-primary active:scale-95"
+    class="block transition-all ease-snappy hover:scale-110 hover:text-primary active:scale-95"
     onclick={() => {
       open = !open;
     }}
@@ -52,7 +52,7 @@
   </button>
   <div
     id="language-list"
-    class="absolute right-12 bottom-0 z-1 flex origin-bottom-right flex-col gap-3 rounded-2xl bg-muted p-6 shadow-elevation ease-out inert:invisible inert:scale-90 inert:opacity-0 motion-safe:transition-all"
+    class="absolute right-12 bottom-0 z-1 flex origin-bottom-right flex-col gap-3 rounded-2xl bg-muted p-6 shadow-elevation ease-snappy inert:invisible inert:scale-95 inert:opacity-0 motion-safe:transition-all"
     role="menu"
     inert={!open}
     onclickaway={() => {

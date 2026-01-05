@@ -113,7 +113,7 @@
           </ul>
           <div class="h-4 w-px bg-white/10"></div>
           <Link
-            class="flex items-center gap-2 font-mono font-bold text-primary transition-colors hover:text-primary/80"
+            class="flex items-center gap-2 font-mono font-bold text-primary hover:text-primary/80"
             variant="none"
             href="/cv.pdf"
             newTab
@@ -131,7 +131,7 @@
     <!-- Mobile Menu -->
     <ul
       id={ID_MOBILE_MENU}
-      class="fixed inset-x-0 top-0 z-40 flex origin-top flex-col gap-4 bg-muted px-8 pt-28 pb-8 shadow-elevation duration-300 ease-out inert:invisible inert:-translate-y-2 inert:opacity-0 motion-safe:transition-all"
+      class="fixed inset-x-0 top-0 z-40 flex origin-top flex-col gap-4 bg-muted px-8 pt-28 pb-8 shadow-elevation ease-out-expo inert:invisible inert:-translate-y-4 inert:opacity-0 motion-safe:transition-all"
       inert={!open}
       onclickaway={() => {
         open = false;

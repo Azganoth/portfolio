@@ -16,7 +16,7 @@
 <Section id={ID_START_SECTION} class="relative flex min-h-svh items-center">
   <div class="relative w-full">
     <Reveal
-      class="duration-500 not-in-view:-translate-y-4 not-in-view:opacity-0"
+      class="delay-75 duration-400 ease-out-expo not-in-view:-translate-y-4 not-in-view:opacity-0"
     >
       <h1
         class="mb-4 text-center font-display text-4xl leading-16 font-semibold tracking-wide md:text-start md:text-5xl md:leading-20"
@@ -25,7 +25,7 @@
       </h1>
     </Reveal>
     <Reveal
-      class="delay-200 duration-500 not-in-view:translate-y-4 not-in-view:opacity-0"
+      class="delay-200 duration-400 not-in-view:translate-y-4 not-in-view:opacity-0"
     >
       <h2
         class="text-center font-display text-lg font-semibold tracking-wide text-muted-foreground md:text-start md:text-xl"
@@ -34,14 +34,14 @@
       </h2>
     </Reveal>
     <Reveal
-      class="delay-500 duration-500 not-in-view:translate-y-4 not-in-view:opacity-0"
+      class="delay-500 duration-400 ease-out-expo not-in-view:translate-y-4 not-in-view:opacity-0"
     >
       <ul class=" mt-8 flex justify-center gap-6 md:justify-start">
         {#each CONTACT_SHORTCUTS as { label, href, icon } (href)}
-          <li class="transition-transform hover:scale-110">
+          <li class="transition-transform ease-snappy hover:scale-110">
             <Link
               {href}
-              class="text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground"
+              class="text-muted-foreground hover:text-foreground focus-visible:text-foreground"
               aria-label={label}
               newTab
             >
@@ -54,7 +54,7 @@
   </div>
   <Link
     class={[
-      "absolute bottom-8 center-x flex items-center gap-2 rounded-full bg-secondary px-6 py-3 font-mono text-lg font-bold text-background transition-transform hover:scale-105 hover:bg-secondary/90 md:bottom-10",
+      "absolute bottom-8 center-x flex items-center gap-2 rounded-full bg-secondary px-6 py-3 font-mono text-lg font-bold text-background hover:scale-105 hover:bg-secondary/90 active:scale-95 md:bottom-10",
       "before:absolute before:inset-0 before:-z-1 before:animate-pulse before:rounded-full before:bg-secondary before:blur-sm before:content-['']",
     ]}
     variant="none"

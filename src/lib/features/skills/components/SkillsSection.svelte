@@ -32,11 +32,11 @@
           {#each skills as skill, i (skill)}
             {@const { icon, color } = TAG_META[skill]}
             <Reveal
-              class="delay-(--delay) duration-500 not-in-view:translate-y-4 not-in-view:opacity-0"
+              class="delay-(--delay) duration-400 ease-out-expo not-in-view:translate-y-4 not-in-view:opacity-0"
               style={`--delay: ${i * 100}ms`}
             >
               <div
-                class="group flex items-center gap-2 rounded-lg bg-white/5 p-3 text-sm transition-transform hover:scale-110"
+                class="group flex items-center gap-2 rounded-lg bg-white/5 p-3 text-sm transition-transform ease-snappy hover:scale-110"
               >
                 <Icon
                   class="size-5 transition-transform group-hover:-rotate-12"
