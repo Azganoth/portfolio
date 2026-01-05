@@ -2,6 +2,7 @@
   import { CONTACT_INFO } from "$lib/features/contact/data";
   import { t } from "$lib/features/i18n/translation.svelte";
   import Link from "$lib/shared/components/Link.svelte";
+  import Reveal from "$lib/shared/components/Reveal.svelte";
   import Section from "$lib/shared/components/Section.svelte";
   import { ID_CONTACT_SECTION } from "$lib/shared/constants";
   import Icon from "@iconify/svelte";
@@ -32,13 +33,17 @@
 >
   <div class="my-auto grid gap-16 xl:grid-cols-2">
     <!-- Headline and Specs -->
-    <div>
+    <Reveal
+      class="duration-700 ease-out-expo not-in-view:-translate-x-8 not-in-view:opacity-0"
+    >
       <h3 class="font-display text-4xl leading-tight font-bold md:text-5xl">
         {t("contact_message")}
       </h3>
-    </div>
+    </Reveal>
     <!-- Actions -->
-    <div class="flex flex-col gap-4">
+    <Reveal
+      class="flex flex-col gap-4 delay-200 duration-700 ease-snappy not-in-view:opacity-0"
+    >
       <button
         type="button"
         class="group relative w-full gap-6 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold transition-all ease-snappy hover:scale-102 hover:bg-white/10 hover:text-primary active:scale-98"
@@ -90,6 +95,6 @@
           <span>Resume</span>
         </Link>
       </div>
-    </div>
+    </Reveal>
   </div>
 </Section>

@@ -111,9 +111,9 @@
               </li>
             {/each}
           </ul>
-          <div class="h-4 w-px bg-white/10"></div>
+          <div class="h-6 w-px bg-white/10"></div>
           <Link
-            class="flex items-center gap-2 font-mono font-bold text-primary hover:text-primary/80"
+            class="-mr-3.5 flex items-center gap-2 rounded-full border border-secondary/20 bg-secondary/10 px-3 py-1 font-mono font-bold tracking-wide text-secondary transition-all ease-snappy hover:scale-105 hover:border-secondary/40 hover:bg-secondary/20 active:scale-95"
             variant="none"
             href="/cv.pdf"
             newTab

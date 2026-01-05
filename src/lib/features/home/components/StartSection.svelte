@@ -52,17 +52,11 @@
       </ul>
     </Reveal>
   </div>
-  <Link
-    class={[
-      "absolute bottom-8 center-x flex items-center gap-2 rounded-full bg-secondary px-6 py-3 font-mono text-lg font-bold text-background hover:scale-105 hover:bg-secondary/90 active:scale-95 md:bottom-10",
-      "before:absolute before:inset-0 before:-z-1 before:animate-pulse before:rounded-full before:bg-secondary before:blur-sm before:content-['']",
-    ]}
-    variant="none"
-    href="/cv.pdf"
-    newTab
-    aria-label={t("a11y_download_cv")}
+  <div
+    class="absolute bottom-12 center-x flex h-14 w-7 justify-center rounded-full border-2 border-muted-foreground p-2 opacity-50 transition-opacity hover:opacity-100"
   >
-    <span>{t("start_curriculum")}</span>
-    <Icon icon="fa6-solid:arrow-up-right-from-square" />
-  </Link>
+    <div
+      class="h-4 w-2 animate-scroll-wheel rounded-full bg-muted-foreground"
+    ></div>
+  </div>
 </Section>
