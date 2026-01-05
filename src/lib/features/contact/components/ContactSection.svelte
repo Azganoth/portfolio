@@ -1,9 +1,9 @@
 <script lang="ts">
+  import { CONTACT_INFO } from "$lib/features/contact/data";
   import { t } from "$lib/features/i18n/translation.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import Section from "$lib/shared/components/Section.svelte";
   import { ID_CONTACT_SECTION } from "$lib/shared/constants";
-  import { CONTACT_INFO } from "$lib/features/contact/data";
   import Icon from "@iconify/svelte";
 
   let copied = $state(false);
@@ -41,7 +41,7 @@
     <div class="flex flex-col gap-4">
       <button
         type="button"
-        class="tap-push group relative w-full gap-6 rounded-2xl border border-white/10 bg-muted px-6 py-4 font-bold transition-[color,background,scale] hover:scale-[1.01] hover:bg-muted-foreground/15 hover:text-primary active:scale-[0.99]"
+        class="group relative w-full gap-6 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold transition-all hover:scale-102 hover:bg-white/10 hover:text-primary active:scale-98"
         onclick={copyEmail}
       >
         <span class="font-mono tracking-widest uppercase">

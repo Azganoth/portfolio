@@ -52,7 +52,7 @@
   {#if visibleCount < projects.length}
     <button
       type="button"
-      class="tap-push mt-24 rounded-full bg-secondary px-8 py-3 font-mono text-lg font-bold text-background shadow-[0_0_20px_-5px_var(--color-secondary)] transition-[scale,background-color] hover:scale-105 hover:bg-secondary/90 md:mt-32"
+      class="mt-24 rounded-full bg-secondary px-8 py-3 font-mono text-lg font-bold text-background shadow-[0_0_20px_-5px_var(--color-secondary)] transition-all hover:scale-102 hover:bg-secondary/90 active:scale-98 md:mt-32"
       onclick={showMore}
     >
       {t("projects_show_more")}

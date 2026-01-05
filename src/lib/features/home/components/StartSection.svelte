@@ -37,7 +37,7 @@
       class="delay-500 duration-500 not-in-view:translate-y-4 not-in-view:opacity-0"
     >
       <ul class=" mt-8 flex justify-center gap-6 md:justify-start">
-        {#each CONTACT_SHORTCUTS as { label, href, icon }, i (href)}
+        {#each CONTACT_SHORTCUTS as { label, href, icon } (href)}
           <li class="transition-transform hover:scale-110">
             <Link
               {href}

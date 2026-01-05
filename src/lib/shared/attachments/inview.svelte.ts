@@ -46,11 +46,11 @@ export interface InViewOptions {
  *
  * @example
  * // Basic Enter Animation (runs once)
- * <div class="transition-all duration-500 not-in-view:opacity-0 not-in-view:-translate-y-4" {@attach inview({ once: true })}>...</div>
+ * <div class="transition-all duration-400 not-in-view:opacity-0 not-in-view:-translate-y-4" {@attach inview({ once: true })}>...</div>
  *
  * @example
  * // Enter & Exit Animation (runs every time)
- * <div class="transition-all duration-500 not-in-view:opacity-0" {@attach inview()}>...</div>
+ * <div class="transition-all duration-400 not-in-view:opacity-0" {@attach inview()}>...</div>
  */
 export const inView = (options: InViewOptions = {}): Attachment => {
   const {

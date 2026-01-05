@@ -74,7 +74,7 @@
 <dialog
   bind:this={dialog}
   id={ID_PROJECT_DETAILS}
-  class="z-20 m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl bg-background text-foreground shadow-elevation transition-[opacity,scale] duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg md:h-[calc(100dvh-8rem)] md:max-w-180 xl:max-w-300 starting:scale-90 starting:opacity-0"
+  class="z-20 m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl bg-background text-foreground shadow-elevation transition-all duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg md:h-[calc(100dvh-8rem)] md:max-w-180 xl:max-w-300 starting:scale-90 starting:opacity-0"
   onclose={handleClose}
   onclickaway={handleClose}
   aria-labelledby={ID_PROJECT_TITLE}
@@ -84,7 +84,7 @@
   {#if projectStore.selected}
     <div class="relative flex h-full flex-col overflow-y-auto">
       <button
-        class="tap-push absolute top-4 right-4 z-10 text-muted-foreground transition-colors hover:text-foreground"
+        class="absolute top-4 right-4 z-10 text-muted-foreground transition-all hover:scale-110 hover:text-foreground active:scale-95"
         type="button"
         onclick={handleClose}
         aria-label={t("a11y_close_project_details")}
