@@ -4,9 +4,8 @@
   import { t } from "$lib/features/i18n/translation.svelte";
   import { composeProjectLinkId } from "$lib/features/projects/components/ProjectThumb.svelte";
   import ProjectViewPreviews from "$lib/features/projects/components/ProjectViewPreviews.svelte";
+  import type { Project } from "$lib/features/projects/schema";
   import { projectStore } from "$lib/features/projects/store.svelte";
-  import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
-  import { focustrap } from "$lib/shared/attachments/focustrap.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import { ID_PROJECT_DETAILS, ID_PROJECT_TITLE } from "$lib/shared/constants";
   import { getLocalizedPath } from "$lib/shared/utils";
@@ -16,7 +15,7 @@
   let open = $derived(!!projectStore.selected);
   let dialog = $state<HTMLDialogElement>();
 
-  async function handleClose() {
+  const handleClose = async () => {
     if (
       page.state.selectedProject ||
       page.route.id?.includes("projects/[slug]")
@@ -26,7 +25,7 @@
     } else {
       projectStore.selected = undefined;
     }
-  }
+  };
 
   // Sync state from Shallow Routing (History API) & Navigation
   $effect(() => {
@@ -39,34 +38,34 @@
     }
   });
 
-  let lastSelectedProjectSlug = $state<string>();
+  // Keep alive for transitions
+  let lastProject = $state<Project>();
   $effect(() => {
     if (projectStore.selected) {
-      lastSelectedProjectSlug = projectStore.selected.slug;
+      lastProject = projectStore.selected;
     }
   });
-
-  function restoreFocus() {
-    if (!lastSelectedProjectSlug) return;
-
-    const projectLinkId = `#${composeProjectLinkId(lastSelectedProjectSlug)}`;
-
-    // Use nested requestAnimationFrame to ensure browser layout/scroll is settled
-    requestAnimationFrame(() => {
-      const thumbLink = document.querySelector<HTMLElement>(projectLinkId);
-      thumbLink?.scrollIntoView({ block: "center", behavior: "smooth" });
-      thumbLink?.focus({ preventScroll: true });
-
-      lastSelectedProjectSlug = undefined;
-    });
-  }
 
   $effect(() => {
     if (open) {
       dialog?.showModal();
     } else {
       dialog?.close();
-      tick().then(restoreFocus);
+
+      // Restore focus
+      tick().then(() => {
+        const slug = lastProject?.slug;
+        if (!slug) return;
+
+        // Use requestAnimationFrame to ensure browser layout/scroll is settled
+        requestAnimationFrame(() => {
+          const thumbLink = document.querySelector<HTMLElement>(
+            `#${composeProjectLinkId(slug)}`,
+          );
+          thumbLink?.scrollIntoView({ block: "center", behavior: "smooth" });
+          thumbLink?.focus({ preventScroll: true });
+        });
+      });
     }
   });
 </script>
@@ -74,24 +73,26 @@
 <dialog
   bind:this={dialog}
   id={ID_PROJECT_DETAILS}
-  class="z-20 m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl bg-background text-foreground shadow-elevation transition-all duration-300 backdrop:bg-black/70 backdrop:backdrop-blur-lg md:h-[calc(100dvh-8rem)] md:max-w-180 xl:max-w-300 starting:scale-90 starting:opacity-0"
+  class="m-auto h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-hidden rounded-2xl bg-background text-foreground shadow-elevation transition-[scale,opacity,display,overlay] transition-discrete duration-400 ease-fluid not-open:scale-90 not-open:opacity-0 backdrop:bg-black/70 backdrop:backdrop-blur-lg md:h-[calc(100dvh-8rem)] md:max-w-[calc(100dvw-8rem)] xl:max-w-300 starting:scale-90 starting:opacity-0"
   onclose={handleClose}
-  onclickaway={handleClose}
+  onclick={(e) => {
+    if (e.target === dialog) {
+      handleClose();
+    }
+  }}
   aria-labelledby={ID_PROJECT_TITLE}
-  {@attach clickaway({ ignoreSelf: true, enabled: open })}
-  {@attach focustrap()}
 >
-  {#if projectStore.selected}
-    <div class="relative flex h-full flex-col overflow-y-auto">
-      <button
-        class="absolute top-4 right-4 z-10 text-muted-foreground transition-all hover:scale-110 hover:text-foreground active:scale-95"
-        type="button"
-        onclick={handleClose}
-        aria-label={t("a11y_close_project_details")}
-      >
-        <Icon class="size-8 drop-shadow-contrast" icon="fa6-solid:xmark" />
-      </button>
+  <div class="relative flex h-full flex-col overflow-y-auto">
+    <button
+      class="absolute top-4 right-4 z-10 text-muted-foreground transition-all hover:scale-110 hover:text-foreground active:scale-95"
+      type="button"
+      onclick={handleClose}
+      aria-label={t("a11y_close_project_details")}
+    >
+      <Icon class="size-8 drop-shadow-contrast" icon="fa6-solid:xmark" />
+    </button>
 
+    {#if lastProject}
       <article class="flex flex-col gap-8 px-6 py-8 md:px-10 md:py-10">
         <!-- Header -->
         <header class="flex flex-col gap-4">
@@ -100,17 +101,17 @@
               id={ID_PROJECT_TITLE}
               class="font-display text-3xl font-bold tracking-tight md:text-4xl"
             >
-              {projectStore.selected.title}
+              {lastProject.title}
             </h1>
             <span
               class="text-sm font-bold tracking-wider text-muted-foreground uppercase"
             >
-              {projectStore.selected.year} • {projectStore.selected.category}
+              {lastProject.year} • {lastProject.category}
             </span>
           </div>
-          {#if projectStore.selected.tags.length > 0}
+          {#if lastProject.tags.length > 0}
             <div class="flex flex-wrap gap-2">
-              {#each projectStore.selected.tags as tag (tag)}
+              {#each lastProject.tags as tag (tag)}
                 <span
                   class="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary"
                 >
@@ -120,13 +121,13 @@
             </div>
           {/if}
           <p class="text-lg leading-relaxed text-muted-foreground">
-            {projectStore.selected.summary}
+            {lastProject.summary}
           </p>
           <div class="flex flex-wrap gap-4 pt-2">
-            {#if projectStore.selected.repository}
+            {#if lastProject.repository}
               <Link
                 class="flex items-center gap-2 rounded-lg bg-muted px-4 py-2 text-sm font-semibold text-foreground hover:bg-muted/80 hover:text-foreground"
-                href={projectStore.selected.repository}
+                href={lastProject.repository}
                 aria-label={t("a11y_go_to_repository")}
                 newTab
                 variant="none"
@@ -135,10 +136,10 @@
                 {t("projects_code")}
               </Link>
             {/if}
-            {#if projectStore.selected.website}
+            {#if lastProject.website}
               <Link
                 class="text-primary-foreground hover:text-primary-foreground flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold hover:bg-primary/90"
-                href={projectStore.selected.website}
+                href={lastProject.website}
                 aria-label={t("a11y_go_to_website")}
                 newTab
                 variant="none"
@@ -157,15 +158,15 @@
 
         <!-- Description -->
         <div class="markdown">
-          {#if projectStore.selected.previews.length > 0}
+          {#if lastProject.previews.length > 0}
             <div class="mx-auto mt-2 mb-8 w-fit md:float-end md:mx-8 md:mb-0">
-              <ProjectViewPreviews previews={projectStore.selected.previews} />
+              <ProjectViewPreviews previews={lastProject.previews} />
             </div>
           {/if}
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-          {@html projectStore.selected.description}
+          {@html lastProject.description}
         </div>
       </article>
-    </div>
-  {/if}
+    {/if}
+  </div>
 </dialog>
