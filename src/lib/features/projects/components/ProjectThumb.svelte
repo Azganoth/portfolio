@@ -25,23 +25,23 @@
   const summaryId = $derived(`project-summary-${project.slug}`);
 
   const href = $derived(getLocalizedPath(`/projects/${project.slug}`));
-  function openProject() {
+  const openProject = () => {
     projectStore.selected = project;
     pushState(href, { selectedProject: project });
-  }
+  };
 
-  function handleclick(event: MouseEvent) {
+  const handleclick = (event: MouseEvent) => {
     event.stopPropagation();
     event.preventDefault();
     openProject();
-  }
+  };
 
-  function handlekeydown(event: KeyboardEvent) {
+  const handlekeydown = (event: KeyboardEvent) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       openProject();
     }
-  }
+  };
 </script>
 
 <article
@@ -87,7 +87,7 @@
 
       <h3
         id={titleId}
-        class="flex items-center gap-5 font-display text-4xl font-bold tracking-tight text-white"
+        class="flex items-center gap-5 font-display text-2xl font-bold tracking-tight text-white md:text-4xl"
       >
         <Link
           id={linkId}
@@ -104,7 +104,7 @@
         </Link>
         <Icon
           icon="fa7-solid:arrow-up-right-from-square"
-          class="mt-1 size-8 text-muted-foreground"
+          class="size-7 text-muted-foreground md:mt-1 md:size-8"
         />
       </h3>
     </div>

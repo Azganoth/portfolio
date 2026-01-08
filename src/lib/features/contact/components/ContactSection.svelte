@@ -10,7 +10,7 @@
   let copied = $state(false);
   let timeout: ReturnType<typeof setTimeout>;
 
-  async function copyEmail() {
+  const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(
         CONTACT_INFO.Email.replace("mailto:", ""),
@@ -23,7 +23,7 @@
     } catch (err) {
       console.error("Failed to copy email", err);
     }
-  }
+  };
 </script>
 
 <Section
@@ -49,9 +49,10 @@
         class="group relative w-full gap-6 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold transition-all ease-snappy hover:scale-102 hover:bg-white/10 hover:text-primary active:scale-98"
         onclick={copyEmail}
       >
-        <span class="font-mono tracking-widest uppercase">
+        <span class="font-mono tracking-widest uppercase max-md:hidden">
           {CONTACT_INFO.Email}
         </span>
+        <span class="font-mono tracking-widest uppercase md:hidden">Email</span>
         <Icon
           class="absolute center-y right-4 size-5 transition-transform group-hover:-rotate-12"
           icon={copied ? "fa6-solid:check" : "fa6-solid:copy"}

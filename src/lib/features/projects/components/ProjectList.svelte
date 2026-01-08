@@ -42,7 +42,7 @@
     {#each displayedProjects as project (project.title)}
       <Reveal
         tag="li"
-        class="group/project-item duration-400 ease-out-expo not-in-view:translate-y-32 not-in-view:opacity-0"
+        class="group/project-item duration-400 ease-out-expo not-in-view:translate-y-16 not-in-view:opacity-0"
       >
         <ProjectThumb {project} />
       </Reveal>
