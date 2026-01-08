@@ -53,10 +53,10 @@
     </Reveal>
   </div>
   <div
-    class="absolute bottom-12 center-x flex h-14 w-7 justify-center rounded-full border-2 border-muted-foreground p-2 opacity-50 transition-opacity hover:opacity-100"
+    class="absolute bottom-12 center-x flex h-14 w-7 justify-center rounded-full border-2 border-muted-foreground/50 p-2"
   >
     <div
-      class="h-4 w-2 animate-scroll-wheel rounded-full bg-muted-foreground"
+      class="h-4 w-2 animate-scroll-wheel rounded-full bg-muted-foreground/50"
     ></div>
   </div>
 </Section>
