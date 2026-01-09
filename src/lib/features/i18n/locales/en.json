@@ -56,6 +56,7 @@
   "a11y_image_gallery": "Image gallery",
   "a11y_open_image_gallery": "Open image gallery",
   "a11y_close_image_gallery": "Close image gallery",
+  "a11y_slide_n_of_m": "Image {n} of {m}",
   "a11y_next_image": "Next image",
   "a11y_previous_image": "Previous image",
   "a11y_jump_to_image": "Jump to image: {name}",

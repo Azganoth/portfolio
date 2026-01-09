@@ -3,6 +3,7 @@
   import AboutMeSection from "$lib/features/home/components/AboutMeSection.svelte";
   import StartSection from "$lib/features/home/components/StartSection.svelte";
   import { translationStore } from "$lib/features/i18n/translation.svelte";
+  import ProjectLightbox from "$lib/features/projects/components/ProjectLightbox.svelte";
   import ProjectsSection from "$lib/features/projects/components/ProjectsSection.svelte";
   import ProjectView from "$lib/features/projects/components/ProjectView.svelte";
   import SkillsSection from "$lib/features/skills/components/SkillsSection.svelte";
@@ -22,3 +23,4 @@
   {@render children()}
 </main>
 <ProjectView />
+<ProjectLightbox />

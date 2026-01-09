@@ -49,6 +49,7 @@
   "a11y_image_gallery": "Galeria de imagens",
   "a11y_open_image_gallery": "Abrir galeria de imagens",
   "a11y_close_image_gallery": "Fechar galeria de imagens",
+  "a11y_slide_n_of_m": "Imagem {n} de {m}",
   "a11y_next_image": "Próxima imagem",
   "a11y_previous_image": "Imagem anterior",
   "a11y_jump_to_image": "Ir para a imagem: {name}",

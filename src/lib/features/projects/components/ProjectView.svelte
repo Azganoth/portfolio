@@ -3,11 +3,14 @@
   import { page } from "$app/state";
   import { t } from "$lib/features/i18n/translation.svelte";
   import { composeProjectLinkId } from "$lib/features/projects/components/ProjectThumb.svelte";
-  import ProjectViewPreviews from "$lib/features/projects/components/ProjectViewPreviews.svelte";
   import type { Project } from "$lib/features/projects/schema";
   import { projectStore } from "$lib/features/projects/store.svelte";
   import Link from "$lib/shared/components/Link.svelte";
-  import { ID_PROJECT_DETAILS, ID_PROJECT_TITLE } from "$lib/shared/constants";
+  import {
+    ID_IMAGE_GALLERY,
+    ID_PROJECT_DETAILS,
+    ID_PROJECT_TITLE,
+  } from "$lib/shared/constants";
   import { getLocalizedPath } from "$lib/shared/utils";
   import Icon from "@iconify/svelte";
   import { tick } from "svelte";
@@ -159,8 +162,36 @@
         <!-- Description -->
         <div class="markdown">
           {#if lastProject.previews.length > 0}
-            <div class="mx-auto mt-2 mb-8 w-fit md:float-end md:mx-8 md:mb-0">
-              <ProjectViewPreviews previews={lastProject.previews} />
+            {@const previews = lastProject.previews}
+            <div
+              class="mt-2 mb-8 flex justify-center md:float-end md:mx-8 md:mb-0"
+            >
+              <button
+                type="button"
+                class="group hover: relative max-w-100 overflow-hidden rounded-2xl border border-muted transition-transform ease-snappy hover:scale-102 hover:border-primary active:scale-98"
+                onclick={() => {
+                  projectStore.openLightbox(previews);
+                }}
+                aria-label={t("a11y_open_image_gallery")}
+                aria-haspopup="dialog"
+                aria-controls={ID_IMAGE_GALLERY}
+              >
+                <img
+                  class="aspect-4/3 max-h-52 w-auto object-cover"
+                  src={previews[0].url}
+                  width={previews[0].width}
+                  height={previews[0].height}
+                  alt=""
+                />
+                <div
+                  class="absolute right-1 bottom-1 flex items-center gap-2 rounded-xl bg-black/50 p-2"
+                >
+                  <span class="font-mono text-xs font-bold">
+                    1/{previews.length}
+                  </span>
+                  <Icon class="size-4" icon="fa6-solid:expand" />
+                </div>
+              </button>
             </div>
           {/if}
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
