@@ -15,7 +15,7 @@ import { marked } from "marked";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-export const getProjectsMap = async () =>
+export const getProjects = async () =>
   Object.fromEntries(
     await Promise.all(
       SUPPORTED_LOCALES.map(
@@ -23,34 +23,32 @@ export const getProjectsMap = async () =>
           [locale, await getAllProjects(locale)] as [Locale, Project[]],
       ),
     ),
-  );
+  ) as Record<Locale, Project[]>;
 
-const composePreviews = async (slug: string) => {
-  const previews: ProjectPreview[] = [];
-  const staticPath = path.join(process.cwd(), "static");
+const composePreviews = (
+  previewFilenames: string[],
+  slug: string,
+): ProjectPreview[] =>
+  previewFilenames
+    .filter(
+      (filename) =>
+        filename.startsWith(`${slug}_`) && filename.endsWith(".webp"),
+    )
+    .sort((a, b) => {
+      const indexA = parseInt(a.split("_")[1]);
+      const indexB = parseInt(b.split("_")[1]);
+      return indexA - indexB;
+    })
+    .map((filename) => ({
+      url: `/images/preview/${filename}`,
+      width: PREVIEW_SIZE.width,
+      height: PREVIEW_SIZE.height,
+    }));
 
-  for (let i = 0; ; i++) {
-    const imagePath = `/images/preview/${slug}_${i}.webp`;
-    const filePath = path.join(staticPath, imagePath);
-
-    try {
-      await fs.access(filePath, fs.constants.F_OK);
-      previews.push({
-        url: imagePath,
-        width: PREVIEW_SIZE.width,
-        height: PREVIEW_SIZE.height,
-      });
-    } catch {
-      break;
-    }
-  }
-
-  return previews;
-};
-
-export const getProject = async (
+const getProject = async (
   locale: string,
   slug: string,
+  previews: ProjectPreview[],
 ): Promise<Project | null> => {
   const projectsDir = path.join(
     process.cwd(),
@@ -73,24 +71,31 @@ export const getProject = async (
     slug,
     ...frontmatter,
     description,
-    previews: await composePreviews(slug),
+    previews,
   };
 };
 
-export const getAllProjects = async (locale: string): Promise<Project[]> => {
+const getAllProjects = async (locale: string): Promise<Project[]> => {
   const projectsDir = path.join(
     process.cwd(),
     "src/lib/features/projects/data",
   );
   const dirPath = path.join(projectsDir, locale);
   const filenames = await fs.readdir(dirPath);
+  const previewFilenames = await fs.readdir(
+    path.join(process.cwd(), "static/images/preview"),
+  );
 
   const projects = await Promise.all<Project | null>(
     filenames
       .filter((filename) => filename.endsWith(".md"))
       .map(async (filename) => {
         const slug = filename.split(".")[0];
-        return getProject(locale, slug);
+        return getProject(
+          locale,
+          slug,
+          composePreviews(previewFilenames, slug),
+        );
       }),
   );
 
