@@ -14,21 +14,21 @@
 </script>
 
 {#snippet nexus()}
-  <Link
-    class="text-white"
-    href={getLocalizedPath("/projects/nexus")}
-    onclick={(e) => e.stopPropagation()}
-  >
+  <Link class="text-white" href={getLocalizedPath("/projects/nexus")}>
     Nexus
   </Link>
 {/snippet}
-{#snippet simplemotionreact()}
+{#snippet smr()}
   <Link
     class="text-white"
     href={getLocalizedPath("/projects/simplemotionreact")}
-    onclick={(e) => e.stopPropagation()}
   >
     Simple Motion React
+  </Link>
+{/snippet}
+{#snippet fixmyhalo()}
+  <Link class="text-white" href={getLocalizedPath("/projects/fixmyhalo")}>
+    Fix My Halo
   </Link>
 {/snippet}
 
@@ -88,7 +88,7 @@
           <Translation key="bio_description_2" values={{ nexus }} />
         </p>
         <p class="leading-relaxed">
-          <Translation key="bio_description_3" values={{ simplemotionreact }} />
+          <Translation key="bio_description_3" values={{ smr, fixmyhalo }} />
         </p>
       </div>
     </Reveal>
@@ -97,7 +97,7 @@
     <Reveal
       class={[
         cardClass,
-        "delay-1000 duration-700 ease-out-expo not-in-view:translate-y-4 not-in-view:opacity-0",
+        "delay-500 duration-700 ease-out-expo not-in-view:translate-y-4 not-in-view:opacity-0",
         "md:col-span-3",
       ]}
     >

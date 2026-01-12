@@ -15,10 +15,10 @@ export const PROJECT_LINK_BASE = "#project-";
 // --- CONTENT ---
 
 export const PROJECTS_ORDER = [
-  "azganoth",
   "nexus",
-  "simplemotionreact",
   "fixmyhalo",
+  "simplemotionreact",
+  "azganoth",
   "treesitterlua",
   "galleria",
 ];
