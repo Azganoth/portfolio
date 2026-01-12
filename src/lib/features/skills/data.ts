@@ -5,6 +5,7 @@ export const SKILLS_BY_CATEGORY = {
     "JavaScript",
     "TypeScript",
     "Python",
+    "Rust",
   ],
   skills_category_frontend: [
     "React",

@@ -20,15 +20,7 @@ export const PROJECTS_ORDER = [
   "simplemotionreact",
   "fixmyhalo",
   "treesitterlua",
-  "tictactoe",
   "galleria",
-  "devfinder",
-  "passwordgen",
-  "bmicalc",
-  "skilled",
-  "workit",
-  "suite",
-  "equalizer",
 ];
 
 // --- IDENTIFIERS ---
