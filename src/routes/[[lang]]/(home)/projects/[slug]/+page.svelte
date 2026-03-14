@@ -9,7 +9,3 @@
     projectStore.selected = data.project;
   });
 </script>
-
-<svelte:head>
-  <title>{data.project.title} | Azganoth</title>
-</svelte:head>

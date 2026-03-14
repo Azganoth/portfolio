@@ -2,6 +2,8 @@
 
 // --- CONFIGURATION & DEFAULTS ---
 
+export const SITE_URL = "https://azganoth.vercel.app";
+
 export const SUPPORTED_LOCALES = ["pt", "en"];
 export const DEFAULT_LOCALE = "pt";
 
