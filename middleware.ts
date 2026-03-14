@@ -27,7 +27,7 @@ export function middleware(request: Request) {
   else if (langHeader) {
     const langBrowser = langHeader.split(",")[0].split("-")[0];
     if (SUPPORTED_LOCALES.includes(langBrowser)) {
-      lang = langHeader;
+      lang = langBrowser;
     }
   }
 
@@ -37,7 +37,9 @@ export function middleware(request: Request) {
   }
 
   // Otherwise, redirect to the prefixed path
-  return rewrite(new URL(`/${lang}`, request.url));
+  const localizedUrl = new URL(`/${lang}`, request.url);
+  localizedUrl.search = new URL(request.url).search;
+  return rewrite(localizedUrl);
 }
 
 export const config = {
