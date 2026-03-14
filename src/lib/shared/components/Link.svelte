@@ -1,6 +1,15 @@
 <script lang="ts">
   import type { HTMLAnchorAttributes } from "svelte/elements";
 
+  const mergeRel = (rel?: string | null) =>
+    [
+      ...new Set([
+        ...(rel?.split(/\s+/).filter(Boolean) ?? []),
+        "noopener",
+        "noreferrer",
+      ]),
+    ].join(" ");
+
   interface Props extends HTMLAnchorAttributes {
     variant?: "default" | "none";
     newTab?: boolean;
@@ -11,6 +20,8 @@
     children,
     variant = "default",
     newTab,
+    rel,
+    target,
     ...otherProps
   }: Props = $props();
 </script>
@@ -21,7 +32,8 @@
     variant === "default" && "font-body hover:text-secondary",
     className,
   ]}
-  {...newTab && { target: "_blank" }}
+  target={newTab ? "_blank" : target}
+  rel={newTab ? mergeRel(rel) : rel}
   {...otherProps}
 >
   {@render children?.()}
