@@ -14,7 +14,7 @@ interface ContactLink {
 export const CONTACT_SHORTCUTS: ContactLink[] = [
   {
     label: "Email",
-    href: `emailto:${CONTACT_INFO.Email}`,
+    href: `mailto:${CONTACT_INFO.Email}`,
     icon: "simple-icons:gmail",
   },
   {
@@ -40,7 +40,10 @@ interface ContactItem {
 }
 
 export const CONTACT_LIST: ContactItem[] = [
-  { label: "ademirj.ferreirajunior@gmail.com", href: CONTACT_INFO.Email },
+  {
+    label: "ademirj.ferreirajunior@gmail.com",
+    href: `mailto:${CONTACT_INFO.Email}`,
+  },
   { label: "WhatsApp", href: CONTACT_INFO.WhatsApp },
   { label: "LinkedIn", href: CONTACT_INFO.LinkedIn },
 ];
