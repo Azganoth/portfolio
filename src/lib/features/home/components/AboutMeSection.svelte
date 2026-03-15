@@ -85,10 +85,13 @@
           <Translation key="bio_description_1" />
         </p>
         <p class="leading-relaxed">
-          <Translation key="bio_description_2" values={{ nexus }} />
+          <Translation
+            key="bio_description_2"
+            values={{ nexus, smr, fixmyhalo }}
+          />
         </p>
         <p class="leading-relaxed">
-          <Translation key="bio_description_3" values={{ smr, fixmyhalo }} />
+          <Translation key="bio_description_3" />
         </p>
       </div>
     </Reveal>

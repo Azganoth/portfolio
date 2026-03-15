@@ -49,6 +49,8 @@
       mobilePopover?.hidePopover();
     }
   });
+
+  const cvHref = $derived(t("_cv_href"));
 </script>
 
 <header>
@@ -81,7 +83,7 @@
       <Link
         class="-mr-3.5 flex items-center gap-2 rounded-full border border-secondary/20 bg-secondary/10 px-3 py-1 font-mono font-bold tracking-wide text-secondary transition-all ease-snappy hover:scale-105 hover:border-secondary/40 hover:bg-secondary/20 active:scale-95"
         variant="none"
-        href="/cv.pdf"
+        href={cvHref}
         newTab
         aria-label={t("a11y_download_cv")}
       >
@@ -132,7 +134,7 @@
 
           <Link
             class="flex items-center justify-center gap-2 font-mono text-lg font-bold text-primary"
-            href="/cv.pdf"
+            href={cvHref}
             newTab
             aria-label={t("a11y_download_cv")}
           >
