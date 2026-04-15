@@ -4,6 +4,7 @@ import js from "@eslint/js";
 import prettier from "eslint-config-prettier";
 import onlyWarn from "eslint-plugin-only-warn";
 import svelte from "eslint-plugin-svelte";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 import { fileURLToPath } from "node:url";
 import ts from "typescript-eslint";
@@ -11,19 +12,17 @@ import svelteConfig from "./svelte.config.js";
 
 const gitignorePath = fileURLToPath(new URL("./.gitignore", import.meta.url));
 
-export default ts.config(
+export default defineConfig(
   includeIgnoreFile(gitignorePath),
   js.configs.recommended,
-  ...ts.configs.recommended,
-  ...svelte.configs.recommended,
-  prettier,
-  ...svelte.configs.prettier,
+  ts.configs.recommended,
+  svelte.configs.recommended,
   {
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node },
-    },
-    rules: {
-      "no-undef": "off",
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
     },
   },
   {
@@ -43,8 +42,10 @@ export default ts.config(
   },
   {
     plugins: {
-      // @ts-expect-error This is fine for this plugin.
+      // @ts-expect-error 'eslint-plugin-only-warn' does not provide type definitions
       onlyWarn,
     },
   },
+  prettier,
+  svelte.configs.prettier,
 );
