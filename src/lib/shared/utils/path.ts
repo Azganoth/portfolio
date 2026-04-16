@@ -1,5 +1,9 @@
-import type { Locale } from "$lib/features/i18n/translation.svelte";
-import { DEFAULT_LOCALE, SITE_URL } from "$lib/shared/constants";
+import {
+  DEFAULT_LOCALE,
+  SITE_URL,
+  SUPPORTED_LOCALES,
+  type Locale,
+} from "../constants";
 
 export const HREFLANG_BY_LOCALE: Record<Locale, string> = {
   pt: "pt-BR",
@@ -16,14 +20,18 @@ export const normalizePathname = (pathname: string) => {
   return `/${pathname.replace(/^\/+|\/+$/g, "")}`;
 };
 
-export const stripLocaleFromPathname = (pathname: string, locale: Locale) => {
-  if (pathname === "/") return pathname;
+const localePrefixPattern = new RegExp(
+  `^/(${SUPPORTED_LOCALES.join("|")})(?=/|$)`,
+);
+
+export const stripSupportedLocaleFromPathname = (pathname: string) => {
   const normalized = normalizePathname(pathname);
-  return normalized.replace(new RegExp(`^/${locale}(/|$)`), "/");
+  const stripped = normalized.replace(localePrefixPattern, "");
+  return stripped ? normalizePathname(stripped) : "/";
 };
 
 export const localizePathname = (pathname: string, locale: Locale) => {
-  const normalized = normalizePathname(pathname);
+  const normalized = stripSupportedLocaleFromPathname(pathname);
 
   if (locale === DEFAULT_LOCALE) return normalized;
   return normalized === "/" ? `/${locale}` : `/${locale}${normalized}`;

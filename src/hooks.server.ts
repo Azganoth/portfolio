@@ -1,14 +1,13 @@
-import { type Locale } from "$lib/features/i18n/translation.svelte";
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "$lib/shared/constants";
+import { DEFAULT_LOCALE, isSupportedLocale } from "$lib/shared/constants";
 import type { Handle } from "@sveltejs/kit";
 
 export const handle: Handle = async ({ event, resolve }) => {
-  let lang: Locale = DEFAULT_LOCALE;
+  let lang = DEFAULT_LOCALE;
 
   const pathname = event.url.pathname;
   const pathnameLang = pathname.split("/").at(1);
-  if (pathnameLang && SUPPORTED_LOCALES.includes(pathnameLang)) {
-    lang = pathnameLang as Locale;
+  if (isSupportedLocale(pathnameLang)) {
+    lang = pathnameLang;
   }
 
   return resolve(event, {

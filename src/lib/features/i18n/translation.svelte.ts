@@ -1,8 +1,8 @@
-import { DEFAULT_LOCALE } from "$lib/shared/constants";
+import { DEFAULT_LOCALE, type Locale } from "$lib/shared/constants";
 import en from "./locales/en.json" with { type: "json" };
 import pt from "./locales/pt.json" with { type: "json" };
 
-export type Locale = "pt" | "en";
+export type { Locale };
 export type LocaleStructure = typeof pt;
 export type TranslationKey = keyof LocaleStructure;
 

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { browser } from "$app/environment";
+  import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import { t, type Locale } from "$lib/features/i18n/translation.svelte";
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
@@ -25,15 +27,32 @@
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ lang: newLang }),
+        keepalive: true,
       });
     } catch (error) {
       console.error("Failed to save language preference:", error);
     }
   };
 
+  const selectLanguage = async (
+    event: MouseEvent,
+    newLang: Locale,
+    href: string,
+  ) => {
+    event.preventDefault();
+    await changeLanguage(newLang);
+    open = false;
+    await goto(href);
+  };
+
   let rawCurrentPath = $derived(getCurrentUnlocalizedPath(page.url.pathname));
+  let currentQuery = $derived(browser ? page.url.search : "");
+  let currentHash = $derived(browser ? page.url.hash : "");
 
   let currentLang = $derived((page.params.lang as Locale) || DEFAULT_LOCALE);
+
+  const getLanguageHref = (locale: Locale) =>
+    `${localizePathname(rawCurrentPath, locale)}${currentQuery}${currentHash}`;
 </script>
 
 <div class="fixed right-8 bottom-10 z-10">
@@ -62,7 +81,7 @@
     {@attach clickaway({ ignoreNodes: [toggler] })}
   >
     {#each languages as [label, value] (value)}
-      {@const href = localizePathname(rawCurrentPath, value)}
+      {@const href = getLanguageHref(value)}
       <Link
         class={[
           "text-center",
@@ -71,10 +90,7 @@
         {href}
         variant="none"
         role="menuitem"
-        onclick={() => {
-          changeLanguage(value);
-          open = false;
-        }}
+        onclick={(event) => selectLanguage(event, value, href)}
         aria-current={value === currentLang ? "page" : false}
         aria-label={t("a11y_language_change", {
           language: label.toLowerCase(),

@@ -1,11 +1,13 @@
-// NOTE: don't import anything, it will break vercel's middleware
-
 // --- CONFIGURATION & DEFAULTS ---
 
 export const SITE_URL = "https://azganoth.vercel.app";
 
-export const SUPPORTED_LOCALES = ["pt", "en"];
-export const DEFAULT_LOCALE = "pt";
+export const SUPPORTED_LOCALES = ["pt", "en"] as const;
+export type Locale = (typeof SUPPORTED_LOCALES)[number];
+export const DEFAULT_LOCALE: Locale = "pt";
+
+export const isSupportedLocale = (locale: unknown): locale is Locale =>
+  typeof locale === "string" && SUPPORTED_LOCALES.includes(locale as Locale);
 
 export const PREVIEW_SIZE = {
   width: 720,

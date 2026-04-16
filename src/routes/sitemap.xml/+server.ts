@@ -1,4 +1,3 @@
-import type { Locale } from "$lib/features/i18n/translation.svelte";
 import { getProjects } from "$lib/features/projects/loader/server";
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "$lib/shared/constants";
 import { HREFLANG_BY_LOCALE, localizeUrl } from "$lib/shared/utils";
@@ -26,7 +25,7 @@ const xml = (strings: TemplateStringsArray, ...values: string[]) =>
 export const prerender = true;
 
 export const GET: RequestHandler = async () => {
-  const locales = SUPPORTED_LOCALES as Locale[];
+  const locales = SUPPORTED_LOCALES;
   const projectsByLocale = await getProjects();
   const slugs = [
     ...new Set(
@@ -61,7 +60,7 @@ export const GET: RequestHandler = async () => {
           );
 
         alternates.push(
-          xml`    <xhtml:link rel="alternate" hreflang="x-default" href="${localizeUrl(path, DEFAULT_LOCALE as Locale)}" />`,
+          xml`    <xhtml:link rel="alternate" hreflang="x-default" href="${localizeUrl(path, DEFAULT_LOCALE)}" />`,
         );
 
         return `  <url>

@@ -1,12 +1,11 @@
 import { page } from "$app/state";
-import type { Locale } from "$lib/features/i18n/translation.svelte";
-import { DEFAULT_LOCALE } from "$lib/shared/constants";
-import { localizePathname, stripLocaleFromPathname } from "./path";
+import { DEFAULT_LOCALE, isSupportedLocale } from "$lib/shared/constants";
+import { localizePathname, stripSupportedLocaleFromPathname } from "./path";
 
-const currentLocale = () => (page.params.lang as Locale) || DEFAULT_LOCALE;
+const currentLocale = () =>
+  isSupportedLocale(page.params.lang) ? page.params.lang : DEFAULT_LOCALE;
 
 export const getCurrentLocalizedPath = (pathname: string) =>
   localizePathname(pathname, currentLocale());
 
-export const getCurrentUnlocalizedPath = (pathname: string) =>
-  stripLocaleFromPathname(pathname, currentLocale());
+export const getCurrentUnlocalizedPath = stripSupportedLocaleFromPathname;
