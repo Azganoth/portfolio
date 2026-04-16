@@ -9,6 +9,7 @@
 
   let copied = $state(false);
   let timeout: ReturnType<typeof setTimeout>;
+  const cvHref = $derived(t("_cv_href"));
 
   const copyEmail = async () => {
     try {
@@ -48,6 +49,7 @@
         type="button"
         class="group relative w-full gap-6 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold transition-all ease-snappy hover:scale-102 hover:bg-white/10 hover:text-primary active:scale-98"
         onclick={copyEmail}
+        aria-label={t("contact_email_action")}
       >
         <span class="font-mono tracking-widest uppercase max-md:hidden">
           {CONTACT_INFO.Email}
@@ -57,6 +59,9 @@
           class="absolute center-y right-4 size-5 transition-transform group-hover:-rotate-12"
           icon={copied ? "fa6-solid:check" : "fa6-solid:copy"}
         />
+        <span class="sr-only" role="status" aria-live="polite">
+          {copied ? t("a11y_copied") : ""}
+        </span>
       </button>
       <div class="grid gap-4 md:grid-cols-2">
         <Link
@@ -89,11 +94,11 @@
         <Link
           class="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-bold hover:bg-white/10 hover:text-primary"
           variant="none"
-          href="/cv.pdf"
+          href={cvHref}
           newTab
         >
           <Icon class="size-6" icon="fa6-solid:file-pdf" />
-          <span>Resume</span>
+          <span>{t("start_curriculum")}</span>
         </Link>
       </div>
     </Reveal>

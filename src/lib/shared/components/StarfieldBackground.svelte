@@ -28,7 +28,9 @@
     let dpr = 1;
     let stars: Star[] = [];
     let mouse = { x: 0, y: 0 };
-    let frameId: number;
+    let frameId = 0;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let prefersReducedMotion = motionQuery.matches;
 
     const ctx = canvas.getContext("2d");
 
@@ -68,15 +70,19 @@
       }
     };
 
-    const animate = (time: number) => {
+    const draw = (time: number) => {
       if (!ctx) return;
 
       const scrollY = window.scrollY;
 
       const cx = w / 2;
       const cy = h / 2;
-      const mouseOffsetX = (mouse.x - cx) * PARALLAX_STRENGTH;
-      const mouseOffsetY = (mouse.y - cy) * PARALLAX_STRENGTH;
+      const mouseOffsetX = prefersReducedMotion
+        ? 0
+        : (mouse.x - cx) * PARALLAX_STRENGTH;
+      const mouseOffsetY = prefersReducedMotion
+        ? 0
+        : (mouse.y - cy) * PARALLAX_STRENGTH;
 
       ctx.clearRect(0, 0, w, h);
 
@@ -92,8 +98,9 @@
           apparentY > -50 &&
           apparentY < h + 50
         ) {
-          const pulse =
-            (Math.sin(time * star.pulseSpeed + star.pulseOffset) + 1) / 2;
+          const pulse = prefersReducedMotion
+            ? 0
+            : (Math.sin(time * star.pulseSpeed + star.pulseOffset) + 1) / 2;
           const alpha = 0.3 + star.z * 0.4 + pulse * 0.2;
 
           // Draw Star
@@ -104,6 +111,10 @@
           ctx.fill();
         }
       });
+    };
+
+    const animate = (time: number) => {
+      draw(time);
 
       frameId = requestAnimationFrame(animate);
     };
@@ -113,17 +124,41 @@
       mouse.y = e.clientY;
     };
 
+    const handleResize = () => {
+      resizeCanvas();
+      if (prefersReducedMotion) {
+        draw(performance.now());
+      }
+    };
+
+    const handleMotionPreferenceChange = (event: MediaQueryListEvent) => {
+      prefersReducedMotion = event.matches;
+      cancelAnimationFrame(frameId);
+
+      if (prefersReducedMotion) {
+        draw(performance.now());
+      } else {
+        frameId = requestAnimationFrame(animate);
+      }
+    };
+
     resizeCanvas();
     initStars();
 
-    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", handleMouseMove);
+    motionQuery.addEventListener("change", handleMotionPreferenceChange);
 
-    frameId = requestAnimationFrame(animate);
+    if (prefersReducedMotion) {
+      draw(performance.now());
+    } else {
+      frameId = requestAnimationFrame(animate);
+    }
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
+      motionQuery.removeEventListener("change", handleMotionPreferenceChange);
       cancelAnimationFrame(frameId);
     };
   });

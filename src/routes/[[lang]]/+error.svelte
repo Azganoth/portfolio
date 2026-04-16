@@ -5,7 +5,7 @@
   import Link from "$lib/shared/components/Link.svelte";
   import Logo from "$lib/shared/components/Logo.svelte";
   import Starfield from "$lib/shared/components/StarfieldBackground.svelte";
-  import { getLocalizedPath } from "$lib/shared/utils";
+  import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
 
   const is404 = $derived(page.status === 404);
   const title = $derived(
@@ -37,7 +37,7 @@
   </p>
 
   <Link
-    href={getLocalizedPath("/")}
+    href={getCurrentLocalizedPath("/")}
     class="mt-24 block rounded-full bg-secondary px-6 py-3 font-mono text-background hover:bg-secondary/90"
     variant="none"
   >

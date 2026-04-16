@@ -6,7 +6,7 @@
   import Section from "$lib/shared/components/Section.svelte";
   import { ID_BIO_SECTION } from "$lib/shared/constants";
   import profileImage from "$lib/shared/images/profile.webp?enhanced";
-  import { getLocalizedPath } from "$lib/shared/utils";
+  import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
   import Icon from "@iconify/svelte";
 
   const cardClass =
@@ -14,20 +14,23 @@
 </script>
 
 {#snippet nexus()}
-  <Link class="text-white" href={getLocalizedPath("/projects/nexus")}>
+  <Link class="text-white" href={getCurrentLocalizedPath("/projects/nexus")}>
     Nexus
   </Link>
 {/snippet}
 {#snippet smr()}
   <Link
     class="text-white"
-    href={getLocalizedPath("/projects/simplemotionreact")}
+    href={getCurrentLocalizedPath("/projects/simplemotionreact")}
   >
     Simple Motion React
   </Link>
 {/snippet}
 {#snippet fixmyhalo()}
-  <Link class="text-white" href={getLocalizedPath("/projects/fixmyhalo")}>
+  <Link
+    class="text-white"
+    href={getCurrentLocalizedPath("/projects/fixmyhalo")}
+  >
     Fix My Halo
   </Link>
 {/snippet}

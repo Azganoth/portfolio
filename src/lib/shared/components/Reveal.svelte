@@ -34,7 +34,11 @@
 
 <svelte:element
   this={tag}
-  class={[!override && "motion-reduce:transition- transition-all", className]}
+  class={[
+    !override &&
+      "transition-all motion-reduce:transform-none motion-reduce:transition-none",
+    className,
+  ]}
   {...restProps}
   {@attach inView({ root, rootMargin, threshold, once })}
 >

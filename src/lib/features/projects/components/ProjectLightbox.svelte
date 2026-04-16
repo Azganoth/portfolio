@@ -46,15 +46,15 @@
   let scroller = $state<HTMLElement>();
   let scrollerSlides = $state<HTMLElement[]>([]);
   let isProgrammaticScroll = false;
-  let scrollTimeout: NodeJS.Timeout;
+  let scrollTimeout: number;
 
   $effect(() => {
     if (!lastLightbox) return;
 
     // Guard against observer loops
     isProgrammaticScroll = true;
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
+    window.clearTimeout(scrollTimeout);
+    scrollTimeout = window.setTimeout(() => {
       isProgrammaticScroll = false;
     }, 500);
 
@@ -98,6 +98,7 @@
   id={ID_IMAGE_GALLERY}
   class="m-auto max-h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-x-hidden bg-transparent transition-all transition-discrete duration-400 ease-fluid not-open:scale-90 not-open:opacity-0 backdrop:bg-black/70 backdrop:backdrop-blur-lg starting:scale-90 starting:opacity-0"
   aria-modal="true"
+  aria-label={t("a11y_image_gallery")}
   onclose={handleClose}
   onclick={(e) => {
     if (e.target === dialog) {
@@ -123,21 +124,23 @@
         aria-live="polite"
       >
         {#each lastLightbox.previews as slide, i (slide.url)}
+          {@const title = lastLightbox.title}
+          {@const n = String(i + 1)}
+          {@const m = String(lastLightbox.previews.length)}
           <figure
             id={`slide-${i}`}
             class="shrink-0 select-none md:snap-center"
             bind:this={scrollerSlides[i]}
             role="group"
             aria-roledescription="slide"
-            aria-label={t("a11y_slide_n_of_m", {
-              n: String(i + 1),
-              m: String(lastLightbox.previews.length),
-            })}
+            aria-label={t("a11y_slide_n_of_m", { n, m })}
           >
             <img
               class="rounded-2xl bg-muted"
               src={slide.url}
-              alt=""
+              alt={title
+                ? t("a11y_project_preview_n_of_m", { title, n, m })
+                : t("a11y_slide_n_of_m", { n, m })}
               width={slide.width}
               height={slide.height}
               loading={i === 0 ? "eager" : "lazy"}

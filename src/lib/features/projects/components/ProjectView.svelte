@@ -11,7 +11,7 @@
     ID_PROJECT_DETAILS,
     ID_PROJECT_TITLE,
   } from "$lib/shared/constants";
-  import { getLocalizedPath } from "$lib/shared/utils";
+  import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
   import Icon from "@iconify/svelte";
   import { tick } from "svelte";
 
@@ -24,7 +24,7 @@
       page.route.id?.includes("projects/[slug]")
     ) {
       // Home page handles deselecting the project
-      await goto(getLocalizedPath("/"), { noScroll: true });
+      await goto(getCurrentLocalizedPath("/"), { noScroll: true });
     } else {
       projectStore.selected = undefined;
     }
@@ -83,6 +83,7 @@
       handleClose();
     }
   }}
+  aria-modal="true"
   aria-labelledby={ID_PROJECT_TITLE}
 >
   <div class="relative flex h-full flex-col overflow-y-auto">
@@ -170,9 +171,13 @@
                 type="button"
                 class="group hover: relative max-w-100 overflow-hidden rounded-2xl border border-muted transition-transform ease-snappy hover:scale-102 hover:border-primary active:scale-98"
                 onclick={() => {
-                  projectStore.openLightbox(previews);
+                  if (lastProject) {
+                    projectStore.openLightbox(previews, lastProject.title);
+                  }
                 }}
-                aria-label={t("a11y_open_image_gallery")}
+                aria-label={t("a11y_open_image_gallery_named", {
+                  title: lastProject.title,
+                })}
                 aria-haspopup="dialog"
                 aria-controls={ID_IMAGE_GALLERY}
               >
@@ -181,7 +186,9 @@
                   src={previews[0].url}
                   width={previews[0].width}
                   height={previews[0].height}
-                  alt=""
+                  alt={t("a11y_project_preview", {
+                    title: lastProject.title,
+                  })}
                 />
                 <div
                   class="absolute right-1 bottom-1 flex items-center gap-2 rounded-xl bg-black/50 p-2"

@@ -4,7 +4,8 @@
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import { DEFAULT_LOCALE } from "$lib/shared/constants";
-  import { getUnlocalizedPath } from "$lib/shared/utils";
+  import { localizePathname } from "$lib/shared/utils";
+  import { getCurrentUnlocalizedPath } from "$lib/shared/utils/currentPath.svelte";
   import Icon from "@iconify/svelte";
 
   let languages: [label: string, value: Locale][] = [
@@ -30,7 +31,7 @@
     }
   };
 
-  let rawCurrentPath = $derived(getUnlocalizedPath(page.url.pathname));
+  let rawCurrentPath = $derived(getCurrentUnlocalizedPath(page.url.pathname));
 
   let currentLang = $derived((page.params.lang as Locale) || DEFAULT_LOCALE);
 </script>
@@ -61,10 +62,7 @@
     {@attach clickaway({ ignoreNodes: [toggler] })}
   >
     {#each languages as [label, value] (value)}
-      {@const href =
-        value === DEFAULT_LOCALE
-          ? rawCurrentPath
-          : `/${value}${rawCurrentPath}`}
+      {@const href = localizePathname(rawCurrentPath, value)}
       <Link
         class={[
           "text-center",
@@ -77,7 +75,7 @@
           changeLanguage(value);
           open = false;
         }}
-        aria-current={value === currentLang && "page"}
+        aria-current={value === currentLang ? "page" : false}
         aria-label={t("a11y_language_change", {
           language: label.toLowerCase(),
         })}

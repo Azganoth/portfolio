@@ -9,7 +9,7 @@
   import { projectStore } from "$lib/features/projects/store.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import { ID_PROJECT_DETAILS, TAG_META } from "$lib/shared/constants";
-  import { getLocalizedPath } from "$lib/shared/utils";
+  import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
   import Icon from "@iconify/svelte";
   import type { ClassValue } from "svelte/elements";
 
@@ -24,7 +24,7 @@
   const titleId = $derived(`project-title-${project.slug}`);
   const summaryId = $derived(`project-summary-${project.slug}`);
 
-  const href = $derived(getLocalizedPath(`/projects/${project.slug}`));
+  const href = $derived(getCurrentLocalizedPath(`/projects/${project.slug}`));
   const openProject = () => {
     projectStore.selected = project;
     pushState(href, { selectedProject: project });
@@ -42,6 +42,8 @@
       openProject();
     }
   };
+
+  const title = $derived(project.title);
 </script>
 
 <article
@@ -64,7 +66,7 @@
           width={project.previews[0].width}
           height={project.previews[0].height}
           loading="lazy"
-          alt=""
+          alt={t("a11y_project_preview", { title })}
         />
       {:else}
         <div class="grid h-full w-full place-items-center bg-muted/50">
@@ -96,7 +98,7 @@
           variant="none"
           aria-haspopup="dialog"
           aria-controls={ID_PROJECT_DETAILS}
-          aria-label={t("a11y_open_project_details")}
+          aria-label={t("a11y_open_project_details_named", { title })}
           onclick={handleclick}
           onkeydown={handlekeydown}
         >

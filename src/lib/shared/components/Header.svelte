@@ -10,7 +10,7 @@
     ID_PROJECTS_SECTION,
     ID_SKILLS_SECTION,
   } from "$lib/shared/constants";
-  import { getLocalizedPath } from "$lib/shared/utils";
+  import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
   import Icon from "@iconify/svelte";
 
   interface JumpLink {
@@ -101,6 +101,8 @@
         type="button"
         class="fixed right-4 block transition-colors hover:text-primary"
         popovertarget="mobile-menu"
+        aria-label={t("a11y_open_nav_menu")}
+        aria-controls="mobile-menu"
       >
         <Icon icon="fa7-solid:bars" class="size-8" />
       </button>
@@ -114,7 +116,7 @@
       >
         <div class="flex flex-col items-center gap-6">
           {@render homeLink()}
-          <nav>
+          <nav aria-label={t("a11y_mobile_navigation")}>
             <ul class="flex flex-col gap-6">
               {#each links as { label, link, description } (link)}
                 <li>
@@ -150,7 +152,7 @@
 {#snippet homeLink()}
   <Link
     variant="none"
-    href={getLocalizedPath("/")}
+    href={getCurrentLocalizedPath("/")}
     aria-label={t("a11y_go_to_home")}
   >
     <Logo class="h-8 w-auto" />

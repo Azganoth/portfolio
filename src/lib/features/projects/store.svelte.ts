@@ -3,6 +3,7 @@ import type { Project, ProjectPreview } from "$lib/features/projects/schema";
 export interface PreviewsLightbox {
   previews: ProjectPreview[];
   index: number;
+  title?: string;
 }
 
 class ProjectStore {
@@ -10,8 +11,8 @@ class ProjectStore {
 
   lightbox = $state<PreviewsLightbox>();
 
-  openLightbox = (previews: ProjectPreview[]) => {
-    this.lightbox = { previews, index: 0 };
+  openLightbox = (previews: ProjectPreview[], title?: string) => {
+    this.lightbox = { previews, index: 0, title };
   };
 
   closeLightbox = () => {
