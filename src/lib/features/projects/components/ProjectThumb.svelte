@@ -1,12 +1,9 @@
-<script lang="ts" module>
-  export const composeProjectLinkId = (slug: string) => `project-link-${slug}`;
-</script>
-
 <script lang="ts">
   import { pushState } from "$app/navigation";
   import { t } from "$lib/features/i18n/translation.svelte";
   import type { Project } from "$lib/features/projects/schema";
   import { projectStore } from "$lib/features/projects/store.svelte";
+  import { composeProjectLinkId } from "$lib/features/projects/utils";
   import Link from "$lib/shared/components/Link.svelte";
   import { ID_PROJECT_DETAILS, TAG_META } from "$lib/shared/constants";
   import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";

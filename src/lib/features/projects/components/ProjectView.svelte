@@ -2,9 +2,9 @@
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
   import { t } from "$lib/features/i18n/translation.svelte";
-  import { composeProjectLinkId } from "$lib/features/projects/components/ProjectThumb.svelte";
   import type { Project } from "$lib/features/projects/schema";
   import { projectStore } from "$lib/features/projects/store.svelte";
+  import { composeProjectLinkId } from "$lib/features/projects/utils";
   import Link from "$lib/shared/components/Link.svelte";
   import {
     ID_IMAGE_GALLERY,
