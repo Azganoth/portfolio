@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { LANG_COOKIE_AGE, POST } from "./+server";
+import { _LANG_COOKIE_AGE, POST } from "./+server";
 
 const createEvent = (body: string) => {
   const cookies = {
@@ -49,7 +49,7 @@ describe("language API", () => {
     expect(response.status).toBe(200);
     expect(cookies.set).toHaveBeenCalledWith("lang", "en", {
       path: "/",
-      maxAge: LANG_COOKIE_AGE,
+      maxAge: _LANG_COOKIE_AGE,
       httpOnly: true,
       sameSite: "lax",
     });

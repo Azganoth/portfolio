@@ -2,7 +2,7 @@ import { isSupportedLocale } from "$lib/shared/constants";
 import { json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 
-export const LANG_COOKIE_AGE = 60 * 60 * 24 * 365;
+export const _LANG_COOKIE_AGE = 60 * 60 * 24 * 365;
 
 export const POST: RequestHandler = async ({ request, cookies }) => {
   let lang: unknown;
@@ -22,7 +22,7 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 
   cookies.set("lang", lang, {
     path: "/",
-    maxAge: LANG_COOKIE_AGE,
+    maxAge: _LANG_COOKIE_AGE,
     httpOnly: true,
     sameSite: "lax",
   });
