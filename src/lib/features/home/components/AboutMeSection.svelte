@@ -11,6 +11,27 @@
 
   const cardClass =
     "relative flex flex-col overflow-hidden rounded-3xl bg-muted/20 p-6 shadow-sm ring-1 ring-white/10 backdrop-blur-md";
+
+  const footerSections = $derived([
+    {
+      label: t("bio_stat_education_label"),
+      value: t("bio_stat_education_value"),
+      icon: "lucide:graduation-cap",
+      accent: "text-primary",
+    },
+    {
+      label: t("bio_stat_languages_label"),
+      value: t("bio_stat_languages_value"),
+      icon: "lucide:globe",
+      accent: "text-secondary",
+    },
+    {
+      label: t("bio_stat_location_label"),
+      value: t("bio_stat_location_value"),
+      icon: "lucide:map-pin",
+      accent: "text-accent",
+    },
+  ]);
 </script>
 
 {#snippet nexus()}
@@ -108,53 +129,28 @@
       ]}
     >
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-        <div class="flex items-center gap-4">
-          <div
-            class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary"
-          >
-            <Icon icon="lucide:graduation-cap" class="size-5" />
+        {#each footerSections as { label, value, icon, accent } (value)}
+          <div class="flex items-center gap-4">
+            <div
+              class={[
+                "flex size-10 items-center justify-center rounded-full bg-current/10",
+                accent,
+              ]}
+            >
+              <Icon {icon} class="size-6" />
+            </div>
+            <div>
+              <p
+                class="text-xs font-semibold tracking-wider text-muted-foreground uppercase"
+              >
+                {label}
+              </p>
+              <p class="font-semibold text-foreground">
+                {value}
+              </p>
+            </div>
           </div>
-          <div>
-            <p class="text-xs tracking-wider text-muted-foreground uppercase">
-              {t("bio_stat_education_label")}
-            </p>
-            <p class="font-semibold text-foreground">
-              {t("bio_stat_education_value")}
-            </p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-4">
-          <div
-            class="flex size-10 items-center justify-center rounded-full bg-secondary/10 text-secondary"
-          >
-            <Icon icon="lucide:globe" class="size-5" />
-          </div>
-          <div>
-            <p class="text-xs tracking-wider text-muted-foreground uppercase">
-              {t("bio_stat_languages_label")}
-            </p>
-            <p class="text-foreground">
-              {t("bio_stat_languages_value")}
-            </p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-4">
-          <div
-            class="flex size-10 items-center justify-center rounded-full bg-accent/10 text-accent"
-          >
-            <Icon icon="lucide:map-pin" class="size-5" />
-          </div>
-          <div>
-            <p class="text-xs tracking-wider text-muted-foreground uppercase">
-              {t("bio_stat_location_label")}
-            </p>
-            <p class="font-semibold text-foreground">
-              {t("bio_stat_location_value")}
-            </p>
-          </div>
-        </div>
+        {/each}
       </div>
     </Reveal>
   </div>

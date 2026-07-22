@@ -54,7 +54,7 @@
   <!-- Visuals -->
   <div class="perspective-1000 w-full flex-1">
     <div
-      class="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-muted shadow-2xl transition-shadow duration-400 ease-out outline-none group-focus-within:ring-4 group-focus-within:ring-primary"
+      class="relative aspect-4/3 overflow-hidden rounded-2xl border border-white/10 bg-muted shadow-2xl transition-shadow duration-400 ease-out outline-none group-focus-within:ring-4 group-focus-within:ring-primary"
     >
       {#if project.previews.length > 0}
         <img
@@ -119,7 +119,7 @@
       {#each project.tags as tag (tag)}
         {@const { color, icon } = TAG_META[tag] ?? TAG_META["fallback"]}
         <li
-          class="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 font-mono font-bold tracking-wide text-muted-foreground"
+          class="inline-flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 font-mono font-bold tracking-wide text-muted-foreground"
           title={tag}
         >
           <Icon class="size-5" style="color: {color}" {icon} />
