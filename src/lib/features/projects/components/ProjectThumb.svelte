@@ -108,6 +108,17 @@
       </h3>
     </div>
 
+    <div class="border-l-2 border-primary/70 pl-4">
+      <div
+        class="font-mono text-xs font-bold tracking-widest text-primary uppercase"
+      >
+        {t("project_card_result_label")}
+      </div>
+      <p class="mt-2 max-w-prose text-base leading-relaxed text-foreground/90">
+        {project.outcome}
+      </p>
+    </div>
+
     <p
       id={summaryId}
       class="max-w-prose text-lg leading-relaxed text-muted-foreground"

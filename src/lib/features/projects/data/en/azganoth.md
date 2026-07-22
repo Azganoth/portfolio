@@ -3,6 +3,7 @@ title: Azganoth
 category: Portfolio
 year: 2025
 summary: Personal portfolio developed with SvelteKit and TailwindCSS, focused on content, immersion, and performance.
+outcome: Localized SvelteKit portfolio with prerendered routes, SEO metadata, Vercel routing middleware, and accessible project flows.
 repository: https://github.com/Azganoth/portfolio
 website: https://azganoth.vercel.app
 tags:

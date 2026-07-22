@@ -3,6 +3,7 @@ title: Fix My Halo
 category: Tool
 year: 2026
 summary: Ferramenta para corrigir artefatos gráficos em desenvolvimento de jogos, disponível como WebApp e CLI.
+outcome: Pipeline de processamento de imagem em Rust e WebAssembly que corrige artefatos de halo em sprites diretamente no navegador e na CLI.
 repository: https://github.com/Azganoth/fix-my-halo
 website: https://fixmyhalo.vercel.app
 tags:

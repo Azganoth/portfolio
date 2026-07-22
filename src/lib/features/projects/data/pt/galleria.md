@@ -3,6 +3,7 @@ title: Galleria
 category: Web App
 year: 2023
 summary: Galeria de arte virtual com layout Masonry customizado e Static Site Generation (SSG).
+outcome: Galeria de arte estática com layout masonry customizado que permanece rápida sem backend em runtime.
 repository: https://github.com/Azganoth/galleria-slideshow-site
 website: https://azganoth.github.io/galleria-slideshow-site/
 tags:

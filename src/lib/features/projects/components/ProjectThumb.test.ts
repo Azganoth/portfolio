@@ -25,6 +25,7 @@ const project: Project = {
   category: "Web",
   year: 2026,
   summary: "A project summary.",
+  outcome: "A project outcome.",
   tags: ["TypeScript", "Svelte"],
   description: "<p>Description</p>",
   previews: [

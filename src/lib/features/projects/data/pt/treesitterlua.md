@@ -3,6 +3,7 @@ title: Tree Sitter Lua
 category: Library
 year: 2018
 summary: Gramática completa da linguagem Lua para o parser Tree-sitter, com scanner externo para strings e comentários.
+outcome: Gramática Lua mantida para consumidores de parser em bindings Node.js, Rust e Swift.
 repository: https://github.com/Azganoth/tree-sitter-lua
 tags:
   - JavaScript

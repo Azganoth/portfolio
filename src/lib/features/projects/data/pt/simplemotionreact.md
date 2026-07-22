@@ -3,6 +3,7 @@ title: Simple Motion React
 category: Library
 year: 2024
 summary: Biblioteca de animação declarativa para React inspirada no Vue, com zero dependências extras e foco em tamanho de bundle.
+outcome: Biblioteca de transições React sem dependências extras que mantém animações de saída confiáveis após o unmount do componente.
 repository: https://github.com/Azganoth/simple-motion-react
 website: https://simple-motion-react.vercel.app/
 tags:

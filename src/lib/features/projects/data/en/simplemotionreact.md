@@ -3,6 +3,7 @@ title: Simple Motion React
 category: Library
 year: 2024
 summary: Declarative animation library for React inspired by Vue, with zero extra dependencies and focused on bundle size.
+outcome: Zero-dependency React transition library that keeps exit animations reliable after component unmount.
 repository: https://github.com/Azganoth/simple-motion-react
 website: https://simple-motion-react.vercel.app/
 tags:
