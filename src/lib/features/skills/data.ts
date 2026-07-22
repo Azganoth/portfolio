@@ -23,6 +23,12 @@ export const SKILLS_BY_CATEGORY = {
     "Mongoose",
     "GraphQL",
   ],
-  skills_category_tests: ["Vitest", "Jest", "Testing Library", "Storybook"],
+  skills_category_tests: [
+    "Vitest",
+    "Playwright",
+    "Jest",
+    "Testing Library",
+    "Storybook",
+  ],
   skills_category_devops: ["Git", "Docker", "Figma"],
 } satisfies Record<string, string[]>;

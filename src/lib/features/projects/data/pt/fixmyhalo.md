@@ -3,7 +3,7 @@ title: Fix My Halo
 category: Tool
 year: 2026
 summary: Ferramenta para corrigir artefatos gráficos em desenvolvimento de jogos, disponível como WebApp e CLI.
-outcome: Pipeline de processamento de imagem em Rust e WebAssembly que corrige artefatos de halo em sprites diretamente no navegador e na CLI.
+outcome: Pipeline de processamento de imagem em Rust e WebAssembly publicado e validado diretamente por um usuário da comunidade de mods de RimWorld.
 repository: https://github.com/Azganoth/fix-my-halo
 website: https://fixmyhalo.vercel.app
 tags:
@@ -15,6 +15,8 @@ tags:
 ---
 
 **Fix My Halo** é uma solução de engenharia híbrida projetada para resolver um problema comum em motores de jogos (como Unity): o aparecimento de "halos brancos" ao redor de sprites que contém transparencia devido à filtragem bilinear. O projeto implementa um núcleo de processamento em **Rust** que é compilado tanto para um executável nativo de alta performance quanto para **WebAssembly (Wasm)** como uma biblioteca, permitindo que a mesma lógica rode diretamente no navegador do usuário sem backend.
+
+Depois que compartilhei a ferramenta com a comunidade de RimWorld, um modder relatou tê-la usado em uma textura de bancada e confirmou que ela removeu uma borda que não havia conseguido corrigir manualmente. Esse [lançamento e feedback da comunidade](https://www.reddit.com/r/RimWorld/comments/1qnqxwi/tool_fix_my_halo_an_opensource_web_cli_tool_to/) oferece validação direta do público que a ferramenta foi criada para ajudar.
 
 ---
 

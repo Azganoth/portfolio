@@ -19,12 +19,13 @@ export const PROJECT_LINK_BASE = "#project-";
 // --- CONTENT ---
 
 export const PROJECTS_ORDER = [
+  "leafdown",
   "nexus",
   "fixmyhalo",
   "simplemotionreact",
-  "azganoth",
+  "cropandquest",
+  "pixelicons",
   "treesitterlua",
-  "galleria",
 ];
 
 // --- IDENTIFIERS ---
@@ -51,6 +52,7 @@ export const TAG_META: Record<string, { color: string; icon: string }> = {
   React: { color: "#61DAFB", icon: "simple-icons:react" },
   Preact: { color: "#673AB8", icon: "simple-icons:preact" },
   Svelte: { color: "#FF3E00", icon: "simple-icons:svelte" },
+  "VS Code": { color: "#007ACC", icon: "devicon:vscode" },
   Next: { color: "#FFFFFF", icon: "simple-icons:nextdotjs" },
   SASS: { color: "#CC6699", icon: "simple-icons:sass" },
   TailwindCSS: { color: "#06B6D4", icon: "simple-icons:tailwindcss" },
@@ -62,6 +64,7 @@ export const TAG_META: Record<string, { color: string; icon: string }> = {
   GraphQL: { color: "#E10098", icon: "simple-icons:graphql" },
   Jest: { color: "#C21325", icon: "simple-icons:jest" },
   Vitest: { color: "#6E9F18", icon: "simple-icons:vitest" },
+  Playwright: { color: "#2EAD33", icon: "simple-icons:playwright" },
   "Testing Library": { color: "#E33332", icon: "simple-icons:testinglibrary" },
   Storybook: { color: "#FF4785", icon: "simple-icons:storybook" },
   Git: { color: "#F05032", icon: "simple-icons:git" },
@@ -69,6 +72,7 @@ export const TAG_META: Record<string, { color: string; icon: string }> = {
   Figma: { color: "#F24E1E", icon: "simple-icons:figma" },
   C: { color: "#A8B9CC", icon: "simple-icons:c" },
   Rust: { color: "#FFFFFF", icon: "simple-icons:rust" },
+  Tauri: { color: "#24C8D8", icon: "simple-icons:tauri" },
   WebAssembly: { color: "#654FF0", icon: "simple-icons:webassembly" },
   Vue: { color: "#4FC08D", icon: "simple-icons:vuedotjs" },
   Express: { color: "#FFFFFF", icon: "simple-icons:express" },
