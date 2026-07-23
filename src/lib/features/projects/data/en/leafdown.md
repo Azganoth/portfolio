@@ -3,81 +3,105 @@ title: Leafdown
 category: Desktop App
 year: 2026
 summary: Open-source, local-first Markdown desktop editor for ordinary files and folders, built around one hybrid reading and editing surface.
-outcome: Public open-source alpha with native filesystem integration, source-projection Markdown editing, and a tested React/Rust architecture.
+outcome: Native file workflows, source-projection Markdown editing, automated frontend and Rust verification, and a packaged Windows alpha release.
 repository: https://github.com/Azganoth/leafdown
 tags:
   - Tauri
   - React
   - TypeScript
   - Rust
-  - TailwindCSS
+  - Tailwind CSS
   - Vitest
 ---
 
-**Leafdown** is an open-source, local-first Markdown desktop editor under active development. It opens ordinary files and folders directly from the filesystem without requiring a vault, workspace, account, cloud synchronization, or application metadata inside user folders.
+**Leafdown** is an open-source, local-first Markdown desktop editor for ordinary files and folders. It opens content directly from the filesystem without requiring a vault, workspace, account, cloud service, or application metadata inside user folders.
 
-The project is currently a **public alpha**. I develop the application together with its product specification, architecture, technical decisions, engineering patterns, and verification strategy.
+The first Windows alpha is available through [GitHub Releases](https://github.com/Azganoth/leafdown/releases/tag/v0.1.0-alpha.1) as MSI and EXE installers. Development continues in public under the `GPL-3.0-or-later` license.
 
 ---
 
-## 🧩 Technical Challenges & Solutions
+## 🧩 Technical decisions
 
-### 1. Hybrid Editing Through Source Projection
+### 1. One surface for rendered content and Markdown source
 
-**The Problem:** Markdown editors commonly choose between permanent source text, a separate preview, or visual components that hide syntax completely. These approaches make it difficult to combine fluent reading with precise control over the saved Markdown.
+**Challenge:** Markdown editors often separate source and preview or hide syntax behind visual controls. Both approaches make it harder to combine comfortable reading with direct control over the saved Markdown.
 
-**The Solution:** I built a _source projection_ system on top of **Milkdown/ProseMirror**. When the selection enters a supported object — including emphasis, inline code, links, autolinks, and footnote references — the editor temporarily replaces its visual presentation with editable Markdown inside the document itself.
+**Implementation:** I built a source-projection engine on top of **Milkdown** and **ProseMirror**. When the selection enters a supported inline object, Leafdown temporarily exposes its Markdown source as editable document text while retaining the canonical editor model. The current adapters cover strong, emphasis, strikethrough, inline code, links, autolinks, and footnote references.
 
-Each adapter owns target discovery, source generation, validation, semantic rehydration, and selection mapping. Valid edits reconstruct the rich object; incomplete or invalid input is preserved as literal text instead of being discarded.
+Each adapter locates its target, generates and parses source, validates edits, reconstructs semantic content, and maps the selection between both representations. Valid source becomes the corresponding rich object again; incomplete or invalid source remains exact literal text instead of losing the user's input.
 
 **Outcome:**
 
-- One surface for reading and editing without switching between source and preview modes.
-- Markdown markers remain accessible when the user needs direct control.
-- Saved files remain ordinary, portable Markdown.
+- Reading and direct Markdown editing happen in the same document surface.
+- Syntax markers remain available when precise control is needed.
+- Invalid intermediate edits preserve the characters the user entered.
 
-### 2. Native File Workflows Without a Workspace Model
+### 2. Local file workflows without a workspace model
 
-**The Problem:** The editor needed to operate on real files without claiming ownership of user folders while still handling dirty state, external changes, recent items, local links, and navigation refreshes.
+**Challenge:** The editor must work with real files without claiming ownership of their folders. It also needs to protect unsaved work, detect external changes, preserve line endings, and keep folder navigation current.
 
-**The Solution:** The **Rust/Tauri** backend owns file reads and writes, metadata, directory scanning, and filesystem watching. The frontend maintains an explicit session for the active document and folder context, checking metadata freshness before overwriting a file.
+**Implementation:** The **Rust/Tauri** backend owns file reads and writes, metadata, directory scanning, and filesystem watching. The React frontend maintains an explicit session for the active document and folder context. Before saving, it compares current file metadata with the version originally opened; detected LF or CRLF line endings are retained when writing.
 
 **Outcome:**
 
 - Markdown files remain the only source of truth.
-- Folders open directly without databases or application sidecar files.
-- External changes refresh article navigation without silently replacing unsaved work.
+- Opening a folder creates no database or application sidecar files.
+- External filesystem events refresh navigation without silently replacing unsaved work.
 
-### 3. Semantic Clipboard Behavior and Windows Compatibility
+### 3. Consistent clipboard semantics for source and rich content
 
-**The Problem:** Clipboard behavior in a structured editor involves Markdown in `text/plain`, semantic HTML, and the partial-document context used by ProseMirror. On Windows/WebView, **CF_HTML** envelopes can also introduce whitespace that changes pasted content.
+**Challenge:** Copy and Cut in a structured editor must preserve Markdown in `text/plain`, semantic content in `text/html`, and ProseMirror's partial-document context. Windows **CF_HTML** envelopes can also introduce transport whitespace that changes the pasted document.
 
-**The Solution:** I centralized Copy/Cut payload resolution across native shortcuts and application commands, preserving Markdown as text alongside semantically equivalent HTML. At paste ingress, a narrowly qualified normalization unwraps only one valid ProseMirror fragment while leaving external or malformed HTML unchanged.
+**Implementation:** One shared policy resolves clipboard payloads for native editor gestures, application menus, and the context popup. Selections inside source projection keep the exact selected Markdown in `text/plain` and provide semantic HTML when a faithful mapping exists. At paste ingress, a narrowly qualified normalization unwraps only one qualifying ProseMirror fragment and leaves external or malformed HTML unchanged.
 
 **Outcome:**
 
-- Menus, contextual controls, and native gestures follow the same clipboard policy.
-- Projected selections preserve the exact Markdown characters selected by the user.
-- External HTML retains the editor's default behavior.
-
-### 4. Architecture and Verification Strategy
-
-The frontend follows feature-owned boundaries across application components, commands, session workflows, domain features, and shared utilities. Native operations remain behind feature-owned Tauri API modules.
-
-Verification combines:
-
-- Behavioral and integration tests with **Vitest** and Testing Library.
-- Rust tests for native operations.
-- TypeScript, Oxlint, Oxfmt, Clippy, and Cargo fmt checks.
-- A manual Markdown corpus for round trips, syntax interactions, byte boundaries, local files, and environment scenarios.
+- Keyboard, menu, and context-popup actions follow the same clipboard rules.
+- Cut removes content only after the clipboard write succeeds.
+- Windows transport details do not become document whitespace.
 
 ---
 
-## 🏗️ Stack
+## 🏗️ Architecture and verification
+
+```text
+               Application components
+                         |
+                      Commands
+                         |
+                       Session
+                         |
+   Domain features: editor, document, folder context, preferences
+              |                              |
+   Milkdown / ProseMirror          Feature-owned Tauri APIs
+                                             |
+                                  Rust backend -> filesystem
+```
+
+The frontend enforces one-way dependencies from application composition through commands and session workflows into domain features and shared utilities. Native operations stay behind feature-owned Tauri API modules, keeping filesystem concerns out of React components.
+
+### Content safety
+
+- Raw Markdown HTML is displayed as literal text instead of live DOM.
+- Remote images are blocked from loading automatically.
+- External links open in the system browser, while local non-Markdown targets require confirmation.
+- Syntax-highlighting assets are bundled instead of fetched at runtime.
+
+### Delivery and verification
+
+- **Vitest** and Testing Library cover editor, session, and interface behavior.
+- Rust tests cover native file and folder operations.
+- TypeScript, Oxlint, Oxfmt, Clippy, and Cargo fmt run as project checks.
+- A committed Markdown corpus complements automation with round-trip, syntax, byte-boundary, file, and environment scenarios.
+- **GitHub Actions** runs frontend and Rust checks separately on Windows. Tagged releases rerun the full check and build versioned Windows installers.
+
+---
+
+## 🛠️ Tech stack
 
 - **Desktop:** Tauri
 - **Frontend:** React, TypeScript, Vite, Tailwind CSS
 - **Backend:** Rust
-- **Editor:** Milkdown / ProseMirror
+- **Editor:** Milkdown, ProseMirror
 - **State:** Zustand
 - **Quality:** Vitest, Testing Library, Oxlint, Clippy

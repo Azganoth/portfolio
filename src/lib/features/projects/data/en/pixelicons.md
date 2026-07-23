@@ -1,9 +1,9 @@
 ---
 title: Pixel Icons
-category: VS Code Extension
-year: 2026
-summary: Published pixel-art file icon theme with broad coverage for modern languages, frameworks, and developer tooling.
-outcome: Surpassed 1,000 Visual Studio Marketplace installs through an actively maintained icon catalog and release workflow.
+category: Extension
+year: 2025
+summary: 16×16 pixel-art file icon theme for VS Code, with broad coverage of languages, tooling, and folders.
+outcome: More than 1,000 Marketplace installs; the project includes more than 100 icon definitions, a public catalog of every icon, and tag-triggered publishing.
 repository: https://github.com/Azganoth/vscode-pixel-icons
 website: https://vscode-pixel-icons.vercel.app/
 tags:
@@ -11,55 +11,58 @@ tags:
   - TypeScript
 ---
 
-**Pixel Icons** is a published file icon theme that brings a consistent pixel-art visual language to the VS Code explorer. Starting from a credited open-source icon set, I substantially expanded its coverage for current languages, frameworks, runtimes, package managers, configuration files, and common project folders.
+**Pixel Icons** is a 16×16 pixel-art file icon theme for VS Code. The project began with a credited set of icons created by Platinumaniac and was expanded to cover more languages, frameworks, runtimes, package managers, configuration files, and folders.
 
-The extension has surpassed **1,000 installs** on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Azganoth.pixel-icons) and continues to receive compatibility additions, visual refinements, and versioned releases.
-
----
-
-## 🧩 Technical Challenges & Solutions
-
-### 1. Broad Coverage Without Runtime Cost
-
-**The Problem:** A useful icon theme needs to recognize many overlapping extensions, exact filenames, language identifiers, and folder states. Running extension logic for every workspace would add complexity without improving the theme itself.
-
-**The Solution:** I built the theme as a declarative VS Code contribution. A central manifest maps file extensions, filenames, language identifiers, and collapsed or expanded folders directly to their visual assets, so VS Code can render the theme without activation-time logic.
-
-**Outcome:**
-
-- The theme has no ongoing runtime behavior inside the editor.
-- Specific configuration and lock files can override generic extension mappings.
-- The catalog covers both common languages and modern tooling such as Vite, Vitest, Tauri, Oxc, and Vercel.
-
-### 2. A Consistent Pixel-Art System
-
-**The Problem:** Pixel art becomes blurry or visually inconsistent when asset proportions, contrast, and highlighting vary across a large collection.
-
-**The Solution:** I maintain dedicated variants for files, folders, expanded folders, tests, declarations, and configuration files while reviewing them together against representative workspaces. Releases refine contrast and recognizable silhouettes rather than merely increasing the icon count.
-
-**Outcome:**
-
-- Related technologies remain visually distinct at explorer size.
-- Folder states preserve a consistent shape and visual hierarchy.
-- Improvements can be released independently through semantic versions and a maintained changelog.
-
-### 3. Catalog Verification and Distribution
-
-**The Problem:** Large mapping files easily accumulate missing assets, duplicate names, or collisions between filenames and folder samples.
-
-**The Solution:** A TypeScript generator derives a representative workspace from the theme manifest, including a separate location for naming collisions. Extension tests verify the packaged theme is discoverable by VS Code, and the public catalog provides a browsable view of the complete set.
-
-**Outcome:**
-
-- Every mapped icon can be inspected in a generated test workspace.
-- Marketplace releases and the catalog are maintained from the same repository.
-- Real install adoption provides external evidence that the project is useful beyond its codebase.
+The extension currently contains more than 100 icon definitions and maps more than 390 items, including file extensions, exact filenames, and folder patterns.
 
 ---
 
-## 🏗️ Stack
+## 📦 Adoption and verification
 
-- **Platform:** Visual Studio Code Extension API and Marketplace
-- **Configuration:** Declarative icon-theme manifest
+- Version `1.4.0` is published on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Azganoth.pixel-icons), where the extension has more than 1,000 installs.
+- An automated test verifies that VS Code recognizes the extension in the test environment.
+- A script turns the theme mappings into a sample workspace for visual review.
+- GitHub Actions builds and publishes the extension to the VS Code Marketplace from a version tag or a manual run.
+
+## 🧩 Theme design and maintenance
+
+### Declarative coverage without runtime behavior
+
+A useful icon theme needs to distinguish generic extensions from exact configuration and lock filenames while also handling collapsed and expanded folder states. Pixel Icons contributes `assets/theme.json` directly through `package.json` and declares no activation events, leaving mapping resolution and rendering to VS Code.
+
+This keeps the extension free of background behavior while allowing specific filenames to override generic extension mappings. The catalog covers established languages alongside tooling such as Vite, Vitest, Tauri, Oxc, and Vercel.
+
+### A consistent 16×16 visual system
+
+Small pixel-art assets lose clarity when silhouettes, contrast, or visual weight vary across a large collection. I maintain dedicated variants for tests, TypeScript declarations, configuration files, lockfiles, and collapsed or expanded folders, then review them together in representative workspaces.
+
+The changelog records both new coverage and refinements to existing proportions, highlights, and contrast. Related technologies remain distinguishable while sharing one visual language, and folder states retain a consistent silhouette.
+
+### A reviewable catalog
+
+A TypeScript script derives sample files and folders from the manifest. When an exact filename collides with a generated folder, the script places that file in a dedicated `_COLLISIONS_` directory. The [public catalog](https://vscode-pixel-icons.vercel.app/) groups icons by ecosystem and exposes filename and extension hints, an installation link, and an icon-request route.
+
+The extension, website, changelog, and release workflow are maintained in the same repository.
+
+## 🏗️ Distribution architecture
+
+```text
+theme.json -> VS Code icon-theme contribution -> Explorer rendering
+theme.json -> TypeScript sample generator ----> review workspace
+docs catalog ---------------------------------> Vercel
+version tag -> GitHub Actions ----------------> VS Code Marketplace
+```
+
+### Maintenance constraints
+
+The automated test verifies extension discovery, not every manifest mapping or image asset. Catalog validation remains a visual process supported by the generated workspace. The website gallery is manually curated rather than generated from `theme.json`, so it must be kept in sync when icons change. Because the assets are pixel art, non-integer VS Code zoom levels can introduce anti-aliasing and blur.
+
+---
+
+## 🛠️ Tech stack
+
+- **Platform:** VS Code icon-theme contribution, Visual Studio Marketplace
+- **Assets:** 16×16 PNG icons, declarative JSON manifest
 - **Tooling:** TypeScript, Node.js, pnpm
-- **Quality:** VS Code extension tests, generated sample workspaces, semantic releases
+- **Quality:** VS Code integration test, review workspace, versioned changelog
+- **Delivery:** GitHub Actions, Vercel

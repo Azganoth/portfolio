@@ -1,9 +1,9 @@
 ---
 title: Fix My Halo
-category: Tool
+category: Developer Tool
 year: 2026
-summary: Tool to fix graphical artifacts in game development, available as a WebApp and CLI.
-outcome: Released Rust and WebAssembly image-processing pipeline with direct user validation from the RimWorld modding community.
+summary: Web and Windows CLI tool that removes texture artifacts from transparent game sprites.
+outcome: Delivered one tested Rust core as a browser-based Wasm tool and a parallel native CLI, with direct validation from a RimWorld modder.
 repository: https://github.com/Azganoth/fix-my-halo
 website: https://fixmyhalo.vercel.app
 tags:
@@ -11,74 +11,91 @@ tags:
   - WebAssembly
   - React
   - TypeScript
-  - TailwindCSS
+  - Tailwind CSS
 ---
 
-**Fix My Halo** is a hybrid engineering solution designed to solve a common problem in game engines (like Unity): the appearance of "white halos" around sprites containing transparency due to bilinear filtering. The project implements a processing core in **Rust** that is compiled both to a high-performance native executable and to **WebAssembly (Wasm)** as a library, allowing the same logic to run directly in the user's browser without a backend.
+**Fix My Halo** automates texture dilation, also known as alpha bleeding, for transparent game sprites. With some filtering methods, the GPU samples visible edge pixels together with RGB values stored in transparent pixels. If those hidden values are white or black, the interpolation creates an outline around the sprite.
 
-After I shared the tool with the RimWorld community, a modder reported using it on a workbench texture and confirmed that it removed a border they had been unable to fix manually. This [community launch and feedback](https://www.reddit.com/r/RimWorld/comments/1qnqxwi/tool_fix_my_halo_an_opensource_web_cli_tool_to/) provides direct validation from the audience the tool was built to help.
-
----
-
-## 🧩 Technical Challenges & Solutions
-
-### 1. Hybrid Architecture (Shared Core)
-
-**The Problem:** Maintaining two separate codebases for the Web and CLI versions would result in logic duplication and inconsistency in image processing algorithms.
-
-**The Solution:** I adopted a modular architecture where business logic resides in a shared module (`engine.rs`). The `lib.rs` file exposes this logic to JavaScript via `wasm-bindgen`, while `main.rs` consumes it to create the command-line interface.
-
-**Result:**
-
-- Single source of truth for the dilation algorithm.
-- Bug fixes in the core instantly benefit both platforms.
-
-### 2. Dilation Algorithm (Alpha Bleeding)
-
-**The Problem:** Eliminating the invisible white color (R:255, G:255, B:255, A:0) that image editors save in transparent pixels, causing 3D rendering artifacts.
-
-**The Solution:** I implemented an iterative dilation algorithm in **Rust**. The `process_image` function traverses the image and, for each "padding" step, spreads the color of visible pixels to transparent neighbors (`dilate_step`), keeping the Alpha channel at 0.
-
-**Result:**
-
-- The GPU starts interpolating the sprite edge with the correct color ("bled color") instead of white.
-- Perfect visual transitions in-game.
-
-### 3. Parallelism and Performance (Rayon & Workers)
-
-**The Problem:** Processing high-resolution textures is CPU-intensive. On the Web, this would block the main thread (freezing the UI), and in the CLI, processing files sequentially would be inefficient.
-
-**The Solution:**
-
-- **Web:** I used **Web Workers** to isolate the Wasm module execution, keeping the React 19 interface fluid and responsive.
-- **CLI:** I implemented data parallelism using the **Rayon** library. The `par_iter()` iterator automatically distributes image processing across all available CPU threads.
-
-**Result:**
-
-- Unblocked UI with real-time progress feedback.
-- Massive asset processing in seconds via CLI.
+The web app processes files locally in the browser without sending them to a backend. The native CLI provides the same correction for individual files, folders, and glob patterns.
 
 ---
 
-## 🏗️ Architecture
+## 🧩 Technical decisions
 
-### Rust Core & Wasm
+### 1. One Rust core for two delivery formats
 
-The heart of the project is a Rust _crate_ compiled via `wasm-pack`. This allows manipulation of byte arrays (`Uint8Array`) with near-native performance inside the browser, bypassing JavaScript's performance limitations for bitwise pixel manipulation.
+**Challenge:** The browser offers the most accessible workflow, while a native CLI is better suited to mod projects with many textures. Separate implementations would allow their image-processing behavior to diverge.
 
-### Frontend Stack
+**Implementation:** `engine.rs` contains the `process_image` function and dilation steps. `lib.rs` exposes that core through `wasm-bindgen`, accepting encoded image bytes and returning PNG bytes to the browser. `main.rs` uses the same engine behind a native interface built with Clap.
 
-The web interface was built with **React 19** and **Vite**, using the latest ecosystem technologies:
+**Outcome:**
 
-- **TailwindCSS v4:** Utilization of the new style engine for maximum build performance.
-- **Zustand:** Global state management for configurations and processing queues.
-- **Shadcn/UI & Motion:** Accessible components and declarative animations for a polished user experience (interactive "drop-zone").
+- Both delivery formats use the same algorithm and padding semantics.
+- Platform-specific code remains limited to file discovery, byte transfer, progress, and output.
+
+### 2. Iterative alpha bleeding without changing transparency
+
+**Challenge:** The tool must replace problematic RGB data inside fully transparent pixels without changing the sprite's visible shape or partially transparent edges.
+
+**Implementation:** Each dilation pass inspects fully transparent pixels and copies the color of the first non-transparent pixel found among their eight neighbors. Repeating the pass expands edge colors by one pixel per configured `padding` step. After processing, the original alpha channel is restored across the image.
+
+**Outcome:**
+
+- Only hidden color data is changed; the original transparency remains intact.
+- Processing stops early when another pass would make no changes.
+
+### 3. Worker-isolated browser processing and parallel CLI jobs
+
+**Challenge:** Image processing should not block the React interface, while large CLI batches should make use of available CPU threads.
+
+**Implementation:**
+
+- **Browser:** A Web Worker initializes the Wasm module, receives each job, and transfers the input and result buffers without copying them through the UI thread.
+- **CLI:** File, directory, and glob inputs are converted into jobs. Rayon's `par_iter()` distributes those jobs across its thread pool, while the CLI reports progress and a final summary.
+
+**Outcome:**
+
+- The browser UI can continue updating file states while Wasm processes an image.
+- Folder and recursive CLI batches process files concurrently.
 
 ---
 
-## 🛠️ Tech Stack
+## 🏗️ Architecture and workflows
 
-- **Core:** Rust, Rayon, Image Crate
-- **Web:** WebAssembly (Wasm), React, TypeScript
-- **Styles:** Tailwind
-- **CLI:** Clap (Command Line Argument Parser)
+Rust was chosen primarily so the browser and CLI could reuse the same image-processing implementation, not because the algorithm could not be written in JavaScript. The shared crate is compiled with `wasm-pack` for browser use and as a native executable for batch processing.
+
+```text
+React UI -> transferable buffer -> Web Worker -> Wasm binding -> Rust core
+CLI input -> file discovery -> Rayon jobs ---------------------> Rust core
+```
+
+The React interface supports drag-and-drop batches, a configurable dilation radius, per-file status, individual downloads, and ZIP export. The browser queue handles one image at a time outside the main thread; file-level parallelism is provided by the CLI.
+
+## 📦 Distribution and verification
+
+[Version 0.2.0](https://github.com/Azganoth/fix-my-halo/releases/tag/v0.2.0) provides a Windows x64 executable. After downloading `fixmyhalo.exe`, it can process one file or recursively process a directory:
+
+```powershell
+.\fixmyhalo.exe "Textures\Player.png"
+.\fixmyhalo.exe "C:\MyMod\Textures" --recursive
+```
+
+- Rust unit tests cover neighbor selection, a single dilation step, multi-step padding, already-correct transparent colors, and fully opaque images.
+- GitHub Actions builds the Windows x64 executable whenever a version tag is pushed and attaches it to the corresponding release.
+- The [hosted web app](https://fixmyhalo.vercel.app/) provides the no-install workflow.
+
+After I shared the project with the RimWorld community, a modder reported that it removed a whitish border from a workbench texture they had been unable to correct manually. The [launch post and discussion](https://www.reddit.com/r/RimWorld/comments/1qnqxwi/tool_fix_my_halo_an_opensource_web_cli_tool_to/) provide direct validation from the intended audience.
+
+### Scope and limitations
+
+The project does not publish cross-platform benchmarks, so its performance claims are limited to observable implementation choices: processing is isolated from the browser's UI thread, and CLI jobs are parallelized across files. The downloadable native build currently targets Windows x64.
+
+---
+
+## 🛠️ Tech stack
+
+- **Image-processing core:** Rust, image
+- **Concurrency:** Web Workers, transferable buffers, Rayon
+- **Web:** WebAssembly, React, TypeScript, Zustand
+- **Interface:** Tailwind CSS, Radix UI, Motion
+- **Delivery:** Clap, GitHub Actions, Vercel

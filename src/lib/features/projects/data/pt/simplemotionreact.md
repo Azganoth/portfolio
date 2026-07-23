@@ -1,9 +1,9 @@
 ---
 title: Simple Motion React
-category: Library
+category: Biblioteca
 year: 2024
-summary: Biblioteca de animação declarativa para React inspirada no Vue, com zero dependências extras e foco em tamanho de bundle.
-outcome: Biblioteca de transições React sem dependências extras que mantém animações de saída confiáveis após o unmount do componente.
+summary: Biblioteca de transições para React inspirada no Vue, baseada em CSS e coordenação de ciclo de vida.
+outcome: Pacote publicado no npm para transições CSS com ciclo de vida, listas por key e troca entre componentes, acompanhado de documentação no Storybook e testes automatizados.
 repository: https://github.com/Azganoth/simple-motion-react
 website: https://simple-motion-react.vercel.app/
 tags:
@@ -14,59 +14,82 @@ tags:
   - Storybook
 ---
 
-**Simple Motion React** é uma biblioteca de transição de componentes para **React** com API inspirada no **Vue.js**. Desenvolvida como um estudo de caso de engenharia de software, o projeto implementa "do zero" um sistema de gerenciamento de ciclo de vida estendido, permitindo animar a montagem e, crucialmente, a desmontagem de componentes, com foco em **DX** (Developer Experience) e performance.
+O **Simple Motion React** é uma biblioteca focada em transições para **React**, com uma API inspirada no **Vue.js**. Ela coordena as fases do ciclo de vida e as classes dos componentes, enquanto os valores e o comportamento visual da animação permanecem no CSS da aplicação.
+
+O pacote está disponível no npm como [`@simple-motion/react`](https://www.npmjs.com/package/@simple-motion/react). A versão `0.0.2` fornece `Transition`, `CSSTransition`, `TransitionGroup` e `TransitionSwitch`.
 
 ---
 
-## 🧩 Desafios Técnicos & Soluções
+## 📦 Uso do pacote
 
-### 1. Gerenciamento de Ciclo de Vida Estendido (Unmount Animation)
+```bash
+pnpm add @simple-motion/react
+```
 
-**O Problema:** O **React** remove componentes do DOM imediatamente ao desmontar, impedindo animações de saída com CSS puro.
+```tsx
+import { CSSTransition } from "@simple-motion/react";
 
-**A Solução:** Desenvolvi uma máquina de estados (`entering` → `entered` → `exiting` → `exited`) dentro do componente `<Transition>`. Quando a prop `in` muda para `false` (indicando que os filhos vão ser desmontados), o componente intercepta a renderização e mantém os filhos "vivos" (último estado) no DOM, utilizando `useLayoutEffect` para coordenar classes CSS e timers.
+<CSSTransition in={visible} duration={200} name="fade" unmount>
+  <div>Conteúdo com transição</div>
+</CSSTransition>;
+```
 
-**Resultado:**
+```css
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 
-- Remove o nó do React apenas após a conclusão da animação.
-- Permite animações de saída suaves.
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 200ms;
+}
 
-### 2. Forçando Reflow para Transições CSS
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+```
 
-**O Problema:** Navegadores otimizam renderizações agrupando alterações de estilo ("_batching_"), o que frequentemente quebra animações que dependem de um estado inicial (ex: `opacity: 0`) aplicado imediatamente antes do estado ativo (ex: `opacity: 1`).
+## 🧩 Comportamento dos componentes
 
-**A Solução:** Implementei uma função de utilidade (`reflow`) que força a leitura da propriedade de layout `node.offsetHeight` entre a aplicação das classes, obrigando o motor de renderização a "pintar" o _frame_ inicial antes de processar a classe de transição.
+### Manter o elemento montado durante a saída
 
-**Resultado:**
+Uma animação de saída não pode continuar depois que o React remove o elemento. Por isso, o `<Transition>` controla uma máquina de estados `entering → entered → exiting → exited`. Quando a prop `in` muda para `false`, o componente entra na fase de saída, executa os callbacks de ciclo de vida e aguarda o `duration` configurado. Com `unmount` habilitado, ele só retorna `null` depois de chegar a `exited`.
 
-- Garante a renderização do estado initial antes da transição.
+O cleanup do effect cancela um timer obsoleto quando a direção muda rapidamente. Quem usa o render prop pode estilizar cada fase diretamente, com durações e callbacks separados para appear, enter e exit.
 
-### 3. Orquestração de Listas (TransitionGroup)
+### Coordenar classes CSS entre cálculos de layout
 
-**O Problema:** Animar itens sendo inseridos e removidos de arrays dinâmicos é complexo, pois exige rastrear a identidade e posição de elementos que não existem mais.
+Aplicar as classes inicial e final no mesmo batch de renderização pode impedir a transição CSS, porque o browser não chega a calcular o layout de partida. O `<CSSTransition>` mapeia as fases para classes no estilo do Vue: `enter-from`, `enter-active`, `enter-to`, `leave-from`, `leave-active` e `leave-to`.
 
-**A Solução:** O componente `<TransitionGroup>` mantém um estado interno derivado das `keys` dos filhos. Quando um item é removido, ele é mantido no estado interno do grupo com a prop de saída ativada (`in={false}`).
+Entre as classes inicial e ativa, a biblioteca lê `offsetHeight` para forçar o cálculo do layout antes de aplicar o estado final. É possível seguir a convenção de nomes ou informar cada classe separadamente, enquanto propriedades, easing e decisões visuais continuam sob controle do CSS.
 
-**Resultado:**
+### Reconciliar filhos por key durante remoções e trocas
 
-- Permite que a animação de saída ocorra em paralelo com a reordenação dos outros itens.
+Um item removido deixa de existir nos filhos recebidos, mas seu componente de transição precisa continuar renderizado até concluir o callback de saída. O `<TransitionGroup>` mantém uma lista interna de filhos por key, clona os removidos com `in={false}` e só os exclui depois de `onExited`. Keys persistentes e recém-adicionadas são combinadas na ordem mais recente recebida.
+
+O `<TransitionSwitch>` aplica o mesmo princípio às trocas, mantendo o filho anterior montado até sua saída. Várias remoções preservam estados de ciclo de vida independentes, e nas trocas por key a saída termina antes da entrada do substituto.
+
+## Distribuição e verificação
+
+- O **tsup** gera arquivos ESM, CommonJS e declarações TypeScript.
+- O artefato publicado da versão `0.0.2` é um tarball npm compactado de 6,9 kB, com uma entrada ESM não minificada de 10,0 kB.
+- O [site em Storybook](https://simple-motion-react.vercel.app/) documenta componentes, receitas e exemplos isolados.
+- Testes em Jest e Testing Library cobrem fases do ciclo de vida, classes CSS, reconciliação de listas, troca por key, mudanças rápidas de direção e composição de refs.
+- O GitHub Actions executa a suíte de testes com cobertura e envia o resultado ao Codecov.
+
+### Restrições de design e status
+
+O pacote tem um escopo próximo ao React Transition Group: coordena ciclo de vida e classes CSS, mas não implementa animações de layout, gestos, animações de spring ou um motor de keyframes.
+
+A conclusão da transição depende do `duration` configurado, não de um listener de `transitionend`. Por isso, o tempo no CSS e as props do componente precisam estar alinhados. O pacote está publicado no npm como `v0.0.2`; a manutenção está pausada no momento.
 
 ---
 
-## 🏗️ Arquitetura
-
-O projeto segue padrões rigorosos para distribuição de pacotes Open Source:
-
-- **Build Híbrido (CJS/ESM):** Utilização do **tsup** (esbuild) para gerar saídas compatíveis com bundlers modernos (Vite/Webpack) e legados (Node.js), com **Tree Shaking** nativo e geração automática de definições de tipo (`.d.ts`).
-- **Tipagem Estrita:** APIs 100% tipadas com **TypeScript** para garantir **IntelliSense** e segurança para os consumidores da biblioteca.
-- **Documentação Viva:** Uso do **Storybook** para desenvolvimento isolado de componentes, testes visuais e geração de documentação interativa.
-- **Testes de Comportamento:** Suíte de testes com **Jest** e **React Testing Library** simulando cenários reais de uso e edge cases de timing.
-
----
-
-## 🛠️ Tech Stack
+## 🛠️ Tech stack
 
 - **Core:** React, TypeScript
-- **Build Tooling:** tsup
-- **Qualidade:** Jest, Testing Library
-- **Docs:** Storybook
+- **Build tooling:** tsup
+- **Qualidade:** Jest, Testing Library, Codecov
+- **Documentação:** Storybook

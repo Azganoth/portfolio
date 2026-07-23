@@ -2,8 +2,8 @@
 title: Simple Motion React
 category: Library
 year: 2024
-summary: Declarative animation library for React inspired by Vue, with zero extra dependencies and focused on bundle size.
-outcome: Zero-dependency React transition library that keeps exit animations reliable after component unmount.
+summary: React transition library inspired by Vue, built around CSS and lifecycle coordination.
+outcome: Published npm package for lifecycle-aware CSS transitions, keyed lists, and keyed component switches, with Storybook documentation and automated tests.
 repository: https://github.com/Azganoth/simple-motion-react
 website: https://simple-motion-react.vercel.app/
 tags:
@@ -14,59 +14,82 @@ tags:
   - Storybook
 ---
 
-**Simple Motion React** is a component transition library for **React** with an API inspired by **Vue.js**. Developed as a software engineering case study, the project implements an extended lifecycle management system "from scratch", allowing animation of component mounting and, crucially, unmounting, with a focus on **DX** (Developer Experience) and performance.
+**Simple Motion React** is a focused transition library for **React** with an API inspired by **Vue.js**. It coordinates component lifecycle phases and CSS classes while leaving animation values and visual behavior to the consumer's stylesheet.
+
+The package is published on npm as [`@simple-motion/react`](https://www.npmjs.com/package/@simple-motion/react). Version `0.0.2` provides `Transition`, `CSSTransition`, `TransitionGroup`, and `TransitionSwitch`.
 
 ---
 
-## 🧩 Technical Challenges & Solutions
+## 📦 Package usage
 
-### 1. Extended Lifecycle Management (Unmount Animation)
+```bash
+pnpm add @simple-motion/react
+```
 
-**The Problem:** **React** removes components from the DOM immediately upon unmounting, preventing exit animations with pure CSS.
+```tsx
+import { CSSTransition } from "@simple-motion/react";
 
-**The Solution:** I developed a state machine (`entering` → `entered` → `exiting` → `exited`) inside the `<Transition>` component. When the `in` prop changes to `false` (indicating children will be unmounted), the component intercepts the rendering and keeps children "alive" (last state) in the DOM, using `useLayoutEffect` to coordinate CSS classes and timers.
+<CSSTransition in={visible} duration={200} name="fade" unmount>
+  <div>Transitioned content</div>
+</CSSTransition>;
+```
 
-**Result:**
+```css
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 
-- Removes the React node only after animation completion.
-- Allows smooth exit animations.
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 200ms;
+}
 
-### 2. Forcing Reflow for CSS Transitions
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+```
 
-**The Problem:** Browsers optimize rendering by grouping style changes ("batching"), which often breaks animations that depend on an initial state (e.g., `opacity: 0`) applied immediately before the active state (e.g., `opacity: 1`).
+## 🧩 Component behavior
 
-**The Solution:** I implemented a utility function (`reflow`) that forces reading the `node.offsetHeight` layout property between class applications, forcing the rendering engine to "paint" the initial frame before processing the transition class.
+### Keeping an element mounted during its exit phase
 
-**Result:**
+An exit animation cannot continue after React removes its element. `<Transition>` therefore owns an `entering → entered → exiting → exited` state machine. When its `in` prop becomes `false`, the component enters the exit phase, invokes lifecycle callbacks, and waits for the configured exit `duration`. With `unmount` enabled, it returns `null` only after reaching `exited`.
 
-- Ensures rendering of the initial state before transition.
+Effect cleanup cancels an obsolete timer when the direction changes quickly. Render-prop consumers can style every phase directly, and separate appear, enter, and exit durations and callbacks are supported.
 
-### 3. List Orchestration (TransitionGroup)
+### Sequencing CSS classes across browser layout
 
-**The Problem:** Animating items being inserted and removed from dynamic arrays is complex, as it requires tracking the identity and position of elements that no longer exist.
+Applying initial and target classes in one rendering batch can prevent a CSS transition because the browser never calculates the starting layout. `<CSSTransition>` maps lifecycle phases to Vue-style `enter-from`, `enter-active`, `enter-to`, `leave-from`, `leave-active`, and `leave-to` classes.
 
-**The Solution:** The `<TransitionGroup>` component maintains an internal state derived from children's `keys`. When an item is removed, it is kept in the group's internal state with the exit prop activated (`in={false}`).
+Between the initial and active classes, the library reads `offsetHeight` to force a layout calculation before applying the target state. Consumers can follow the naming convention or provide each class explicitly, while CSS remains responsible for properties, easing, and visual design.
 
-**Result:**
+### Reconciling keyed children during removal and replacement
 
-- Allows exit animation to occur in parallel with reordering of other items.
+A removed list item no longer exists in the caller's children, but its transition component must remain rendered until its exit callback completes. `<TransitionGroup>` keeps an internal keyed child list, clones removed children with `in={false}`, and deletes them only after `onExited`. Persisting and newly added keys are merged into the caller's latest order.
+
+`<TransitionSwitch>` applies the same principle to replacements by keeping the previous keyed child mounted until it exits. Multiple removals retain independent lifecycle state, and keyed replacements run in exit-then-enter order.
+
+## Distribution and verification
+
+- **tsup** produces ESM, CommonJS, and TypeScript declaration files.
+- The published `0.0.2` artifact is a 6.9 kB compressed npm tarball with a 10.0 kB unminified ESM entry.
+- The [Storybook site](https://simple-motion-react.vercel.app/) documents components, recipes, and isolated examples.
+- Jest and Testing Library tests cover lifecycle phases, CSS classes, list reconciliation, keyed switching, rapid direction changes, and ref composition.
+- GitHub Actions runs the test suite with coverage and uploads its result to Codecov.
+
+### Design constraints and status
+
+The package is closest in scope to React Transition Group: it coordinates lifecycle and CSS classes but does not implement layout animation, gesture handling, spring physics, or a keyframe engine.
+
+Transition completion is based on the configured `duration`, not a `transitionend` listener, so consumers must keep CSS timing and component props aligned. The package is published on npm as `v0.0.2`; maintenance is currently paused.
 
 ---
 
-## 🏗️ Architecture
-
-The project follows rigorous standards for Open Source package distribution:
-
-- **Hybrid Build (CJS/ESM):** Utilization of **tsup** (esbuild) to generate outputs compatible with modern bundlers (Vite/Webpack) and legacy ones (Node.js), with native **Tree Shaking** and automatic type definition generation (`.d.ts`).
-- **Strict Typing:** APIs 100% typed with **TypeScript** to ensure **IntelliSense** and safety for library consumers.
-- **Living Documentation:** Use of **Storybook** for isolated component development, visual testing, and interactive documentation generation.
-- **Behavior Testing:** Test suite with **Jest** and **React Testing Library** simulating real usage scenarios and timing edge cases.
-
----
-
-## 🛠️ Tech Stack
+## 🛠️ Tech stack
 
 - **Core:** React, TypeScript
-- **Build Tooling:** tsup
-- **Quality:** Jest, Testing Library
-- **Docs:** Storybook
+- **Build tooling:** tsup
+- **Quality:** Jest, Testing Library, Codecov
+- **Documentation:** Storybook

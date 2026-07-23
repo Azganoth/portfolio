@@ -5,8 +5,10 @@
   import Link from "$lib/shared/components/Link.svelte";
   import Reveal from "$lib/shared/components/Reveal.svelte";
   import Section from "$lib/shared/components/Section.svelte";
-  import { ID_START_SECTION } from "$lib/shared/constants";
+  import { ID_PROJECTS_SECTION, ID_START_SECTION } from "$lib/shared/constants";
   import Icon from "@iconify/svelte";
+
+  const cvHref = $derived(t("_cv_href"));
 </script>
 
 {#snippet name()}
@@ -44,7 +46,27 @@
     <Reveal
       class="delay-500 duration-400 ease-out-expo not-in-view:translate-y-4 not-in-view:opacity-0"
     >
-      <ul class="mt-8 flex justify-center gap-6 md:justify-start">
+      <div class="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+        <Link
+          variant="none"
+          href={`#${ID_PROJECTS_SECTION}`}
+          class="flex items-center gap-2 rounded-full bg-primary px-5 py-3 font-mono font-bold tracking-wide text-background shadow-glow transition-transform hover:-translate-y-1"
+        >
+          <span>{t("start_projects_cta")}</span>
+          <Icon icon="fa6-solid:arrow-down" />
+        </Link>
+        <Link
+          variant="none"
+          href={cvHref}
+          newTab
+          aria-label={t("a11y_download_cv")}
+          class="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 font-mono font-bold tracking-wide text-foreground transition-all hover:-translate-y-1 hover:border-secondary/40 hover:text-secondary"
+        >
+          <span>{t("start_curriculum")}</span>
+          <Icon icon="fa6-solid:arrow-up-right-from-square" />
+        </Link>
+      </div>
+      <ul class="mt-10 flex justify-center gap-6 md:ml-8 md:justify-start">
         {#each CONTACT_SHORTCUTS as { label, href, icon } (href)}
           <li class="transition-transform ease-snappy hover:scale-110">
             <Link

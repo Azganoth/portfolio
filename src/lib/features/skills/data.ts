@@ -1,34 +1,56 @@
-export const SKILLS_BY_CATEGORY = {
-  skills_category_languages: [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "TypeScript",
-    "Python",
-    "Rust",
-  ],
-  skills_category_frontend: [
-    "React",
-    "Next",
-    "Vue",
-    "Svelte",
-    "SASS",
-    "TailwindCSS",
-  ],
-  skills_category_backend: [
-    "Node",
-    "PostgreSQL",
-    "MongoDB",
-    "Prisma",
-    "Mongoose",
-    "GraphQL",
-  ],
-  skills_category_tests: [
-    "Vitest",
-    "Playwright",
-    "Jest",
-    "Testing Library",
-    "Storybook",
-  ],
-  skills_category_devops: ["Git", "Docker", "Figma"],
-} satisfies Record<string, string[]>;
+export type SkillGroupEmphasis = "primary" | "supporting" | "additional";
+
+export interface SkillGroup {
+  titleKey:
+    | "skills_category_primary"
+    | "skills_category_quality"
+    | "skills_category_additional";
+  emphasis: SkillGroupEmphasis;
+  skills: string[];
+}
+
+export const SKILL_GROUPS = [
+  {
+    titleKey: "skills_category_primary",
+    emphasis: "primary",
+    skills: [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Prisma",
+    ],
+  },
+  {
+    titleKey: "skills_category_quality",
+    emphasis: "supporting",
+    skills: [
+      "Git",
+      "Vitest",
+      "Playwright",
+      "Jest",
+      "Testing Library",
+      "Docker",
+      "GitHub Actions",
+    ],
+  },
+  {
+    titleKey: "skills_category_additional",
+    emphasis: "additional",
+    skills: [
+      "Python",
+      "Svelte",
+      "Vue",
+      "SASS",
+      "Rust",
+      "Tauri",
+      "MongoDB",
+      "GraphQL",
+      "WebAssembly",
+    ],
+  },
+] satisfies SkillGroup[];

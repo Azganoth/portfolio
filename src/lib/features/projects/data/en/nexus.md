@@ -2,16 +2,16 @@
 title: Nexus
 category: Web App
 year: 2025
-summary: Link aggregation SaaS platform built in a Monorepo with scalable Full-Stack architecture.
-outcome: Full-stack SaaS architecture with shared contracts, hardened auth flows, automated tests, and deployable infrastructure.
+summary: Full-stack link-in-bio application built as a Next.js and Express monorepo.
+outcome: Shared contracts, coordinated session renewal, direct-to-storage avatar uploads, automated tests, and deployment on Fly.io.
 repository: https://github.com/Azganoth/nexus
 website: https://nexusapp.fly.dev
 tags:
-  - Next
+  - Next.js
   - React
   - TypeScript
-  - TailwindCSS
-  - Node
+  - Tailwind CSS
+  - Node.js
   - Express
   - Prisma
   - PostgreSQL
@@ -20,100 +20,95 @@ tags:
   - Testing Library
 ---
 
-Nexus is a complete "Link-in-Bio" application, designed to simulate a real **SaaS** product. The project adopts a **Monorepo** architecture to share data contracts and logic between the frontend (**Next.js**) and the backend (**Express**), demonstrating mastery over the full software development lifecycle, from data modeling to container orchestration.
+Nexus is a link-in-bio application built to explore a production-shaped **SaaS** architecture beyond the interface. Its **Turborepo** workspace connects a **Next.js** frontend, an **Express** API, shared **Zod** contracts, **PostgreSQL** through **Prisma**, and S3-compatible object storage on **Cloudflare R2**.
 
 ---
 
-## 🧩 Technical Challenges & Solutions
+## 🧩 Technical decisions
 
-### 1. Authentication Concurrency (Promise Singleton)
+### 1. Session renewal without competing requests
 
-**The Problem:** In complex SPAs, multiple simultaneous requests can fail due to an expired token. If each attempts to renew the token independently, the **Refresh Token Rotation** mechanism would invalidate previous tokens in a cascade, inadvertently logging the user out.
+**Challenge:** When an access token expires, several browser requests can receive a 401 response at once. If each request starts its own refresh, they compete over the same session. Server-rendered routes also need a way to inspect the session without invoking the renewal flow.
 
-**The Solution:** I implemented a **Promise Singleton** pattern in the HTTP client interceptor. The first 401 failure instantiates a refresh promise, and all subsequent requests subscribe to this same pending promise (queueing) instead of triggering new refreshes.
+**Implementation:** The HTTP client keeps a shared `Promise` for the active refresh request. The first eligible 401 response starts the request; later failures await the same `Promise` and retry with the new access token. The API verifies the signed refresh token against its stored session, while an `httpOnly` cookie keeps that token outside client-side JavaScript. A separate read-only endpoint lets **Next.js** inspect the session during **SSR**.
 
-**Result:**
+**Outcome:**
 
-- Upon resolution, all paused requests are re-executed with the new token.
-- Ensures atomicity in session renewal.
+- Only one browser refresh request remains in flight at a time.
+- Failed requests retry after the shared refresh completes.
+- SSR session checks do not invoke the token-renewal endpoint.
 
-### 2. Session Integrity and Security
+### 2. Direct avatar uploads with content deduplication
 
-**The Problem:** Prevent replay attacks and ensure tokens could not be forged or collide, as well as allowing session validation on the server (**Next.js**) without exposing sensitive tokens.
+**Challenge:** Sending image bodies through the **Express** API would consume application-server bandwidth and memory. Re-uploading the same processed avatar would also create redundant objects.
 
-**The Solution:** I injected cryptographic entropy (16 hex bytes) via **JTI (JWT ID)** into each generated token and created a read-only endpoint (**BFF Pattern**) allowing **Next.js** to validate the session via `httpOnly` cookies in **SSR**.
+**Implementation:** The browser crops the avatar to a 256 × 256 WebP image and calculates its SHA-256 hash. The API uses that hash in the object key and checks **R2** with `HeadObject`. If the object already exists for that account, it returns the public URL; otherwise, it returns a presigned `PUT` URL and the browser uploads the image directly to the bucket.
 
-**Result:**
+**Outcome:**
 
-- Absolute uniqueness in the database for precise revocation.
-- Does not inadvertently trigger write rotation logic.
-- Security and performance maintained in SSR.
+- Repeated uploads of the same processed avatar reuse the existing object.
+- Image bodies travel from the browser to R2 instead of passing through Express.
 
-### 3. Upload with Deduplication (Content-Addressable Storage)
+### 3. Shared contracts across frontend and backend
 
-**The Problem:** Uploading binary images directly through the **Node.js** API blocks the main thread, degrading overall performance. Furthermore, some users upload the same image (e.g., social media logo), wasting storage and bandwidth with duplicate files.
+**Challenge:** Duplicating request types and validation rules across applications makes contract drift easy to miss.
 
-**The Solution:** I implemented client-side SHA-256 hash logic (**Content-Based Addressing**). Before upload, the server checks via R2/S3 `HeadObject` if the file already exists. If it exists, it reuses it instantly; if not, it generates a **Presigned URL** for direct upload to the bucket.
+**Implementation:** The `@repo/shared` package centralizes **Zod** schemas and the **TypeScript** types inferred from them. The Next.js forms and Express request handlers consume the same definitions.
 
-**Result:**
+**Outcome:**
 
-- Automatic deduplication of identical files.
-- Direct upload (Client-to-Storage) without blocking the **Node.js** server.
+- Contract changes surface during build or type-checking instead of relying on manual synchronization.
+- The same validation rules are applied at the client and API boundaries.
 
-### 4. End-to-End Type-Safety (Shared Contracts)
+### 4. Optimistic reordering under a UNIQUE constraint
 
-**The Problem:** Keeping TypeScript types manually synchronized between Frontend and Backend is prone to human error. A simple field name change in the API can silently break the interface in production, as there is no cross-compilation validation between projects.
+**Challenge:** Swapping positions directly can violate the database's `UNIQUE` ordering constraint before every row reaches its final value.
 
-**The Solution:** I utilized the **Monorepo** architecture to create a shared package (`@repo/shared`). The **Zod** schemas defined in this package serve as the single source of truth, generating both static types (**TypeScript**) and validation rules for forms (Frontend) and API inputs (Backend).
+**Implementation:** **SWR** applies the new order optimistically in the interface. The API first confirms that the submitted IDs exactly match the user's links. Inside a database transaction, it assigns temporary negative positions and then writes the final zero-based order.
 
-**Result:**
+**Outcome:**
 
-- Safe refactoring: changing a field in the backend generates an immediate build error in the frontend.
-- Isomorphic validation: the same email/password rule runs on client and server.
+- The interface responds before the API round trip completes.
+- The database keeps a unique, validated order for every saved link.
 
-### 5. Optimistic Reordering and Database Constraints
+## Other implementation details
 
-**The Problem:** Updating the order of items in a column with a `UNIQUE` constraint in the SQL database often causes collision errors. Trying to swap item "1" for "2" fails immediately if the transaction is not atomic, because index "2" is already occupied at the time of writing.
-
-**The Solution:** On the frontend, I used **SWR** for instant optimistic updates. On the backend, I implemented a transaction that first updates indices to temporary negative values, bypassing the uniqueness constraint before applying the new definitive order.
-
-**Result:**
-
-- Fluid UX without "jumps" or network waits.
-- Data integrity guaranteed at the database level.
-
-### 6. Intelligent Auto-Save (Debounce & Dirty Check)
-
-**The Problem:** Implementing auto-save listening to every keystroke event (`onChange`) creates excessive unnecessary requests (overhead). Additionally, variable network latency causes race conditions, where an old response might overwrite newer data, reverting the user's modification.
-
-**The Solution:** I created a custom hook `useAutoSaveForm` that combines **React Hook Form** state monitoring with `useDebounceValue`. The hook intelligently checks if there was a real change (isDirty) comparing with the initial value before triggering automatic submission.
-
-**Result:**
-
-- Fluid and modern editing experience.
-- Drastic reduction of unnecessary network calls.
+Profile settings use a reusable auto-save hook. It watches selected fields, waits one second after the latest edit, compares them with the saved values, validates the changed state, and submits only when an update is necessary.
 
 ---
 
 ## 🏗️ Architecture
 
-The system is orchestrated via **Turborepo**, allowing code sharing with **End-to-End Type-Safety**:
+```text
+                         @repo/shared
+                Zod schemas and TypeScript contracts
+                       /                    \
+Browser -> Next.js frontend -> Express API -> PostgreSQL
+   |                              |
+   |                              +-> R2: existence check + presigned URL
+   +--------------------------------> R2: direct avatar upload
+```
 
-- **Apps:** `web` (**Next.js 14 App Router**) and `api` (**Express.js**).
-- **Shared Packages:**
-  - `@repo/database`: **Prisma** client and migrations, ensuring API and seed scripts use the same source of truth.
-  - `@repo/shared`: **Zod** schemas and isomorphic **TypeScript** types. A change in the validation schema immediately reflects in build errors on both frontend and backend.
+- **Applications:** `web` with the **Next.js App Router** and `api` with **Express**.
+- **Shared packages:**
+  - `@repo/database`: **Prisma** client and migrations shared by the API and seed scripts.
+  - `@repo/shared`: **Zod** schemas, API contracts, and inferred **TypeScript** types.
 
-### Infrastructure
+### Delivery and verification
 
-- **Multi-stage Docker:** Optimized builds for production with drastic reduction of final image size.
-- **CI/CD:** **GitHub Actions** pipeline for automated tests (**Jest**/**Supertest**) and continuous deploy.
+- Separate multi-stage Dockerfiles build the web and API applications for **Fly.io**.
+- **GitHub Actions** builds and tests the workspace. On the main branch, it also applies database migrations and deploys both applications.
+- **Jest**, **Supertest**, and Testing Library cover API and frontend behavior.
+
+### Current scope and production considerations
+
+The deployed instance demonstrates the product architecture rather than operating as a public multi-tenant service. Commercial operation would also require structured observability, backup and restore procedures, rate limiting and abuse controls, capacity planning, and operational runbooks.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech stack
 
-- **Frontend:** Next.js, React, Tailwind
+- **Frontend:** Next.js, React, Tailwind CSS
 - **Backend:** Node.js, Express
 - **Data:** PostgreSQL, Prisma
-- **Infra:** Docker, Fly.io
+- **Infrastructure:** Docker, Fly.io

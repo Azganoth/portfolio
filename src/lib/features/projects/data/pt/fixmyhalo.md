@@ -1,9 +1,9 @@
 ---
 title: Fix My Halo
-category: Tool
+category: Ferramenta
 year: 2026
-summary: Ferramenta para corrigir artefatos gráficos em desenvolvimento de jogos, disponível como WebApp e CLI.
-outcome: Pipeline de processamento de imagem em Rust e WebAssembly publicado e validado diretamente por um usuário da comunidade de mods de RimWorld.
+summary: Ferramenta web e CLI para Windows que remove artefatos de texturas com transparencia.
+outcome: Um único core testado em Rust disponibilizado como ferramenta em Wasm no navegador e CLI nativa com processamento paralelo, além da validação direta de um modder de RimWorld.
 repository: https://github.com/Azganoth/fix-my-halo
 website: https://fixmyhalo.vercel.app
 tags:
@@ -11,74 +11,91 @@ tags:
   - WebAssembly
   - React
   - TypeScript
-  - TailwindCSS
+  - Tailwind CSS
 ---
 
-**Fix My Halo** é uma solução de engenharia híbrida projetada para resolver um problema comum em motores de jogos (como Unity): o aparecimento de "halos brancos" ao redor de sprites que contém transparencia devido à filtragem bilinear. O projeto implementa um núcleo de processamento em **Rust** que é compilado tanto para um executável nativo de alta performance quanto para **WebAssembly (Wasm)** como uma biblioteca, permitindo que a mesma lógica rode diretamente no navegador do usuário sem backend.
+O **Fix My Halo** automatiza a dilatação de textura, também conhecida como alpha bleeding, em sprites transparentes usados em jogos. Em alguns métodos de filtragem, a GPU combina os pixels visíveis da borda com valores RGB armazenados em pixels transparentes. Quando esses valores ocultos são brancos ou pretos, a interpolação cria um contorno ao redor do sprite.
 
-Depois que compartilhei a ferramenta com a comunidade de RimWorld, um modder relatou tê-la usado em uma textura de bancada e confirmou que ela removeu uma borda que não havia conseguido corrigir manualmente. Esse [lançamento e feedback da comunidade](https://www.reddit.com/r/RimWorld/comments/1qnqxwi/tool_fix_my_halo_an_opensource_web_cli_tool_to/) oferece validação direta do público que a ferramenta foi criada para ajudar.
+A aplicação web processa os arquivos localmente no navegador, sem enviá-los para um backend. A CLI nativa oferece a mesma correção para arquivos individuais, diretórios e padrões glob.
 
 ---
 
-## 🧩 Desafios Técnicos & Soluções
+## 🧩 Decisões técnicas
 
-### 1. Arquitetura Híbrida (Core Compartilhado)
+### 1. Um core em Rust para dois formatos de distribuição
 
-**O Problema:** Manter duas bases de código separadas para a versão Web e CLI resultaria em duplicação de lógica e inconsistência nos algoritmos de processamento de imagem.
+**Desafio:** O navegador oferece o fluxo mais acessível, enquanto uma CLI nativa atende melhor projetos de mods com muitas texturas. Duas implementações permitiriam que o comportamento do processamento divergisse com o tempo.
 
-**A Solução:** Adotei uma arquitetura modular onde a lógica de negócios reside em um módulo compartilhado (`engine.rs`). O arquivo `lib.rs` expõe essa lógica para o JavaScript via `wasm-bindgen`, enquanto o `main.rs` a consome para criar a interface de linha de comando.
+**Implementação:** O `engine.rs` concentra a função `process_image` e as etapas de dilatação. O `lib.rs` expõe esse core por meio do `wasm-bindgen`: recebe os bytes da imagem e devolve bytes em PNG ao navegador. Já o `main.rs` usa o mesmo engine por trás de uma interface nativa construída com Clap.
 
 **Resultado:**
 
-- Única fonte da verdade para o algoritmo de dilatação.
-- A correção de bugs no core beneficia instantaneamente ambas as plataformas.
+- Os dois formatos de distribuição usam o mesmo algoritmo e a mesma interpretação do padding.
+- O código específico de cada plataforma fica restrito à descoberta de arquivos, transferência de bytes, progresso e saída.
 
-### 2. Algoritmo de Dilatação (Alpha Bleeding)
+### 2. Alpha bleeding iterativo sem alterar a transparência
 
-**O Problema:** Eliminar a cor branca invisível (R:255, G:255, B:255, A:0) que editores de imagem salvam em pixels transparentes, causando artefatos de renderização 3D.
+**Desafio:** A ferramenta precisa substituir os dados RGB problemáticos dentro de pixels totalmente transparentes sem mudar o formato visível do sprite nem suas bordas semitransparentes.
 
-**A Solução:** Implementei um algoritmo iterativo de dilatação em **Rust**. A função `process_image` percorre a imagem e, para cada passo de "padding", espalha a cor dos pixels visíveis para os vizinhos transparentes (`dilate_step`), mantendo o canal Alpha em 0.
-
-**Resultado:**
-
-- A GPU passa a interpolar a borda do sprite com a cor correta ("bled color") em vez de branco.
-- Transições visuais perfeitas in-game.
-
-### 3. Paralelismo e Performance (Rayon & Workers)
-
-**O Problema:** O processamento de texturas de alta resolução é intensivo para a CPU. Na Web, isso bloquearia a thread principal (congelando a UI), e na CLI, processar arquivos sequencialmente seria ineficiente.
-
-**A Solução:**
-
-- **Web:** Utilizei **Web Workers** para isolar a execução do módulo Wasm, mantendo a interface React 19 fluida e responsiva.
-- **CLI:** Implementei paralelismo de dados utilizando a biblioteca **Rayon**. O iterador `par_iter()` distribui automaticamente o processamento das imagens entre todas as threads disponíveis da CPU.
+**Implementação:** Cada etapa da dilatação percorre os pixels totalmente transparentes e copia a cor do primeiro pixel não transparente encontrado entre os oito vizinhos. A repetição expande as cores da borda em um pixel por unidade de `padding` configurada. Ao final, o canal alpha original é restaurado em toda a imagem.
 
 **Resultado:**
 
-- UI desbloqueada com feedback de progresso em tempo real.
-- Processamento massivo de assets em segundos via CLI.
+- Apenas os dados de cor ocultos são alterados; a transparência original permanece intacta.
+- O processamento termina antes do limite quando outra etapa não produziria nenhuma mudança.
+
+### 3. Processamento isolado no navegador e jobs paralelos na CLI
+
+**Desafio:** O processamento de imagens não deve bloquear a interface em React, enquanto lotes grandes na CLI devem aproveitar as threads disponíveis da CPU.
+
+**Implementação:**
+
+- **Navegador:** Um Web Worker inicializa o módulo Wasm, recebe cada job e transfere os buffers de entrada e saída sem copiá-los pela thread da interface.
+- **CLI:** Entradas por arquivo, diretório ou padrão glob são convertidas em jobs. O `par_iter()` do Rayon distribui esses jobs entre suas threads, enquanto a CLI exibe o progresso e um resumo ao final.
+
+**Resultado:**
+
+- A interface continua atualizando o estado dos arquivos enquanto o Wasm processa uma imagem.
+- Lotes de diretórios, inclusive recursivos, processam vários arquivos ao mesmo tempo na CLI.
 
 ---
 
-## 🏗️ Arquitetura
+## 🏗️ Arquitetura e fluxos de uso
 
-### Rust Core & Wasm
+Rust foi escolhido principalmente para permitir que o navegador e a CLI reutilizassem a mesma implementação, não porque o algoritmo fosse inviável em JavaScript. A crate compartilhada é compilada com `wasm-pack` para o navegador e como executável nativo para processamento em lote.
 
-O coração do projeto é uma _crate_ Rust compilada via `wasm-pack`. Isso permite manipulação de _arrays_ de bytes (`Uint8Array`) com performance próxima à nativa dentro do browser, contornando as limitações de performance do JavaScript para manipulação de pixels bit a bit.
+```text
+Interface React -> buffer transferível -> Web Worker -> binding Wasm -> core Rust
+Entrada CLI -> descoberta de arquivos -> jobs do Rayon ------------> core Rust
+```
 
-### Frontend Stack
+A interface em React oferece lotes por drag and drop, ajuste do raio de dilatação, status por arquivo, download individual e exportação em ZIP. A fila do navegador processa uma imagem por vez fora da thread principal; o paralelismo entre arquivos fica a cargo da CLI.
 
-A interface web foi construída com **React 19** e **Vite**, utilizando as tecnologias mais recentes do ecossistema:
+## 📦 Distribuição e verificação
 
-- **TailwindCSS v4:** Utilização da nova engine de estilos para máxima performance de build.
-- **Zustand:** Gerenciamento de estado global para configurações e filas de processamento.
-- **Shadcn/UI & Motion:** Componentes acessíveis e animações declarativas para uma experiência de usuário polida ("drop-zone" interativa).
+A [versão 0.2.0](https://github.com/Azganoth/fix-my-halo/releases/tag/v0.2.0) oferece um executável para Windows x64. Depois de baixar o `fixmyhalo.exe`, ele pode processar um arquivo ou percorrer um diretório recursivamente:
+
+```powershell
+.\fixmyhalo.exe "Textures\Player.png"
+.\fixmyhalo.exe "C:\MeuMod\Textures" --recursive
+```
+
+- Testes unitários em Rust cobrem a seleção do pixel vizinho, uma etapa de dilatação, padding com várias etapas, cores transparentes já corrigidas e imagens totalmente opacas.
+- O GitHub Actions gera o executável para Windows x64 sempre que uma tag de versão é enviada e anexa o arquivo à release correspondente.
+- A [aplicação web](https://fixmyhalo.vercel.app/) oferece o fluxo sem instalação.
+
+Depois que compartilhei o projeto com a comunidade de RimWorld, um modder relatou que ele removeu uma borda esbranquiçada de uma textura de bancada que não havia conseguido corrigir manualmente. O [post de lançamento e a discussão](https://www.reddit.com/r/RimWorld/comments/1qnqxwi/tool_fix_my_halo_an_opensource_web_cli_tool_to/) trazem validação direta do público para o qual a ferramenta foi criada.
+
+### Escopo e limitações
+
+O projeto não publica benchmarks entre plataformas. Por isso, as afirmações de desempenho se limitam a decisões observáveis na implementação: o processamento fica fora da thread da interface no navegador, e a CLI paraleliza os jobs por arquivo. O executável nativo disponível atualmente é voltado ao Windows x64.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech stack
 
-- **Core:** Rust, Rayon, Image Crate
-- **Web:** WebAssembly (Wasm), React, TypeScript
-- **Estilos:** Tailwind
-- **CLI:** Clap (Command Line Argument Parser)
+- **Core de processamento:** Rust, image
+- **Concorrência:** Web Workers, buffers transferíveis, Rayon
+- **Web:** WebAssembly, React, TypeScript, Zustand
+- **Interface:** Tailwind CSS, Radix UI, Motion
+- **Distribuição:** Clap, GitHub Actions, Vercel

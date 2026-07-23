@@ -34,17 +34,14 @@
   ]);
 </script>
 
+{#snippet leafdown()}
+  <Link class="text-white" href={getCurrentLocalizedPath("/projects/leafdown")}>
+    Leafdown
+  </Link>
+{/snippet}
 {#snippet nexus()}
   <Link class="text-white" href={getCurrentLocalizedPath("/projects/nexus")}>
     Nexus
-  </Link>
-{/snippet}
-{#snippet smr()}
-  <Link
-    class="text-white"
-    href={getCurrentLocalizedPath("/projects/simplemotionreact")}
-  >
-    Simple Motion React
   </Link>
 {/snippet}
 {#snippet fixmyhalo()}
@@ -53,6 +50,22 @@
     href={getCurrentLocalizedPath("/projects/fixmyhalo")}
   >
     Fix My Halo
+  </Link>
+{/snippet}
+{#snippet cropandquest()}
+  <Link
+    class="text-white"
+    href={getCurrentLocalizedPath("/projects/cropandquest")}
+  >
+    Crop & Quest
+  </Link>
+{/snippet}
+{#snippet pixelicons()}
+  <Link
+    class="text-white"
+    href={getCurrentLocalizedPath("/projects/pixelicons")}
+  >
+    Pixel Icons
   </Link>
 {/snippet}
 
@@ -109,13 +122,13 @@
           <Translation key="bio_description_1" />
         </p>
         <p class="leading-relaxed">
-          <Translation
-            key="bio_description_2"
-            values={{ nexus, smr, fixmyhalo }}
-          />
+          <Translation key="bio_description_2" values={{ leafdown, nexus }} />
         </p>
         <p class="leading-relaxed">
-          <Translation key="bio_description_3" />
+          <Translation
+            key="bio_description_3"
+            values={{ cropandquest, fixmyhalo, pixelicons }}
+          />
         </p>
       </div>
     </Reveal>
