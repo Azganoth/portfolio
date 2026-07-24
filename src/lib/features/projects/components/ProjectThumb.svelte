@@ -5,7 +5,7 @@
   import { projectStore } from "$lib/features/projects/store.svelte";
   import { composeProjectLinkId } from "$lib/features/projects/utils";
   import Link from "$lib/shared/components/Link.svelte";
-  import { ID_PROJECT_DETAILS, TAG_META } from "$lib/shared/constants";
+  import { ID_PROJECT_DETAILS } from "$lib/shared/constants";
   import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
   import Icon from "@iconify/svelte";
   import type { ClassValue } from "svelte/elements";
@@ -45,20 +45,29 @@
 
 <article
   class={[
-    "group relative flex flex-col gap-8 max-xl:max-w-170 xl:flex-row xl:items-center xl:gap-16 xl:group-odd/project-item:flex-row-reverse",
+    "group relative flex flex-col gap-8 max-xl:max-w-180 xl:grid xl:grid-cols-2 xl:items-center xl:gap-16",
     className,
   ]}
   aria-labelledby={titleId}
   aria-describedby={summaryId}
 >
   <!-- Visuals -->
-  <div class="perspective-1000 w-full flex-1">
+  <div
+    class="w-full xl:group-odd/project-item:col-start-2 xl:group-odd/project-item:row-start-1"
+  >
     <div
-      class="relative aspect-4/3 overflow-hidden rounded-2xl border border-white/10 bg-muted shadow-2xl transition-shadow duration-400 ease-out outline-none group-focus-within:ring-4 group-focus-within:ring-primary"
+      class="relative aspect-video overflow-hidden rounded-3xl border border-white/10 bg-muted/40 shadow-2xl outline-none group-focus-within:ring-4 group-focus-within:ring-primary"
     >
       {#if project.previews.length > 0}
         <img
-          class="h-full w-full object-cover transition-transform duration-700 ease-out group-focus-within:scale-110 group-hover:scale-110"
+          class="absolute inset-0 h-full w-full scale-110 object-cover opacity-35 blur-2xl"
+          src={project.previews[0].url}
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="absolute inset-0 bg-background/35"></div>
+        <img
+          class="relative h-full w-full object-contain transition-transform duration-500 ease-out group-focus-within:scale-[1.02] group-hover:scale-[1.02]"
           src={project.previews[0].url}
           width={project.previews[0].width}
           height={project.previews[0].height}
@@ -66,11 +75,24 @@
           alt={t("a11y_project_preview", { title })}
         />
       {:else}
-        <div class="grid h-full w-full place-items-center bg-muted/50">
-          <Icon
-            class="size-24 text-muted-foreground/20"
-            icon="fa6-solid:code"
-          />
+        <div
+          class="relative grid h-full w-full place-items-center overflow-hidden bg-linear-to-br from-primary/12 via-muted/40 to-secondary/10"
+        >
+          <div
+            class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-size-[32px_32px]"
+          ></div>
+          <div class="relative flex flex-col items-center gap-4">
+            <div
+              class="grid size-14 place-items-center rounded-2xl border border-primary/20 bg-background/65 text-primary shadow-glow"
+            >
+              <Icon class="size-6" icon="fa6-solid:code" />
+            </div>
+            <span
+              class="font-mono text-sm font-bold tracking-widest text-muted-foreground uppercase"
+            >
+              {project.slug}
+            </span>
+          </div>
         </div>
       {/if}
       <div
@@ -78,7 +100,9 @@
       ></div>
     </div>
   </div>
-  <div class="flex flex-1 flex-col gap-6">
+  <div
+    class="flex min-w-0 flex-col gap-6 xl:group-odd/project-item:col-start-1 xl:group-odd/project-item:row-start-1"
+  >
     <div class="flex flex-col gap-2">
       <div class="font-mono font-bold tracking-widest text-primary uppercase">
         {project.year}/{project.category}
@@ -114,7 +138,7 @@
       >
         {t("project_card_result_label")}
       </div>
-      <p class="mt-2 max-w-prose text-base leading-relaxed text-foreground/90">
+      <p class="mt-2 max-w-prose leading-relaxed text-foreground/90">
         {project.outcome}
       </p>
     </div>
@@ -126,14 +150,12 @@
       {project.summary}
     </p>
 
-    <ul class="mt-2 flex flex-wrap gap-3">
+    <ul class="mt-1 flex flex-wrap gap-2">
       {#each project.tags as tag (tag)}
-        {@const { color, icon } = TAG_META[tag] ?? TAG_META["fallback"]}
         <li
-          class="inline-flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 font-mono font-bold tracking-wide text-muted-foreground"
+          class="rounded-lg border border-white/10 bg-white/4 px-2.5 py-1 font-mono text-xs font-semibold tracking-wide text-muted-foreground"
           title={tag}
         >
-          <Icon class="size-5" style="color: {color}" {icon} />
           {tag}
         </li>
       {/each}

@@ -38,7 +38,7 @@
 </script>
 
 <div class={["flex flex-col items-center", className]}>
-  <ul class="flex flex-col gap-24 md:gap-32">
+  <ul class="flex flex-col gap-24">
     {#each displayedProjects as project (project.title)}
       <Reveal
         tag="li"
@@ -52,7 +52,7 @@
   {#if visibleCount < projects.length}
     <button
       type="button"
-      class="mt-24 rounded-full bg-secondary px-8 py-3 font-mono text-lg font-bold text-background shadow-[0_0_20px_-5px_var(--color-secondary)] transition-all ease-snappy hover:scale-102 hover:bg-secondary/90 active:scale-98 md:mt-32"
+      class="mt-24 rounded-xl bg-secondary px-8 py-3 font-mono text-lg font-bold text-background shadow-[0_0_20px_-5px_var(--color-secondary)] transition-colors hover:bg-secondary/85"
       onclick={showMore}
     >
       {t("projects_show_more")}

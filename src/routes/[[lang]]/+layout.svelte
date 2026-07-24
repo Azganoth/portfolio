@@ -2,7 +2,6 @@
   import { dev } from "$app/environment";
   import { page } from "$app/state";
   import { CONTACT_INFO } from "$lib/features/contact/data";
-  import LanguageSelector from "$lib/features/i18n/components/LanguageSelector.svelte";
   import {
     t,
     translationStore,
@@ -178,5 +177,4 @@
 </svelte:head>
 
 <StarfieldBackground />
-<LanguageSelector />
 {@render children()}

@@ -9,9 +9,6 @@
   import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
   import Icon from "@iconify/svelte";
 
-  const cardClass =
-    "relative flex flex-col overflow-hidden rounded-3xl bg-muted/20 p-6 shadow-sm ring-1 ring-white/10 backdrop-blur-md";
-
   const footerSections = $derived([
     {
       label: t("bio_stat_education_label"),
@@ -70,101 +67,77 @@
 {/snippet}
 
 <Section id={ID_BIO_SECTION}>
-  <div
-    class="mx-auto grid max-w-5xl grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-[auto_auto]"
+  <Reveal
+    class="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-muted/70 shadow-elevation backdrop-blur-md duration-700 ease-out-expo not-in-view:translate-y-8 not-in-view:opacity-0"
   >
-    <!-- Profile Card -->
-    <Reveal
-      class={[
-        cardClass,
-        "duration-700 ease-out-expo not-in-view:-translate-x-4 not-in-view:opacity-0",
-        "min-h-90 p-0!",
-      ]}
-    >
-      <div
-        class="absolute inset-0 z-0 after:absolute after:inset-0 after:bg-linear-to-t after:from-background/90 after:via-background/20 after:to-transparent"
-      >
+    <div class="grid md:grid-cols-[minmax(16rem,0.85fr)_minmax(0,1.65fr)]">
+      <div class="relative min-h-72 overflow-hidden md:min-h-140">
         <enhanced:img
-          class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+          class="absolute inset-0 h-full w-full object-cover object-center"
           src={profileImage}
           alt={t("a11y_avatar_alt")}
         />
-      </div>
-      <div class="relative z-10 mt-auto flex flex-col p-6">
         <div
-          class="flex w-fit items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-medium text-green-400 backdrop-blur-sm"
+          class="absolute inset-0 bg-linear-to-t from-background/85 via-transparent to-transparent md:bg-linear-to-r md:from-transparent md:via-transparent md:to-background/25"
+        ></div>
+        <div
+          class="absolute bottom-5 left-5 flex w-fit items-center gap-2 rounded-full border border-green-500/30 bg-background/75 px-3 py-1.5 text-sm font-medium text-green-400 backdrop-blur-md"
         >
-          <span class="relative flex h-2 w-2">
-            <span
-              class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"
-            ></span>
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-green-500"
-            ></span>
-          </span>
+          <span class="size-2 rounded-full bg-green-400"></span>
           {t("contact_status_available")}
         </div>
       </div>
-    </Reveal>
 
-    <!-- Intro Card -->
-    <Reveal
-      class={[
-        cardClass,
-        "duration-700 ease-out-expo not-in-view:translate-x-4 not-in-view:opacity-0",
-        "md:col-span-2",
-      ]}
-    >
-      <h2 class="mb-4 font-display text-2xl font-bold text-foreground">
-        {t("bio_title")}
-      </h2>
-      <div class="space-y-4 text-muted-foreground">
-        <p class="leading-relaxed">
-          <Translation key="bio_description_1" />
-        </p>
-        <p class="leading-relaxed">
-          <Translation key="bio_description_2" values={{ leafdown, nexus }} />
-        </p>
-        <p class="leading-relaxed">
-          <Translation
-            key="bio_description_3"
-            values={{ cropandquest, fixmyhalo, pixelicons }}
-          />
-        </p>
-      </div>
-    </Reveal>
-
-    <!-- Stats Bar -->
-    <Reveal
-      class={[
-        cardClass,
-        "delay-500 duration-700 ease-out-expo not-in-view:translate-y-4 not-in-view:opacity-0",
-        "md:col-span-3",
-      ]}
-    >
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {#each footerSections as { label, value, icon, accent } (value)}
-          <div class="flex items-center gap-4">
-            <div
-              class={[
-                "flex size-10 items-center justify-center rounded-full bg-current/10",
-                accent,
-              ]}
-            >
-              <Icon {icon} class="size-6" />
-            </div>
-            <div>
-              <p
-                class="text-xs font-semibold tracking-wider text-muted-foreground uppercase"
-              >
-                {label}
-              </p>
-              <p class="font-semibold text-foreground">
-                {value}
-              </p>
-            </div>
+      <div class="flex min-w-0 flex-col">
+        <div class="p-6 md:p-10 lg:p-12">
+          <h2
+            class="mb-4 font-mono font-bold tracking-widest text-primary uppercase"
+          >
+            {t("bio_title")}
+          </h2>
+          <div
+            class="max-w-3xl space-y-4 leading-relaxed text-muted-foreground md:text-lg"
+          >
+            <p>
+              <Translation key="bio_description_1" />
+            </p>
+            <p>
+              <Translation
+                key="bio_description_2"
+                values={{ leafdown, nexus }}
+              />
+            </p>
+            <p>
+              <Translation
+                key="bio_description_3"
+                values={{ cropandquest, fixmyhalo, pixelicons }}
+              />
+            </p>
           </div>
-        {/each}
+        </div>
+
+        <div
+          class="mt-auto grid border-t border-white/8 sm:grid-cols-3 sm:divide-x sm:divide-white/8"
+        >
+          {#each footerSections as { label, value, icon, accent } (value)}
+            <div
+              class="flex items-start gap-3 border-b border-white/8 px-5 py-5 last:border-b-0 sm:border-b-0"
+            >
+              <Icon {icon} class={["mt-0.5 size-4 shrink-0", accent]} />
+              <div class="min-w-0">
+                <p
+                  class="text-sm font-semibold tracking-wider text-muted-foreground uppercase"
+                >
+                  {label}
+                </p>
+                <p class="mt-1 text-sm font-semibold text-foreground">
+                  {value}
+                </p>
+              </div>
+            </div>
+          {/each}
+        </div>
       </div>
-    </Reveal>
-  </div>
+    </div>
+  </Reveal>
 </Section>

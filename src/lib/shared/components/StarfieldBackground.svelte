@@ -5,7 +5,7 @@
   let canvas: HTMLCanvasElement;
 
   // Configuration
-  const STAR_COUNT = 800;
+  const STAR_COUNT = 640;
   const PARALLAX_STRENGTH = 0.01;
   const VIRTUAL_WIDTH = 4000; // Cover 4k
   const COLOR_WHITE = "white";
@@ -74,6 +74,11 @@
       if (!ctx) return;
 
       const scrollY = window.scrollY;
+      const backgroundOpacity = Math.max(
+        0.22,
+        1 - (scrollY / Math.max(h * 1.1, 1)) * 0.78,
+      );
+      canvas.style.opacity = `${backgroundOpacity}`;
 
       const cx = w / 2;
       const cy = h / 2;

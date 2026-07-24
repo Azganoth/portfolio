@@ -55,11 +55,11 @@
     `${localizePathname(rawCurrentPath, locale)}${currentQuery}${currentHash}`;
 </script>
 
-<div class="fixed right-8 bottom-10 z-10">
+<div class="relative">
   <button
     bind:this={toggler}
     type="button"
-    class="block transition-all ease-snappy hover:scale-110 hover:text-primary active:scale-95"
+    class="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-muted-foreground transition-colors hover:border-white/20 hover:bg-white/10 hover:text-foreground"
     onclick={() => {
       open = !open;
     }}
@@ -72,7 +72,7 @@
   </button>
   <div
     id="language-list"
-    class="absolute right-12 bottom-0 z-1 flex origin-bottom-right flex-col gap-3 rounded-2xl bg-muted p-6 shadow-elevation ease-snappy inert:invisible inert:scale-95 inert:opacity-0 motion-safe:transition-all"
+    class="absolute top-12 right-0 z-1 flex min-w-40 origin-top-right flex-col rounded-xl border border-white/10 bg-background/95 p-2 shadow-elevation backdrop-blur-xl ease-snappy inert:invisible inert:scale-95 inert:opacity-0 motion-safe:transition-all"
     role="menu"
     inert={!open}
     onclickaway={() => {
@@ -84,8 +84,10 @@
       {@const href = getLanguageHref(value)}
       <Link
         class={[
-          "text-center",
-          value === currentLang ? "text-primary" : "hover:text-secondary",
+          "rounded-lg px-3 py-2 text-sm",
+          value === currentLang
+            ? "bg-primary/10 text-primary"
+            : "text-muted-foreground hover:text-foreground",
         ]}
         {href}
         variant="none"

@@ -1,6 +1,6 @@
 @layer components {
   .markdown {
-    @apply font-body text-md leading-relaxed text-foreground;
+    @apply font-body text-base leading-7 text-foreground;
 
     h1,
     h2,
@@ -8,21 +8,21 @@
     h4,
     h5,
     h6 {
-      @apply mt-6 mb-4 font-display font-medium tracking-wide;
+      @apply mt-10 mb-4 font-display font-semibold tracking-tight text-foreground;
     }
 
     h1 {
-      @apply text-2xl;
+      @apply text-3xl;
     }
     h2 {
-      @apply text-xl;
+      @apply text-2xl;
     }
     h3 {
-      @apply text-lg;
+      @apply text-xl;
     }
 
     p {
-      @apply mb-4 text-foreground/80;
+      @apply mb-5 text-foreground/80;
     }
 
     a {
@@ -50,7 +50,7 @@
     }
 
     pre {
-      @apply mb-4 overflow-x-auto rounded-xl bg-muted p-4;
+      @apply my-8 overflow-x-auto rounded-2xl border border-white/10 bg-muted/50 p-5 shadow-inner;
     }
 
     pre code {
@@ -58,15 +58,19 @@
     }
 
     blockquote {
-      @apply my-4 border-l-4 border-primary pl-4 text-muted-foreground italic;
+      @apply my-6 rounded-r-xl border-l-2 border-primary bg-primary/5 py-3 pr-4 pl-5 text-muted-foreground;
     }
 
     img {
-      @apply h-auto max-w-full rounded-xl;
+      @apply my-8 h-auto max-w-full rounded-2xl border border-white/10;
+    }
+
+    img[src*="/images/diagrams/"] {
+      @apply w-full bg-[#121019] p-3 md:p-5;
     }
 
     hr {
-      @apply my-6 border-muted;
+      @apply my-10 border-white/10;
     }
 
     table {

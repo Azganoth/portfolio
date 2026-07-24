@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import LanguageSelector from "$lib/features/i18n/components/LanguageSelector.svelte";
   import { t } from "$lib/features/i18n/translation.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import Logo from "$lib/shared/components/Logo.svelte";
@@ -53,92 +54,104 @@
   const cvHref = $derived(t("_cv_href"));
 </script>
 
-<header>
-  <!-- Navigation Bar -->
-  <div class="fixed inset-x-0 top-4 z-50 flex justify-center">
-    <!-- Desktop Bar -->
-    <div
-      class="flex items-center gap-4 rounded-full border border-white/10 bg-muted/80 p-2 px-6 shadow-elevation backdrop-blur-md max-md:hidden"
-    >
-      <nav aria-label={t("a11y_desktop_navigation")}>
-        <ul class="flex items-center gap-6">
+<header
+  class="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-background/80 backdrop-blur-xl"
+>
+  <div
+    class="mx-auto flex h-18 max-w-360 items-center justify-between px-6 md:px-12 xl:px-16"
+  >
+    <div class="shrink-0">
+      {@render homeLink()}
+    </div>
+
+    <nav class="max-md:hidden" aria-label={t("a11y_desktop_navigation")}>
+      <ul class="flex items-center gap-7">
+        {#each links as { label, link, description } (link)}
           <li>
-            {@render homeLink()}
+            <Link
+              class="font-display text-sm tracking-wide text-muted-foreground hover:text-foreground"
+              variant="none"
+              href={link}
+              aria-label={description}
+            >
+              {label}
+            </Link>
           </li>
-          {#each links as { label, link, description } (link)}
-            <li>
-              <Link
-                class="font-display tracking-wide hover:text-primary"
-                variant="none"
-                href={link}
-                aria-label={description}
-              >
-                {label}
-              </Link>
-            </li>
-          {/each}
-        </ul>
-      </nav>
-      <div class="h-6 w-px bg-white/10"></div>
+        {/each}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <LanguageSelector />
       <Link
-        class="-mr-3.5 flex items-center gap-2 rounded-full border border-secondary/20 bg-secondary/10 px-3 py-1 font-mono font-bold tracking-wide text-secondary transition-all ease-snappy hover:scale-105 hover:border-secondary/40 hover:bg-secondary/20 active:scale-95"
+        class="flex h-10 items-center gap-2 rounded-xl bg-primary px-4 font-mono text-sm font-bold tracking-wide text-background shadow-glow transition-colors hover:bg-primary/85 max-md:hidden"
         variant="none"
         href={cvHref}
         newTab
         aria-label={t("a11y_download_cv")}
       >
         <span>{t("start_curriculum")}</span>
-        <Icon icon="fa6-solid:arrow-up-right-from-square" />
+        <Icon icon="fa6-solid:arrow-up-right-from-square" class="size-3.5" />
       </Link>
-    </div>
 
-    <!-- Mobile Bar -->
-    <div
-      class="flex items-center gap-4 rounded-full bg-background/80 p-2.5 px-20 backdrop-blur-md md:hidden"
-    >
-      {@render homeLink()}
       <button
         type="button"
-        class="fixed right-4 block transition-colors hover:text-primary"
+        class="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/5 transition-colors hover:border-white/20 hover:bg-white/10 hover:text-primary md:hidden"
         popovertarget="mobile-menu"
         aria-label={t("a11y_open_nav_menu")}
         aria-controls="mobile-menu"
       >
-        <Icon icon="fa7-solid:bars" class="size-8" />
+        <Icon icon="fa7-solid:bars" class="size-5" />
       </button>
 
-      <!-- Mobile Menu -->
       <div
         bind:this={mobilePopover}
         id="mobile-menu"
-        class="w-full bg-muted p-8 pt-8 transition-all transition-discrete not-open:-translate-y-16 not-open:opacity-0 starting:-translate-y-16 starting:opacity-0"
+        class="inset-0 h-dvh w-dvw max-w-none border-0 bg-background/98 p-6 transition-all transition-discrete not-open:-translate-y-8 not-open:opacity-0 starting:-translate-y-8 starting:opacity-0"
         popover
       >
-        <div class="flex flex-col items-center gap-6">
-          {@render homeLink()}
+        <div class="mx-auto flex h-full max-w-lg flex-col">
+          <div class="flex h-14 items-center justify-between">
+            {@render homeLink()}
+            <button
+              type="button"
+              class="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/5 transition-colors hover:border-white/20 hover:text-primary"
+              onclick={() => mobilePopover?.hidePopover()}
+              aria-label={t("a11y_close_nav_menu")}
+            >
+              <Icon icon="fa6-solid:xmark" class="size-5" />
+            </button>
+          </div>
+
           <nav aria-label={t("a11y_mobile_navigation")}>
-            <ul class="flex flex-col gap-6">
+            <ul class="mt-16 flex flex-col">
               {#each links as { label, link, description } (link)}
-                <li>
+                <li class="border-b border-white/8">
                   <Link
-                    class="block text-center font-display text-lg tracking-wide"
+                    class="flex items-center justify-between py-5 font-display text-2xl tracking-tight hover:text-primary"
                     href={link}
                     aria-label={description}
+                    variant="none"
+                    onclick={() => mobilePopover?.hidePopover()}
                   >
                     {label}
+                    <Icon
+                      icon="fa6-solid:arrow-right"
+                      class="size-4 text-muted-foreground"
+                    />
                   </Link>
                 </li>
               {/each}
             </ul>
           </nav>
 
-          <div class="h-px w-full bg-white/10"></div>
-
           <Link
-            class="flex items-center justify-center gap-2 font-mono text-lg font-bold text-primary"
+            class="mt-auto flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 font-mono font-bold text-background shadow-glow"
+            variant="none"
             href={cvHref}
             newTab
             aria-label={t("a11y_download_cv")}
+            onclick={() => mobilePopover?.hidePopover()}
           >
             <span>{t("start_curriculum")}</span>
             <Icon icon="fa6-solid:arrow-up-right-from-square" />
