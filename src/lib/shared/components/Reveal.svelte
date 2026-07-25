@@ -17,6 +17,15 @@
        * @default false
        */
       override?: boolean;
+      /**
+       * Render already revealed, without observing the viewport.
+       *
+       * Above-the-fold content is always intersecting, so observing it only
+       * delays its first paint until hydration runs. Use this for content that
+       * must paint immediately, such as the LCP element.
+       * @default false
+       */
+      immediate?: boolean;
     };
 
   let {
@@ -27,6 +36,7 @@
     once = true,
     tag = "div" as Tag,
     override = false,
+    immediate = false,
     class: className,
     ...restProps
   }: Props = $props();
@@ -37,10 +47,13 @@
   class={[
     !override &&
       "transition-all motion-reduce:transform-none motion-reduce:transition-none",
+    immediate && "is-visible",
     className,
   ]}
   {...restProps}
-  {@attach inView({ root, rootMargin, threshold, once })}
+  {@attach immediate
+    ? () => {}
+    : inView({ root, rootMargin, threshold, once })}
 >
   {@render children?.()}
 </svelte:element>

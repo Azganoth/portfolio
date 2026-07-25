@@ -33,6 +33,7 @@
   ></div>
   <div class="relative w-full max-w-5xl">
     <Reveal
+      immediate
       class="delay-75 duration-400 ease-out-expo not-in-view:-translate-y-4 not-in-view:opacity-0"
     >
       <p
@@ -41,12 +42,13 @@
         {t("start_role")}
       </p>
       <h1
-        class="max-w-4xl text-center font-display text-5xl font-semibold tracking-tight text-balance md:text-start md:text-7xl"
+        class="max-w-4xl text-center font-display text-5xl font-semibold tracking-tight text-balance md:text-start md:text-6xl"
       >
         <Translation key="start_hello" values={{ name }} />
       </h1>
     </Reveal>
     <Reveal
+      immediate
       class="delay-200 duration-400 not-in-view:translate-y-4 not-in-view:opacity-0"
     >
       <p
@@ -56,6 +58,7 @@
       </p>
     </Reveal>
     <Reveal
+      immediate
       class="delay-500 duration-400 ease-out-expo not-in-view:translate-y-4 not-in-view:opacity-0"
     >
       <div class="mt-9 flex flex-wrap justify-center gap-3 md:justify-start">
