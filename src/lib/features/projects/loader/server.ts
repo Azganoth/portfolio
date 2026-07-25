@@ -3,6 +3,7 @@ import {
   type Project,
   type ProjectPreview,
   projectSchema,
+  type ProjectSummary,
 } from "$lib/features/projects/schema";
 import {
   PREVIEW_SIZE,
@@ -15,15 +16,18 @@ import { marked } from "marked";
 import fs from "node:fs/promises";
 import path from "node:path";
 
+const PROJECTS_DIR = path.join(process.cwd(), "src/lib/features/projects/data");
+const PREVIEWS_DIR = path.join(process.cwd(), "static/images/preview");
+
 export const getProjects = async () =>
   Object.fromEntries(
     await Promise.all(
       SUPPORTED_LOCALES.map(
         async (locale) =>
-          [locale, await getAllProjects(locale)] as [Locale, Project[]],
+          [locale, await getAllProjects(locale)] as [Locale, ProjectSummary[]],
       ),
     ),
-  ) as Record<Locale, Project[]>;
+  ) as Record<Locale, ProjectSummary[]>;
 
 const composePreviews = (
   previewFilenames: string[],
@@ -45,16 +49,8 @@ const composePreviews = (
       height: PREVIEW_SIZE.height,
     }));
 
-const getProject = async (
-  locale: string,
-  slug: string,
-  previews: ProjectPreview[],
-): Promise<Project | null> => {
-  const projectsDir = path.join(
-    process.cwd(),
-    "src/lib/features/projects/data",
-  );
-  const fullPath = path.join(projectsDir, locale, `${slug}.md`);
+const readProjectFile = async (locale: string, slug: string) => {
+  const fullPath = path.join(PROJECTS_DIR, locale, `${slug}.md`);
 
   try {
     await fs.access(fullPath, fs.constants.F_OK);
@@ -62,36 +58,51 @@ const getProject = async (
     return null;
   }
 
-  const fileContents = await fs.readFile(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
-  const frontmatter = await projectSchema.parseAsync(data);
-  const description = await marked.parse(content);
+  return matter(await fs.readFile(fullPath, "utf8"));
+};
+
+const getProjectSummary = async (
+  locale: string,
+  slug: string,
+  previews: ProjectPreview[],
+): Promise<ProjectSummary | null> => {
+  const file = await readProjectFile(locale, slug);
+  if (!file) return null;
 
   return {
     slug,
-    ...frontmatter,
-    description,
+    ...(await projectSchema.parseAsync(file.data)),
     previews,
   };
 };
 
-const getAllProjects = async (locale: string): Promise<Project[]> => {
-  const projectsDir = path.join(
-    process.cwd(),
-    "src/lib/features/projects/data",
-  );
-  const dirPath = path.join(projectsDir, locale);
-  const filenames = await fs.readdir(dirPath);
-  const previewFilenames = await fs.readdir(
-    path.join(process.cwd(), "static/images/preview"),
-  );
+export const getProject = async (
+  locale: string,
+  slug: string,
+): Promise<Project | null> => {
+  const file = await readProjectFile(locale, slug);
+  if (!file) return null;
 
-  const projects = await Promise.all<Project | null>(
+  const previewFilenames = await fs.readdir(PREVIEWS_DIR);
+
+  return {
+    slug,
+    ...(await projectSchema.parseAsync(file.data)),
+    previews: composePreviews(previewFilenames, slug),
+    description: await marked.parse(file.content),
+  };
+};
+
+const getAllProjects = async (locale: string): Promise<ProjectSummary[]> => {
+  const filenames = await fs.readdir(path.join(PROJECTS_DIR, locale));
+  const previewFilenames = await fs.readdir(PREVIEWS_DIR);
+
+  const projects = await Promise.all<ProjectSummary | null>(
     filenames
       .filter((filename) => filename.endsWith(".md"))
       .map(async (filename) => {
         const slug = filename.split(".")[0];
-        return getProject(
+        return getProjectSummary(
           locale,
           slug,
           composePreviews(previewFilenames, slug),
@@ -99,9 +110,9 @@ const getAllProjects = async (locale: string): Promise<Project[]> => {
       }),
   );
 
-  const validProjects = projects.filter((p): p is Project => p !== null);
+  const validProjects = projects.filter((p): p is ProjectSummary => p !== null);
 
-  // Sort projects by the 'order' field in the frontmatter
+  // Sort projects by the display order in the shared constants
   validProjects.sort(compareOrderBy(PROJECTS_ORDER, (p) => p.slug));
 
   return validProjects;

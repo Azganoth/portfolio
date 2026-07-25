@@ -1,6 +1,6 @@
 /// <reference types="unplugin-icons/types/svelte" />
 
-import type { Project } from "$lib/features/projects/schema";
+import type { Project, ProjectSummary } from "$lib/features/projects/schema";
 import type { Locale } from "$lib/shared/constants";
 import type { ClickawayEventDetail } from "@utils/clickaway.svelte";
 import "svelte/elements";
@@ -10,7 +10,7 @@ declare global {
     // interface Error {}
     // interface Locals {}
     interface PageData {
-      projects?: Record<Locale, Project[]>;
+      projects?: Record<Locale, ProjectSummary[]>;
     }
     interface PageState {
       selectedProject?: Project;

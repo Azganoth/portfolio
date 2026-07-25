@@ -1,14 +1,14 @@
 <script lang="ts">
   import { t } from "$lib/features/i18n/translation.svelte";
   import ProjectThumb from "$lib/features/projects/components/ProjectThumb.svelte";
-  import type { Project } from "$lib/features/projects/schema";
+  import type { ProjectSummary } from "$lib/features/projects/schema";
   import { projectStore } from "$lib/features/projects/store.svelte";
   import Reveal from "$lib/shared/components/Reveal.svelte";
   import type { ClassValue } from "svelte/elements";
 
   interface Props {
     class?: ClassValue;
-    projects: Project[];
+    projects: ProjectSummary[];
   }
 
   let { class: className, projects }: Props = $props();

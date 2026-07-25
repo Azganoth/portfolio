@@ -11,10 +11,13 @@ export const projectSchema = z.object({
   tags: z.array(z.string()),
 });
 
-export type Project = z.infer<typeof projectSchema> & {
+export type ProjectSummary = z.infer<typeof projectSchema> & {
   slug: string;
-  description: string;
   previews: ProjectPreview[];
+};
+
+export type Project = ProjectSummary & {
+  description: string;
 };
 
 export interface ProjectPreview {
