@@ -5,7 +5,13 @@
     type PreviewsLightbox,
   } from "$lib/features/projects/store.svelte";
   import { ID_IMAGE_GALLERY } from "$lib/shared/constants";
-  import Icon from "@iconify/svelte";
+  import {
+    IconChevronLeft,
+    IconChevronRight,
+    IconClose,
+    IconDot,
+    IconDotFill,
+  } from "$lib/shared/icons";
 
   let open = $derived(!!projectStore.lightbox);
   let dialog = $state<HTMLDialogElement>();
@@ -113,7 +119,7 @@
       onclick={handleClose}
       aria-label={t("a11y_close_image_gallery")}
     >
-      <Icon class="size-10 drop-shadow-contrast" icon="fa6-solid:xmark" />
+      <IconClose class="size-10 drop-shadow-contrast" />
     </button>
 
     {#if lastLightbox}
@@ -157,10 +163,11 @@
           onclick={projectStore.prevImage}
           aria-label={t("a11y_previous_image")}
         >
-          <Icon class="size-12" icon="fa6-solid:chevron-left" />
+          <IconChevronLeft class="size-12" />
         </button>
         <div class="flex">
           {#each { length: lastLightbox.previews.length }, i}
+            {@const DotIcon = i === lastLightbox.index ? IconDotFill : IconDot}
             <button
               class="block transition-all ease-snappy hover:scale-110 hover:text-primary active:scale-95"
               type="button"
@@ -169,12 +176,7 @@
               aria-label={t("a11y_jump_to_image", { name: String(i + 1) })}
               aria-controls={`slide-${i}`}
             >
-              <Icon
-                class="size-10"
-                icon={i === lastLightbox.index
-                  ? "octicon:dot-fill-16"
-                  : "octicon:dot-16"}
-              />
+              <DotIcon class="size-10" />
             </button>
           {/each}
         </div>
@@ -183,7 +185,7 @@
           onclick={projectStore.nextImage}
           aria-label={t("a11y_next_image")}
         >
-          <Icon class="size-12" icon="fa6-solid:chevron-right" />
+          <IconChevronRight class="size-12" />
         </button>
       </div>
     {/if}

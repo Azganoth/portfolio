@@ -6,9 +6,9 @@
   import { clickaway } from "$lib/shared/attachments/clickaway.svelte";
   import Link from "$lib/shared/components/Link.svelte";
   import { DEFAULT_LOCALE } from "$lib/shared/constants";
+  import { IconLanguage } from "$lib/shared/icons";
   import { localizePathname } from "$lib/shared/utils";
   import { getCurrentUnlocalizedPath } from "$lib/shared/utils/currentPath.svelte";
-  import Icon from "@iconify/svelte";
 
   let languages: [label: string, value: Locale][] = [
     ["Português", "pt"],
@@ -68,7 +68,7 @@
     aria-expanded={open}
     aria-controls="language-list"
   >
-    <Icon class="size-6" icon="fa7-solid:language" />
+    <IconLanguage class="size-6" />
   </button>
   <div
     id="language-list"

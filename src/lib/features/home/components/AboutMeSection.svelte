@@ -6,26 +6,26 @@
   import Section from "$lib/shared/components/Section.svelte";
   import { ID_BIO_SECTION } from "$lib/shared/constants";
   import profileImage from "$lib/shared/images/profile.webp?enhanced";
+  import { IconGlobe, IconGraduationCap, IconMapPin } from "$lib/shared/icons";
   import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
-  import Icon from "@iconify/svelte";
 
   const footerSections = $derived([
     {
       label: t("bio_stat_education_label"),
       value: t("bio_stat_education_value"),
-      icon: "lucide:graduation-cap",
+      icon: IconGraduationCap,
       accent: "text-primary",
     },
     {
       label: t("bio_stat_languages_label"),
       value: t("bio_stat_languages_value"),
-      icon: "lucide:globe",
+      icon: IconGlobe,
       accent: "text-secondary",
     },
     {
       label: t("bio_stat_location_label"),
       value: t("bio_stat_location_value"),
-      icon: "lucide:map-pin",
+      icon: IconMapPin,
       accent: "text-accent",
     },
   ]);
@@ -119,11 +119,11 @@
         <div
           class="mt-auto grid border-t border-white/8 sm:grid-cols-3 sm:divide-x sm:divide-white/8"
         >
-          {#each footerSections as { label, value, icon, accent } (value)}
+          {#each footerSections as { label, value, icon: StatIcon, accent } (value)}
             <div
               class="flex items-start gap-3 border-b border-white/8 px-5 py-5 last:border-b-0 sm:border-b-0"
             >
-              <Icon {icon} class={["mt-0.5 size-4 shrink-0", accent]} />
+              <StatIcon class={["mt-0.5 size-4 shrink-0", accent]} />
               <div class="min-w-0">
                 <p
                   class="text-sm font-semibold tracking-wider text-muted-foreground uppercase"

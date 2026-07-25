@@ -11,8 +11,13 @@
     ID_PROJECTS_SECTION,
     ID_SKILLS_SECTION,
   } from "$lib/shared/constants";
+  import {
+    IconArrowRight,
+    IconClose,
+    IconExternalLink,
+    IconMenu,
+  } from "$lib/shared/icons";
   import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
-  import Icon from "@iconify/svelte";
 
   interface JumpLink {
     label: string;
@@ -91,7 +96,7 @@
         aria-label={t("a11y_download_cv")}
       >
         <span>{t("start_curriculum")}</span>
-        <Icon icon="fa6-solid:arrow-up-right-from-square" class="size-3.5" />
+        <IconExternalLink class="size-3.5" />
       </Link>
 
       <button
@@ -101,7 +106,7 @@
         aria-label={t("a11y_open_nav_menu")}
         aria-controls="mobile-menu"
       >
-        <Icon icon="fa7-solid:bars" class="size-5" />
+        <IconMenu class="size-5" />
       </button>
 
       <div
@@ -119,7 +124,7 @@
               onclick={() => mobilePopover?.hidePopover()}
               aria-label={t("a11y_close_nav_menu")}
             >
-              <Icon icon="fa6-solid:xmark" class="size-5" />
+              <IconClose class="size-5" />
             </button>
           </div>
 
@@ -135,10 +140,7 @@
                     onclick={() => mobilePopover?.hidePopover()}
                   >
                     {label}
-                    <Icon
-                      icon="fa6-solid:arrow-right"
-                      class="size-4 text-muted-foreground"
-                    />
+                    <IconArrowRight class="size-4 text-muted-foreground" />
                   </Link>
                 </li>
               {/each}
@@ -154,7 +156,7 @@
             onclick={() => mobilePopover?.hidePopover()}
           >
             <span>{t("start_curriculum")}</span>
-            <Icon icon="fa6-solid:arrow-up-right-from-square" />
+            <IconExternalLink />
           </Link>
         </div>
       </div>

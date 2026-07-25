@@ -1,10 +1,13 @@
 <script lang="ts">
   import { t } from "$lib/features/i18n/translation.svelte";
-  import { ADDITIONAL_SKILLS, SKILL_GROUPS } from "$lib/features/skills/data";
+  import {
+    ADDITIONAL_SKILLS,
+    SKILL_GROUPS,
+    TAG_META,
+  } from "$lib/features/skills/data";
   import Reveal from "$lib/shared/components/Reveal.svelte";
   import Section from "$lib/shared/components/Section.svelte";
-  import { ID_SKILLS_SECTION, TAG_META } from "$lib/shared/constants";
-  import Icon from "@iconify/svelte";
+  import { ID_SKILLS_SECTION } from "$lib/shared/constants";
 
   const skillGroups = $derived(
     SKILL_GROUPS.map((group) => ({
@@ -22,7 +25,7 @@
     {t("skills_description")}
   </p>
   <div class="grid gap-4 lg:grid-cols-3">
-    {#each skillGroups as { title, description, icon, skills }, groupIndex (title)}
+    {#each skillGroups as { title, description, icon: GroupIcon, skills }, groupIndex (title)}
       <Reveal
         class="rounded-3xl border border-white/10 bg-muted/15 p-6 delay-(--delay) duration-500 ease-out-expo not-in-view:translate-y-6 not-in-view:opacity-0 md:p-8"
         style={`--delay: ${groupIndex * 100}ms`}
@@ -30,7 +33,7 @@
         <div
           class="mb-6 grid size-11 place-items-center rounded-xl border border-primary/20 bg-primary/10 text-primary"
         >
-          <Icon {icon} class="size-5" />
+          <GroupIcon class="size-5" />
         </div>
         <div class="mb-7">
           <h3 class="font-display text-xl font-semibold tracking-tight">
@@ -42,9 +45,13 @@
         </div>
         <ul class="grid grid-cols-2 gap-x-5 gap-y-3">
           {#each skills as skill (skill)}
-            {@const { icon, color } = TAG_META[skill] ?? TAG_META["fallback"]}
+            {@const { icon: SkillIcon, color } =
+              TAG_META[skill] ?? TAG_META["fallback"]}
             <li class="flex min-w-0 items-center gap-2.5 text-sm">
-              <Icon class="size-4 shrink-0 opacity-80" {icon} {color} />
+              <SkillIcon
+                class="size-4 shrink-0 opacity-80"
+                style="color: {color}"
+              />
               <span
                 class="truncate font-mono font-semibold tracking-wide text-foreground/85"
               >

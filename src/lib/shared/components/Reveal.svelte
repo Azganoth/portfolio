@@ -51,9 +51,7 @@
     className,
   ]}
   {...restProps}
-  {@attach immediate
-    ? () => {}
-    : inView({ root, rootMargin, threshold, once })}
+  {@attach immediate ? () => {} : inView({ root, rootMargin, threshold, once })}
 >
   {@render children?.()}
 </svelte:element>

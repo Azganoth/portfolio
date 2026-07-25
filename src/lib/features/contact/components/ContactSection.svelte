@@ -4,7 +4,11 @@
   import Link from "$lib/shared/components/Link.svelte";
   import Section from "$lib/shared/components/Section.svelte";
   import { ID_CONTACT_SECTION } from "$lib/shared/constants";
-  import Icon from "@iconify/svelte";
+  import {
+    IconArrowRight,
+    IconExternalLink,
+    IconMapPin,
+  } from "$lib/shared/icons";
 
   const cvHref = $derived(t("_cv_href"));
   const otherContacts = $derived([
@@ -41,7 +45,7 @@
           {t("contact_status_available")}
         </span>
         <span class="flex items-center gap-2 text-muted-foreground">
-          <Icon icon="lucide:map-pin" class="size-4" />
+          <IconMapPin class="size-4" />
           {t("bio_stat_location_value")}
         </span>
       </div>
@@ -54,8 +58,7 @@
         href={CONTACT_INFO.Email}
       >
         <span>{t("contact_email_cta")}</span>
-        <Icon
-          icon="fa6-solid:arrow-right"
+        <IconArrowRight
           class="size-4 transition-transform group-hover:translate-x-1"
         />
       </Link>
@@ -66,8 +69,7 @@
         newTab
       >
         <span>{t("contact_connect")}</span>
-        <Icon
-          icon="fa6-solid:arrow-up-right-from-square"
+        <IconExternalLink
           class="size-4 transition-transform group-hover:translate-x-0.5"
         />
       </Link>

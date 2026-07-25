@@ -10,8 +10,14 @@
     ID_PROJECT_DETAILS,
     ID_PROJECT_TITLE,
   } from "$lib/shared/constants";
+  import {
+    IconClose,
+    IconCode,
+    IconExpand,
+    IconExternalLink,
+    IconGitHub,
+  } from "$lib/shared/icons";
   import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
-  import Icon from "@iconify/svelte";
   import { tick } from "svelte";
 
   let open = $derived(!!projectStore.selected);
@@ -102,7 +108,7 @@
       onclick={handleClose}
       aria-label={t("a11y_close_project_details")}
     >
-      <Icon class="size-5" icon="fa6-solid:xmark" />
+      <IconClose class="size-5" />
     </button>
 
     <div bind:this={scrollContainer} class="h-full overflow-y-auto">
@@ -141,10 +147,7 @@
                     variant="none"
                   >
                     {t("projects_visit")}
-                    <Icon
-                      icon="fa6-solid:arrow-up-right-from-square"
-                      class="size-3.5"
-                    />
+                    <IconExternalLink class="size-3.5" />
                   </Link>
                 {/if}
                 {#if lastProject.repository}
@@ -160,7 +163,7 @@
                     newTab
                     variant="none"
                   >
-                    <Icon icon="simple-icons:github" class="size-4" />
+                    <IconGitHub class="size-4" />
                     {t("projects_code")}
                   </Link>
                 {/if}
@@ -214,7 +217,7 @@
                     <span class="font-mono text-xs font-bold">
                       1/{previews.length}
                     </span>
-                    <Icon class="size-3.5" icon="fa6-solid:expand" />
+                    <IconExpand class="size-3.5" />
                   </div>
                 </button>
               {:else}
@@ -225,7 +228,7 @@
                     class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-size-[32px_32px]"
                   ></div>
                   <div class="relative flex flex-col items-center gap-4">
-                    <Icon class="size-10 text-primary" icon="fa6-solid:code" />
+                    <IconCode class="size-10 text-primary" />
                     <span
                       class="font-mono text-xs font-bold tracking-[0.2em] text-muted-foreground uppercase"
                     >

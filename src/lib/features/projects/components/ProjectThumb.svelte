@@ -6,8 +6,8 @@
   import { composeProjectLinkId } from "$lib/features/projects/utils";
   import Link from "$lib/shared/components/Link.svelte";
   import { ID_PROJECT_DETAILS } from "$lib/shared/constants";
+  import { IconCode, IconExternalLink } from "$lib/shared/icons";
   import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
-  import Icon from "@iconify/svelte";
   import type { ClassValue } from "svelte/elements";
 
   interface Props {
@@ -85,7 +85,7 @@
             <div
               class="grid size-14 place-items-center rounded-2xl border border-primary/20 bg-background/65 text-primary shadow-glow"
             >
-              <Icon class="size-6" icon="fa6-solid:code" />
+              <IconCode class="size-6" />
             </div>
             <span
               class="font-mono text-sm font-bold tracking-widest text-muted-foreground uppercase"
@@ -125,8 +125,7 @@
         >
           {project.title}
         </Link>
-        <Icon
-          icon="fa7-solid:arrow-up-right-from-square"
+        <IconExternalLink
           class="size-7 text-muted-foreground md:mt-1 md:size-8"
         />
       </h3>

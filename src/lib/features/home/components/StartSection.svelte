@@ -10,7 +10,7 @@
     ID_PROJECTS_SECTION,
     ID_START_SECTION,
   } from "$lib/shared/constants";
-  import Icon from "@iconify/svelte";
+  import { IconArrowDown, IconExternalLink } from "$lib/shared/icons";
 
   const cvHref = $derived(t("_cv_href"));
   const contactList = $derived(
@@ -68,7 +68,7 @@
           class="flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono font-bold tracking-wide text-background shadow-glow transition-colors hover:bg-primary/85"
         >
           <span>{t("start_projects_cta")}</span>
-          <Icon icon="fa6-solid:arrow-down" />
+          <IconArrowDown />
         </Link>
         <Link
           variant="none"
@@ -78,7 +78,7 @@
           class="flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-mono font-bold tracking-wide text-foreground transition-colors hover:border-white/30 hover:bg-white/10"
         >
           <span>{t("start_curriculum")}</span>
-          <Icon icon="fa6-solid:arrow-up-right-from-square" />
+          <IconExternalLink />
         </Link>
       </div>
       <ul
@@ -94,10 +94,7 @@
               newTab
             >
               <span>{label}</span>
-              <Icon
-                class="size-3"
-                icon="fa6-solid:arrow-up-right-from-square"
-              />
+              <IconExternalLink class="size-3" />
             </Link>
           </li>
         {/each}
@@ -110,6 +107,6 @@
     class="absolute bottom-8 left-6 hidden items-center gap-3 font-mono text-sm tracking-widest text-muted-foreground uppercase transition-colors hover:text-foreground md:left-12 md:flex xl:left-16"
   >
     <span>{t("start_scroll_label")}</span>
-    <Icon icon="fa6-solid:arrow-down" class="size-3" />
+    <IconArrowDown class="size-3" />
   </Link>
 </Section>
