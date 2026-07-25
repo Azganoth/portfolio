@@ -92,8 +92,10 @@
       { root: scroller, threshold: 0.6 },
     );
 
-    scrollerSlides.forEach((slide) => observer.observe(slide));
-    return () => scrollerSlides.forEach((slide) => observer.unobserve(slide));
+    scrollerSlides.forEach((slide) => {
+      if (slide) observer.observe(slide);
+    });
+    return () => observer.disconnect();
   });
 </script>
 
