@@ -1,5 +1,6 @@
 import { DEFAULT_LOCALE, SITE_URL } from "$lib/shared/constants";
 import {
+  getPathnameLocale,
   localizePathname,
   localizeUrl,
   normalizePathname,
@@ -41,6 +42,15 @@ describe("path utilities", () => {
     expect(localizePathname("/pt/projects/nexus", "en")).toBe(
       "/en/projects/nexus",
     );
+  });
+
+  it("resolves the locale from a pathname", () => {
+    expect(getPathnameLocale("/en/projects/nexus")).toBe("en");
+    expect(getPathnameLocale("/en")).toBe("en");
+    expect(getPathnameLocale("/pt/nonexistent")).toBe("pt");
+    expect(getPathnameLocale("/projects/nexus")).toBe(DEFAULT_LOCALE);
+    expect(getPathnameLocale("/fr/projects/nexus")).toBe(DEFAULT_LOCALE);
+    expect(getPathnameLocale("/")).toBe(DEFAULT_LOCALE);
   });
 
   it("builds absolute localized urls", () => {

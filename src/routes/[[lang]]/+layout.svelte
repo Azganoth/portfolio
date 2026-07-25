@@ -9,7 +9,6 @@
   } from "$lib/features/i18n/translation.svelte";
   import type { Project } from "$lib/features/projects/schema";
   import { projectStore } from "$lib/features/projects/store.svelte";
-  import StarfieldBackground from "$lib/shared/components/StarfieldBackground.svelte";
   import {
     DEFAULT_LOCALE,
     SITE_URL,
@@ -24,7 +23,6 @@
   import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
   import spaceGroteskWoff2 from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
   import { injectAnalytics } from "@vercel/analytics/sveltekit";
-  import "../../app.css";
 
   let { data, children } = $props();
 
@@ -97,7 +95,7 @@
           url: SITE_URL,
           image: new URL("/meta_image.png", SITE_URL).toString(),
           jobTitle: t("start_role"),
-          email: `mailto:${CONTACT_INFO.Email}`,
+          email: CONTACT_INFO.Email,
           sameAs: [CONTACT_INFO.GitHub, CONTACT_INFO.LinkedIn],
         },
         {
@@ -176,5 +174,4 @@
   {@html jsonLdScript}
 </svelte:head>
 
-<StarfieldBackground />
 {@render children()}

@@ -1,5 +1,6 @@
 import {
   DEFAULT_LOCALE,
+  isSupportedLocale,
   SITE_URL,
   SUPPORTED_LOCALES,
   type Locale,
@@ -28,6 +29,16 @@ export const stripSupportedLocaleFromPathname = (pathname: string) => {
   const normalized = normalizePathname(pathname);
   const stripped = normalized.replace(localePrefixPattern, "");
   return stripped ? normalizePathname(stripped) : "/";
+};
+
+/**
+ * Resolves the locale from a pathname's first segment, without relying on route
+ * params. Used where the `[[lang]]` route tree is unavailable, such as the root
+ * error page rendered for unmatched URLs.
+ */
+export const getPathnameLocale = (pathname: string): Locale => {
+  const segment = normalizePathname(pathname).split("/").at(1);
+  return isSupportedLocale(segment) ? segment : DEFAULT_LOCALE;
 };
 
 export const localizePathname = (pathname: string, locale: Locale) => {
