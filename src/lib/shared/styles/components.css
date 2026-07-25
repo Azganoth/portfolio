@@ -1,6 +1,6 @@
 @layer components {
   .markdown {
-    @apply font-body text-base leading-7 text-foreground;
+    @apply font-body text-md leading-7 text-foreground;
 
     h1,
     h2,

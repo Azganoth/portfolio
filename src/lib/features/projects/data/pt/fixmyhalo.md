@@ -2,7 +2,7 @@
 title: Fix My Halo
 category: Ferramenta
 year: 2026
-summary: Ferramenta web e CLI para Windows que remove artefatos de texturas com transparencia.
+summary: Ferramenta web e CLI para Windows que remove artefatos de texturas com transparência.
 outcome: Um único core testado em Rust disponibilizado como ferramenta em Wasm no navegador e CLI nativa com processamento paralelo, além da validação direta de um modder de RimWorld.
 repository: https://github.com/Azganoth/fix-my-halo
 website: https://fixmyhalo.vercel.app

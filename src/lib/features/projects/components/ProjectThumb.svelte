@@ -90,7 +90,7 @@
             <span
               class="font-mono text-sm font-bold tracking-widest text-muted-foreground uppercase"
             >
-              {project.slug}
+              {project.title}
             </span>
           </div>
         </div>

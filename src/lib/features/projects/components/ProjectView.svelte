@@ -229,7 +229,7 @@
                     <span
                       class="font-mono text-xs font-bold tracking-[0.2em] text-muted-foreground uppercase"
                     >
-                      {lastProject.slug}
+                      {lastProject.title}
                     </span>
                   </div>
                 </div>
