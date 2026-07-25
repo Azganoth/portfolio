@@ -14,8 +14,6 @@ export const PREVIEW_SIZE = {
   height: 540,
 };
 
-export const PROJECT_LINK_BASE = "#project-";
-
 // --- CONTENT ---
 
 export const PROJECTS_ORDER = [

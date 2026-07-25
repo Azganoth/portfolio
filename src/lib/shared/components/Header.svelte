@@ -8,6 +8,7 @@
   import {
     ID_BIO_SECTION,
     ID_CONTACT_SECTION,
+    ID_MOBILE_MENU,
     ID_PROJECTS_SECTION,
     ID_SKILLS_SECTION,
   } from "$lib/shared/constants";
@@ -102,16 +103,16 @@
       <button
         type="button"
         class="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/5 transition-colors hover:border-white/20 hover:bg-white/10 hover:text-primary md:hidden"
-        popovertarget="mobile-menu"
+        popovertarget={ID_MOBILE_MENU}
         aria-label={t("a11y_open_nav_menu")}
-        aria-controls="mobile-menu"
+        aria-controls={ID_MOBILE_MENU}
       >
         <IconMenu class="size-5" />
       </button>
 
       <div
         bind:this={mobilePopover}
-        id="mobile-menu"
+        id={ID_MOBILE_MENU}
         class="inset-0 h-dvh w-dvw max-w-none border-0 bg-background/98 p-6 transition-all transition-discrete not-open:-translate-y-8 not-open:opacity-0 starting:-translate-y-8 starting:opacity-0"
         popover
       >

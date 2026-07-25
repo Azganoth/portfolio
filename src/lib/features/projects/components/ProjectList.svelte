@@ -13,7 +13,7 @@
 
   let { class: className, projects }: Props = $props();
 
-  const INITIAL_COUNT = 7;
+  const INITIAL_COUNT = 8;
   const SHOW_MORE_COUNT = 3;
 
   let visibleCount = $state(INITIAL_COUNT);
