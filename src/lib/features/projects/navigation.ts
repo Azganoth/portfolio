@@ -1,6 +1,9 @@
 import { goto, preloadData, pushState } from "$app/navigation";
 import type { Project } from "$lib/features/projects/schema";
 
+/** DOM id of a project's link in the list, used to return focus to it. */
+export const composeProjectLinkId = (slug: string) => `project-link-${slug}`;
+
 /**
  * Opens a project as a dialog over the current page.
  *

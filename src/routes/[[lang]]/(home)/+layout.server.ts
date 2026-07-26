@@ -1,4 +1,4 @@
-import { getProjects } from "$lib/features/projects/loader/server";
+import { getProjects } from "$lib/features/projects/loader.server";
 import type { LayoutServerLoad } from "./$types";
 
 export const load: LayoutServerLoad = async () => {

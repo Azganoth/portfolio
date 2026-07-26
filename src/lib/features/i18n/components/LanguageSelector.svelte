@@ -7,7 +7,7 @@
   import Link from "$lib/shared/components/Link.svelte";
   import { DEFAULT_LOCALE } from "$lib/shared/constants";
   import { IconLanguage } from "$lib/shared/icons";
-  import { localizePathname } from "$lib/shared/utils";
+  import { localizePathname } from "$lib/shared/utils/path";
   import { getCurrentUnlocalizedPath } from "$lib/shared/utils/currentPath.svelte";
 
   let languages: [label: string, value: Locale][] = [

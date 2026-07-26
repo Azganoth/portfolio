@@ -1,8 +1,10 @@
 <script lang="ts">
   import { t } from "$lib/features/i18n/translation.svelte";
-  import { openProject } from "$lib/features/projects/navigation";
+  import {
+    composeProjectLinkId,
+    openProject,
+  } from "$lib/features/projects/navigation";
   import type { ProjectSummary } from "$lib/features/projects/schema";
-  import { composeProjectLinkId } from "$lib/features/projects/utils";
   import Link from "$lib/shared/components/Link.svelte";
   import { ID_PROJECT_DETAILS } from "$lib/shared/constants";
   import { IconCode, IconExternalLink } from "$lib/shared/icons";

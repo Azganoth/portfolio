@@ -1,4 +1,4 @@
-import { getProject } from "$lib/features/projects/loader/server";
+import { getProject } from "$lib/features/projects/loader.server";
 import { DEFAULT_LOCALE, isSupportedLocale } from "$lib/shared/constants";
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";

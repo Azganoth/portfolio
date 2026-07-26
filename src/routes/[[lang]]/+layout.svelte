@@ -18,7 +18,7 @@
     HREFLANG_BY_LOCALE,
     localizeUrl,
     OG_LOCALE_BY_LOCALE,
-  } from "$lib/shared/utils";
+  } from "$lib/shared/utils/path";
   import { getCurrentUnlocalizedPath } from "$lib/shared/utils/currentPath.svelte";
   import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
   import spaceGroteskWoff2 from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";

@@ -1,6 +1,6 @@
 import type { Project, ProjectSummary } from "$lib/features/projects/schema";
 import { projectStore } from "$lib/features/projects/store.svelte";
-import { composeProjectLinkId } from "$lib/features/projects/utils";
+import { composeProjectLinkId } from "$lib/features/projects/navigation";
 import { render, screen } from "@testing-library/svelte";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";

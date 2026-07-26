@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mulberry32 } from "$lib/shared/utils";
+  import { mulberry32 } from "$lib/shared/utils/random";
   import { onMount } from "svelte";
 
   let canvas: HTMLCanvasElement;

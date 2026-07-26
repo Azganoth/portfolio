@@ -1,7 +1,7 @@
 <script lang="ts">
   import ContactSection from "$lib/features/contact/components/ContactSection.svelte";
-  import AboutMeSection from "$lib/features/home/components/AboutMeSection.svelte";
-  import StartSection from "$lib/features/home/components/StartSection.svelte";
+  import AboutMeSection from "$lib/features/profile/components/AboutMeSection.svelte";
+  import StartSection from "$lib/features/profile/components/StartSection.svelte";
   import { translationStore } from "$lib/features/i18n/translation.svelte";
   import ProjectLightbox from "$lib/features/projects/components/ProjectLightbox.svelte";
   import ProjectsSection from "$lib/features/projects/components/ProjectsSection.svelte";

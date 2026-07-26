@@ -2,7 +2,7 @@
 
 import type { Project, ProjectSummary } from "$lib/features/projects/schema";
 import type { Locale } from "$lib/shared/constants";
-import type { ClickawayEventDetail } from "$lib/shared/attachments/clickaway";
+import type { ClickawayEventDetail } from "$lib/shared/attachments/clickaway.svelte";
 import "svelte/elements";
 
 declare global {

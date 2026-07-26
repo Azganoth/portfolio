@@ -1,6 +1,6 @@
 import { PREVIEW_SIZE, PROJECTS_ORDER } from "$lib/shared/constants";
 import { describe, expect, it } from "vitest";
-import { getProject, getProjects } from "./server";
+import { getProject, getProjects } from "./loader.server";
 
 const NEXUS_PREVIEWS = [
   "/images/preview/nexus_0.webp",

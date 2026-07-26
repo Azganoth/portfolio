@@ -1,6 +1,6 @@
-import { getProjects } from "$lib/features/projects/loader/server";
+import { getProjects } from "$lib/features/projects/loader.server";
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "$lib/shared/constants";
-import { HREFLANG_BY_LOCALE, localizeUrl } from "$lib/shared/utils";
+import { HREFLANG_BY_LOCALE, localizeUrl } from "$lib/shared/utils/path";
 import type { RequestHandler } from "./$types";
 
 const escapeXml = (value: string) =>
