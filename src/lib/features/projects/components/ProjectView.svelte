@@ -18,12 +18,10 @@
     IconGitHub,
   } from "$lib/shared/icons";
   import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
-  import { tick } from "svelte";
 
   let open = $derived(!!projectStore.selected);
   let dialog = $state<HTMLDialogElement>();
   let scrollContainer = $state<HTMLDivElement>();
-  let returnFocus = $state<HTMLElement>();
 
   const handleClose = async () => {
     if (
@@ -60,30 +58,11 @@
     if (open) {
       if (!dialog) return;
 
-      const activeElement = document.activeElement;
-      if (
-        activeElement instanceof HTMLElement &&
-        !dialog.contains(activeElement)
-      ) {
-        returnFocus = activeElement;
-      }
-
       scrollContainer?.scrollTo({ top: 0 });
 
       dialog.showModal();
     } else {
       dialog?.close();
-
-      const focusTarget = returnFocus;
-      returnFocus = undefined;
-
-      tick().then(() => {
-        if (!focusTarget) return;
-
-        requestAnimationFrame(() => {
-          focusTarget.focus({ preventScroll: true });
-        });
-      });
     }
   });
 </script>

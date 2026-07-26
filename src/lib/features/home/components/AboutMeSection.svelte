@@ -1,13 +1,12 @@
 <script lang="ts">
   import Translation from "$lib/features/i18n/components/Translation.svelte";
   import { t } from "$lib/features/i18n/translation.svelte";
-  import Link from "$lib/shared/components/Link.svelte";
+  import ProjectLink from "$lib/features/projects/components/ProjectLink.svelte";
   import Reveal from "$lib/shared/components/Reveal.svelte";
   import Section from "$lib/shared/components/Section.svelte";
   import { ID_BIO_SECTION } from "$lib/shared/constants";
   import profileImage from "$lib/shared/images/profile.webp?enhanced";
   import { IconGlobe, IconGraduationCap, IconMapPin } from "$lib/shared/icons";
-  import { getCurrentLocalizedPath } from "$lib/shared/utils/currentPath.svelte";
 
   const footerSections = $derived([
     {
@@ -32,38 +31,19 @@
 </script>
 
 {#snippet leafdown()}
-  <Link class="text-white" href={getCurrentLocalizedPath("/projects/leafdown")}>
-    Leafdown
-  </Link>
+  <ProjectLink class="text-white" slug="leafdown">Leafdown</ProjectLink>
 {/snippet}
 {#snippet nexus()}
-  <Link class="text-white" href={getCurrentLocalizedPath("/projects/nexus")}>
-    Nexus
-  </Link>
+  <ProjectLink class="text-white" slug="nexus">Nexus</ProjectLink>
 {/snippet}
 {#snippet fixmyhalo()}
-  <Link
-    class="text-white"
-    href={getCurrentLocalizedPath("/projects/fixmyhalo")}
-  >
-    Fix My Halo
-  </Link>
+  <ProjectLink class="text-white" slug="fixmyhalo">Fix My Halo</ProjectLink>
 {/snippet}
 {#snippet cropandquest()}
-  <Link
-    class="text-white"
-    href={getCurrentLocalizedPath("/projects/cropandquest")}
-  >
-    Crop & Quest
-  </Link>
+  <ProjectLink class="text-white" slug="cropandquest">Crop & Quest</ProjectLink>
 {/snippet}
 {#snippet pixelicons()}
-  <Link
-    class="text-white"
-    href={getCurrentLocalizedPath("/projects/pixelicons")}
-  >
-    Pixel Icons
-  </Link>
+  <ProjectLink class="text-white" slug="pixelicons">Pixel Icons</ProjectLink>
 {/snippet}
 
 <Section id={ID_BIO_SECTION}>

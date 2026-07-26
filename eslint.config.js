@@ -39,6 +39,14 @@ export default defineConfig(
       "svelte/no-navigation-without-resolve": "off",
     },
   },
+  {
+    // Same reason, for the navigation helpers that are plain modules rather
+    // than components.
+    files: ["**/navigation.ts"],
+    rules: {
+      "svelte/no-navigation-without-resolve": "off",
+    },
+  },
   prettier,
   svelte.configs.prettier,
 );

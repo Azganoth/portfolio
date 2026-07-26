@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { goto, preloadData, pushState } from "$app/navigation";
   import { t } from "$lib/features/i18n/translation.svelte";
-  import type { Project, ProjectSummary } from "$lib/features/projects/schema";
+  import { openProject } from "$lib/features/projects/navigation";
+  import type { ProjectSummary } from "$lib/features/projects/schema";
   import { composeProjectLinkId } from "$lib/features/projects/utils";
   import Link from "$lib/shared/components/Link.svelte";
   import { ID_PROJECT_DETAILS } from "$lib/shared/constants";
@@ -22,31 +22,16 @@
 
   const href = $derived(getCurrentLocalizedPath(`/projects/${project.slug}`));
 
-  // The card only holds a summary; the markdown body lives on the project
-  // route, so load that route's data before opening the dialog over the page.
-  // `data-sveltekit-preload-data="hover"` usually has it cached already.
-  const openProject = async () => {
-    const result = await preloadData(href);
-
-    if (result.type === "loaded" && result.status === 200) {
-      pushState(href, {
-        selectedProject: (result.data as { project: Project }).project,
-      });
-    } else {
-      await goto(href);
-    }
-  };
-
   const handleclick = (event: MouseEvent) => {
     event.stopPropagation();
     event.preventDefault();
-    openProject();
+    openProject(href);
   };
 
   const handlekeydown = (event: KeyboardEvent) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      openProject();
+      openProject(href);
     }
   };
 
