@@ -1,0 +1,8 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+minimumReleaseAgeExclude:
+  - "@iconify-json/lucide@1.2.120"
+  - "@iconify-json/octicon@1.2.30"
+  - "@iconify-json/simple-icons@1.2.92"
+  - globals@17.8.0

@@ -8,7 +8,7 @@
   --underscore: "_";
 }
 
-@variant in-view (&.is-visible);
+@custom-variant in-view (&.is-visible);
 
 @layer base {
   code {
@@ -27,7 +27,6 @@
     @apply outline-2 outline-offset-2 outline-primary;
   }
 
-  /* Scrollbar */
   ::-webkit-scrollbar {
     @apply w-2;
   }
@@ -38,5 +37,11 @@
 
   ::-webkit-scrollbar-thumb {
     @apply rounded-full bg-muted-foreground/20;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    html {
+      @apply scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-muted/50;
+    }
   }
 }
