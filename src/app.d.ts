@@ -2,7 +2,7 @@
 
 import type { Project, ProjectSummary } from "$lib/features/projects/schema";
 import type { Locale } from "$lib/shared/constants";
-import type { ClickawayEventDetail } from "@utils/clickaway.svelte";
+import type { ClickawayEventDetail } from "$lib/shared/attachments/clickaway";
 import "svelte/elements";
 
 declare global {
@@ -20,8 +20,12 @@ declare global {
 }
 
 declare module "svelte/elements" {
-  export interface HTMLAttributes {
-    onclickaway?: (event: CustomEvent<ClickawayEventDetail>) => unknown;
+  export interface HTMLAttributes<T extends EventTarget> {
+    onclickaway?: (
+      event: CustomEvent<ClickawayEventDetail> & {
+        currentTarget: EventTarget & T;
+      },
+    ) => unknown;
   }
 }
 
