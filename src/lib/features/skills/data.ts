@@ -1,10 +1,9 @@
 import {
-  IconBadgeCheck,
-  IconBraces,
-  IconC,
   IconCircle,
+  IconCloudflare,
   IconDocker,
   IconExpress,
+  IconFly,
   IconGit,
   IconGitHubActions,
   IconGraphQL,
@@ -14,7 +13,6 @@ import {
   IconMongoose,
   IconNext,
   IconNode,
-  IconPanelsTopLeft,
   IconPlaywright,
   IconPostgreSQL,
   IconPrisma,
@@ -28,6 +26,7 @@ import {
   IconTauri,
   IconTestingLibrary,
   IconTypeScript,
+  IconVercel,
   IconVitest,
   IconVSCode,
   IconVue,
@@ -35,58 +34,29 @@ import {
 } from "$lib/shared/icons";
 import type { Component } from "svelte";
 
-export interface SkillGroup {
-  titleKey:
-    | "skills_category_interfaces"
-    | "skills_category_systems"
-    | "skills_category_quality";
-  descriptionKey:
-    | "skills_interfaces_description"
-    | "skills_systems_description"
-    | "skills_quality_description";
-  icon: Component;
-  skills: string[];
-}
-
-export const SKILL_GROUPS = [
-  {
-    titleKey: "skills_category_interfaces",
-    descriptionKey: "skills_interfaces_description",
-    icon: IconPanelsTopLeft,
-    skills: ["JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS"],
-  },
-  {
-    titleKey: "skills_category_systems",
-    descriptionKey: "skills_systems_description",
-    icon: IconBraces,
-    skills: ["Node.js", "Express", "PostgreSQL", "Prisma", "GraphQL"],
-  },
-  {
-    titleKey: "skills_category_quality",
-    descriptionKey: "skills_quality_description",
-    icon: IconBadgeCheck,
-    skills: [
-      "Git",
-      "Vitest",
-      "Playwright",
-      "Docker",
-      "GitHub Actions",
-      "Rust",
-      "Tauri",
-    ],
-  },
-] satisfies SkillGroup[];
-
-export const ADDITIONAL_SKILLS = [
-  "Python",
-  "Svelte",
-  "Vue",
-  "SASS",
-  "MongoDB",
-  "WebAssembly",
-  "Jest",
-  "Testing Library",
-];
+export const SKILLS = {
+  frontend: [
+    "TypeScript",
+    "React",
+    "Next.js",
+    "JavaScript",
+    "Tailwind CSS",
+    "Svelte",
+    "Vue",
+    "SASS",
+  ],
+  backend: ["Node.js", "Express", "PostgreSQL", "Prisma", "MongoDB", "GraphQL"],
+  testing: ["Vitest", "Jest", "Testing Library", "Playwright"],
+  infrastructure: [
+    "Docker",
+    "GitHub Actions",
+    "Vercel",
+    "Fly.io",
+    "Cloudflare R2",
+    "Git",
+  ],
+  systems: ["Rust", "Tauri", "WebAssembly"],
+} satisfies Record<string, string[]>;
 
 export interface TagMeta {
   color: string;
@@ -121,7 +91,9 @@ export const TAG_META: Record<string, TagMeta> = {
   Git: { color: "#F05032", icon: IconGit },
   "GitHub Actions": { color: "#2088FF", icon: IconGitHubActions },
   Docker: { color: "#2496ED", icon: IconDocker },
-  C: { color: "#A8B9CC", icon: IconC },
+  Vercel: { color: "#FFFFFF", icon: IconVercel },
+  "Fly.io": { color: "#8B5CF6", icon: IconFly },
+  "Cloudflare R2": { color: "#F38020", icon: IconCloudflare },
   Rust: { color: "#FFFFFF", icon: IconRust },
   Tauri: { color: "#24C8D8", icon: IconTauri },
   WebAssembly: { color: "#654FF0", icon: IconWebAssembly },

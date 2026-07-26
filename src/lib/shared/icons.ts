@@ -19,18 +19,16 @@ export { default as IconClose } from "~icons/fa7-solid/xmark";
 export { default as IconDot } from "~icons/octicon/dot-16";
 export { default as IconDotFill } from "~icons/octicon/dot-fill-16";
 
-export { default as IconBadgeCheck } from "~icons/lucide/badge-check";
-export { default as IconBraces } from "~icons/lucide/braces";
 export { default as IconGlobe } from "~icons/lucide/globe";
 export { default as IconGraduationCap } from "~icons/lucide/graduation-cap";
 export { default as IconMapPin } from "~icons/lucide/map-pin";
-export { default as IconPanelsTopLeft } from "~icons/lucide/panels-top-left";
 
 // --- TECHNOLOGIES ---
 
-export { default as IconC } from "~icons/simple-icons/c";
+export { default as IconCloudflare } from "~icons/simple-icons/cloudflare";
 export { default as IconDocker } from "~icons/simple-icons/docker";
 export { default as IconExpress } from "~icons/simple-icons/express";
+export { default as IconFly } from "~icons/simple-icons/flydotio";
 export { default as IconGit } from "~icons/simple-icons/git";
 export { default as IconGitHub } from "~icons/simple-icons/github";
 export { default as IconGitHubActions } from "~icons/simple-icons/githubactions";
@@ -54,6 +52,7 @@ export { default as IconTailwind } from "~icons/simple-icons/tailwindcss";
 export { default as IconTauri } from "~icons/simple-icons/tauri";
 export { default as IconTestingLibrary } from "~icons/simple-icons/testinglibrary";
 export { default as IconTypeScript } from "~icons/simple-icons/typescript";
+export { default as IconVercel } from "~icons/simple-icons/vercel";
 export { default as IconVitest } from "~icons/simple-icons/vitest";
 export { default as IconVue } from "~icons/simple-icons/vuedotjs";
 export { default as IconWebAssembly } from "~icons/simple-icons/webassembly";
