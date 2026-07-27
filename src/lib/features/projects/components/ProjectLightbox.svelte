@@ -9,28 +9,10 @@
     IconChevronLeft,
     IconChevronRight,
     IconClose,
-    IconDot,
-    IconDotFill,
   } from "$lib/shared/icons";
 
   let open = $derived(!!projectStore.lightbox);
   let dialog = $state<HTMLDialogElement>();
-
-  const handleClose = async () => {
-    projectStore.closeLightbox();
-  };
-
-  const handleKeydown = (e: KeyboardEvent) => {
-    if (!open) return;
-    if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      projectStore.prevImage();
-    }
-    if (e.key === "ArrowRight") {
-      e.preventDefault();
-      projectStore.nextImage();
-    }
-  };
 
   let lastLightbox = $state<PreviewsLightbox>();
   $effect(() => {
@@ -39,36 +21,59 @@
     }
   });
 
-  $effect(() => {
-    if (open) {
-      dialog?.showModal();
-    } else {
-      dialog?.close();
-    }
-  });
+  const previews = $derived(lastLightbox?.previews ?? []);
+  const index = $derived(lastLightbox?.index ?? 0);
+  const paged = $derived(previews.length > 1);
+
+  const handleClose = () => {
+    projectStore.closeLightbox();
+  };
 
   /* Scroller */
 
   let scroller = $state<HTMLElement>();
-  let scrollerSlides = $state<HTMLElement[]>([]);
-  let isProgrammaticScroll = false;
-  let scrollTimeout: number;
+  let slides = $state<HTMLElement[]>([]);
 
-  $effect(() => {
-    if (!lastLightbox) return;
-
-    // Guard against observer loops
-    isProgrammaticScroll = true;
-    window.clearTimeout(scrollTimeout);
-    scrollTimeout = window.setTimeout(() => {
-      isProgrammaticScroll = false;
-    }, 500);
-
-    scrollerSlides[lastLightbox.index]?.scrollIntoView({
+  const scrollToCurrent = () => {
+    slides[projectStore.lightbox?.index ?? 0]?.scrollIntoView({
       behavior: "smooth",
       block: "nearest",
-      inline: "start",
+      inline: "center",
     });
+  };
+
+  const jump = (target: number) => {
+    projectStore.toImage(target);
+    scrollToCurrent();
+  };
+  const next = () => {
+    projectStore.nextImage();
+    scrollToCurrent();
+  };
+  const previous = () => {
+    projectStore.prevImage();
+    scrollToCurrent();
+  };
+
+  const handleKeydown = (event: KeyboardEvent) => {
+    if (!open || !paged) return;
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      previous();
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      next();
+    }
+  };
+
+  $effect(() => {
+    if (open) {
+      dialog?.showModal();
+      if (scroller) scroller.scrollLeft = 0;
+    } else {
+      dialog?.close();
+    }
   });
 
   $effect(() => {
@@ -76,23 +81,17 @@
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (isProgrammaticScroll) return;
+        for (const entry of entries) {
+          if (!entry.isIntersecting || !projectStore.lightbox) continue;
 
-        entries.forEach((entry) => {
-          if (!projectStore.lightbox) return;
-
-          if (entry.isIntersecting) {
-            const index = scrollerSlides.indexOf(entry.target as HTMLElement);
-            if (index !== -1) {
-              projectStore.lightbox.index = index;
-            }
-          }
-        });
+          const found = slides.indexOf(entry.target as HTMLElement);
+          if (found !== -1) projectStore.lightbox.index = found;
+        }
       },
       { root: scroller, threshold: 0.6 },
     );
 
-    scrollerSlides.forEach((slide) => {
+    slides.forEach((slide) => {
       if (slide) observer.observe(slide);
     });
     return () => observer.disconnect();
@@ -104,92 +103,126 @@
 <dialog
   bind:this={dialog}
   id={ID_IMAGE_GALLERY}
-  class="m-auto max-h-[calc(100dvh-4rem)] max-w-[calc(100dvw-4rem)] overflow-x-hidden bg-transparent transition-all transition-discrete duration-400 ease-fluid not-open:scale-90 not-open:opacity-0 backdrop:bg-black/70 backdrop:backdrop-blur-lg starting:scale-90 starting:opacity-0"
+  class="m-0 h-dvh max-h-none w-dvw max-w-none bg-transparent p-0 transition-[opacity,scale,display,overlay] transition-discrete duration-300 ease-fluid not-open:scale-98 not-open:opacity-0 backdrop:bg-black/80 backdrop:backdrop-blur-lg starting:scale-98 starting:opacity-0"
   aria-modal="true"
   aria-label={t("a11y_image_gallery")}
   onclose={handleClose}
-  onclick={(e) => {
-    if (e.target === dialog) {
-      handleClose();
-    }
-  }}
 >
-  <div class="relative py-18">
-    <button
-      class="absolute top-4 right-4 z-10 text-muted-foreground transition-all hover:scale-110 hover:text-foreground active:scale-95"
-      type="button"
-      onclick={handleClose}
-      aria-label={t("a11y_close_image_gallery")}
-    >
-      <IconClose class="size-10 drop-shadow-contrast" />
-    </button>
-
-    {#if lastLightbox}
-      <div
-        bind:this={scroller}
-        class="flex flex-col gap-16 overflow-y-auto md:grid md:max-w-180 md:snap-x md:snap-mandatory md:auto-cols-[100%] md:grid-flow-col md:items-center md:gap-4 md:overflow-x-auto md:overscroll-contain"
-        aria-roledescription="carousel"
-        aria-live="polite"
+  {#if lastLightbox}
+    <div class="flex h-full flex-col">
+      <header
+        class="flex h-14 shrink-0 items-center justify-between gap-4 px-4 md:h-16 md:px-6"
       >
-        {#each lastLightbox.previews as slide, i (slide.url)}
-          {@const title = lastLightbox.title}
-          {@const n = String(i + 1)}
-          {@const m = String(lastLightbox.previews.length)}
-          <figure
-            id={`slide-${i}`}
-            class="shrink-0 select-none md:snap-center"
-            bind:this={scrollerSlides[i]}
-            role="group"
-            aria-roledescription="slide"
-            aria-label={t("a11y_slide_n_of_m", { n, m })}
+        <p class="min-w-0 truncate font-display font-semibold text-foreground">
+          {lastLightbox.title ?? t("a11y_image_gallery")}
+        </p>
+        <div class="flex shrink-0 items-center gap-4">
+          {#if paged}
+            <span
+              class="font-mono text-sm tracking-wider text-muted-foreground tabular-nums"
+            >
+              {index + 1} / {previews.length}
+            </span>
+          {/if}
+          <button
+            class="grid size-10 place-items-center rounded-xl border border-white/15 bg-white/5 text-muted-foreground transition-colors hover:border-white/30 hover:bg-white/10 hover:text-foreground"
+            type="button"
+            onclick={handleClose}
+            aria-label={t("a11y_close_image_gallery")}
           >
-            <img
-              class="rounded-2xl bg-muted"
-              src={slide.url}
-              alt={title
-                ? t("a11y_project_preview_n_of_m", { title, n, m })
-                : t("a11y_slide_n_of_m", { n, m })}
-              width={slide.width}
-              height={slide.height}
-              loading={i === 0 ? "eager" : "lazy"}
-            />
-          </figure>
-        {/each}
+            <IconClose class="size-5" />
+          </button>
+        </div>
+      </header>
+
+      <div class="relative min-h-0 flex-1">
+        <div
+          bind:this={scroller}
+          class="flex h-full snap-x snap-mandatory overflow-x-auto overscroll-contain"
+          role="group"
+          aria-roledescription="carousel"
+          aria-label={lastLightbox.title
+            ? t("a11y_project_preview", { title: lastLightbox.title })
+            : t("a11y_image_gallery")}
+        >
+          {#each previews as slide, i (slide.url)}
+            {@const title = lastLightbox.title}
+            {@const n = String(i + 1)}
+            {@const m = String(previews.length)}
+            <!-- Clicking the space around the image dismisses. Keyboard users reach the same action through Escape and the close button, so this is a redundant affordance rather than the only route out. -->
+            <!-- svelte-ignore a11y_click_events_have_key_events -->
+            <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+            <figure
+              id={`slide-${i}`}
+              bind:this={slides[i]}
+              class="flex h-full w-full shrink-0 snap-center items-center justify-center px-4 md:px-16"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={t("a11y_slide_n_of_m", { n, m })}
+              onclick={(event) => {
+                if (event.target === event.currentTarget) handleClose();
+              }}
+            >
+              <img
+                class="max-h-full max-w-full rounded-2xl object-contain"
+                src={slide.url}
+                alt={title
+                  ? t("a11y_project_preview_n_of_m", { title, n, m })
+                  : t("a11y_slide_n_of_m", { n, m })}
+                width={slide.width}
+                height={slide.height}
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+            </figure>
+          {/each}
+        </div>
+
+        {#if paged}
+          <button
+            class="absolute top-1/2 left-2 grid h-20 w-11 -translate-y-1/2 place-items-center rounded-xl border border-white/12 bg-white/6 text-foreground backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/12 max-md:hidden"
+            type="button"
+            onclick={previous}
+            aria-label={t("a11y_previous_image")}
+          >
+            <IconChevronLeft class="size-6" />
+          </button>
+          <button
+            class="absolute top-1/2 right-2 grid h-20 w-11 -translate-y-1/2 place-items-center rounded-xl border border-white/12 bg-white/6 text-foreground backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/12 max-md:hidden"
+            type="button"
+            onclick={next}
+            aria-label={t("a11y_next_image")}
+          >
+            <IconChevronRight class="size-6" />
+          </button>
+        {/if}
       </div>
 
-      <div
-        class="absolute bottom-0 center-x flex items-center overflow-hidden max-md:hidden"
-      >
-        <button
-          class="transition-all ease-snappy hover:scale-110 hover:text-primary active:scale-95"
-          onclick={projectStore.prevImage}
-          aria-label={t("a11y_previous_image")}
-        >
-          <IconChevronLeft class="size-12" />
-        </button>
-        <div class="flex">
-          {#each { length: lastLightbox.previews.length }, i}
-            {@const DotIcon = i === lastLightbox.index ? IconDotFill : IconDot}
+      {#if paged}
+        <div class="flex shrink-0 justify-center gap-2 overflow-x-auto p-4">
+          {#each previews as slide, i (slide.url)}
             <button
-              class="block transition-all ease-snappy hover:scale-110 hover:text-primary active:scale-95"
+              class={[
+                "h-12 w-20 shrink-0 overflow-hidden rounded-lg border transition-all md:h-14 md:w-24",
+                i === index
+                  ? "border-primary opacity-100"
+                  : "border-white/12 opacity-50 hover:opacity-80",
+              ]}
               type="button"
-              onclick={() => projectStore.toImage(i)}
-              aria-current={i === lastLightbox.index ? "step" : undefined}
+              onclick={() => jump(i)}
+              aria-current={i === index ? "true" : undefined}
               aria-label={t("a11y_jump_to_image", { name: String(i + 1) })}
               aria-controls={`slide-${i}`}
             >
-              <DotIcon class="size-10" />
+              <img
+                class="h-full w-full object-cover"
+                src={slide.url}
+                alt=""
+                loading="lazy"
+              />
             </button>
           {/each}
         </div>
-        <button
-          class="transition-all ease-snappy hover:scale-110 hover:text-primary active:scale-95"
-          onclick={projectStore.nextImage}
-          aria-label={t("a11y_next_image")}
-        >
-          <IconChevronRight class="size-12" />
-        </button>
-      </div>
-    {/if}
-  </div>
+      {/if}
+    </div>
+  {/if}
 </dialog>
