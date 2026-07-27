@@ -169,7 +169,7 @@
                 {@const previews = lastProject.previews}
                 <button
                   type="button"
-                  class="group relative aspect-video max-h-90 w-full overflow-hidden rounded-2xl border border-white/15 bg-muted/40 shadow-2xl transition-colors hover:border-primary/60 focus-visible:ring-4 focus-visible:ring-primary"
+                  class="group relative aspect-video max-h-90 w-full overflow-hidden rounded-2xl border border-white/15 bg-muted/40 shadow-2xl transition-colors hover:border-primary/60"
                   onclick={() => {
                     if (lastProject) {
                       projectStore.openLightbox(previews, lastProject.title);

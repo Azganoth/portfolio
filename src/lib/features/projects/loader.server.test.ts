@@ -1,4 +1,7 @@
 import { PROJECTS_ORDER } from "$lib/shared/constants";
+import { imageSize } from "image-size";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { getProject, getProjects } from "./loader.server";
 
@@ -30,13 +33,18 @@ describe("project loader", () => {
 
   it("reports each preview's real dimensions", async () => {
     const projects = await getProjects();
-    const nexus = projects.pt.find((project) => project.slug === "nexus");
+    const previews = projects.pt.flatMap((project) => project.previews);
 
-    for (const preview of nexus?.previews ?? []) {
-      expect(preview.width).toBeGreaterThan(0);
-      expect(preview.height).toBeGreaterThan(0);
+    expect(previews.length).toBeGreaterThan(0);
+
+    for (const preview of previews) {
+      const file = await fs.readFile(
+        path.join(process.cwd(), "static", preview.url),
+      );
+      const { width, height } = imageSize(file);
+
+      expect(preview).toMatchObject({ width, height });
     }
-    expect(nexus?.previews[0]).toMatchObject({ width: 720, height: 540 });
   });
 
   it("keeps markdown bodies out of the summary list", async () => {

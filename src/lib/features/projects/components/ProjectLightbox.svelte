@@ -77,6 +77,10 @@
   });
 
   $effect(() => {
+    slides.length = previews.length;
+  });
+
+  $effect(() => {
     if (!scroller) return;
 
     const observer = new IntersectionObserver(
@@ -136,10 +140,13 @@
       </header>
 
       <div class="relative min-h-0 flex-1">
+        <!-- A scrollable region has to be reachable by keyboard on its own, not only through the window-level arrow handler, so it takes a tab stop. The rule below assumes a non-interactive role never should. -->
+        <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
         <div
           bind:this={scroller}
           class="flex h-full snap-x snap-mandatory overflow-x-auto overscroll-contain"
-          role="group"
+          tabindex="0"
+          role="region"
           aria-roledescription="carousel"
           aria-label={lastLightbox.title
             ? t("a11y_project_preview", { title: lastLightbox.title })
