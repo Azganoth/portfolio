@@ -75,8 +75,8 @@
 
       const scrollY = window.scrollY;
       const backgroundOpacity = Math.max(
-        0.22,
-        1 - (scrollY / Math.max(h * 1.1, 1)) * 0.78,
+        0.62,
+        1 - (scrollY / Math.max(h * 1.1, 1)) * 0.38,
       );
       canvas.style.opacity = `${backgroundOpacity}`;
 
