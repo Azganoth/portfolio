@@ -70,7 +70,10 @@
   $effect(() => {
     if (open) {
       dialog?.showModal();
-      if (scroller) scroller.scrollLeft = 0;
+      slides[projectStore.lightbox?.index ?? 0]?.scrollIntoView({
+        block: "nearest",
+        inline: "center",
+      });
     } else {
       dialog?.close();
     }

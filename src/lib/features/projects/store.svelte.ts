@@ -11,8 +11,12 @@ class ProjectStore {
 
   lightbox = $state<PreviewsLightbox>();
 
-  openLightbox = (previews: ProjectPreview[], title?: string) => {
-    this.lightbox = { previews, index: 0, title };
+  openLightbox = (previews: ProjectPreview[], title?: string, index = 0) => {
+    this.lightbox = {
+      previews,
+      index: Math.min(Math.max(index, 0), previews.length - 1),
+      title,
+    };
   };
 
   closeLightbox = () => {
