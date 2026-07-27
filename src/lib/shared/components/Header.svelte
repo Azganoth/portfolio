@@ -102,7 +102,7 @@
 
       <button
         type="button"
-        class="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/5 transition-colors hover:border-white/20 hover:bg-white/10 hover:text-primary md:hidden"
+        class="icon-button hover:text-primary md:hidden"
         popovertarget={ID_MOBILE_MENU}
         aria-label={t("a11y_open_nav_menu")}
         aria-controls={ID_MOBILE_MENU}
@@ -121,7 +121,7 @@
             {@render homeLink()}
             <button
               type="button"
-              class="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/5 transition-colors hover:border-white/20 hover:text-primary"
+              class="icon-button hover:text-primary"
               onclick={() => mobilePopover?.hidePopover()}
               aria-label={t("a11y_close_nav_menu")}
             >

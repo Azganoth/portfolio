@@ -125,7 +125,7 @@
             </span>
           {/if}
           <button
-            class="grid size-10 place-items-center rounded-xl border border-white/15 bg-white/5 text-muted-foreground transition-colors hover:border-white/30 hover:bg-white/10 hover:text-foreground"
+            class="icon-button"
             type="button"
             onclick={handleClose}
             aria-label={t("a11y_close_image_gallery")}
@@ -179,7 +179,7 @@
 
         {#if paged}
           <button
-            class="absolute top-1/2 left-2 grid h-20 w-11 -translate-y-1/2 place-items-center rounded-xl border border-white/12 bg-white/6 text-foreground backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/12 max-md:hidden"
+            class="absolute top-1/2 left-2 icon-button h-20 w-11 -translate-y-1/2 backdrop-blur-md max-md:hidden"
             type="button"
             onclick={previous}
             aria-label={t("a11y_previous_image")}
@@ -187,7 +187,7 @@
             <IconChevronLeft class="size-6" />
           </button>
           <button
-            class="absolute top-1/2 right-2 grid h-20 w-11 -translate-y-1/2 place-items-center rounded-xl border border-white/12 bg-white/6 text-foreground backdrop-blur-md transition-colors hover:border-white/25 hover:bg-white/12 max-md:hidden"
+            class="absolute top-1/2 right-2 icon-button h-20 w-11 -translate-y-1/2 backdrop-blur-md max-md:hidden"
             type="button"
             onclick={next}
             aria-label={t("a11y_next_image")}
@@ -202,10 +202,10 @@
           {#each previews as slide, i (slide.url)}
             <button
               class={[
-                "h-12 w-20 shrink-0 overflow-hidden rounded-lg border transition-all md:h-14 md:w-24",
+                "h-12 w-20 shrink-0 overflow-hidden rounded-lg outline-offset-2 transition-all md:h-14 md:w-24",
                 i === index
-                  ? "border-primary opacity-100"
-                  : "border-white/12 opacity-50 hover:opacity-80",
+                  ? "opacity-100 outline-2 outline-primary"
+                  : "opacity-50 outline-1 outline-white/15 hover:opacity-80",
               ]}
               type="button"
               onclick={() => jump(i)}

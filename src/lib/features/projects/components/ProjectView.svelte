@@ -82,7 +82,7 @@
 >
   <div class="relative h-full overflow-hidden">
     <button
-      class="absolute top-4 right-4 z-30 grid size-11 place-items-center rounded-full border border-white/15 bg-background/85 text-muted-foreground shadow-lg backdrop-blur-md transition-colors hover:border-white/30 hover:bg-muted hover:text-foreground"
+      class="absolute top-4 right-4 z-30 icon-button bg-background/85 shadow-lg backdrop-blur-md hover:bg-muted"
       type="button"
       onclick={handleClose}
       aria-label={t("a11y_close_project_details")}

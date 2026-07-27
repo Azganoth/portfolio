@@ -59,7 +59,7 @@
   <button
     bind:this={toggler}
     type="button"
-    class="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-muted-foreground transition-colors hover:border-white/20 hover:bg-white/10 hover:text-foreground"
+    class="icon-button"
     onclick={() => {
       open = !open;
     }}
