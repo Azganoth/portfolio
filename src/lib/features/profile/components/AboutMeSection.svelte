@@ -5,8 +5,8 @@
   import Reveal from "$lib/shared/components/Reveal.svelte";
   import Section from "$lib/shared/components/Section.svelte";
   import { ID_BIO_SECTION } from "$lib/shared/constants";
-  import profileImage from "$lib/shared/images/profile.webp?enhanced";
   import { IconGlobe, IconGraduationCap, IconMapPin } from "$lib/shared/icons";
+  import profileImage from "$lib/shared/images/profile.webp?enhanced";
 
   const footerSections = $derived([
     {
@@ -57,15 +57,6 @@
           src={profileImage}
           alt={t("a11y_avatar_alt")}
         />
-        <div
-          class="absolute inset-0 bg-linear-to-t from-background/85 via-transparent to-transparent md:bg-linear-to-r md:from-transparent md:via-transparent md:to-background/25"
-        ></div>
-        <div
-          class="absolute bottom-5 left-5 flex w-fit items-center gap-2 rounded-full border border-green-500/30 bg-background/75 px-3 py-1.5 text-sm font-medium text-green-400 backdrop-blur-md"
-        >
-          <span class="size-2 rounded-full bg-green-400"></span>
-          {t("contact_status_available")}
-        </div>
       </div>
 
       <div class="flex min-w-0 flex-col">

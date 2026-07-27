@@ -23,7 +23,7 @@
   class="flex min-h-[calc(100svh-4.5rem)] flex-col justify-center pb-10 md:pb-12"
 >
   <div
-    class="relative grid gap-12 overflow-hidden rounded-3xl border border-white/10 bg-muted/20 p-6 shadow-elevation md:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:p-14"
+    class="relative grid gap-12 overflow-hidden rounded-3xl border border-white/10 bg-muted/70 p-6 shadow-elevation md:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:p-14"
   >
     <div class="min-w-0">
       <p
@@ -39,11 +39,7 @@
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
         {t("contact_description")}
       </p>
-      <div class="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm">
-        <span class="flex items-center gap-2 text-green-400">
-          <span class="size-2 rounded-full bg-green-400"></span>
-          {t("contact_status_available")}
-        </span>
+      <div class="mt-7 text-sm">
         <span class="flex items-center gap-2 text-muted-foreground">
           <IconMapPin class="size-4" />
           {t("bio_stat_location_value")}
