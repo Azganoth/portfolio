@@ -5,13 +5,10 @@ import {
   projectSchema,
   type ProjectSummary,
 } from "$lib/features/projects/schema";
-import {
-  PREVIEW_SIZE,
-  PROJECTS_ORDER,
-  SUPPORTED_LOCALES,
-} from "$lib/shared/constants";
+import { PROJECTS_ORDER, SUPPORTED_LOCALES } from "$lib/shared/constants";
 import { compareOrderBy } from "$lib/shared/utils/sort";
 import matter from "gray-matter";
+import { imageSize } from "image-size";
 import { marked } from "marked";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -29,11 +26,11 @@ export const getProjects = async () =>
     ),
   ) as Record<Locale, ProjectSummary[]>;
 
-const composePreviews = (
+const composePreviews = async (
   previewFilenames: string[],
   slug: string,
-): ProjectPreview[] =>
-  previewFilenames
+): Promise<ProjectPreview[]> => {
+  const filenames = previewFilenames
     .filter(
       (filename) =>
         filename.startsWith(`${slug}_`) && filename.endsWith(".webp"),
@@ -42,12 +39,22 @@ const composePreviews = (
       const indexA = parseInt(a.split("_")[1]);
       const indexB = parseInt(b.split("_")[1]);
       return indexA - indexB;
-    })
-    .map((filename) => ({
-      url: `/images/preview/${filename}`,
-      width: PREVIEW_SIZE.width,
-      height: PREVIEW_SIZE.height,
-    }));
+    });
+
+  return Promise.all(
+    filenames.map(async (filename) => {
+      const { width, height } = imageSize(
+        await fs.readFile(path.join(PREVIEWS_DIR, filename)),
+      );
+
+      if (!width || !height) {
+        throw new Error(`Could not read dimensions of preview ${filename}`);
+      }
+
+      return { url: `/images/preview/${filename}`, width, height };
+    }),
+  );
+};
 
 const readProjectFile = async (locale: string, slug: string) => {
   const fullPath = path.join(PROJECTS_DIR, locale, `${slug}.md`);
@@ -88,7 +95,7 @@ export const getProject = async (
   return {
     slug,
     ...(await projectSchema.parseAsync(file.data)),
-    previews: composePreviews(previewFilenames, slug),
+    previews: await composePreviews(previewFilenames, slug),
     description: await marked.parse(file.content),
   };
 };
@@ -105,7 +112,7 @@ const getAllProjects = async (locale: string): Promise<ProjectSummary[]> => {
         return getProjectSummary(
           locale,
           slug,
-          composePreviews(previewFilenames, slug),
+          await composePreviews(previewFilenames, slug),
         );
       }),
   );

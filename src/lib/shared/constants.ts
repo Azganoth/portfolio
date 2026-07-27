@@ -9,11 +9,6 @@ export const DEFAULT_LOCALE: Locale = "pt";
 export const isSupportedLocale = (locale: unknown): locale is Locale =>
   typeof locale === "string" && SUPPORTED_LOCALES.includes(locale as Locale);
 
-export const PREVIEW_SIZE = {
-  width: 720,
-  height: 540,
-};
-
 // --- CONTENT ---
 
 export const PROJECTS_ORDER = [

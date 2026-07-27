@@ -1,4 +1,4 @@
-import { PREVIEW_SIZE, PROJECTS_ORDER } from "$lib/shared/constants";
+import { PROJECTS_ORDER } from "$lib/shared/constants";
 import { describe, expect, it } from "vitest";
 import { getProject, getProjects } from "./loader.server";
 
@@ -26,7 +26,17 @@ describe("project loader", () => {
     expect(nexus?.previews.map((preview) => preview.url)).toEqual(
       NEXUS_PREVIEWS,
     );
-    expect(nexus?.previews[0]).toMatchObject(PREVIEW_SIZE);
+  });
+
+  it("reports each preview's real dimensions", async () => {
+    const projects = await getProjects();
+    const nexus = projects.pt.find((project) => project.slug === "nexus");
+
+    for (const preview of nexus?.previews ?? []) {
+      expect(preview.width).toBeGreaterThan(0);
+      expect(preview.height).toBeGreaterThan(0);
+    }
+    expect(nexus?.previews[0]).toMatchObject({ width: 720, height: 540 });
   });
 
   it("keeps markdown bodies out of the summary list", async () => {
