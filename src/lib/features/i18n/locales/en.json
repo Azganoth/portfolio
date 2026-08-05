@@ -10,7 +10,7 @@
   "start_curriculum": "Resume",
   "start_scroll_label": "Scroll to explore",
   "bio_title": "About me",
-  "bio_description_1": "I'm Ademir, a Computer Science graduate focused on full-stack development. I enjoy turning specific problems into clear, reliable products that are pleasant to use. I'm especially interested in productivity tools, local-first software, and projects built for communities.",
+  "bio_description_1": "I'm Ademir, a full-stack software engineer. I enjoy turning specific problems into clear, reliable products that are pleasant to use. I'm especially interested in productivity tools, local-first software, and projects built for communities.",
   "bio_description_2": "I currently develop {leafdown}, an open-source Markdown desktop editor built with React, Rust, and native filesystem integration. I also built and deployed {nexus}, a full-stack application with authentication, shared contracts, PostgreSQL, automated tests, and CI/CD.",
   "bio_description_3": "Projects such as {cropandquest} and {fixmyhalo} grew from real problems faced by players and creators, while {pixelicons} surpassed one thousand installs on the Visual Studio Marketplace. This combination of engineering, product thinking, and practical usefulness is the kind of work that interests me most.",
   "bio_stat_education_label": "Education",

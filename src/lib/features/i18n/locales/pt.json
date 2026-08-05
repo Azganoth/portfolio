@@ -10,7 +10,7 @@
   "start_curriculum": "Currículo",
   "start_scroll_label": "Role para explorar",
   "bio_title": "Sobre mim",
-  "bio_description_1": "Sou Ademir, formado em Ciência da Computação e focado em desenvolvimento full stack. Gosto de transformar problemas específicos em produtos claros, confiáveis e agradáveis de usar. Tenho interesse especial por ferramentas de produtividade, software local-first e projetos voltados a comunidades.",
+  "bio_description_1": "Sou Ademir, engenheiro de software full stack. Gosto de transformar problemas específicos em produtos claros, confiáveis e agradáveis de usar. Tenho interesse especial por ferramentas de produtividade, software local-first e projetos voltados a comunidades.",
   "bio_description_2": "Atualmente desenvolvo o {leafdown}, um editor Markdown desktop de código aberto construído com React, Rust e integração nativa ao sistema de arquivos. Também construí e implantei o {nexus}, uma aplicação full stack com autenticação, contratos compartilhados, PostgreSQL, testes automatizados e CI/CD.",
   "bio_description_3": "Projetos como o {cropandquest} e o {fixmyhalo} nasceram de problemas reais enfrentados por jogadores e criadores, enquanto o {pixelicons} ultrapassou mil instalações no Visual Studio Marketplace. Essa combinação de engenharia, produto e utilidade prática é o tipo de trabalho que mais me interessa.",
   "bio_stat_education_label": "Formação",
