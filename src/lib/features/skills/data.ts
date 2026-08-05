@@ -46,7 +46,7 @@ export const SKILLS = {
     "SASS",
   ],
   backend: ["Node.js", "Express", "PostgreSQL", "Prisma", "MongoDB", "GraphQL"],
-  testing: ["Vitest", "Jest", "Testing Library", "Playwright"],
+  testing: ["Vitest", "Jest", "Testing Library", "Playwright", "Storybook"],
   infrastructure: [
     "Docker",
     "GitHub Actions",
