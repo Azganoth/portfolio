@@ -14,12 +14,12 @@
     SITE_URL,
     SUPPORTED_LOCALES,
   } from "$lib/shared/constants";
+  import { getCurrentUnlocalizedPath } from "$lib/shared/utils/currentPath.svelte";
   import {
     HREFLANG_BY_LOCALE,
     localizeUrl,
     OG_LOCALE_BY_LOCALE,
   } from "$lib/shared/utils/path";
-  import { getCurrentUnlocalizedPath } from "$lib/shared/utils/currentPath.svelte";
   import interVarWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
   import spaceGroteskWoff2 from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
   import { injectAnalytics } from "@vercel/analytics/sveltekit";
@@ -45,7 +45,7 @@
   });
 
   const title = $derived(
-    activeProject ? `${activeProject.title} | Azganoth` : t("meta_title"),
+    activeProject ? `${activeProject.title} — Azganoth` : t("meta_title"),
   );
   const siteDescription = $derived(t("meta_description"));
   const description = $derived(activeProject?.summary ?? siteDescription);
@@ -69,7 +69,7 @@
   );
   const metaImage = $derived(
     new URL(
-      activeProject?.previews[0]?.url ?? "/meta_image.png",
+      `/og/${activeProject?.slug ?? "default"}-${translationStore.locale}.png`,
       SITE_URL,
     ).toString(),
   );
@@ -161,6 +161,9 @@
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={metaImage} />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content={metaImageAlt} />
 
   <!-- Twitter -->

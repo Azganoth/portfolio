@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
+    "og": "node scripts/og.js",
     "build": "vite build",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo ''",
@@ -47,6 +48,7 @@
     "image-size": "^2.0.2",
     "jsdom": "^29.1.1",
     "marked": "^18.0.7",
+    "playwright-core": "^1.62.1",
     "prettier": "^3.9.6",
     "prettier-plugin-svelte": "^4.1.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
