@@ -79,9 +79,9 @@
   aria-modal="true"
   aria-labelledby={ID_PROJECT_TITLE}
 >
-  <div class="relative h-full overflow-hidden">
+  <div class="relative h-full overflow-hidden px-3 py-4 md:px-5 md:py-6">
     <button
-      class="absolute top-4 right-4 z-30 icon-button bg-background/85 shadow-lg backdrop-blur-md hover:bg-muted"
+      class="absolute top-8 right-12 z-30 icon-button bg-background/85 shadow-lg backdrop-blur-md hover:bg-muted"
       type="button"
       onclick={handleClose}
       aria-label={t("a11y_close_project_details")}
@@ -92,13 +92,11 @@
     <div bind:this={scrollContainer} class="h-full overflow-y-auto">
       {#if lastProject}
         <article
-          class="mx-auto flex w-full max-w-4xl flex-col px-6 py-8 md:px-10 md:py-12"
+          class="mx-auto flex w-full max-w-4xl flex-col px-3 py-4 md:px-5 md:py-6"
         >
           <header class="flex flex-col border-b border-white/10 pb-8">
             <div class="flex min-w-0 flex-col pr-12 lg:pr-0">
-              <span
-                class="mb-4 font-mono text-sm font-bold tracking-widest text-primary uppercase"
-              >
+              <span class="mb-4 eyebrow text-sm text-primary">
                 {lastProject.year} · {lastProject.category}
               </span>
               <h1
@@ -115,7 +113,7 @@
             <div class="mt-7 flex flex-wrap gap-3">
               {#if lastProject.website}
                 <Link
-                  class="group flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono text-sm font-bold text-background shadow-glow transition-colors hover:bg-primary/85"
+                  class="group flex items-center gap-2 primary-button px-5 py-3"
                   href={lastProject.website}
                   aria-label={t("a11y_go_to_website")}
                   newTab
@@ -128,10 +126,10 @@
               {#if lastProject.repository}
                 <Link
                   class={[
-                    "group flex items-center gap-2 rounded-xl border px-5 py-3 font-mono text-sm font-bold transition-colors",
+                    "group flex items-center gap-2 px-5 py-3",
                     lastProject.website
-                      ? "border-white/20 bg-white/5 text-foreground hover:border-white/35 hover:bg-white/10"
-                      : "border-primary bg-primary text-background shadow-glow hover:bg-primary/85",
+                      ? "ghost-button"
+                      : "primary-button border border-primary",
                   ]}
                   href={lastProject.repository}
                   aria-label={t("a11y_go_to_repository")}
@@ -198,9 +196,7 @@
                 aria-label={t("a11y_used_technology")}
               >
                 {#each lastProject.tags as tag (tag)}
-                  <li
-                    class="rounded-lg border border-white/10 bg-white/4 px-2.5 py-1 font-mono text-xs font-semibold tracking-wide text-muted-foreground"
-                  >
+                  <li class="chip">
                     {tag}
                   </li>
                 {/each}

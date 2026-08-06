@@ -71,11 +71,11 @@
     </div>
 
     <nav class="max-md:hidden" aria-label={t("a11y_desktop_navigation")}>
-      <ul class="flex items-center gap-7">
+      <ul class="flex items-center gap-3 lg:gap-6">
         {#each links as { label, link, description } (link)}
           <li>
             <Link
-              class="font-display text-sm tracking-wide text-muted-foreground hover:text-foreground"
+              class="font-display text-sm tracking-wide whitespace-nowrap text-muted-foreground hover:text-foreground lg:text-base"
               variant="none"
               href={link}
               aria-label={description}
@@ -90,7 +90,7 @@
     <div class="flex items-center gap-2">
       <LanguageSelector />
       <Link
-        class="flex h-10 items-center gap-2 rounded-xl bg-primary px-4 font-mono text-sm font-bold tracking-wide text-background shadow-glow transition-colors hover:bg-primary/85 max-md:hidden"
+        class="flex h-10 items-center gap-2 primary-button px-4 text-sm tracking-wide max-md:hidden"
         variant="none"
         href={cvHref}
         newTab
@@ -113,11 +113,11 @@
       <div
         bind:this={mobilePopover}
         id={ID_MOBILE_MENU}
-        class="inset-0 h-dvh w-dvw max-w-none border-0 bg-background/98 p-6 transition-all transition-discrete not-open:-translate-y-8 not-open:opacity-0 starting:-translate-y-8 starting:opacity-0"
+        class="inset-0 h-dvh w-dvw max-w-none border-0 bg-background/98 p-8 transition-all transition-discrete not-open:-translate-y-8 not-open:opacity-0 starting:-translate-y-8 starting:opacity-0"
         popover
       >
         <div class="mx-auto flex h-full max-w-lg flex-col">
-          <div class="flex h-14 items-center justify-between">
+          <div class="flex items-center justify-between">
             {@render homeLink()}
             <button
               type="button"
@@ -132,16 +132,18 @@
           <nav aria-label={t("a11y_mobile_navigation")}>
             <ul class="mt-16 flex flex-col">
               {#each links as { label, link, description } (link)}
-                <li class="border-b border-white/8">
+                <li class="group border-b border-white/8">
                   <Link
-                    class="flex items-center justify-between py-5 font-display text-2xl tracking-tight hover:text-primary"
+                    class="flex items-center justify-between py-5 font-display text-2xl tracking-tight group-hover:text-primary"
                     href={link}
                     aria-label={description}
                     variant="none"
                     onclick={() => mobilePopover?.hidePopover()}
                   >
                     {label}
-                    <IconArrowRight class="size-4 text-muted-foreground" />
+                    <IconArrowRight
+                      class="size-7 text-muted-foreground transition-colors ease-snappy group-hover:text-primary"
+                    />
                   </Link>
                 </li>
               {/each}
@@ -149,7 +151,7 @@
           </nav>
 
           <Link
-            class="mt-auto flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 font-mono font-bold text-background shadow-glow"
+            class="mt-auto flex items-center justify-center gap-2 primary-button px-5 py-3.5"
             variant="none"
             href={cvHref}
             newTab

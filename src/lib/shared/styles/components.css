@@ -29,12 +29,17 @@
       @apply font-medium text-primary transition-colors hover:underline;
     }
 
+    ul,
+    ol {
+      @apply mb-4 ml-6 list-outside text-foreground/80 marker:text-muted-foreground;
+    }
+
     ul {
-      @apply mb-4 ml-6 list-outside list-disc text-foreground/80 marker:text-secondary;
+      @apply list-disc;
     }
 
     ol {
-      @apply mb-4 ml-6 list-outside list-decimal text-foreground/80 marker:text-secondary;
+      @apply list-decimal;
     }
 
     li {
@@ -46,15 +51,15 @@
     }
 
     code {
-      @apply rounded bg-muted px-1 py-0.5 font-mono text-sm text-secondary;
+      @apply font-mono text-sm;
+
+      &:where(:not(pre code)) {
+        @apply rounded border border-white/10 bg-muted/50 px-2 py-0.5;
+      }
     }
 
     pre {
       @apply my-8 overflow-x-auto rounded-2xl border border-white/10 bg-muted/50 p-5 shadow-inner;
-    }
-
-    pre code {
-      @apply bg-transparent p-0 text-foreground;
     }
 
     blockquote {
@@ -63,10 +68,6 @@
 
     img {
       @apply my-8 h-auto max-w-full rounded-2xl border border-white/10;
-    }
-
-    img[src*="/images/diagrams/"] {
-      @apply w-full bg-[#121019] p-3 md:p-5;
     }
 
     hr {

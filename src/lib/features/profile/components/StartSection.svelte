@@ -36,9 +36,7 @@
       immediate
       class="delay-75 duration-400 ease-out-expo not-in-view:-translate-y-4 not-in-view:opacity-0"
     >
-      <p
-        class="mb-5 text-center font-mono font-bold tracking-widest text-secondary uppercase md:text-start"
-      >
+      <p class="mb-5 text-center eyebrow text-secondary md:text-start">
         {t("start_role")}
       </p>
       <h1
@@ -65,7 +63,7 @@
         <Link
           variant="none"
           href={`#${ID_PROJECTS_SECTION}`}
-          class="flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono font-bold tracking-wide text-background shadow-glow transition-colors hover:bg-primary/85"
+          class="flex items-center gap-2 primary-button px-5 py-3 tracking-wide"
         >
           <span>{t("start_projects_cta")}</span>
           <IconArrowDown />
@@ -75,7 +73,7 @@
           href={cvHref}
           newTab
           aria-label={t("a11y_download_cv")}
-          class="flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-mono font-bold tracking-wide text-foreground transition-colors hover:border-white/30 hover:bg-white/10"
+          class="flex items-center gap-2 ghost-button px-5 py-3 tracking-wide"
         >
           <span>{t("start_curriculum")}</span>
           <IconExternalLink />

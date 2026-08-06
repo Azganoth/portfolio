@@ -48,7 +48,6 @@
   aria-labelledby={titleId}
   aria-describedby={summaryId}
 >
-  <!-- Visuals -->
   <div
     class="w-full xl:group-odd/project-item:col-start-2 xl:group-odd/project-item:row-start-1"
   >
@@ -84,9 +83,7 @@
             >
               <IconCode class="size-6" />
             </div>
-            <span
-              class="font-mono text-sm font-bold tracking-widest text-muted-foreground uppercase"
-            >
+            <span class="eyebrow text-sm text-muted-foreground">
               {project.title}
             </span>
           </div>
@@ -97,11 +94,12 @@
       ></div>
     </div>
   </div>
+
   <div
     class="flex min-w-0 flex-col gap-6 xl:group-odd/project-item:col-start-1 xl:group-odd/project-item:row-start-1"
   >
     <div class="flex flex-col gap-2">
-      <div class="font-mono font-bold tracking-widest text-primary uppercase">
+      <div class="eyebrow text-primary">
         {project.year}/{project.category}
       </div>
 
@@ -123,15 +121,13 @@
           {project.title}
         </Link>
         <IconExternalLink
-          class="size-7 text-muted-foreground md:mt-1 md:size-8"
+          class="size-7 text-muted-foreground transition-colors ease-snappy group-hover:text-primary md:mt-1 md:size-8"
         />
       </h3>
     </div>
 
     <div class="border-l-2 border-primary/70 pl-4">
-      <div
-        class="font-mono text-xs font-bold tracking-widest text-primary uppercase"
-      >
+      <div class="eyebrow text-sm text-primary">
         {t("project_card_result_label")}
       </div>
       <p class="mt-2 max-w-prose leading-relaxed text-foreground/90">
@@ -146,12 +142,9 @@
       {project.summary}
     </p>
 
-    <ul class="mt-1 flex flex-wrap gap-2">
+    <ul class="mt-1 flex flex-wrap gap-3">
       {#each project.tags as tag (tag)}
-        <li
-          class="rounded-lg border border-white/10 bg-white/4 px-2.5 py-1 font-mono text-xs font-semibold tracking-wide text-muted-foreground"
-          title={tag}
-        >
+        <li class="chip" title={tag}>
           {tag}
         </li>
       {/each}

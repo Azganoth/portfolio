@@ -27,21 +27,7 @@
     @apply outline-2 outline-offset-2 outline-primary;
   }
 
-  ::-webkit-scrollbar {
-    @apply w-2;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-muted/50;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-muted-foreground/20;
-  }
-
-  @supports not selector(::-webkit-scrollbar) {
-    html {
-      @apply scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-muted/50;
-    }
+  * {
+    @apply scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-muted/50;
   }
 }

@@ -31,19 +31,19 @@
 </script>
 
 {#snippet leafdown()}
-  <ProjectLink class="text-white" slug="leafdown">Leafdown</ProjectLink>
+  <ProjectLink slug="leafdown">Leafdown</ProjectLink>
 {/snippet}
 {#snippet nexus()}
-  <ProjectLink class="text-white" slug="nexus">Nexus</ProjectLink>
+  <ProjectLink slug="nexus">Nexus</ProjectLink>
 {/snippet}
 {#snippet fixmyhalo()}
-  <ProjectLink class="text-white" slug="fixmyhalo">Fix My Halo</ProjectLink>
+  <ProjectLink slug="fixmyhalo">Fix My Halo</ProjectLink>
 {/snippet}
 {#snippet cropandquest()}
-  <ProjectLink class="text-white" slug="cropandquest">Crop & Quest</ProjectLink>
+  <ProjectLink slug="cropandquest">Crop & Quest</ProjectLink>
 {/snippet}
 {#snippet pixelicons()}
-  <ProjectLink class="text-white" slug="pixelicons">Pixel Icons</ProjectLink>
+  <ProjectLink slug="pixelicons">Pixel Icons</ProjectLink>
 {/snippet}
 
 <Section id={ID_BIO_SECTION}>
@@ -61,13 +61,11 @@
 
       <div class="flex min-w-0 flex-col">
         <div class="p-6 md:p-10 lg:p-12">
-          <h2
-            class="mb-4 font-mono font-bold tracking-widest text-primary uppercase"
-          >
+          <h2 class="mb-4 eyebrow text-primary">
             {t("bio_title")}
           </h2>
           <div
-            class="max-w-3xl space-y-4 leading-relaxed text-muted-foreground md:text-lg"
+            class="max-w-3xl space-y-4 leading-relaxed text-foreground/90 md:text-lg"
           >
             <p>
               <Translation key="bio_description_1" />

@@ -29,7 +29,8 @@
 <a
   class={[
     "font-bold transition-all ease-snappy",
-    variant === "default" && "font-body hover:text-secondary",
+    variant === "default" &&
+      "font-body underline underline-offset-3 hover:text-secondary",
     className,
   ]}
   target={newTab ? "_blank" : target}

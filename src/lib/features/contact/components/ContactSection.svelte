@@ -26,9 +26,7 @@
     class="relative grid gap-12 overflow-hidden rounded-3xl border border-white/10 bg-muted/70 p-6 shadow-elevation md:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:p-14"
   >
     <div class="min-w-0">
-      <p
-        class="mb-5 font-mono text-xs font-bold tracking-widest text-secondary uppercase"
-      >
+      <p class="mb-5 eyebrow text-secondary">
         {t("contact_title")}
       </p>
       <h2
@@ -39,8 +37,10 @@
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
         {t("contact_description")}
       </p>
-      <div class="mt-7 text-sm">
-        <span class="flex items-center gap-2 text-muted-foreground">
+      <div class="mt-7">
+        <span
+          class="flex items-center gap-2 text-sm font-medium text-muted-foreground"
+        >
           <IconMapPin class="size-4" />
           {t("bio_stat_location_value")}
         </span>
@@ -49,30 +49,28 @@
 
     <div class="flex min-w-0 flex-col gap-3">
       <Link
-        class="group flex items-center justify-between rounded-xl bg-primary px-5 py-4 font-mono font-bold text-background shadow-glow transition-colors hover:bg-primary/85"
+        class="group flex items-center justify-between primary-button px-5 py-4"
         variant="none"
         href={CONTACT_INFO.Email}
       >
         <span>{t("contact_email_cta")}</span>
         <IconArrowRight
-          class="size-4 transition-transform group-hover:translate-x-1"
+          class="size-6 transition-transform group-hover:translate-x-1"
         />
       </Link>
       <Link
-        class="group flex items-center justify-between rounded-xl border border-white/15 bg-white/5 px-5 py-4 font-mono font-bold text-foreground transition-colors hover:border-white/30 hover:bg-white/10"
+        class="group flex items-center justify-between ghost-button px-5 py-4"
         variant="none"
         href={CONTACT_INFO.LinkedIn}
         newTab
       >
         <span>{t("contact_connect")}</span>
         <IconExternalLink
-          class="size-4 transition-transform group-hover:translate-x-0.5"
+          class="size-6 transition-transform group-hover:translate-x-0.5"
         />
       </Link>
       <div class="mt-4 flex flex-wrap gap-x-5 gap-y-3">
-        <span
-          class="w-full font-mono text-xs tracking-widest text-muted-foreground uppercase"
-        >
+        <span class="w-full eyebrow text-sm text-muted-foreground">
           {t("contact_elsewhere")}
         </span>
         {#each otherContacts as { link, label } (link)}
