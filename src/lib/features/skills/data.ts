@@ -10,16 +10,13 @@ import {
   IconJavaScript,
   IconJest,
   IconMongoDB,
-  IconMongoose,
   IconNext,
   IconNode,
   IconPlaywright,
   IconPostgreSQL,
   IconPrisma,
-  IconPython,
   IconReact,
   IconRust,
-  IconSass,
   IconStorybook,
   IconSvelte,
   IconTailwind,
@@ -28,23 +25,12 @@ import {
   IconTypeScript,
   IconVercel,
   IconVitest,
-  IconVSCode,
-  IconVue,
   IconWebAssembly,
 } from "$lib/shared/icons";
 import type { Component } from "svelte";
 
 export const SKILLS = {
-  frontend: [
-    "TypeScript",
-    "React",
-    "Next.js",
-    "JavaScript",
-    "Tailwind CSS",
-    "Svelte",
-    "Vue",
-    "SASS",
-  ],
+  frontend: ["TypeScript", "React", "Next.js", "JavaScript", "Tailwind CSS"],
   backend: ["Node.js", "Express", "PostgreSQL", "Prisma", "MongoDB", "GraphQL"],
   testing: ["Vitest", "Jest", "Testing Library", "Playwright", "Storybook"],
   infrastructure: [
@@ -55,7 +41,7 @@ export const SKILLS = {
     "Cloudflare R2",
     "Git",
   ],
-  systems: ["Rust", "Tauri", "WebAssembly"],
+  additional: ["Rust", "Tauri", "WebAssembly", "Svelte"],
 } satisfies Record<string, string[]>;
 
 export interface TagMeta {
@@ -67,21 +53,14 @@ export interface TagMeta {
 export const TAG_META: Record<string, TagMeta> = {
   JavaScript: { color: "#F7DF1E", icon: IconJavaScript },
   TypeScript: { color: "#3178C6", icon: IconTypeScript },
-  Python: { color: "#3776AB", icon: IconPython },
   React: { color: "#61DAFB", icon: IconReact },
   Svelte: { color: "#FF3E00", icon: IconSvelte },
-  "VS Code": { color: "#007ACC", icon: IconVSCode },
-  Next: { color: "#FFFFFF", icon: IconNext },
   "Next.js": { color: "#FFFFFF", icon: IconNext },
-  SASS: { color: "#CC6699", icon: IconSass },
-  TailwindCSS: { color: "#06B6D4", icon: IconTailwind },
   "Tailwind CSS": { color: "#06B6D4", icon: IconTailwind },
-  Node: { color: "#5FA04E", icon: IconNode },
   "Node.js": { color: "#5FA04E", icon: IconNode },
   PostgreSQL: { color: "#4169E1", icon: IconPostgreSQL },
   MongoDB: { color: "#47A248", icon: IconMongoDB },
   Prisma: { color: "#D2C8B7", icon: IconPrisma },
-  Mongoose: { color: "#880000", icon: IconMongoose },
   GraphQL: { color: "#E10098", icon: IconGraphQL },
   Jest: { color: "#C21325", icon: IconJest },
   Vitest: { color: "#6E9F18", icon: IconVitest },
@@ -97,7 +76,6 @@ export const TAG_META: Record<string, TagMeta> = {
   Rust: { color: "#FFFFFF", icon: IconRust },
   Tauri: { color: "#24C8D8", icon: IconTauri },
   WebAssembly: { color: "#654FF0", icon: IconWebAssembly },
-  Vue: { color: "#4FC08D", icon: IconVue },
   Express: { color: "#FFFFFF", icon: IconExpress },
   fallback: { color: "#FFFFFF", icon: IconCircle },
 };

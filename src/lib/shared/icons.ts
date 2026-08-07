@@ -36,16 +36,13 @@ export { default as IconGraphQL } from "~icons/simple-icons/graphql";
 export { default as IconJavaScript } from "~icons/simple-icons/javascript";
 export { default as IconJest } from "~icons/simple-icons/jest";
 export { default as IconMongoDB } from "~icons/simple-icons/mongodb";
-export { default as IconMongoose } from "~icons/simple-icons/mongoose";
 export { default as IconNext } from "~icons/simple-icons/nextdotjs";
 export { default as IconNode } from "~icons/simple-icons/nodedotjs";
 export { default as IconPlaywright } from "~icons/simple-icons/playwright";
 export { default as IconPostgreSQL } from "~icons/simple-icons/postgresql";
 export { default as IconPrisma } from "~icons/simple-icons/prisma";
-export { default as IconPython } from "~icons/simple-icons/python";
 export { default as IconReact } from "~icons/simple-icons/react";
 export { default as IconRust } from "~icons/simple-icons/rust";
-export { default as IconSass } from "~icons/simple-icons/sass";
 export { default as IconStorybook } from "~icons/simple-icons/storybook";
 export { default as IconSvelte } from "~icons/simple-icons/svelte";
 export { default as IconTailwind } from "~icons/simple-icons/tailwindcss";
@@ -54,7 +51,4 @@ export { default as IconTestingLibrary } from "~icons/simple-icons/testinglibrar
 export { default as IconTypeScript } from "~icons/simple-icons/typescript";
 export { default as IconVercel } from "~icons/simple-icons/vercel";
 export { default as IconVitest } from "~icons/simple-icons/vitest";
-export { default as IconVue } from "~icons/simple-icons/vuedotjs";
 export { default as IconWebAssembly } from "~icons/simple-icons/webassembly";
-
-export { default as IconVSCode } from "~icons/devicon/vscode";
